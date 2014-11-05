@@ -6,5 +6,15 @@
  */
 
 return array(
-
+	'default' => array(
+		'type' => 'mysql',
+		'connection'  => array(
+			'host'       => 'localhost',
+			'username'   => 'root',
+			'password'   => 'testsql',
+			'database'   => 'task',
+		),
+		'table_prefix' => '',
+		'charset' => 'utf8',
+	),
 );
