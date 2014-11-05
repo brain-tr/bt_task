@@ -2,7 +2,7 @@
 
 use \Model\Db_Ranking;
 
-class Controller_Ranking extends Controller
+class Controller_Kisitest extends Controller
 {
 
 	public function action_insert()
