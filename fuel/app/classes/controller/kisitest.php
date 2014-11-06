@@ -12,6 +12,11 @@ class Controller_Kisitest extends Controller
 		db_ranking::ins_ranking($data);
 		exit;
 	}
+	public function action_ranking()
+	{
+		var_dump(db_ranking::ranking_list());
+		exit;
+	}
 
 
 }
