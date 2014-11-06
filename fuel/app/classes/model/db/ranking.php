@@ -18,7 +18,7 @@ class db_ranking extends \Model {
 	*/
 	public static function ranking_list()
 	{
-		return  \DB::select()->from('t_ranking')->order_by('post','desc')->limit(10)->execute()->as_array();
+		return  \DB::select()->from('t_ranking')->order_by('point','desc')->limit(10)->execute()->as_array();
 	}
 
 	/*
