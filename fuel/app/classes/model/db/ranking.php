@@ -28,6 +28,7 @@ class db_ranking extends \Model {
 	{
 
 		return \DB::insert('t_ranking')->set(array(
+				'id'					=> 1,
 				'point'					=> $data['point'],
 				'create_date'			=> $data['create_date'],
 		))->execute();
