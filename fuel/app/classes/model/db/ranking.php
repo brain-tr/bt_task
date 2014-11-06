@@ -27,7 +27,6 @@ class db_ranking extends \Model {
 	public static function ins_ranking($data)
 	{
 
-	return  \DB::select()->from('t_ranking')->where('id', 1)->execute()->current();
 		return \DB::insert('t_ranking')->set(array(
 				'point'					=> $data['point'],
 				'create_date'			=> $data['create_date'],

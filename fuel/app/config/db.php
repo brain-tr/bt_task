@@ -7,7 +7,7 @@
 
 return array(
 	'default' => array(
-		'type'           => 'mysqli',
+		'type' => 'mysql',
 		'connection'  => array(
 			'host'       => 'localhost',
 			'username'   => 'root',
