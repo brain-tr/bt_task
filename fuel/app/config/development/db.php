@@ -9,7 +9,7 @@ return array(
 		'connection'  => array(
 			'host'       => 'localhost',
 			'username'   => 'root',
-			'password'   => 'ankensql',
+			'password'   => 'testsql',
 			'database'   => 'task',
 		),
 		'table_prefix' => '',
