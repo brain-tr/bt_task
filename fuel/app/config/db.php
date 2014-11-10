@@ -17,4 +17,10 @@ return array(
 		'table_prefix' => '',
 		'charset' => 'utf8',
 	),
+	'redis' => array(
+        'default' => array(
+                'hostname' => '127.0.0.1',
+                'port'     => 6379
+        )
+	),
 );
