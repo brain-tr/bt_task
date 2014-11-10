@@ -117,4 +117,40 @@ class Controller_Kisitest extends Controller
 	
 	}
 
+	public function action_redistest()
+	{
+
+        $redis = Redis::instance('default');
+
+        $staff = array(
+                     'staff1' => 30,
+                     'staff2' => 25,
+                     'staff3' => 42,
+                     'staff4' => 60,
+                     'staff5' => 38
+                 );
+
+        foreach ($staff as $name => $age) {
+            // 年齢をスコアとして、スタッフ名をメンバーとして登録
+            $redis->zadd('mysort', $age, $name);
+        }
+
+        // 年齢の昇順リスト
+        $list = $redis->zrange('mysort', 0, count($staff));
+
+        // 年齢の降順リスト
+        $rlist = $redis->zrevrange('mysort', 0, count($staff));
+
+        // 昇順の場合の staff4 の順位(ランクが0から始まる為、1を足す)
+        $rank = $redis->zrank('mysort', 'staff4') + 1;
+
+        // 降順の場合の staff4 の順位(ランクが0から始まる為、1を足す)
+        $rrank = $redis->zrevrank('mysort', 'staff4') + 1;
+		
+		var_dump($list);
+		var_dump($rlist);
+		var_dump($rank);
+		var_dump($rrank);
+	
+	}
 }
