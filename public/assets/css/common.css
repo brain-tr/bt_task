@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+@import url(reset.css);
+@import url(style.css);
+
+
+/*	定義
+----------------------------------------------------*/
+
+html {height:100%;}
+
+body {
+font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+font-size:14px;
+line-height:1.8;
+}
+/* for WinIE7 */
+*:first-child+html body {
+	font-size: 87.50%;
+}
+/* for WinIE6 */
+*html body {
+	font-size: 87.50%;
+}
+
+
+h1,h2,h3,h4,h5,h6 {font-size:100%;}
+
+ul,
+ul li{list-style-type:none;}
+
+a:link {color:#0066ff; text-decoration:underline;}
+a:visited {color:#0066ff;}
+a:hover,
+a:visited:hover {color:#ff0000; text-decoration:none;}
+a:active {color:#0066ff;}
+
+a:hover {
+text-decoration:none;
+}
+
+a.wt:link {color:#ffffff; text-decoration:underline;}
+a.wt:visited {color:#ffffff;}
+a.wt:hover,
+a.wt:visited:hover {color:#ffffff; text-decoration:none;}
+a.wt:active {color:#ffffff;}
+
+img {border:0;}
+
+p,li,dt,dd,th,td {line-height:1.6em;}
+
+sup {
+font-size:x-small;
+position:relative;
+vertical-align:baseline;
+top:-4px;
+}
+
+* html sup {
+font-size:1.2em;
+position:relative;
+vertical-align:baseline;
+top:-6px;
+}
+
+*:first-child+html sup {
+font-size:1.2em;
+position:relative;
+vertical-align:baseline;
+top:-6px;
+}
+
+a:hover img {
+  opacity: 0.80;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.80;
+  -ms-filter: "alpha(opacity=80)";
+}
+
+
+/*	共通スタイル
+----------------------------------------------------*/
+
+.clear {clear:both !important;}
+.none {display:none !important;}
+.nowrap {white-space:nowrap !important;}
+.h10 {height:10px !important;}
+.h15 {height:15px !important;}
+.h20 {height:20px !important;}
+.h30 {height:30px !important;}
+.h40 {height:40px !important;}
+.h50 {height:50px !important;}
+.h100 {height:100px !important;}
+.h200 {height:200px !important;}
+.h300 {height:300px !important;}
+.h400 {height:400px !important;}
+.h500 {height:500px !important;}
+.h600 {height:600px !important;}
+.w25p {width:25% !important;}
+.w50p {width:50% !important;}
+.w100p {width:100% !important;}
+.mB0 {margin-bottom:0 !important;}
+.mB5 {margin-bottom:5px !important;}
+.mB10 {margin-bottom:10px !important;}
+.mB15 {margin-bottom:15px !important;}
+.mB20 {margin-bottom:20px !important;}
+.mB30 {margin-bottom:30px !important;}
+.mB40 {margin-bottom:40px !important;}
+.mB50 {margin-bottom:50px !important;}
+.mT10 {margin-top:10px !important;}
+.mT15 {margin-top:15px !important;}
+.mT20 {margin-top:20px !important;}
+.mL10 {margin-left:10px !important;}
+.mL20 {margin-left:20px !important;}
+.mL50 {margin-left:50px !important;}
+.mL80 {margin-left:80px !important;}
+.mL150 {margin-left:150px !important;}
+.mR10 {margin-right:10px !important;}
+.mR20 {margin-right:20px !important;}
+.mR50 {margin-right:50px !important;}
+.figR {float:right; margin:0 0 30px 30px !important;}
+.figL {float:left; margin:0 30px 30px 0 !important;}
+.b {font-weight:bold !important;}
+.i {font-style:italic !important;}
+.c {text-align:center !important;}
+.r {text-align:right !important;}
+.m {vertical-align:middle !important;}
+.fl {float:left;}
+.fr {float:right;}
+.rd {color:#C36 !important;}
+.bl {color:#09C !important;}
+.gr {color:#393 !important;}
+.noscript {display:none !important;}
+.narrow {letter-spacing:-1.0px !important;}
+.lg {font-size:16px !important;}
+.sm {font-size:12px !important;}
+
+
+/*	layaut
+----------------------------------------------------*/
+#content{
+	width:960px;
+	margin:0 auto;
+}
+input {
+	margin:5px 0;
+}
+h1{
+	font-size:172%;
+	margin-top:20px;
+}
+
+/*	table
+----------------------------------------------------*/
+#content table.tableStyle1{
+	width:100%;
+	border: 2px solid #999;
+}
+#content table.tableStyle1 td,
+#content table.tableStyle1 th {
+	text-align:center;
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px dotted #999;
+	background-color:#fff;
+	vertical-align:top;
+}
+#content table.tableStyle1 th {
+	text-align:center;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#d5eff7;
+	color:#666;
+	vertical-align:middle;
+}
+
+#content table.tableStyle1 td {
+	font-size:93%;
+	text-align:left;
+}
+#content table.tableStyle1 td.cnt {
+	text-align:center;
+}

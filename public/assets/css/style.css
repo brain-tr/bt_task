@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+/*	user
+----------------------------------------------------*/
+
+#content #formBox{
+	margin:15px 0;
+	padding:30px 30px;
+	border: 2px solid #999;
+}
+#content #formBox #formBoxText{
+	font-size:115%;
+	color:#F23131;
+	font-weight:bold;
+	padding-bottom:10px;
+}
+
+
+/*	situation
+----------------------------------------------------*/
+
+#content .boxR{
+	float:right;
+	width:450px;
+}
+#content .boxL{
+	float:left;
+	width:450px;
+}
