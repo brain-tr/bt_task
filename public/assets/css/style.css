@@ -4,7 +4,7 @@
 ----------------------------------------------------*/
 
 #content #formBox{
-	margin:15px 0;
+	margin:15px 0 30px 0;
 	padding:30px 30px;
 	border: 2px solid #999;
 }
@@ -19,11 +19,39 @@
 /*	situation
 ----------------------------------------------------*/
 
-#content .boxR{
-	float:right;
-	width:450px;
+#content span.stationStyle {
+	padding:5px 15px;
+	border-radius: 5px;
+	border:1px solid #999;
 }
-#content .boxL{
-	float:left;
-	width:450px;
+#content .boxRainL {
+	border:2px solid #999;
+	padding:20px;
+	margin-left:10px;
+	border-radius: 5px;
+	/*background:#e6e6e6;*/
 }
+#content .boxRainR {
+	border:2px solid #999;
+	padding:20px;
+	margin-right:10px;
+	border-radius: 5px;
+	/*background:#e6e6e6;*/
+}
+
+#content p.situTitle {
+	padding:10px 0;
+	margin-bottom:30px;
+	/*color:#406cbd;*/
+	font-size:140%;
+	text-align:center;
+	/*font-weight:bold;*/
+	/*border-bottom:2px solid #999;*/
+	background:#ebebeb;
+}
+
+#content span.stationStyle a {color:#000000; text-decoration:none;}
+#content span.stationStyle a:link {color:#000000; text-decoration:none;}
+#content span.stationStyle a:visited {color:#000000; text-decoration:none;}
+#content span.stationStyle a:hover {color:#000000; text-decoration:none;}
+#content span.stationStyle a:active {color:#000000; text-decoration:none;}
