@@ -55,3 +55,16 @@
 #content span.stationStyle a:visited {color:#000000; text-decoration:none;}
 #content span.stationStyle a:hover {color:#000000; text-decoration:none;}
 #content span.stationStyle a:active {color:#000000; text-decoration:none;}
+
+
+/*	passBox
+----------------------------------------------------*/
+.passBox{
+	width:350px;
+	height:250px;
+	margin:25px;
+}
+.passBox .passTxt{
+	font-size:122%;
+	padding-bottom:20px;
+}

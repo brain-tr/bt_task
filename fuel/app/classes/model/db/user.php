@@ -39,6 +39,7 @@ class db_user extends \Model {
 				'job_type'		=> $data['job_type'],
 				'send_flag'		=> $data['send_flag'],
 				'rank_id'		=> 10,
+				'password'		=> $data['password'],
 		))->execute();
 	}
 
@@ -48,12 +49,24 @@ class db_user extends \Model {
 	public static function upd_user($data)
 	{
 		return \DB::update('t_user')->set(array(
-		//				'user_id'		=> "",
+				//'user_id'		=> "",
 				'name'			=> $data['name'],
 				'mail'			=> $data['mail'],
 				'job_type'		=> $data['job_type'],
 				'send_flag'		=> $data['send_flag'],
 				'rank_id'		=> 10,
+				//'password'	=> $data['password'],
+		))->where('user_id', $data['user_id'])
+		->execute();
+
+	}
+	/*
+	 *	パスワードを変更する
+	*/
+	public static function upd_user_pass($data)
+	{
+		return \DB::update('t_user')->set(array(
+				'password'		=> $data['new_pass'],
 		))->where('user_id', $data['user_id'])
 		->execute();
 

@@ -95,7 +95,7 @@
 <h1>状況フラグ登録・更新画面</h1>
 <div id ="formBox">
 	<p id="formBoxText"></p>
-	<form action="/situation/create" method="post" name="form">
+	<form action="/situation/create" method="post" name="form" class="formstyle1">
 		状況名 <input type="text" name="name" value="" size="10" />　
 		色 <input type="text" name="color_code" id="jquery-colorpicker-field" maxlength="6" size="6" value="" />　
 		<input type="checkbox" name="flag" value="0" checked /> 親フラグ　
