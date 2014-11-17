@@ -1,5 +1,7 @@
 <?php
+
 use \Model\Db_user;
+use \Model\User;
 class Controller_User extends Controller
 {
 	/*
@@ -24,26 +26,18 @@ class Controller_User extends Controller
 		// ボタン数字化
 		if($data["btn_send"] == "この内容で登録する") {
 			$data["btn_send"] = 1;
-		} else if($data["btn_send"] == "この内容で変更する") {
+		} else if($data["btn_send"] == "この内容で変更する"){
 			$data["btn_send"] = 2;
 		}
 
 		// 情報を登録
 		if(!empty($post["result"]) && $data["btn_send"] == 1) {
-			$passCount = mb_strlen($data["password"]);
-			if(empty($data["name"])) {
-				$data['msg'] = "名前が入力されていません。";
-			} else if(empty($data["password"]) || empty($data["password_conf"])) {
-				$data['msg'] = "パスワードまたはパスワード(確認用)を入力してください。";
-			} else if(!preg_match("/^[a-zA-Z0-9]+$/", $data["password"])) {
-				$data['msg'] = "パスワードは半角英数で入力してください。";
-			} else if($data["password"] != $data["password_conf"]) {
-				$data['msg'] = "パスワードとパスワード(確認用)の文字が一致しません。";
-			} else if($passCount < 4) {
-				$data['msg'] = "4文字以上のパスワードを入力してください。";
-			} else if($passCount > 12) {
-				$data['msg'] = "12文字以下のパスワードを入力してください。";
-			} else {
+
+			// 入力チェック
+			$flag = array(1,2,3,4,5,6);
+			$check = User::check_php($flag,$data['name'],$data['password'],$data['password_conf']);
+
+			if(empty($check)){
 				$searchName = db_user::get_user_name($data['name']);	//名前を検索
 				if(empty($searchName)) {
 					db_user::ins_user($data);
@@ -51,14 +45,18 @@ class Controller_User extends Controller
 				} else {
 					$data['msg'] = "すでに登録されている名前です。";
 				}
+			} else {
+				$data["msg"] = $check;
 			}
 
 		// 情報の変更
 		} else if(!empty($post["result"]) && $data["btn_send"] == 2) {
 
-			if(empty($data["name"])) {
-				$data['msg'] = "名前が入力されていません。";
-			} else {
+			// 入力チェック
+			$flag = array(1);
+			$check = User::check_php($flag,$data['name'],$data['password'],$data['password_conf']);
+
+			if(empty($check)){
 				$searchName = db_user::get_user_id($data["user_id"]);	//idを検索
 				if(!empty($searchName)) {
 					db_user::upd_user($data);
@@ -66,6 +64,8 @@ class Controller_User extends Controller
 				} else {
 					$data['msg'] = "変更ユーザーが見つかりません。データを確認してください。";
 				}
+			} else {
+				$data["msg"] = $check;
 			}
 		}
 
@@ -113,28 +113,30 @@ class Controller_User extends Controller
 		if(!empty($post['pass_up'])){
 			$searchName = db_user::get_user_id($data["user_id"]);	//idを検索
 			if(!empty($searchName)){
-				$passCount = mb_strlen($data["new_pass"]);
+
 				if(empty($data["password"]) || empty($data["new_pass"]) || empty($data["new_pass_conf"])) {
 					$data['msg'] = "空欄があります。入力内容を確認してください。";
 					$box = 1;
-				} else if($data["new_pass"] != $data["new_pass_conf"]) {
-					$data['msg'] = "パスワードとパスワード(確認用)の文字が一致しません。";
-					$box = 1;
-				} else if($passCount < 4) {
-					$data['msg'] = "4文字以上のパスワードを入力してください。";
-					$box = 1;
-				} else if($passCount > 12) {
-					$data['msg'] = "12文字以下のパスワードを入力してください。";
-					$box = 1;
-				} else if($searchName['password'] != $data['password']) {
-					$data['msg'] = "現在のパスワードが違います。";
-					$box = 1;
 				} else {
-					db_user::upd_user_pass($data);
-					$data['msg'] = "パスワードを変更しました。";
-					$box = 2;
+
+					// 入力チェック
+					$flag = array(2,3,4,5,6);
+					$check = User::check_php($flag,$data['password'],$data['new_pass'],$data['new_pass_conf']);
+					if(empty($check)){
+						if($searchName['password'] != $data['password']) {
+							$data['msg'] = "現在のパスワードが違います。";
+							$box = 1;
+						} else {
+							db_user::upd_user_pass($data);
+							$data['msg'] = "パスワードを変更しました。";
+							$box = 2;
+						}
+					} else {
+						$data["msg"] = $check;
+						$box = 1;
+					}
 				}
-			}else{
+			} else {
 				$data['msg'] = "変更対象ユーザーが見つかりません。データを確認してください。";
 				$box = 2;
 			}
