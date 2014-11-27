@@ -60,6 +60,7 @@ class db_user extends \Model {
 		->execute();
 
 	}
+
 	/*
 	 *	パスワードを変更する
 	*/
@@ -78,5 +79,14 @@ class db_user extends \Model {
 	public static function delete_user($id)
 	{
 		\DB::delete('t_user')->where('user_id', $id)->execute();
+	}
+
+	/*
+	 * ユーザ存在確認
+	* メールアドレスとパスワードが一致する本登録済みユーザを取得
+	*/
+	public static function confirm_user($mail,$pass)
+	{
+		return \DB::select()->from('t_user')->where('mail', $mail)->where('password', $pass)->execute()->current();
 	}
 }

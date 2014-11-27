@@ -1,16 +1,31 @@
 <?php
+
 use \Model\Db_situation;
+use \Model\Loginout;
 class Controller_Situation extends Controller
 {
-
-	public function action_index()
+	/*
+	 *	セッション情報の確認
+	*/
+	public function before()
 	{
+		session_start();
+		parent::before();
+		if (!Loginout::logincheck()){
+			header('Location: /login/');
+			exit();
+		}
 	}
+
 	/*
 	 *	状況フラグ登録更新画面
 	*/
 	public function action_create()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+
 		// POST
 		$post = Input::post();
 		$data["name"]			= empty($post["name"]) ? "" : $post["name"];

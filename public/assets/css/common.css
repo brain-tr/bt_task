@@ -13,7 +13,12 @@ body {
 	font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	font-size:14px;
 	line-height:1.8;
+	background:url(../img/common/bg.png) repeat-y left top;
 }
+body.login {
+	background:#e9eff3;
+}
+
 /* for WinIE7 */
 *:first-child+html body {
 	font-size: 87.50%;
@@ -138,18 +143,78 @@ a:hover img {
 
 /*	layaut
 ----------------------------------------------------*/
-#content{
-	width:760px;
-	margin:0 auto;
+#main{
+	margin-bottom:100px;
 }
+#content{
+	float:right;
+	width:100%;
+	margin: 0 0 0 -225px
+}
+#contentIn{
+	margin: 0 0 0 275px
+}
+
+
+/*	header
+----------------------------------------------------*/
+#header{
+	background-color:#3089cb;
+	min-width:1000px;
+
+}
+#header #headerInner{
+	color:#ffffff;
+	padding:20px 30px;
+}
+#header #headerInner h1{
+	float:left;
+}
+#header #headerInner p{
+	float:right;
+	padding-top:15px;
+}
+#header #headerInner p a {color:#ffffff; text-decoration:none;}
+#header #headerInner p a:link {color:#ffffff; text-decoration:none;}
+#header #headerInner p a:visited {color:#ffffff; text-decoration:none;}
+#header #headerInner p a:hover {color:#ffffff; text-decoration:underline;}
+#header #headerInner p a:active {color:#ffffff; text-decoration:none;}
+
 input {
 	margin:5px 0;
 }
-h1{
+h2{
 	font-size:172%;
-	margin-top:20px;
-	text-align:center;
+	margin:50px 0 20px 0;
 }
+
+/*	navi
+----------------------------------------------------*/
+#side{
+	background:#e9f6ff;
+	width:225px;
+	float: left;
+}
+#side ul.navi li a{
+	display: block;
+	width:195px;
+	height:45px;
+	font-weight:bold;
+	color:#006699;
+	text-decoration:none;
+	padding:25px 0 0 30px;
+	margin:0;
+}
+#side ul.navi li a{
+	background: url(../img/common/bg_navi.png) no-repeat left top;
+}
+#side ul.navi li a:hover{
+	background: url(../img/common/bg_navi.png) no-repeat left -70px;
+}
+#side ul.navi li a.now{
+	background: url(../img/common/bg_navi.png) no-repeat left -70px;
+}
+
 
 /*	table
 ----------------------------------------------------*/
@@ -195,14 +260,62 @@ h1{
 	font-size: 86%;
 }
 
+#content table.tableStyle3{
+	width:750px;
+	border: 2px solid #999;
+}
+#content table.tableStyle3 td,
+#content table.tableStyle3 th {
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px dotted #999;
+	background-color:#fff;
+}
+#content table.tableStyle3 th {
+	width:25%;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#d5eff7;
+	color:#666;
+	vertical-align:middle;
+	font-size:93%;
+}
 
+#content table.tableStyle4{
+	width:100%;
+	border: 2px solid #999;
+}
+#content table.tableStyle4 td,
+#content table.tableStyle4 th {
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px dotted #999;
+	background-color:#fff;
+}
+#content table.tableStyle4 th {
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	color:#666;
+	vertical-align:middle;
+	text-align:center;
+	font-size:93%;
+}
+#content table.tableStyle4 td{
+	min-width:80px;
+}
+#content table.tableStyle4 th.name{
+	width:150px;
+	min-width:130px;
+}
 /*	form
 ----------------------------------------------------*/
 #content .formstyle1 input#name {
 	width:150px;
-}
-#content .formstyle1 input#mail {
-	width:210px;
 }
 #content .formstyle1 input#mail {
 	width:210px;
@@ -226,4 +339,24 @@ h1{
 }
 .formstyle2 input#new_pass_conf {
 	width:150px;
+}
+
+
+.formstyle3 input#mail {
+	width:280px;
+	height:35px;
+	padding:5px 25px 5px 5px;
+	margin-bottom:10px;
+}
+.formstyle3 input#pass {
+	width:280px;
+	height:35px;
+	padding:5px 25px 5px 5px;
+}
+
+/*	ボタンスタイル初期
+----------------------------------------------------*/
+#btnCrea{
+	background:none;
+	border:none;
 }

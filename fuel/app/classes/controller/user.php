@@ -2,13 +2,31 @@
 
 use \Model\Db_user;
 use \Model\User;
+use \Model\Loginout;
 class Controller_User extends Controller
 {
+	/*
+	 *	セッション情報の確認
+	*/
+	public function before()
+	{
+		session_start();
+		parent::before();
+		if (!Loginout::logincheck()){
+			header('Location: /login/');
+			exit();
+		}
+	}
+
 	/*
 	 *	ユーザー登録画面
 	*/
 	public function action_create()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+
 		// POST
 		$post = Input::post();
 		$data["name"]			= empty($post["name"]) ? "" : $post["name"];
@@ -92,6 +110,10 @@ class Controller_User extends Controller
 	*/
 	public function action_pass()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+
 		// GET
 		$get = Input::get();
 		$data["user_id"]	= empty($get["user"]) ? "" : $get["user"];

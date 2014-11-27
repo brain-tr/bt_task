@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>エンジニア対応管理システム</title>
+<title>エンジニア対応管理システム | ユーザー登録・更新</title>
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
 	msgcheck = "<?php echo $msg; ?>";
@@ -139,9 +139,21 @@
 	}
 </script>
 </head>
+
 <body>
+
+<div id="header">
+<div id="headerInner">
+	<h1><img src="/assets/img/common/logo.png" alt="ブレイントラスト" /></h1>
+	<p class="r">[ <a href="/login/logout">ログアウト</a> ]</p>
+	<div class="clear"></div>
+</div><!-- /header -->
+</div><!-- /headerInner -->
+
+<div id="main">
 <div id="content">
-<h1>ユーザー登録・更新画面</h1>
+<div id="contentIn">
+<h2>ユーザー登録・更新</h2>
 <div id ="formBox">
 	<p id="formBoxText"></p>
 	<form action="/user/create" method="post" name="form" class="formstyle1">
@@ -195,6 +207,21 @@
 	<?php }
 	?>
 </table>
-</div><!--/container-->
+</div><!-- /contentIn -->
+</div><!-- /content -->
+
+<div id="side">
+	<ul class="navi">
+		<li><a href="/top/">TOP</a></li>
+		<li><a href="/follow/create">フォロー報告</a></li>
+		<li><a href="/list/">フォロー一覧</a></li>
+		<li><a href="/user/create">ユーザー登録・更新</a></li>
+		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
+		<li><a href="/appointment/create">対応方針登録・更新</a></li>
+	</ul>
+</div><!-- /side -->
+
+<div class="clear"></div>
+</div><!-- /main -->
 </body>
 <html>

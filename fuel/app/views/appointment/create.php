@@ -1,13 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>エンジニア対応管理システム</title>
-	<link href="/assets/css/create.css" rel="stylesheet" type="text/css" media="all" />
-
-<style>
-
-</style>
+	<title>エンジニア対応管理システム | 対応方針登録・更新</title>
+	<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
 	msg = "<?php echo $msg; ?>";
 	window.onload = function(){
@@ -30,11 +25,7 @@
 		document.form.btn.value = "登録";
 		document.getElementById('formBoxText').textContent	= "";
 		document.getElementById('formBox').style.backgroundColor	= '';
-
-
-
 	}
-
 
 	function deleate(name,appointment_id){
 		//テキストボックスの背景色
@@ -77,9 +68,21 @@
 	}
 </script>
 </head>
+
 <body>
+
+<div id="header">
+<div id="headerInner">
+	<h1><img src="/assets/img/common/logo.png" alt="ブレイントラスト" /></h1>
+	<p class="r">[ <a href="/login/logout">ログアウト</a> ]</p>
+	<div class="clear"></div>
+</div><!-- /header -->
+</div><!-- /headerInner -->
+
+<div id="main">
 <div id="content">
-<h1>ユーザー登録・更新画面</h1>
+<div id="contentIn">
+<h2>対応方式の登録・更新</h2>
 <div id ="formBox">
 	<p id="formBoxText"></p>
 	<form action="create" method="post" name="form">
@@ -108,8 +111,22 @@
 ?>
 
 </table>
-</div><!--/container-->
+</div><!--/contantIn-->
+</div><!--/contant-->
 
+<div id="side">
+	<ul class="navi">
+		<li><a href="/top/">TOP</a></li>
+		<li><a href="/follow/create">フォロー報告</a></li>
+		<li><a href="/list/">フォロー一覧</a></li>
+		<li><a href="/user/create">ユーザー登録・更新</a></li>
+		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
+		<li><a href="/appointment/create">対応方針登録・更新</a></li>
+	</ul>
+</div>
+
+<div class="clear"></div>
+</div><!-- /main -->
 
 
 </body>

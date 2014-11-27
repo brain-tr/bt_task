@@ -1,7 +1,6 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>エンジニア対応管理システム</title>
 	<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 	<script type="text/javascript">
@@ -39,7 +38,7 @@
 	</script>
 </head>
 <body>
-	<div class="passBox">
+<div class="passBox">
 	<p class="passTxt">パスワードの変更</p>
 	<form action="/user/pass" method="post" name="formPass" class="formstyle2">
 		現在のパスワード <input type="text" name="password" id ="password" value="" /><br />
@@ -52,6 +51,7 @@
 		<input type="submit" name="btn_send" value="パスワードを変更する" onClick="return formCheck();" />
 		<input type="button" value="キャンセル" onClick="window.close(); return false;" />
 	</form>
-	</div>
+</div><!-- /passBox -->
+
 </body>
 </html>
