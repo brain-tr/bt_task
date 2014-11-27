@@ -19,14 +19,36 @@
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<h2>フォロー一覧</h2>
 
+<div class="listBox">
+<h2>フォロー一覧</h2>
+<?php
+	// 日付
+	$cDay		= $today;
+	$cDay		= explode("-", $today);		// 現在の日付
+	$cLastday	= substr($lastday,8,2);		// 月の最終日
+
+	// もし0があったら削除（日）
+	if(substr($cDay[2],0,1) === "0"){
+		$cDay[2] = ltrim ($cDay[2],"0");
+	}
+	// もし0があったら削除（月）
+	if(substr($cDay[1],0,1) === "0"){
+		$cDay[1] = ltrim ($cDay[1],"0");
+	}
+	// 年月日の表示
+	if(!empty($carenderKey)){
+		echo '<div class="listTitle">'.$cDay[0]."年".$cDay[1]."月".$cDay[2]."日".'</div>';
+	}else{
+		echo '<div class="listTitle">'.$cDay[0]."年".$cDay[1]."月".'</div>';
+	}
+?>
+
+
+<div class="listBoxInner">
 <ul class="listMenu clearfix">
 	<li class="mR100">
 		<form action="/list/" method="post">
-			<?php
-
-			?>
 			<input type="submit" name="carender" value="<?php echo $carender; ?>" />
 			<input type="hidden" name="today" value="<?php echo $today; ?>" />
 		</form>
@@ -96,31 +118,15 @@
 	</li>
 	<?php }?>
 </ul>
+</div><!-- /listBoxInner -->
+</div><!-- /listBox -->
+<div class="clear"></div>
+
 
 <table class="tableStyle4">
 	<tr>
 	<th class="name"></th>
 	<?php
-	// 日付
-	$cDay		= $today;
-	$cDay		= explode("-", $today);		// 現在の日付
-	$cLastday	= substr($lastday,8,2);		// 月の最終日
-
-	// もし0があったら削除（日）
-	if(substr($cDay[2],0,1) === "0"){
-		$cDay[2] = ltrim ($cDay[2],"0");
-	}
-	// もし0があったら削除（月）
-	if(substr($cDay[1],0,1) === "0"){
-		$cDay[1] = ltrim ($cDay[1],"0");
-	}
-	// 年月日の表示
-	if(!empty($carenderKey)){
-		echo $cDay[0]."年".$cDay[1]."月".$cDay[2]."日";
-	}else{
-		echo $cDay[0]."年".$cDay[1]."月";
-	}
-
 
 	// 日付(週表示)
 	if(!empty($carenderKey)){
@@ -144,7 +150,6 @@
 	</tr>
 
 	<?php
-
 	// 予定（週表示）
 	if(!empty($carenderKey)) {
 		$flag	= 0;		// 予定のない空のtdチェック用
@@ -173,22 +178,27 @@
 				}
 
 				//$x = 0;
-				for($i=$wk_id2; $i<$lastdayW; $i++){
+
+				for($i=$flag; $i<6; $i++){
+
+					//比較日付を設定する
+					$wk_id2 = date("Y-m-d",mktime(0,0,0,substr($today,5,2),substr($today,8,2)+$i,substr($today,0,4)));
+
 					// 予定日の前のセルを作る
-					if($i < $val['start_date']){
+					if($wk_id2 < $val['start_date']){
 						echo "</td><td>";
-						$wk_id2 = $val['start_date'];
+						//$wk_id2 = $val['start_date'];
 						$flag++;
 
 					// 予定日を表示
-					}else if($i == $val['start_date']){
-						echo $val['name'];
+					}else if($wk_id2 == $val['start_date']){
+						echo '<a href="/follow/update/?follow_id='.$val['follow_id'].'"><span class="btnStyle" style="background:#'.$val['color_code'].'">'.$val['name'].'</span></a>';
+						break;
 
 					// 予定日が終わったら繰り返しを抜ける
 					}else{
 						break;
 					}
-
 // 					if ($x == 10) {
 // 						echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 // 						exit;
@@ -233,17 +243,24 @@
 					echo '<td>';
 					$wk_id = $val['user_id'];	// エンジニアのIDをセット
 				}
-				for($i=$wk_id2; $i<$lastday; $i++){
+
+				//まわす回数を取得
+				$end = date("d",mktime(0,0,0,substr($lastday,5,2),substr($lastday,8,2),substr($lastday,0,4)));
+				for($i=$flag; $i<$end; $i++){
+
+					//比較日付を設定する
+					$wk_id2 = date("Y-m-d",mktime(0,0,0,substr($today,5,2),0+$i,substr($today,0,4)));
 
 					// 予定日の前のセルを作る
-					if($i < $val['start_date']){
+					if($wk_id2 < $val['start_date']){
 						echo "</td><td>";
-						$wk_id2 = $val['start_date'];
+						//$wk_id2 = $val['start_date'];
 						$flag++;
 
 					// 予定日を表示
-					}else if($i == $val['start_date']){
-						echo $val['name'];
+					}else if($wk_id2 == $val['start_date']){
+						echo '<a href="/follow/update/?follow_id='.$val['follow_id'].'"><span class="btnStyle" style="background:#'.$val['color_code'].'">'.$val['name'].'</span></a>';
+						break;
 
 					// 予定日が終わったら繰り返しを抜ける
 					}else{

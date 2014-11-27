@@ -20,12 +20,14 @@ class db_follow extends \Model {
 	}
 
 	/*
-	 * エンジニア情報カレンダー用
+	 * 指定したフォロー情報を１レコードだけ持ってくる
 	*/
-// 	public static function engineer_id_list()
-// 	{
-// 		return  \DB::select()->from('t_follow')->order_by('s','desc')->execute()->as_array();
-// 	}
+	public static function follow_data($follow_id)
+	{
+		$query	=\DB::query("select a.name as engineer_name, b.engineer_user_id, e.name as create_name, b.create_user_id, b.situation_id, b.start_date, b.project_text, b.content_text, b.remarks, c.name as situation_name, d.name as appointment_name, d.appointment_id from t_user a, t_user e, t_follow b, m_situation c, m_appointment d where b.engineer_user_id = a.user_id and b.create_user_id = e.user_id and b.situation_id = c.situation_id and b.appointment_id = d.appointment_id and follow_id = :follow_id;");
+		$result	= $query->bind('follow_id', $follow_id)->bind('day2', $day2)->execute()->as_array();
+		return $result;
+	}
 
 	/*
 	 * 状況を取得する
@@ -43,7 +45,7 @@ class db_follow extends \Model {
 	public static function list_data($day1,$day2)
 	{
 		//return  \DB::select('a.name', 'b.engineer_user_id', 'b.situation_id', 'c.name', 'b.start_date')->from('t_user a', 't_follow b', 'm_situation c')->where('b.engineer_user_id', 'a.user_id')->where('b.situation_id', 'c.situation_id')->execute()->as_array();
-		$query	=\DB::query("select a.name as user_name, a.job_type, a.user_id, b.engineer_user_id, b.situation_id, c.name, b.start_date from ( t_user a left join t_follow b on b.engineer_user_id = a.user_id and b.start_date >= :day1 and b.start_date <= :day2) left join m_situation c on b.situation_id = c.situation_id order by user_id,start_date;");
+		$query	=\DB::query("select a.name as user_name, a.job_type, a.user_id, b.engineer_user_id, b.situation_id, c.name, c.color_code, b.start_date, b.follow_id from ( t_user a left join t_follow b on b.engineer_user_id = a.user_id and b.start_date >= :day1 and b.start_date <= :day2) left join m_situation c on b.situation_id = c.situation_id where a.job_type = 1 order by user_id,start_date;");
 		$result	= $query->bind('day1', $day1)->bind('day2', $day2)->execute()->as_array();
 		return $result;
 
@@ -92,7 +94,7 @@ class db_follow extends \Model {
 	}
 
 	/*
-	 *	フォロー情報を降順で1つ取得する
+	 *	フォロー情報を取得する
 	*/
 	public static function get_follow_id()
 	{

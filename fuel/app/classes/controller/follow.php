@@ -70,8 +70,35 @@ class Controller_Follow extends Controller
 			header('Location: /list/index?today='.$data["start_date"]);
 			exit();
 		}
-
-
-
 	}
+
+
+	/*
+	 *	フォロー変更画面
+	*/
+	public function action_update()
+	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+
+		// POST
+		$post = Input::post();
+		$data["follow_id"]			= empty($post["follow_id"]) ? "" : $post["follow_id"];
+		$data["follow_data"]		= empty($post["follow_data"]) ? "" : $post["follow_data"];
+		$data["msg"]				= empty($post["msg"]) ? "1" : $post["msg"];
+
+		// GET
+		$get = Input::get('follow_id');
+		if(!empty($get)){
+			$data["follow_id"] = $get;
+		}
+
+		//エンジニアを検索
+		$data["follow_data"] = db_follow::follow_data($data["follow_id"]);
+
+
+		return View::forge('follow/update', $data);
+	}
+
 }

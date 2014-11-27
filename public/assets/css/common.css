@@ -306,12 +306,15 @@ h2{
 	font-size:93%;
 }
 #content table.tableStyle4 td{
-	min-width:80px;
+	min-width:100px;
+	min-height:100px;
 }
 #content table.tableStyle4 th.name{
 	width:150px;
 	min-width:130px;
 }
+
+
 /*	form
 ----------------------------------------------------*/
 #content .formstyle1 input#name {

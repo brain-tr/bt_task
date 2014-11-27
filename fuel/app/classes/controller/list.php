@@ -81,6 +81,7 @@ class Controller_List extends Controller
 			$day1 = $day1." 00:00:00";
 			$day2 = $day2." 23:59:59";
 			$data['engineer_list'] = db_follow::list_data($day1,$day2);
+			//var_dump($data['engineer_list']);
 			//exit;
 
 
