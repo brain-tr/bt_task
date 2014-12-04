@@ -86,14 +86,14 @@
 <div id ="formBox">
 	<p id="formBoxText"></p>
 	<form action="create" method="post" name="form">
-		名　　前<input type="text" name="name" value="" >
+		名　　前 <input type="text" name="name" value="" >
 	<input type="hidden" name="get" value="<?php echo $get; ?>">
 	<input type="hidden" name="id" value="">
 	<input type="submit" name="btn" value="" onClick="return check();">
 	<input type="button" value="キャンセル" name="cancel" id="cancel" disabled onClick="reload();">
 </form>
 </div>
-<table class="tableStyle1 mB50">
+<table class="tableStyle5 mB50">
 	<tr>
 		<th>ID</th>
 		<th>名前</th>

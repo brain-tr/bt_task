@@ -42,18 +42,20 @@ class Controller_List extends Controller
 		$data["nextWeek"]			= empty($post["nextWeek"]) ? "" : $post["nextWeek"];
 		$data["backMonth"]			= empty($post["backMonth"]) ? "" : $post["backMonth"];
 		$data["nextMonth"]			= empty($post["nextMonth"]) ? "" : $post["nextMonth"];
+		$data["msg"]				= empty($post["msg"]) ? "1" : $post["msg"];
 
-		// GET（followからの遷移）
-		$get = Input::get('today');
-		if(!empty($get)){
-			$data["today"] = date("Y-m-d",mktime(0,0,0,substr($get,5,2),substr($get,8,2),substr($get,0,4)));
+		// GET
+		$get = Input::get();
+		if(!empty($get['today'])){
+			$data["today"] = date("Y-m-d",mktime(0,0,0,substr($get['today'],5,2),substr($get['today'],8,2),substr($get['today'],0,4)));
+		}
+		if(!empty($get['msg'])){
+			$data["msg"] = $get['msg'];
 		}
 
-		// ボタン数字化
-		// 月・週
+		// ボタン数字化（月・週）
 		if(empty($post["carender"])) {
 			$data["carenderKey"] = 1;
-			// 今日の日付を取得
 		} else if($post["carender"] == "月表示") {
 			$data["carenderKey"] = 0;
 		} else if($post["carender"] == "週表示") {
@@ -69,41 +71,37 @@ class Controller_List extends Controller
 			} else {
 				$tday	= $data["today"];
 			}
+
 			// 月の最終日
 			$lday	= date('Y-m-d', mktime(0, 0, 0, substr($tday,5,2)+1, 0, substr($tday,0,4)));
 
 			// ループ用
-			$ldayW	= date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+			$ldayW	= date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 
 			// エンジニアの一覧を取得
 			$day1 = $tday;
-			$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+			$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 			$day1 = $day1." 00:00:00";
 			$day2 = $day2." 23:59:59";
-			$data['engineer_list'] = db_follow::list_data($day1,$day2);
-			//var_dump($data['engineer_list']);
-			//exit;
 
 
 			// 翌週
 			if(!empty($data["nextWeek"])) {
 
 				// 現在の日付
-				//$dayBlok	= substr($tday,8,2)+7;
-				$tday		=  date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+				$tday		=  date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 
 				// その月の最終日
 				$lday	= date('Y-m-d', mktime(0, 0, 0, substr($tday,5,2)+1, 0, substr($tday,0,4)));
 
 				// ループ用
-				$ldayW	= date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+14,substr($tday,0,4)));
+				$ldayW	= date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+13,substr($tday,0,4)));
 
 				// エンジニアリスト
 				$day1 = $tday;
-				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 				$day1 = $day1." 00:00:00";
 				$day2 = $day2." 23:59:59";
-				$data['engineer_list'] = db_follow::list_data($day1,$day2);
 			}
 
 
@@ -111,8 +109,8 @@ class Controller_List extends Controller
 			if(!empty($data["backWeek"])) {
 
 				// 現在の日付
-				//$dayBlok = substr($tday,8,2);
-				$tday =  date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)-7,substr($tday,0,4)));
+				// $dayBlok = substr($tday,8,2);
+				$tday =  date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)-6,substr($tday,0,4)));
 
 				// その月の最終日
 				$lday	= date('Y-m-d', mktime(0, 0, 0, substr($tday,5,2)+1, 0, substr($tday,0,4)));
@@ -122,10 +120,9 @@ class Controller_List extends Controller
 
 				// エンジニアリスト
 				$day1 = $tday;
-				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 				$day1 = $day1." 00:00:00";
 				$day2 = $day2." 23:59:59";
-				$data['engineer_list'] = db_follow::list_data($day1,$day2);
 			}
 
 
@@ -133,7 +130,6 @@ class Controller_List extends Controller
 			if(!empty($data["nextDay"])) {
 
 				// 現在の日付
-				//$dayBlok = substr($tday,8,2);
 				$tday = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+1,substr($tday,0,4)));
 
 				// その月の最終日
@@ -144,10 +140,9 @@ class Controller_List extends Controller
 
 				// エンジニアリスト
 				$day1 = $tday;
-				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 				$day1 = $day1." 00:00:00";
 				$day2 = $day2." 23:59:59";
-				$data['engineer_list'] = db_follow::list_data($day1,$day2);
 			}
 
 
@@ -155,7 +150,6 @@ class Controller_List extends Controller
 			if(!empty($data["backDay"])) {
 
 				// 現在の日付
-				//$dayBlok = substr($tday,8,2);
 				$tday = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)-1,substr($tday,0,4)));
 
 				// その月の最終日
@@ -166,16 +160,18 @@ class Controller_List extends Controller
 
 				// エンジニアリスト
 				$day1 = $tday;
-				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+7,substr($tday,0,4)));
+				$day2 = date("Y-m-d",mktime(0,0,0,substr($tday,5,2),substr($tday,8,2)+6,substr($tday,0,4)));
 				$day1 = $day1." 00:00:00";
 				$day2 = $day2." 23:59:59";
-				$data['engineer_list'] = db_follow::list_data($day1,$day2);
 			}
 
 			$data["today"]			= $tday;
 			$data["lastday"]		= $lday;
 			$data["lastdayW"]		= $ldayW;
 			$data["carender"]		= "月表示";
+
+			// 予定の検索
+			$data['engineer_list'] = db_follow::list_data($day1,$day2);
 
 
 		// 月間
@@ -192,10 +188,8 @@ class Controller_List extends Controller
 			$lday		= date('Y-m-d', mktime(0, 0, 0, date('m') + 1, 0, date('Y')));
 
 			// エンジニアの一覧を取得
-			//$dayBlok	= substr($tday,0,8);
 			$day1		= substr($tday,0,8)."01 00:00:00";
 			$day2		= $lday." 23:59:59";
-			$data['engineer_list'] = db_follow::list_data($day1,$day2);
 
 
 			// 翌月
@@ -207,12 +201,9 @@ class Controller_List extends Controller
 				// その月の最終日
 				$lday	= date('Y-m-d', mktime(0, 0, 0, substr($tday,5,2)+1, 0, substr($tday,0,4)));
 
-
 				// エンジニアの一覧を取得
-				//$dayBlok = substr($tday,0,8);
 				$day1 = substr($tday,0,8)."01 00:00:00";
 				$day2 = $lday." 23:59:59";
-				$data['engineer_list'] = db_follow::list_data($day1,$day2);
 			}
 
 
@@ -226,17 +217,15 @@ class Controller_List extends Controller
 				$lday	= date('Y-m-d', mktime(0, 0, 0, substr($tday,5,2)+1, 0, substr($tday,0,4)));
 
 				// エンジニアの一覧を取得
-				//$dayBlok = substr($tday,0,8);
 				$day1 = substr($tday,0,8)."01 00:00:00";
 				$day2 = $lday." 23:59:59";
-				$data['engineer_list'] = db_follow::list_data($day1,$day2);
 			}
 
 			$data["today"]			= $tday;
 			$data["lastday"]		= $lday;
 			$data["carender"]		= "週表示";
+			$data['engineer_list'] = db_follow::list_data($day1,$day2);
 		}
-
 
 		return View::forge('list/index', $data);
 	}

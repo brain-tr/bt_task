@@ -18,6 +18,9 @@ body {
 body.login {
 	background:#e9eff3;
 }
+body.white {
+	background:#ffffff;
+}
 
 /* for WinIE7 */
 *:first-child+html body {
@@ -152,7 +155,7 @@ a:hover img {
 	margin: 0 0 0 -225px
 }
 #contentIn{
-	margin: 0 0 0 275px
+	margin: 0 50px 0 295px
 }
 
 
@@ -160,8 +163,7 @@ a:hover img {
 ----------------------------------------------------*/
 #header{
 	background-color:#3089cb;
-	min-width:1000px;
-
+	min-width:1300px;
 }
 #header #headerInner{
 	color:#ffffff;
@@ -183,19 +185,25 @@ a:hover img {
 input {
 	margin:5px 0;
 }
-h2{
+h2 {
 	font-size:172%;
 	margin:50px 0 20px 0;
+	color:171717;
+}
+h3 {
+	font-size:143%;
+	margin-bottom:15px;
+	color:171717;
 }
 
 /*	navi
 ----------------------------------------------------*/
-#side{
+#side {
 	background:#e9f6ff;
 	width:225px;
 	float: left;
 }
-#side ul.navi li a{
+#side ul.navi li a {
 	display: block;
 	width:195px;
 	height:45px;
@@ -205,13 +213,13 @@ h2{
 	padding:25px 0 0 30px;
 	margin:0;
 }
-#side ul.navi li a{
+#side ul.navi li a {
 	background: url(../img/common/bg_navi.png) no-repeat left top;
 }
-#side ul.navi li a:hover{
+#side ul.navi li a:hover {
 	background: url(../img/common/bg_navi.png) no-repeat left -70px;
 }
-#side ul.navi li a.now{
+#side ul.navi li a.now {
 	background: url(../img/common/bg_navi.png) no-repeat left -70px;
 }
 
@@ -227,7 +235,7 @@ h2{
 	text-align:center;
 	padding: 5px 10px;
 	border-left: 1px dotted #999;
-	border-bottom: 1px dotted #999;
+	border-bottom: 1px solid #999;
 	background-color:#fff;
 	vertical-align:top;
 }
@@ -237,7 +245,7 @@ h2{
 	border-bottom-width: 1px;
 	border-bottom-style:solid;
 	border-bottom-color: #999;
-	background-color:#d5eff7;
+	background-color:#ffe8ee;
 	color:#666;
 	vertical-align:middle;
 	font-size:93%;
@@ -253,7 +261,7 @@ h2{
 }
 
 #content table.tableStyle2{
-	width:100%;
+	width:750px;
 }
 #content table.tableStyle2 td{
 	vertical-align:top;
@@ -267,8 +275,8 @@ h2{
 #content table.tableStyle3 td,
 #content table.tableStyle3 th {
 	padding: 5px 10px;
-	border-left: 1px dotted #999;
-	border-bottom: 1px dotted #999;
+	border-left: 1px solid #999;
+	border-bottom: 1px solid #999;
 	background-color:#fff;
 }
 #content table.tableStyle3 th {
@@ -282,6 +290,14 @@ h2{
 	vertical-align:middle;
 	font-size:93%;
 }
+
+#content table.tableStyle3 .bgG{
+	background-color:#e8e8e8;
+}
+#content table.tableStyle3 .bgP{
+	background-color:#ffe8ee;
+}
+
 
 #content table.tableStyle4{
 	width:100%;
@@ -315,6 +331,40 @@ h2{
 }
 
 
+#content table.tableStyle5{
+	width:750px;
+	border: 2px solid #999;
+}
+#content table.tableStyle5 td,
+#content table.tableStyle5 th {
+	text-align:center;
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px solid #999;
+	background-color:#fff;
+	vertical-align:top;
+}
+#content table.tableStyle5 th {
+	text-align:center;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	color:#666;
+	vertical-align:middle;
+	font-size:93%;
+}
+
+#content table.tableStyle5 td {
+	font-size:86%;
+	text-align:left;
+}
+#content table.tableStyle5 td.cnt {
+	text-align:center;
+	font-size:86%;
+}
+
 /*	form
 ----------------------------------------------------*/
 #content .formstyle1 input#name {
@@ -333,7 +383,6 @@ h2{
 	margin-left:5px;
 }
 
-
 .formstyle2 input#password {
 	width:150px;
 }
@@ -343,8 +392,6 @@ h2{
 .formstyle2 input#new_pass_conf {
 	width:150px;
 }
-
-
 .formstyle3 input#mail {
 	width:280px;
 	height:35px;
@@ -356,10 +403,20 @@ h2{
 	height:35px;
 	padding:5px 25px 5px 5px;
 }
+#content .formstyle3 textarea.txtArea1 {
+	width:650px;
+}
+
 
 /*	ボタンスタイル初期
 ----------------------------------------------------*/
 #btnCrea{
 	background:none;
 	border:none;
+}
+
+p.btnSpace{
+	margin-top:25px;
+	width:750px;
+	text-align:center;
 }

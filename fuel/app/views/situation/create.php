@@ -114,9 +114,6 @@
 		<input type="hidden" name="result" value="<?php echo $result; ?>" />
 		<input type="hidden" name="situation_id" value="" />
 		<input type="submit" name="btn_send" value="" />
-
-		<!--<p>※色のテキストボックスをクリックするとカラーパレットが表示されます。</p> -->
-
 	</form>
 </div>
 <table class="tableStyle2">

@@ -99,7 +99,7 @@
 	</tr>
 	</table>
 	<input type="hidden" name="result" value="1" />
-	<p class="c mT20"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_insert.png" alt="登録する" /></button></p>
+	<p class="btnSpace"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_insert.png" alt="登録する" /></button></p>
 </form>
 </div><!-- /contentIn -->
 </div><!-- /content -->

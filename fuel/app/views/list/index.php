@@ -3,6 +3,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>エンジニア対応管理システム | フォロー一覧</title>
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript">
+	msgcheck = "<?php echo $msg; ?>";
+	// メッセージ表示
+	if(msgcheck != "1"){
+		alert(msgcheck);
+	}
+</script>
 </head>
 
 <body>
@@ -150,134 +157,126 @@
 	</tr>
 
 	<?php
-	// 予定（週表示）
-	if(!empty($carenderKey)) {
-		$flag	= 0;		// 予定のない空のtdチェック用
-		echo '<tr>';
-		$wk_id2	= $today;	// 表示日
-		$date	= $today;	// 表示日
-		$wk_id	= "　";		// IDチェック用の変数（前の予定が誰か？）;
-		foreach($engineer_list as $val){
-			if(!empty($val['job_type'])){
+		// 予定（週表示）
+		if(!empty($carenderKey)) {
+			$flag	= 0;		// 予定のない空のtdチェック用
+			echo '<tr>';
+			$wk_id2	= $today;	// 表示日
+			$date	= $today;	// 表示日
+			$wk_id	= "　";		// IDチェック用の変数（前の予定が誰か？）;
+			$num = 7;
+			foreach($engineer_list as $val){
+				if(!empty($val['job_type'])){
 
-				// エンジニアの確認
-				if($wk_id != $val['user_id']){
+					// エンジニアの確認
+					if($wk_id != $val['user_id']){
+							if($wk_id != "　") {		// 2人目以降の処理
+
+								// 予定の無かった日付を埋める
+								for($i=$flag; $i<$num-1; $i++) {
+									echo '</td><td>';
+								}
+								echo '</td></tr><tr>';		// 改行
+								$wk_id2	= $today;		// 登録日
+								$flag	= 0;			// フラッグを初期化
+							}
+							echo '<td>'.$val['user_name'].'</td>';
+							echo '<td>';
+							$wk_id = $val['user_id'];	// エンジニアのIDをセット
+					}
+
+					for($i=$flag; $i<$num; $i++){
+
+						//比較日付を設定する
+						$wk_id2 = date("Y-m-d",mktime(0,0,0,substr($today,5,2),substr($today,8,2)+$i,substr($today,0,4)));
+
+						// 予定日の前のセルを作る
+						if($wk_id2 < $val['start_date']){
+							echo "</td><td>";
+							$flag++;
+
+						// 予定日を表示
+						}else if($wk_id2 == $val['start_date']){
+							if(empty($val['del_flag'])){
+								echo '<p class="btnStyle" style="background:#'.$val['color_code'].'"><a href="/follow/update/?follow_id='.$val['follow_id']."&follow_detail_id=".$val['follow_detail_id'].'">'.$val['name'].'</a></p>';
+							}
+							break;
+						}else{
+							break;
+						}
+					}
+				}
+			}
+			for($i=$flag; $i<$num-1; $i++) {
+				echo '</td><td>';
+			}
+			echo '</td>';
+			echo '</tr>';
+
+
+		// 月表示
+		} else {
+			$flag	= 1;		// 予定のない空のtdチェック用
+			echo '<tr>';
+			$date	= $today;	// 表示日
+			$wk_id	= "　";		// IDチェック用の変数（前の予定が誰か？）
+			$wk_id2 = substr($today,0,8);
+			$wk_id2 = $wk_id2."01";
+
+			foreach($engineer_list as $val){
+				if(!empty($val['job_type'])){
+
+					// エンジニアの確認
+					if($wk_id != $val['user_id']){
+
 						if($wk_id != "　") {		// 2人目以降の処理
 
 							// 予定の無かった日付を埋める
-							for($i=$flag; $i<6; $i++) {
+							for($i=$flag; $i<$cLastday; $i++) {
 								echo '</td><td>';
 							}
-							echo '</tr><tr>';		// 改行
-							$wk_id2	= $today;		// 登録日
-							$flag	= 0;			// フラッグを初期化
+							echo '</tr><tr>';		// 行の終わり
+							$wk_id2 = substr($today,0,8);
+							$wk_id2 = $wk_id2."01";
+							$flag	= 1;			// フラッグを初期化
 						}
 						echo '<td>'.$val['user_name'].'</td>';
 						echo '<td>';
 						$wk_id = $val['user_id'];	// エンジニアのIDをセット
-				}
-
-				//$x = 0;
-
-				for($i=$flag; $i<6; $i++){
-
-					//比較日付を設定する
-					$wk_id2 = date("Y-m-d",mktime(0,0,0,substr($today,5,2),substr($today,8,2)+$i,substr($today,0,4)));
-
-					// 予定日の前のセルを作る
-					if($wk_id2 < $val['start_date']){
-						echo "</td><td>";
-						//$wk_id2 = $val['start_date'];
-						$flag++;
-
-					// 予定日を表示
-					}else if($wk_id2 == $val['start_date']){
-						echo '<a href="/follow/update/?follow_id='.$val['follow_id'].'"><span class="btnStyle" style="background:#'.$val['color_code'].'">'.$val['name'].'</span></a>';
-						break;
-
-					// 予定日が終わったら繰り返しを抜ける
-					}else{
-						break;
 					}
-// 					if ($x == 10) {
-// 						echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-// 						exit;
-// 					}
-// 					$x++;
-				}
-			}
-		}
-		for($i=$flag; $i<6; $i++) {
-			echo '</td><td>';
-		}
-		echo '</tr>';
 
+					//まわす回数を取得
+					$end = date("d",mktime(0,0,0,substr($lastday,5,2),substr($lastday,8,2),substr($lastday,0,4)));
+					for($i=$flag; $i<$end; $i++){
 
-	// 月表示
-	} else {
-		$flag	= 1;		// 予定のない空のtdチェック用
-		echo '<tr>';
-		$date	= $today;	// 表示日
-		$wk_id	= "　";		// IDチェック用の変数（前の予定が誰か？）
-		$wk_id2 = substr($today,0,8);
-		$wk_id2 = $wk_id2."01";
+						//比較日付の設定
+						$wk_id2 = date("Y-m-d",mktime(0,0,0,substr($today,5,2),0+$i,substr($today,0,4)));
 
-		foreach($engineer_list as $val){
-			if(!empty($val['job_type'])){
+						// 予定日の前のセルを作る
+						if($wk_id2 < $val['start_date']){
+							echo "</td><td>";
+							$flag++;
 
-				// エンジニアの確認
-				if($wk_id != $val['user_id']){
-
-					if($wk_id != "　") {		// 2人目以降の処理
-
-						// 予定の無かった日付を埋める
-						for($i=$flag; $i<$cLastday; $i++) {
-							echo '</td><td>';
+						// 予定日を表示
+						}else if($wk_id2 == $val['start_date']){
+							if(empty($val['del_flag'])){	// 削除フラッグ
+								echo '<p class="btnStyle" style="background:#'.$val['color_code'].'"><a href="/follow/update/?follow_id='.$val['follow_id']."&".$val['follow_detail_id'].'">'.$val['name'].'</a></p>';
+							}
+							break;
+						}else{
+							break;
 						}
-						echo '</tr><tr>';		// 行の終わり
-						$wk_id2 = substr($today,0,8);
-						$wk_id2 = $wk_id2."01";
-						$flag	= 1;			// フラッグを初期化
-					}
-					echo '<td>'.$val['user_name'].'</td>';
-					echo '<td>';
-					$wk_id = $val['user_id'];	// エンジニアのIDをセット
-				}
-
-				//まわす回数を取得
-				$end = date("d",mktime(0,0,0,substr($lastday,5,2),substr($lastday,8,2),substr($lastday,0,4)));
-				for($i=$flag; $i<$end; $i++){
-
-					//比較日付を設定する
-					$wk_id2 = date("Y-m-d",mktime(0,0,0,substr($today,5,2),0+$i,substr($today,0,4)));
-
-					// 予定日の前のセルを作る
-					if($wk_id2 < $val['start_date']){
-						echo "</td><td>";
-						//$wk_id2 = $val['start_date'];
-						$flag++;
-
-					// 予定日を表示
-					}else if($wk_id2 == $val['start_date']){
-						echo '<a href="/follow/update/?follow_id='.$val['follow_id'].'"><span class="btnStyle" style="background:#'.$val['color_code'].'">'.$val['name'].'</span></a>';
-						break;
-
-					// 予定日が終わったら繰り返しを抜ける
-					}else{
-						break;
 					}
 				}
 			}
-		}
-		for($i=$flag; $i<$cLastday; $i++) {
-			echo '</td><td>';
-			if($i == $cLastday){
-				break;
+			for($i=$flag; $i<$cLastday; $i++) {
+				echo '</td><td>';
+				if($i == $cLastday){
+					break;
+				}
 			}
+			echo '</tr>';
 		}
-		echo '</tr>';
-
-	}
 	?>
 </table>
 </div><!-- /content -->

@@ -3,12 +3,16 @@
 /*	layaut
 ----------------------------------------------------*/
 #formbox2{
-	width:300px;
-	height:450px;
-	margin:30px auto;
-	border:2px solid blue;
-	padding:30px 0 80px 0;
+	width:800px;
+	margin:30px 0;
+	border:2px solid #3089cb;
+	padding:50px 0;
 
+}
+
+#formbox2 ul li {
+	float:left;
+	margin-bottom:20px;
 }
 
 #formbox2 input{

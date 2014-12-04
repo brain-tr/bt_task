@@ -73,9 +73,6 @@ class Controller_Appointment extends Controller
 
  		}
 
-
-
-
  		$data["namelist"] = db_appointment::get_all();
  		//$dataをviewにリターン
  		return View::forge('appointment/create',$data);

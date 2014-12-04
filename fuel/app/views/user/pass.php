@@ -37,7 +37,7 @@
 		}
 	</script>
 </head>
-<body>
+<body class="white">
 <div class="passBox">
 	<p class="passTxt">パスワードの変更</p>
 	<form action="/user/pass" method="post" name="formPass" class="formstyle2">
