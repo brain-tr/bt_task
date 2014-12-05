@@ -40,11 +40,54 @@ class db_seitotensu extends \Model {
  			order_by($cha,$hiki)->execute()->as_array();
  	}
 
- 	//生徒ID2(配列)
- 	public static function get_all2()
+ 	//全件表示用 昇降ボタン
+ 	public static function get_all1($select,$hiki)
  	{
- 		return \DB::select()->from('t_test')->execute()->as_array();
+		$query =\DB::query("SELECT * FROM t_seito a,t_test b where a.seito_id=b.seito_id order by ".$select." ".$hiki." ");
+		$result	=	$query->execute()->as_array();
+		return $result;
  	}
+
+ 	//全件表示用 判定:all
+ 	public static function get_result($sel,$sel2,$sel3,$updown,$updown2,$updown3)
+ 	{
+ 		$query =\DB::query("SELECT * FROM t_seito a,t_test b where a.seito_id=b.seito_id order by
+ 			  $sel  $updown , $sel2  $updown2 , $sel3  $updown3
+ 				 ");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+
+ 	//全件表示用 判定:1
+ 	public static function get_result2($sel,$updown)
+ 	{
+ 		$query =\DB::query("SELECT * FROM t_seito a,t_test b where a.seito_id=b.seito_id order by
+ 				$sel  $updown
+ 				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+
+ 	//全件表示用 判定:1/2
+ 	public static function get_result3($sel,$sel2,$updown,$updown2)
+ 	{
+ 		$query =\DB::query("SELECT * FROM t_seito a,t_test b where a.seito_id=b.seito_id order by
+ 				$sel  $updown , $sel2 $updown2
+ 				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+
+ 	//全件表示用 二番目/三番目のみ入力時
+ 	public static function get_illegal($sel,$sel2,$updown,$updown2)
+ 	{
+ 		$query =\DB::query("SELECT * FROM t_seito a,t_test b where a.seito_id=b.seito_id order by
+ 				$sel  $updown , $sel2 $updown2
+ 				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+
 
 
 
