@@ -13,9 +13,9 @@
 echo "名前<select name='name'>";
  	foreach($namelist as  $val){
 		if ($name == $val['seito_id']) {
-		print '<option value="' .$val['seito_id']. '" selected="selected">' .$val["name"]. '</option>';
-	}else{
-		print '<option value="' .$val['seito_id']. '"">' .$val["name"]. '</option>';
+			print '<option value="' .$val['seito_id']. '" selected="selected">' .$val["name"]. '</option>';
+		}else{
+			print '<option value="' .$val['seito_id']. '"">' .$val["name"]. '</option>';
 }
 
 }
@@ -49,6 +49,5 @@ echo "</select>";
 
 </table>
 </form>
-
 </body>
 </html>
