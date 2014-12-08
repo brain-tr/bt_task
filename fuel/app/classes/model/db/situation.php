@@ -64,4 +64,24 @@ class db_situation extends \Model {
 	{
 		\DB::delete('m_situation')->where('situation_id', $situation_id)->execute();
 	}
+
+	/*
+	 * 状況フラグ確認
+	*/
+	public static function get_situation($delete)
+	{
+		$select =\DB::query("select situation_id from t_follow where situation_id = $delete;");
+		$result	=	$select->execute()->current();
+		return $result;
+	}
+
+	/*
+	 * 状況フラグ確認2
+	*/
+	public static function get_situation2($delete)
+	{
+		$select2 =\DB::query("select situation_id from t_follow_detail where situation_id = $delete;");
+		$result2 = $select2->execute()->current();
+		return $result2;
+	}
 }
