@@ -216,5 +216,26 @@ class db_follow extends \Model {
 		return  \DB::select()->from('t_follow')->order_by('follow_id','desc')->execute()->current();
 	}
 
+	/*
+	 * 状況フラグ確認
+	*/
+	public static function get_situation($situation_id)
+	{
+
+		$select =\DB::query("select situation_id from t_follow where situation_id = $situation_id");
+		$result	=	$select->execute()->current();
+		return $result;
+	}
+
+	/*
+	 * 状況フラグ確認2
+	*/
+	public static function get_situation2($situation_id)
+	{
+		$select2 =\DB::query("select situation_id from t_follow_detail where situation_id = $situation_id");
+		$result2 = $select2->execute()->current();
+		return $result2;
+	}
+
 
 }

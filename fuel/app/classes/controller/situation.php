@@ -1,6 +1,6 @@
 <?php
 
-use \Model\Db_situation;
+use \Model\Db_situation,\Model\Db_follow;
 use \Model\Loginout;
 class Controller_Situation extends Controller
 {
@@ -36,7 +36,6 @@ class Controller_Situation extends Controller
 		$data["btn_send"]		= empty($post["btn_send"]) ? "" : $post["btn_send"];
 		$data["msg"]			= empty($post["msg"]) ? "1" : $post["msg"];
 		$data["delete"]			= empty($post["delete"]) ? "" : $post["delete"];
-		$delete	= empty($post["situation_id"]) ? "" : $post["situation_id"];
 
  		// ボタン数字化
 		if($data["btn_send"] == "この内容で登録する") {
@@ -77,8 +76,8 @@ class Controller_Situation extends Controller
 
 		// 情報の削除
 		} else if(!empty($post["result"]) && $data["btn_send"] == 2 && !empty($data['delete'])) {
-			$search = db_situation::get_situation($delete);
-			$search2 = db_situation::get_situation2($delete);
+			$search = db_follow::get_situation($data["situation_id"]);
+			$search2 = db_follow::get_situation2($data["situation_id"]);
 			//t_followとt_follow_detailに一致するsituation_idの有無を確認
 			if(!empty($search) || !empty($search2)){
 				$data["msg"] = $data['name']."は現在使用している状況のため削除できません。";
@@ -94,6 +93,6 @@ class Controller_Situation extends Controller
 		$data['stationData'] = db_situation::situation_list();
 
 		// var_dump($data);
-		return View::forge('situation/create', $data,$delete);
+		return View::forge('situation/create', $data);
 	}
 }
