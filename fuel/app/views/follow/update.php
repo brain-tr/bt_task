@@ -45,8 +45,15 @@ foreach ($follow_data as $val){ ?>
 		<td colspan="3"><?php echo $val['create_name']; ?></td>
 	</tr>
 	<tr>
-		<th>発生日</th>
-		<td><?php echo $val['start_date']; ?></td>
+		<th>発生日/終了日</th>
+		<td><?php echo $val['start_date']; ?>　
+		<?php
+			if($val['end_date']!='0000-00-00'){
+				echo $val['end_date'];
+			}
+		?>
+
+		</td>
 		<th>エンジニア名</th>
 		<td><?php echo $val['engineer_name']; ?></td>
 	</tr>

@@ -24,7 +24,7 @@ class db_follow extends \Model {
 	*/
 	public static function follow_data($follow_id)
 	{
-		$query	=\DB::query("select a.name as engineer_name, b.engineer_user_id, e.name as create_name, b.create_user_id, b.situation_id, b.start_date, b.project_text, b.content_text, b.remarks, c.name as situation_name, d.name as appointment_name, d.appointment_id from t_user a, t_user e, t_follow b, m_situation c, m_appointment d where b.engineer_user_id = a.user_id and b.create_user_id = e.user_id and b.situation_id = c.situation_id and b.appointment_id = d.appointment_id and follow_id = :follow_id;");
+		$query	=\DB::query("select a.name as engineer_name, b.engineer_user_id, e.name as create_name, b.create_user_id, b.situation_id, b.start_date, b.end_date,b.project_text, b.content_text, b.remarks, c.name as situation_name, d.name as appointment_name, d.appointment_id from t_user a, t_user e, t_follow b, m_situation c, m_appointment d where b.engineer_user_id = a.user_id and b.create_user_id = e.user_id and b.situation_id = c.situation_id and b.appointment_id = d.appointment_id and follow_id = :follow_id;");
 		$result	= $query->bind('follow_id', $follow_id)->bind('day2', $day2)->execute()->as_array();
 		return $result;
 	}
@@ -100,6 +100,27 @@ class db_follow extends \Model {
 	{
 		return \DB::insert('t_follow')->set(array(
 		//		'follow_id'		=> "",
+				'engineer_user_id'	=> $data['engineer_user_id'],
+				'situation_id'		=> $data['situation_id'],
+				'appointment_id'	=> $data['appointment_id'],
+				'project_text'		=> $data['project_text'],
+				'content_text'		=> $data['content_text'],
+				'remarks'			=> $data['remarks'],
+				'create_user_id'	=> $data['create_user_id'],
+				'start_date'		=> $data['start_date'],
+				'end_date'			=> $data['end_date'],
+				'del_flag'			=> 0,
+		//		'created_at'		=> $data['created_at'],
+		))->execute();
+	}
+
+	/*
+	 *	フォロー情報を登録する(終了日入り)
+	*/
+	public static function ins_follow2($data)
+	{
+		return \DB::insert('t_follow')->set(array(
+			//	'follow_id'			=> "",
 				'engineer_user_id'	=> $data['engineer_user_id'],
 				'situation_id'		=> $data['situation_id'],
 				'appointment_id'	=> $data['appointment_id'],
@@ -236,6 +257,17 @@ class db_follow extends \Model {
 		$result2 = $select2->execute()->current();
 		return $result2;
 	}
+
+	/*
+	 *	situation_flagとsituation_idを比較する。
+	*/
+	public static function select_flag($data)
+	{
+		return  \DB::select('situation_flag')->from('m_situation')->where('situation_id', $data["situation_id"])->where('situation_flag', '1')->execute()->current();
+	}
+
+
+
 
 
 }

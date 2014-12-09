@@ -29,6 +29,7 @@ class Controller_Follow extends Controller
 		$post = Input::post();
 		$data["engineer_user_id"]	= empty($post["engineer_user_id"]) ? "" : $post["engineer_user_id"];
 		$data["situation_id"]		= empty($post["situation_id"]) ? "" : $post["situation_id"];
+		$data["situation_flag"]		= empty($post["situation_flag"]) ? "" : $post["situation_flag"];
 		$data["appointment_id"]		= empty($post["appointment_id"]) ? "" : $post["appointment_id"];
 		$data["project_text"]		= empty($post["project_text"]) ? "" : $post["project_text"];
 		$data["content_text"]		= empty($post["content_text"]) ? "" : $post["content_text"];
@@ -58,6 +59,8 @@ class Controller_Follow extends Controller
 			// 対応方式検索
 			$data["appointment_id"]		= db_follow::appointment_list();
 
+			//フラグ検索
+
 			return View::forge('follow/create', $data);
 
 		} else {
@@ -65,7 +68,13 @@ class Controller_Follow extends Controller
 			// ユーザーIDのセット
 			$data["create_user_id"] = $data['userlog_id'];
 
+			//フラグ検索用の値をセット
+			$situation_flag		= db_follow::select_flag($data);
+
 			// フォロー情報の登録
+			if(empty($situation_flag)){
+				$data["end_date"]		= empty($post["start_date"]) ? date('Y-m-d') : $post["start_date"];
+			}
 			db_follow::ins_follow($data);
 			header('Location: /list/index?today='.$data["start_date"]);
 			exit;
