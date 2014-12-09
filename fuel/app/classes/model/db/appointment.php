@@ -54,8 +54,23 @@ class db_appointment extends \Model {
 		))->where('appointment_id', $data['user_id'])->execute();
 	}
 
+	//データベース削除
 	public static function del_user($data)
 	{
 		\DB::delete('m_appointment')->where('appointment_id', $data['user_id'])->execute();
 	}
+
+	//対応方式削除の確認
+	public static function get_situation($user_id)
+	{
+		return  \DB::select('appointment_id')->from('t_follow')->where('appointment_id',$user_id)->execute()->current();
+
+	}
+
+	//対応方式削除の確認2
+	public static function get_situation2($user_id)
+	{
+		return  \DB::select('appointment_id')->from('t_follow_detail')->where('appointment_id',$user_id)->execute()->current();
+	}
+
 }

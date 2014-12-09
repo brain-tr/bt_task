@@ -32,6 +32,7 @@
 		Msg = "削除しますか？";
 		if(confirm(Msg)){
 		document.form.id.value = appointment_id;
+		document.form.name.value = name;
 		var submitType = document.createElement("input");
 		submitType.setAttribute("name", "deleate");
 		submitType.setAttribute("type", "hidden");
