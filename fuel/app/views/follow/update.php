@@ -34,10 +34,21 @@
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<h2>フォロー報告の変更</h2>
+
 
 <?php
-foreach ($follow_data as $val){ ?>
+	foreach ($follow_data as $val){
+	$disabled = "";
+	$end_msg  = "";
+	if($val["end_date"]!='0000-00-00'){
+		$disabled = "disabled";
+		$end_msg = "このフォロー情報は終了しました";
+	}
+
+ 	echo "<p class='alert' style='color:red; font-size:30px;'>".$end_msg."</p>";
+ ?>
+<h2>フォロー報告の変更</h2>
+
 <form action="/follow/update" method="post" id="form1">
 <table class="tableStyle3 mB20">
 	<tr>
@@ -94,79 +105,81 @@ foreach ($follow_data as $val){ ?>
 	</form>
 
 	<?php
-	if(!empty($follow_detail_up_data)){
-		//echo '<h3>フォロー詳細内容の変更</h3>';
-		echo '<form action="/follow/update" method="post" id="form3">';
-		echo '<table class="tableStyle3 mB50">';
-		echo '<tr>';
+	if(empty($disabled)){
+		if(!empty($follow_detail_up_data)){
+			//echo '<h3>フォロー詳細内容の変更</h3>';
+			echo '<form action="/follow/update" method="post" id="form3">';
+			echo '<table class="tableStyle3 mB50">';
+			echo '<tr>';
 
-		echo '<th class="bgP">日付</th>';
-		echo '<td colspan="2" style="border-right:none;">'.$follow_detail_up_data['detail_date'].'</td>';
-		echo '<td style="border-left:none;"><input type="submit" name="detail_up"value="変更" />　<input type="submit" name="detail_del" value="削除" onClick="followDelete()" /></td>';
-		echo '</tr><tr>';
+			echo '<th class="bgP">日付</th>';
+			echo '<td colspan="2" style="border-right:none;">'.$follow_detail_up_data['detail_date'].'</td>';
+			echo '<td style="border-left:none;"><input type="submit" name="detail_up"value="変更" '.$disabled.' />　<input type="submit" name="detail_del" value="削除" '.$disabled.' onClick="followDelete()" /></td>';
+			echo '</tr><tr>';
 
-		// 状況フラグ
-		echo '<th class="bgP">状況フラグ</th>';
-		echo '<td>';
+			// 状況フラグ
+			echo '<th class="bgP">状況フラグ</th>';
+			echo '<td>';
 
-		if(!empty($situation_list)) {
-			echo '<select id="situation_id2" name="situation_id2">';
-			foreach($situation_list as $val) {
+			if(!empty($situation_list)) {
+				echo '<select id="situation_id2" name="situation_id2">';
+				foreach($situation_list as $val2) {
 
-				// 選択項目の設定
-				if($follow_detail_up_data['situation_id'] == $val['situation_id']){
-					$selected = "selected";
+					// 選択項目の設定
+					if($follow_detail_up_data['situation_id'] == $val2['situation_id']){
+						$selected = "selected";
+					} else {
+						$selected = "";
+					}
+					echo '<option value="'.$val2['situation_id'].'" '.$selected.''.$disabled.'>'.$val2['name'].'</option>';
+					}
+					echo '</select>';
 				} else {
-					$selected = "";
-				}
-				echo '<option value="'.$val['situation_id'].'" '.$selected.'>'.$val['name'].'</option>';
+					echo "状況フラグが登録されていません。";
+			}
+			echo '</td>';
+
+
+			// 対応方式
+			echo '<th class="bgP">対応方式</th>';
+			echo '<td>';
+
+			if(!empty($appointment_list)) {
+				echo '<select id="appointment_id2" name="appointment_id2">';
+				foreach($appointment_list as $val2){
+
+					// 選択項目の設定
+					if($follow_detail_up_data['appointment_id'] == $val2['appointment_id']) {
+						$selected = "selected";
+					} else {
+						$selected = "";
+					}
+					echo '<option value="'.$val2['appointment_id'].'" '.$selected.''.$disabled.'>'.$val2['name'].'</option>';
 				}
 				echo '</select>';
 			} else {
-				echo "状況フラグが登録されていません。";
-		}
-		echo '</td>';
-
-
-		// 対応方式
-		echo '<th class="bgP">対応方式</th>';
-		echo '<td>';
-
-		if(!empty($appointment_list)) {
-			echo '<select id="appointment_id2" name="appointment_id2">';
-			foreach($appointment_list as $val){
-
-				// 選択項目の設定
-				if($follow_detail_up_data['appointment_id'] == $val['appointment_id']) {
-					$selected = "selected";
-				} else {
-					$selected = "";
-				}
-				echo '<option value="'.$val['appointment_id'].'" '.$selected.'>'.$val['name'].'</option>';
+				echo "対応方式が登録されていません。";
 			}
-			echo '</select>';
-		} else {
-			echo "対応方式が登録されていません。";
-		}
-		echo '</td></tr><tr>';
-		echo '<th class="bgP">フォロー詳細内容</th>';
-		echo '<td colspan="3"><textarea id ="remarks3" name="remarks3" rows="4" cols="20">'.$follow_detail_up_data['remarks'].'</textarea></td>';
+			echo '</td></tr><tr>';
+			echo '<th class="bgP">フォロー詳細内容</th>';
+			echo '<td colspan="3"><textarea '.$disabled.' id ="remarks3" name="remarks3" rows="4" cols="20">'.$follow_detail_up_data['remarks'].'</textarea></td>';
 
-	echo '</tr></table>';
-	echo '<input type="hidden" name="follow_detail_id" value="'.$follow_detail_up_data['id'].'" />';
-	echo '<input type="hidden" name="detail_date" value="'.$follow_detail_up_data['detail_date'].'" /></form>';
-	} ?>
+		echo '</tr></table>';
+		echo '<input type="hidden" name="follow_detail_id" value="'.$follow_detail_up_data['id'].'" />';
+		echo '<input type="hidden" name="detail_date" value="'.$follow_detail_up_data['detail_date'].'" /></form>';
+		}
+	}?>
 
 
 	<h3>フォロー詳細内容の一覧</h3>
 	<table class="tableStyle3 mB50">
 	<?php
 		if(!empty($follow_detail_data)){
-			foreach($follow_detail_data as $val){
-				if(empty($val['del_flag'])) {
-					echo '<tr><td class="bgG" colspan="4">発生日：'.$val['detail_date']."</td></tr>\r\n";
-					echo '<tr><th>状況フラグ </th><td>'.$val['situation_name'].'</td><th>対応方式 </th><td>'.$val['appointment_name']."</td></tr>\r\n";
-					echo '<tr><th>フォロー詳細内容</th><td colspan="3">'.$val['remarks']."</td></tr>\r\n";
+			foreach($follow_detail_data as $val2){
+				if(empty($val2['del_flag'])) {
+					echo '<tr><td class="bgG" colspan="4">発生日：'.$val2['detail_date']."</td></tr>\r\n";
+					echo '<tr><th>状況フラグ </th><td>'.$val2['situation_name'].'</td><th>対応方式 </th><td>'.$val2['appointment_name']."</td></tr>\r\n";
+					echo '<tr><th>フォロー詳細内容</th><td colspan="3">'.$val2['remarks']."</td></tr>\r\n";
 				}
 			}
 		} else {
@@ -181,8 +194,8 @@ foreach ($follow_data as $val){ ?>
 	<table class="tableStyle3 mB50">
 		<tr>
 			<th class="bgP">日付</th>
-			<td colspan="2" style="border-right:none;"><input type="text" id="detail_date" name="detail_date" value="<?php echo date("Y-m-d"); ?>" size="15" /></td>
-			<td style="border-left:none;"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_insert2.png" alt="登録する"  width="100px"/></button></td>
+			<td colspan="2" style="border-right:none;"><input type="text" id="detail_date" name="detail_date" value="<?php echo date("Y-m-d") ; ?>" size="15" <?php echo $disabled; ?>/></td>
+			<td style="border-left:none;"><button type="submit" id="btnCrea" <?php echo $disabled; ?>><img src="/assets/img/common/btn_insert2.png" alt="登録する"  width="100px"/></button></td>
 		</tr>
 
 		<tr>
@@ -190,8 +203,9 @@ foreach ($follow_data as $val){ ?>
 			<td><?php
 					if(!empty($situation_list)) {
 						echo '<select id="situation_id" name="situation_id">';
-						foreach($situation_list as $val) {
-							echo '<option value="'.$val['situation_id'].'">'.$val['name'].'</option>';
+						foreach($situation_list as $val2) {
+							echo '<option value="'.$val2['situation_id'].'" '.$disabled.'>'.$val2['name'].'</option>';
+
 						}
 						echo '</select>';
 					} else {
@@ -203,9 +217,8 @@ foreach ($follow_data as $val){ ?>
 			<td><?php
 				if(!empty($appointment_list)) {
 					echo '<select id="appointment_id" name="appointment_id">';
-					foreach($appointment_list as $val){
-						echo '<option value="'.$val['appointment_id'].'">'.$val['name'].'</option>';
-
+					foreach($appointment_list as $val2){
+						echo '<option value="'.$val2['appointment_id'].'" '.$disabled.'>'.$val2['name'].'</option>';
 					}
 					echo '</select>';
 				} else {
@@ -219,14 +232,13 @@ foreach ($follow_data as $val){ ?>
 		</tr>
 		<tr>
 			<th class="bgP">フォロー詳細内容</th>
-			<td colspan="3"><textarea id ="remarks2" name="remarks2" rows="4" cols="20"></textarea></td>
+			<td colspan="3"><textarea <?php echo $disabled; ?> id ="remarks2" name="remarks2" rows="4" cols="20" ></textarea></td>
 		</tr>
 	</table>
 	<input type="hidden" name="follow_id" value="<?php echo $follow_id; ?>" />
 	<input type="hidden" name="start_date" value="<?php //echo $val['start_date']; ?>" />
 	<input type="hidden" name="result" value="3" />
 	</form>
-
 
 <?php }?>
 

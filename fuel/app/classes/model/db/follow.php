@@ -183,7 +183,7 @@ class db_follow extends \Model {
 	/*
 	 *	フォロー詳細情報を登録する(end_date)追加
 	*/
-	public static function ins_follow_detail2($data)
+	public static function upd_follow_detail2($data)
 	{
 		return \DB::update('t_follow')->set(array(
 				'end_date'  => $data['detail_date']
