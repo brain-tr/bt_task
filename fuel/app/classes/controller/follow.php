@@ -167,7 +167,6 @@ class Controller_Follow extends Controller
 
 			if(!empty($situation_flag)){
 				db_follow::ins_follow_detail2($data);
-				db_follow::ins_follow_detail($data);
 			}
 
 
