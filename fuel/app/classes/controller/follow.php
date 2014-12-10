@@ -101,6 +101,7 @@ class Controller_Follow extends Controller
 		$data["content_text"]			= empty($post["content_text"]) ? "" : $post["content_text"];
 		$data["remarks"]				= empty($post["remarks"]) ? "" : $post["remarks"];
 		$data["start_date"]				= empty($post["start_date"]) ? "" : $post["start_date"];
+		$data["end_date"]				= empty($post["end_date"]) ? "" : $post["end_date"];
 		$data['appointment_list']		= empty($post["appointment_list"]) ? "" : $post["appointment_list"];
 		$data['situation_list']			= empty($post["situation_list"]) ? "" : $post["situation_list"];
 		$data["remarks2"]				= empty($post["remarks2"]) ? "" : $post["remarks2"];
@@ -160,6 +161,16 @@ class Controller_Follow extends Controller
 
 		// フォロー情報の追加
 		} else  if($data["result"] === "3") {
+			//フラグ検索用の値をセット
+			$situation_flag		= db_follow::select_child($data);
+// 			var_dump($situation_flag);
+
+			if(!empty($situation_flag)){
+				db_follow::ins_follow_detail2($data);
+				db_follow::ins_follow_detail($data);
+			}
+
+
 			db_follow::ins_follow_detail($data);
 			$data["msg"] = "フォロー詳細情報を登録しました。";
 		}

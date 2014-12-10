@@ -114,27 +114,6 @@ class db_follow extends \Model {
 		))->execute();
 	}
 
-	/*
-	 *	フォロー情報を登録する(終了日入り)
-	*/
-	public static function ins_follow2($data)
-	{
-		return \DB::insert('t_follow')->set(array(
-			//	'follow_id'			=> "",
-				'engineer_user_id'	=> $data['engineer_user_id'],
-				'situation_id'		=> $data['situation_id'],
-				'appointment_id'	=> $data['appointment_id'],
-				'project_text'		=> $data['project_text'],
-				'content_text'		=> $data['content_text'],
-				'remarks'			=> $data['remarks'],
-				'create_user_id'	=> $data['create_user_id'],
-				'start_date'		=> $data['start_date'],
-				'end_date'			=> $data['end_date'],
-				'del_flag'			=> 0,
-		//		'created_at'		=> $data['created_at'],
-		))->execute();
-	}
-
 
 	/*
 	 *	フォロー情報を変更する
@@ -201,6 +180,16 @@ class db_follow extends \Model {
 		))->execute();
 	}
 
+	/*
+	 *	フォロー詳細情報を登録する(end_date)追加
+	*/
+	public static function ins_follow_detail2($data)
+	{
+		return \DB::update('t_follow')->set(array(
+				'end_date'  => $data['detail_date']
+		))->where('follow_id', $data['follow_id'])->execute();
+	}
+
 
 	/*
 	 *	フォロー詳細情報を変更する
@@ -226,6 +215,7 @@ class db_follow extends \Model {
 				'del_flag'		=> 1
 		))->where('id', $data['follow_detail_id'])
 		->execute();
+
 	}
 
 
@@ -266,6 +256,13 @@ class db_follow extends \Model {
 		return  \DB::select('situation_flag')->from('m_situation')->where('situation_id', $data["situation_id"])->where('situation_flag', '1')->execute()->current();
 	}
 
+	/*
+	 *	子状況の登録日を取得する
+	*/
+	public static function select_child($data)
+	{
+		return  \DB::select('situation_flag')->from('m_situation')->where('situation_id', $data["situation_id"])->where('situation_flag', '0')->where('flag', '1')->execute()->current();
+	}
 
 
 
