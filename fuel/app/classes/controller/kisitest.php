@@ -12,11 +12,13 @@ class Controller_Kisitest extends Controller
 	
 		$subject = str_replace("{title}",			"登録",						FOLLOW_SUBJECT);
 		$message = str_replace("{user_name}",		"キシハラ",					FOLLOW_MESSAGE);
+		$message = str_replace("{title}",			"登録",						$message);
 		$message = str_replace("{follow_url}",		"http://yahoo.co.jp",		$message);
 		if(!Workbench::sendMail("kab06835@yahoo.co.jp","test",$subject,$message)){
 			return Response::forge(View::forge('welcome/404', $data), 404);
 		}
-	
+		echo "メール送信完了";
+		
 	}
 	
 	/*
