@@ -12,6 +12,12 @@ class Controller_User extends Controller
 	{
 		session_start();
 		parent::before();
+		//管理者以外のアクセスをブロック
+		$adflag = $_SESSION['admin_flag'];
+		if($adflag!=1){
+			header('Location: /top/');
+			exit();
+		}
 		if (!Loginout::logincheck()){
 			header('Location: /login/');
 			exit();

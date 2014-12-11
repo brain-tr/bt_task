@@ -45,6 +45,7 @@ class Controller_Login extends Controller
 				} else {
 					$_SESSION['id']		= $user["user_id"];
 					$_SESSION['name']	= $user["name"];
+					$_SESSION['admin_flag']= $user["admin_flag"];
 					header('Location: /top');
 					exit();
 				}
@@ -62,6 +63,7 @@ class Controller_Login extends Controller
 		// セッションのクリア
 		unset($_SESSION['id']);
 		unset($_SESSION['name']);
+		unset($_SESSION['admin_flag']);
 
 		header('Location: /login/');
 		exit();

@@ -24,7 +24,34 @@ class db_follow extends \Model {
 	*/
 	public static function follow_data($follow_id)
 	{
-		$query	=\DB::query("select a.name as engineer_name, b.engineer_user_id, e.name as create_name, b.create_user_id, b.situation_id, b.start_date, b.end_date,b.project_text, b.content_text, b.remarks, c.name as situation_name, d.name as appointment_name, d.appointment_id from t_user a, t_user e, t_follow b, m_situation c, m_appointment d where b.engineer_user_id = a.user_id and b.create_user_id = e.user_id and b.situation_id = c.situation_id and b.appointment_id = d.appointment_id and follow_id = :follow_id;");
+		$query	=\DB::query("select
+								a.name as engineer_name,
+								a.user_id,
+								b.engineer_user_id,
+								e.name as create_name,
+								b.create_user_id,
+								b.situation_id,
+								b.start_date,
+								b.end_date,
+								b.project_text,
+								b.content_text,
+								b.remarks,
+								b.follow_id,
+								c.name as situation_name,
+								d.name as appointment_name,
+								d.appointment_id
+							from
+								t_user a,
+								t_user e,
+								t_follow b,
+								m_situation c,
+								m_appointment d
+							where
+								b.engineer_user_id = a.user_id and
+								b.create_user_id = e.user_id and
+								b.situation_id = c.situation_id and
+								b.appointment_id = d.appointment_id and
+								follow_id = :follow_id;");
 		$result	= $query->bind('follow_id', $follow_id)->bind('day2', $day2)->execute()->as_array();
 		return $result;
 	}
@@ -177,6 +204,7 @@ class db_follow extends \Model {
 				'appointment_id'	=> $data['appointment_id'],
 				'remarks'			=> $data['remarks2'],
 				'del_flag'			=> 0,
+				'create_user_id'	=> $data['user_id']
 		))->execute();
 	}
 
@@ -263,6 +291,31 @@ class db_follow extends \Model {
 	{
 		return  \DB::select('situation_flag')->from('m_situation')->where('situation_id', $data["situation_id"])->where('situation_flag', '0')->where('flag', '1')->execute()->current();
 	}
+
+	/*
+	 *	更新者情報updatedに登録する
+	*/
+	public static function ins_update($data)
+	{
+		return \DB::insert('t_updated')->set(array(
+				//		'id'				=> "",
+				'follow_id'			=> $data['follow_id'],
+				'user_id'			=> $data['userlog_id'],
+				//		'updated_at'		=> $updated_at,
+		))->execute();
+	}
+
+	/*
+	 *	更新者情報を取得する
+	*/
+	public static function get_change($data,$follow_id)
+	{
+		$select2 =\DB::query("select b.follow_id,a.name,b.updated_at from t_user a left join t_updated b on a.user_id = b.user_id where b.follow_id = $follow_id ");
+		$result2 = $select2->execute()->as_array();
+		return $result2;
+	}
+
+
 
 
 

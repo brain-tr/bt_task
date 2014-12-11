@@ -66,4 +66,5 @@ class db_situation extends \Model {
 	}
 
 
+
 }

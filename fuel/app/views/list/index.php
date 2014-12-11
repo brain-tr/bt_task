@@ -287,9 +287,13 @@
 		<li><a href="/top/">TOP</a></li>
 		<li><a href="/follow/create">フォロー報告</a></li>
 		<li><a href="/list/">フォロー一覧</a></li>
+	<!--管理者以外のアクセスをブロック-->
+	<?php if($userlog_adflag!=0){?>
 		<li><a href="/user/create">ユーザー登録・更新</a></li>
 		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
 		<li><a href="/appointment/create">対応方針登録・更新</a></li>
+	<?php }?>
+	<!--  -->
 	</ul>
 </div><!-- /side -->
 

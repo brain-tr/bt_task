@@ -24,6 +24,7 @@ class Controller_Follow extends Controller
 		// ログイン情報
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
 
 		// POST
 		$post = Input::post();
@@ -90,6 +91,7 @@ class Controller_Follow extends Controller
 		// ログイン情報
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
 
 		// POST
 		$post = Input::post();
@@ -115,6 +117,7 @@ class Controller_Follow extends Controller
 		$data['detail_up']				= empty($post["detail_up"]) ? "" : $post["detail_up"];
 		$data['detail_del']				= empty($post["detail_del"]) ? "" : $post["detail_del"];
 		$data["remarks3"]				= empty($post["remarks3"]) ? "" : $post["remarks3"];
+		$data["user_id"]				= empty($post["create_user_id"])? "" : $post["create_user_id"];
 
 		// GET
 		$get = Input::get();
@@ -139,6 +142,7 @@ class Controller_Follow extends Controller
 			$checkFollow = db_follow::get_follow($data["follow_id"]);		// フォローの検索
 			if(!empty($checkFollow)) {
 				db_follow::upd_follow($data);
+				db_follow::ins_update($data);
 				$data["msg"] = "フォロー情報を変更しました。";
 			} else {
 				$data["msg"] = "フォロー情報がみつかりません。データを確認してください。";
@@ -185,6 +189,7 @@ class Controller_Follow extends Controller
 			$detail_up_data = db_follow::get_follow_detail($data['follow_detail_id']);
 			if(!empty($detail_up_data)) {
 				db_follow::upd_follow_detail($data);
+				db_follow::ins_update($data);
 				$data["msg"] = "フォロー詳細情報を変更しました。";
 				header('Location: /list/index?msg='.$data["msg"]."&today=".$data["detail_date"]);
 				exit;
@@ -221,6 +226,27 @@ class Controller_Follow extends Controller
 		$data["follow_detail_data"] = db_follow::follow_detail_list($data["follow_id"]);
 
 		return View::forge('follow/update', $data);
+	}
+
+	//更新者履歴の確認
+	public function action_check()
+	{
+		//ユーザー情報の確認
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+		//フォローid取得用
+		$get = Input::get();
+		$follow_id	= empty($get["id"]) ? "" : $get["id"];
+		$u_id		= $_SESSION['id'];
+
+		$data["show"] = db_follow::get_change($data,$follow_id);
+
+
+
+
+
+		return View::forge('follow/check',$data,$follow_id,$u_id);
 	}
 
 }

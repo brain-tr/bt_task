@@ -1,6 +1,7 @@
 <?php
 
-use \Model\Db_situation,\Model\Db_follow;
+use \Model\Db_situation;
+use \Model\Db_follow;
 use \Model\Loginout;
 class Controller_Situation extends Controller
 {
@@ -11,6 +12,12 @@ class Controller_Situation extends Controller
 	{
 		session_start();
 		parent::before();
+		//管理者以外のアクセスをブロック
+		$adflag = $_SESSION['admin_flag'];
+		if($adflag!=1){
+			header('Location: /top/');
+			exit();
+		}
 		if (!Loginout::logincheck()){
 			header('Location: /login/');
 			exit();

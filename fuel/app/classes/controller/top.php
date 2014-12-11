@@ -22,6 +22,7 @@ class Controller_Top extends Controller
 		// ログイン情報
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
 
 
  		return View::forge('top' , $data);

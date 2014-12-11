@@ -11,6 +11,12 @@ class Controller_Appointment extends Controller
 	{
 		session_start();
 		parent::before();
+		//管理者以外のアクセスをブロック
+		$adflag = $_SESSION['admin_flag'];
+		if($adflag!=1){
+			header('Location: /top/');
+			exit();
+		}
 		if (!Loginout::logincheck()){
 			header('Location: /login/');
 			exit();
@@ -23,14 +29,14 @@ class Controller_Appointment extends Controller
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
 
-		 $post			=	Input::post();
-		 $data["name"]	=	empty($post["name"]) ? "": $post["name"];
-		 $data["ins"]	=	empty($post["ins"]) ? "": $post["ins"];
-		 $data['user_id']	= empty($post["id"]) ? "": $post["id"];
+		 $post				=	Input::post();
+		 $data["name"]		=	empty($post["name"]) ? "": $post["name"];
+		 $data["ins"]		=	empty($post["ins"]) ? "": $post["ins"];
+		 $data['user_id']	=	empty($post["id"]) ? "": $post["id"];
 		 $data['btn']		=	empty($post["btn"]) ? "": $post["btn"];
- 		 $data["get"]		= empty($post["get"]) ? 1 : $post["get"];
- 		 $data["deleate"]		= empty($post["deleate"]) ? "" : $post["deleate"];
-		 $data["msg"]		= empty($post["msg"]) ? "1" : $post["msg"];
+ 		 $data["get"]		=	empty($post["get"]) ? 1 : $post["get"];
+ 		 $data["deleate"]	=	empty($post["deleate"]) ? "" : $post["deleate"];
+		 $data["msg"]		=	empty($post["msg"]) ? "1" : $post["msg"];
  		 $data["id"]		=	db_appointment::get_id();
 
 		 if($data["btn"]=="登録"){
@@ -67,9 +73,17 @@ class Controller_Appointment extends Controller
 
  		//ここから削除
  		 if(!empty($data["deleate"])){
+ 		 	//使用している対応方式かどうかの判定
+ 		 	$search = db_appointment::get_situation($data['user_id']);
+ 		 	$search2 = db_appointment::get_situation2($data['user_id']);
+ 		 	if(!empty($search) || !empty($search2)){
+ 		 		$data["msg"] = "[".$data['name']."]は現在使用している対応方式のため削除できません。";
+ 		 	}else{
+ 		 		db_appointment::del_user($data);
+ 		 		$data["msg"] = "削除しました。";
+ 		 	}
 
- 			db_appointment::del_user($data);
- 			$data["msg"] = "削除しました。";
+
 
  		}
 

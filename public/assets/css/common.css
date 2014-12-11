@@ -187,7 +187,7 @@ input {
 }
 h2 {
 	font-size:172%;
-	margin:50px 0 20px 0;
+	margin:20px 0 20px 0;
 	color:171717;
 }
 h3 {
@@ -364,6 +364,8 @@ h3 {
 	text-align:center;
 	font-size:86%;
 }
+
+
 
 /*	form
 ----------------------------------------------------*/

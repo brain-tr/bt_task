@@ -30,6 +30,8 @@
 				<input type="submit" value="フォロー一覧" name="list"  style="WIDTH: 200px; HEIGHT: 70px">
 			</form>
 		</li>
+	<!-- 管理者以外のアクセスをブロック -->
+	<?php if($userlog_adflag!=0){?>
 		<li>
 			<form action="/user/create" method="post" name="f_user">
 				<input type="submit" value="ユーザ登録・更新" name="user"  style="WIDTH: 200px; HEIGHT: 70px">
@@ -45,6 +47,8 @@
 				<input type="submit" value="対応方式登録・更新" name="form"  style="WIDTH: 200px; HEIGHT: 70px">
 			</form>
 		</li>
+	<?php }?>
+	<!--   -->
 	</ul>
 	</div>
 </div><!-- /contentIn -->
@@ -55,9 +59,13 @@
 		<li><a href="/top/">TOP</a></li>
 		<li><a href="/follow/create">フォロー報告</a></li>
 		<li><a href="/list/">フォロー一覧</a></li>
+	<!-- 管理者以外のアクセスをブロック -->
+	<?php if($userlog_adflag!=0){?>
 		<li><a href="/user/create">ユーザー登録・更新</a></li>
 		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
 		<li><a href="/appointment/create">対応方針登録・更新</a></li>
+	<?php }?>
+	<!--  -->
 	</ul>
 </div>
 

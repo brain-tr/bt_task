@@ -18,6 +18,16 @@
 	if(msgcheck != "1"){
 		alert(msgcheck);
 	}
+
+	//更新者履歴の確認
+	function disp(follow_id){
+// 		window.open('/user/pass?user=' + user_id , 'pass', 'width=400, height=300, menubar=no, toolbar=no, scrollbars=yes');
+		var follow_id = follow_id;
+		window.open('/follow/check?id=' + follow_id , "id", "width=400,height=400,scrollbars=yes");
+	}
+// 	function userPass(user_id) {
+// 		var user_id = user_id;
+// 		window.open('/user/pass?user=' + user_id , 'pass', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=yes');
 </script>
 </head>
 
@@ -37,6 +47,8 @@
 
 
 <?php
+// 	var_dump($follow_data);
+// 	exit;
 	foreach ($follow_data as $val){
 	$disabled = "";
 	$end_msg  = "";
@@ -66,7 +78,8 @@
 
 		</td>
 		<th>エンジニア名</th>
-		<td><?php echo $val['engineer_name']; ?></td>
+
+		<td><?php echo $val['engineer_name']; ?>　<a onclick="disp(<?php echo "'".$val['follow_id']."'"; ?>)" href="#">更新履歴</a></td>
 	</tr>
 	<tr>
 		<th>状況フラグ</th>
@@ -95,13 +108,14 @@
 	</table>
 	<?php if(empty($follow_detail_id)) {?>
 		<p class="btnSpace mB50">
-		<button type="submit" id="btnCrea" name="result" value="変更する"><img src="/assets/img/common/btn_insert.png" alt="登録する" width="180px" height="70px" /></button>　
+		<button type="submit" id="btnCrea" name="result" value="変更する"><img src="/assets/img/common/btn_update.png" alt="登録する" width="180px" height="70px" /></button>　
 		<button type="submit" id="btnCrea" name="result" value="削除する" onClick="followDelete()"><img src="/assets/img/common/btn_delete.png" alt="登録する" width="180px" height="70px" /></button>
 <!-- 		<input type="submit" name="result" value="変更する" />　 -->
 <!--		<input type="submit" name="result" value="削除する" onClick="followDelete()" /> -->
 	</p>
 	<?php } ?>
 	<input type="hidden" name="follow_id" id="follow_id" value="<?php echo $follow_id; ?>" />
+	<input type="hidden" name="create_user_id" value="<?php echo $val["create_user_id"]; ?>">
 	</form>
 
 	<?php
@@ -165,6 +179,7 @@
 			echo '<td colspan="3"><textarea '.$disabled.' id ="remarks3" name="remarks3" rows="4" cols="20">'.$follow_detail_up_data['remarks'].'</textarea></td>';
 
 		echo '</tr></table>';
+		echo '<input type="hidden" name="create_user_id" value="'.$val['create_user_id'].'" />';
 		echo '<input type="hidden" name="follow_detail_id" value="'.$follow_detail_up_data['id'].'" />';
 		echo '<input type="hidden" name="detail_date" value="'.$follow_detail_up_data['detail_date'].'" /></form>';
 		}
@@ -225,6 +240,7 @@
 					echo "対応方式が登録されていません。";
 				}
 				?>
+
 			</td>
 		</tr>
 		<tr>
@@ -238,6 +254,7 @@
 	<input type="hidden" name="follow_id" value="<?php echo $follow_id; ?>" />
 	<input type="hidden" name="start_date" value="<?php //echo $val['start_date']; ?>" />
 	<input type="hidden" name="result" value="3" />
+	<input type="hidden" name="create_user_id" value="<?php echo $val["create_user_id"]; ?>">
 	</form>
 
 <?php }?>
@@ -252,9 +269,11 @@
 		<li><a href="/top/">TOP</a></li>
 		<li><a href="/follow/create">フォロー報告</a></li>
 		<li><a href="/list/">フォロー一覧</a></li>
+	<?php if($userlog_adflag!=0){?>
 		<li><a href="/user/create">ユーザー登録・更新</a></li>
 		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
 		<li><a href="/appointment/create">対応方針登録・更新</a></li>
+	<?php }?>
 	</ul>
 </div><!-- /side -->
 
