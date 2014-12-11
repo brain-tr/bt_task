@@ -2,6 +2,7 @@
 
 use \Model\Db_Ranking;
 use \Model\kisitest;
+use \Model\Workbench;
 
 class Controller_Kisitest extends Controller
 {
