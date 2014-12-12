@@ -81,6 +81,7 @@ class Controller_Follow extends Controller
 // 			exit;
 			db_follow::ins_follow($data);
 			$data["mail"] = db_follow::get_sflag($data);
+
 			//メール送信
 			$to		 =	$data["mail"];
 			$from	 = "test";
@@ -88,7 +89,8 @@ class Controller_Follow extends Controller
 			$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
 			$message = str_replace("{title}",			"登録",						$message);
 			$message = str_replace("{follow_url}",		"http://localhost/follow/update",		$message);
-			if(!Workbench::sendMail("m_sato@brain-tr.co.jp","test",$subject,$message)){
+// 			if(!Workbench::sendMail("m_sato@brain-tr.co.jp","test",$subject,$message)){
+			if(!Workbench::sendMail("kab06835@yahoo.co.jp","test",$subject,$message)){
 				return Response::forge(View::forge('welcome/404', $data), 404);
 			}
 
@@ -262,28 +264,6 @@ class Controller_Follow extends Controller
 		$data["show"] = db_follow::get_change($data,$follow_id);
 
 		return View::forge('follow/check',$data,$follow_id);
-	}
-
-	//メール送信
-	public function action_mail()
-	{
-		//ユーザー情報の確認
-		$data['userlog_id']		= $_SESSION['id'];
-		$data['userlog_name']	= $_SESSION['name'];
-		$data['userlog_adflag'] = $_SESSION['admin_flag'];
-
-		//メールアドレス取得
-		$data["mail"] = db_follow::get_mail($data);
-
-		$subject = str_replace("{title}",			"登録",						FOLLOW_SUBJECT);
-		$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
-		$message = str_replace("{title}",			"登録",						$message);
-		$message = str_replace("{follow_url}",		"http://localhost/follow/create",		$message);
-		if(!Workbench::sendMail("m_sato@brain-tr.co.jp","test",$subject,$message)){
-			return Response::forge(View::forge('follow/update',$data));
-		}
-		$data["msg"]	=	"メール送信完了";
-
 	}
 
 }
