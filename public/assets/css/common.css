@@ -269,7 +269,7 @@ h3 {
 }
 
 #content table.tableStyle3{
-	width:750px;
+	width:850px;
 	border: 2px solid #999;
 }
 #content table.tableStyle3 td,
@@ -363,6 +363,37 @@ h3 {
 #content table.tableStyle5 td.cnt {
 	text-align:center;
 	font-size:86%;
+}
+
+/* 追加 */
+#content table.tableStyle6{
+	width:750px;
+	border: 2px solid #999;
+}
+#content table.tableStyle6 td,
+#content table.tableStyle6 th {
+	padding: 5px 10px;
+	border-left: 1px solid #999;
+	border-bottom: 1px solid #999;
+	background-color:#fff;
+}
+#content table.tableStyle6 th {
+	width:25%;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#d5eff7;
+	color:#666;
+	vertical-align:middle;
+	font-size:93%;
+}
+
+#content table.tableStyle6 .bgG{
+	background-color:#e8e8e8;
+}
+#content table.tableStyle6 .bgP{
+	background-color:#ffe8ee;
 }
 
 

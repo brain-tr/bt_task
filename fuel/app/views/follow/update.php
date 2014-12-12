@@ -21,13 +21,9 @@
 
 	//更新者履歴の確認
 	function disp(follow_id){
-// 		window.open('/user/pass?user=' + user_id , 'pass', 'width=400, height=300, menubar=no, toolbar=no, scrollbars=yes');
 		var follow_id = follow_id;
 		window.open('/follow/check?id=' + follow_id , "id", "width=400,height=400,scrollbars=yes");
 	}
-// 	function userPass(user_id) {
-// 		var user_id = user_id;
-// 		window.open('/user/pass?user=' + user_id , 'pass', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=yes');
 </script>
 </head>
 
@@ -69,7 +65,7 @@
 	</tr>
 	<tr>
 		<th>発生日/終了日</th>
-		<td><?php echo $val['start_date']; ?>　
+		<td><?php echo $val['start_date']; ?>　/
 		<?php
 			if($val['end_date']!='0000-00-00'){
 				echo $val['end_date'];

@@ -26,7 +26,7 @@
 <div id="contentIn">
 <h2>フォロー報告</h2>
 <form action="/follow/create" method="post">
-<table class="tableStyle3">
+<table class="tableStyle6">
 	<tr>
 		<th>報告者</th>
 		<td><?php echo $create_user_name; ?></td>

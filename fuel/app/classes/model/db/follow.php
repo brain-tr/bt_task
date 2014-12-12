@@ -78,8 +78,6 @@ class db_follow extends \Model {
 	*/
 	public static function list_data($day1,$day2)
 	{
-		//return  \DB::select('a.name', 'b.engineer_user_id', 'b.situation_id', 'c.name', 'b.start_date')->from('t_user a', 't_follow b', 'm_situation c')->where('b.engineer_user_id', 'a.user_id')->where('b.situation_id', 'c.situation_id')->execute()->as_array();
-// 		$query	=\DB::query("select * from ( select a.name as user_name, a.job_type, a.user_id, b.engineer_user_id, b.situation_id, c.color_code, c.name, b.start_date, b.follow_id, b.del_flag from ( t_user a left join t_follow b on b.engineer_user_id = a.user_id and b.start_date >= :day1 and b.start_date <= :day2 ) left join m_situation c on 	b.situation_id = c.situation_id where a.job_type = '1' union select d.name as user_name, d.job_type, d.user_id, g.engineer_user_id, g.situation_id, f.color_code, f.name, e.detail_date, e.follow_id, g.del_flag from t_user d, t_follow g, t_follow_detail e, m_situation f where d.user_id = g.engineer_user_id and e.follow_id = g.follow_id and e.situation_id = f.situation_id and d.job_type = '1' ) h order by h.user_id, h.start_date;");
 		$query	=\DB::query("select * from ( select a.name as user_name, a.job_type, a.user_id, b.engineer_user_id, b.situation_id, c.color_code, c.name, b.start_date, b.follow_id, b.del_flag, 0 as follow_detail_id from ( t_user a left join t_follow b on b.engineer_user_id = a.user_id and b.start_date >= :day1 and b.start_date <= :day2 ) left join m_situation c on b.situation_id = c.situation_id where a.job_type = '1' union select d.name as user_name, d.job_type, d.user_id, g.engineer_user_id, g.situation_id, f.color_code, f.name, e.detail_date, e.follow_id, e.del_flag, e.id from t_user d, t_follow g, t_follow_detail e, m_situation f where d.user_id = g.engineer_user_id and e.follow_id = g.follow_id and e.situation_id = f.situation_id and e.detail_date >= :day1 and e.detail_date <= :day2 and d.job_type = '1' ) h order by h.user_id, h.start_date;");
 		$result	= $query->bind('day1', $day1)->bind('day2', $day2)->execute()->as_array();
 
@@ -126,7 +124,6 @@ class db_follow extends \Model {
 	public static function ins_follow($data)
 	{
 		return \DB::insert('t_follow')->set(array(
-		//		'follow_id'		=> "",
 				'engineer_user_id'	=> $data['engineer_user_id'],
 				'situation_id'		=> $data['situation_id'],
 				'appointment_id'	=> $data['appointment_id'],
@@ -136,8 +133,7 @@ class db_follow extends \Model {
 				'create_user_id'	=> $data['create_user_id'],
 				'start_date'		=> $data['start_date'],
 				'end_date'			=> $data['end_date'],
-				'del_flag'			=> 0,
-		//		'created_at'		=> $data['created_at'],
+				'del_flag'			=> 0
 		))->execute();
 	}
 
@@ -174,10 +170,8 @@ class db_follow extends \Model {
 	public static function ins_updated($follow_id,$user_id)
 	{
 		return \DB::insert('t_updated')->set(array(
-		//		'id'				=> "",
 				'follow_id'			=> $follow_id,
-				'user_id'			=> $user_id,
-		//		'updated_at'		=> $updated_at,
+				'user_id'			=> $user_id
 		))->execute();
 	}
 
@@ -225,7 +219,6 @@ class db_follow extends \Model {
 	public static function upd_follow_detail($data)
 	{
 		return \DB::update('t_follow_detail')->set(array(
-				//'detail_date'		=> $data['detail_date'],
 				'situation_id'		=> $data['situation_id2'],
 				'appointment_id'	=> $data['appointment_id2'],
 				'remarks'			=> $data['remarks3']
@@ -298,11 +291,9 @@ class db_follow extends \Model {
 	public static function ins_update($data)
 	{
 		return \DB::insert('t_updated')->set(array(
-				//		'id'				=> "",
 				'follow_id'			=> $data['follow_id'],
-				'user_id'			=> $data['userlog_id'],
-				//		'updated_at'		=> $updated_at,
-		))->execute();
+				'user_id'			=> $data['userlog_id']
+				))->execute();
 	}
 
 	/*

@@ -76,6 +76,8 @@ class Controller_Follow extends Controller
 			if(empty($situation_flag)){
 				$data["end_date"]		= empty($post["start_date"]) ? date('Y-m-d') : $post["start_date"];
 			}
+// 			var_dump($data["end_date"]);
+// 			exit;
 			db_follow::ins_follow($data);
 			header('Location: /list/index?today='.$data["start_date"]);
 			exit;
@@ -238,7 +240,6 @@ class Controller_Follow extends Controller
 		//フォローid取得用
 		$get = Input::get();
 		$follow_id	= empty($get["id"]) ? "" : $get["id"];
-		$u_id		= $_SESSION['id'];
 
 		$data["show"] = db_follow::get_change($data,$follow_id);
 
@@ -246,7 +247,7 @@ class Controller_Follow extends Controller
 
 
 
-		return View::forge('follow/check',$data,$follow_id,$u_id);
+		return View::forge('follow/check',$data,$follow_id);
 	}
 
 }
