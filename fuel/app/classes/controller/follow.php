@@ -77,21 +77,29 @@ class Controller_Follow extends Controller
 			if(empty($situation_flag)){
 				$data["end_date"]		= empty($post["start_date"]) ? date('Y-m-d') : $post["start_date"];
 			}
-// 			var_dump($data["end_date"]);
-// 			exit;
-			db_follow::ins_follow($data);
-			$data["mail"] = db_follow::get_sflag($data);
 
+			db_follow::ins_follow($data);
+			$to = db_follow::get_sflag($data);
 			//メール送信
-			$to		 =	$data["mail"];
+			$mailto = "";
+			foreach($to as $val){
+
+				if (empty($mailto)) {
+					$mailto .= $val["mail"];
+				} else {
+					$mailto .= ",".$val["mail"];
+				}
+			}
+
 			$from	 = "test";
 			$subject = str_replace("{title}",			"登録",						FOLLOW_SUBJECT);
 			$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
 			$message = str_replace("{title}",			"登録",						$message);
 			$message = str_replace("{follow_url}",		"http://localhost/follow/update",		$message);
-			if(!Workbench::sendMail($to,"test",$subject,$message)){
+			if(!Workbench::sendMail($mailto,"test",$subject,$message)){
 				return Response::forge(View::forge('welcome/404', $data), 404);
 			}
+
 			header('Location: /list/index?today='.$data["start_date"]);
 			exit;
 		}
