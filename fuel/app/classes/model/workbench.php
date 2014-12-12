@@ -14,7 +14,6 @@ class Workbench extends \Model {
 	*/
 	public static function sendMail($to, $from, $subject, $message)
 	{
-
 		if (mb_send_mail($to, $subject, $message, "From: ".$from)) {
 			return true;
 		} else {

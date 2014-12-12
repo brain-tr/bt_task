@@ -122,7 +122,7 @@ class db_follow extends \Model {
 	*/
 	public static function ins_follow($data)
 	{
-		return \DB::insert('t_follow')->set(array(
+		\DB::insert('t_follow')->set(array(
 				'engineer_user_id'	=> $data['engineer_user_id'],
 				'situation_id'		=> $data['situation_id'],
 				'appointment_id'	=> $data['appointment_id'],
@@ -134,6 +134,11 @@ class db_follow extends \Model {
 				'end_date'			=> $data['end_date'],
 				'del_flag'			=> 0
 		))->execute();
+
+		$query	=\DB::query("SELECT LAST_INSERT_ID();");
+		$result	= $query->execute()->current();
+		return $result;
+
 	}
 
 
@@ -313,6 +318,15 @@ class db_follow extends \Model {
 	{
 		return  \DB::select('mail')->from('t_user')->where('send_flag', 1)->execute()->as_array();
 	}
+
+	/*
+	 *	フォロー情報を検索する
+	*/
+// 	public static function ins_follow($data)
+// 	{
+// 		return  \DB::select('situation_flag')->from('m_situation')->where('situation_id', $data["situation_id"])->where('situation_flag', '0')->where('flag', '1')->execute()->current();
+// 	}
+
 
 
 

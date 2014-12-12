@@ -44,7 +44,6 @@ class Controller_Follow extends Controller
 		$data["msg"]				= empty($post["msg"]) ? "1" : $post["msg"];
 		$data["msg"]				= empty($post["msg"]) ? "1" : $post["msg"];
 
-
 		if(empty($post["result"])) {
 
 			// 報告者の検索
@@ -78,7 +77,7 @@ class Controller_Follow extends Controller
 				$data["end_date"]		= empty($post["start_date"]) ? date('Y-m-d') : $post["start_date"];
 			}
 
-			db_follow::ins_follow($data);
+			$last_id = db_follow::ins_follow($data);
 			$to = db_follow::get_sflag($data);
 			//メール送信
 			$mailto = "";
@@ -91,11 +90,12 @@ class Controller_Follow extends Controller
 				}
 			}
 
+
 			$from	 = "test";
 			$subject = str_replace("{title}",			"登録",						FOLLOW_SUBJECT);
 			$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
 			$message = str_replace("{title}",			"登録",						$message);
-			$message = str_replace("{follow_url}",		"http://localhost/follow/update",		$message);
+			$message = str_replace("{follow_url}",		"http://localhost/follow/update/?follow_id=".$last_id ['LAST_INSERT_ID()']."&follow_detail_id=0",		$message);
 			if(!Workbench::sendMail($mailto,"test",$subject,$message)){
 				return Response::forge(View::forge('welcome/404', $data), 404);
 			}
