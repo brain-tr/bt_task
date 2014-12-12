@@ -95,7 +95,7 @@ class Controller_Follow extends Controller
 			$subject = str_replace("{title}",			"登録",						FOLLOW_SUBJECT);
 			$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
 			$message = str_replace("{title}",			"登録",						$message);
-			$message = str_replace("{follow_url}",		"http://localhost/follow/update/?follow_id=".$last_id ['LAST_INSERT_ID()']."&follow_detail_id=0",		$message);
+			$message = str_replace("{follow_url}",		"http://192.168.11.50/follow/update/?follow_id=".$last_id ['LAST_INSERT_ID()']."&follow_detail_id=0",		$message);
 			if(!Workbench::sendMail($mailto,"test",$subject,$message)){
 				return Response::forge(View::forge('welcome/404', $data), 404);
 			}
