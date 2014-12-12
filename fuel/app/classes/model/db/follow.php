@@ -1,6 +1,5 @@
 <?php
 namespace Model;
-
 class db_follow extends \Model {
 
 	/*
@@ -306,6 +305,21 @@ class db_follow extends \Model {
 		return $result2;
 	}
 
+	/*
+	 * 	メールアドレスを取得する。
+	 */
+	public static function get_mail($data)
+	{
+		return  \DB::select('mail')->from('t_user')->where('user_id', $data["userlog_id"])->execute()->current();
+	}
+
+	/*
+	 * 	フラグが1の人を全件取得する。
+	*/
+	public static function get_sflag($data)
+	{
+		return  \DB::select('mail')->from('t_user')->where('send_flag', 1)->execute()->as_array();
+	}
 
 
 
