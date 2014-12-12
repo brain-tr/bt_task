@@ -89,16 +89,9 @@ class Controller_Follow extends Controller
 			$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
 			$message = str_replace("{title}",			"登録",						$message);
 			$message = str_replace("{follow_url}",		"http://localhost/follow/update",		$message);
-// 			if(!Workbench::sendMail("m_sato@brain-tr.co.jp","test",$subject,$message)){
-			if(!Workbench::sendMail("kab06835@yahoo.co.jp","test",$subject,$message)){
+			if(!Workbench::sendMail($to,"test",$subject,$message)){
 				return Response::forge(View::forge('welcome/404', $data), 404);
 			}
-
-// 			var_dump($to);
-// 			var_dump($from);
-// 			var_dump($subject);
-// 			var_dump($message);
-// 			exit;
 			header('Location: /list/index?today='.$data["start_date"]);
 			exit;
 		}
