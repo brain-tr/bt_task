@@ -290,9 +290,9 @@ class Controller_Follow extends Controller
 
 
 				$from	 = "test";
-				$subject = str_replace("{title}",			"詳細登録",						FOLLOW_SUBJECT);
+				$subject = str_replace("{title}",			"詳細変更",						FOLLOW_SUBJECT);
 				$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
-				$message = str_replace("{title}",			"詳細登録",						$message);
+				$message = str_replace("{title}",			"詳細変更",						$message);
 				$message = str_replace("{follow_url}",		"http://192.168.11.50/follow/update/?follow_id=".$data["follow_id"]."&follow_detail_id=".$data["follow_detail_id"]."",		$message);
 
 				if(!Workbench::sendMail($mailto,"test",$subject,$message)){
@@ -327,12 +327,10 @@ class Controller_Follow extends Controller
 
 
 				$from	 = "test";
-				$subject = str_replace("{title}",			"削除",						FOLLOW_SUBJECT);
+				$subject = str_replace("{title}",			"詳細削除",						FOLLOW_SUBJECT);
 				$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
-				$message = str_replace("{title}",			"削除",						$message);
+				$message = str_replace("{title}",			"詳細削除",						$message);
 				$message = str_replace("{follow_url}",		"http://192.168.11.50/list",		$message);
-				var_dump($message);
-				exit;
 				if(!Workbench::sendMail($mailto,"test",$subject,$message)){
 					return Response::forge(View::forge('welcome/404', $data), 404);
 				}
