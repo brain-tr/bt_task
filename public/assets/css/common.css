@@ -453,3 +453,26 @@ p.btnSpace{
 	width:750px;
 	text-align:center;
 }
+
+/* 子フォロー囲い
+----------------------------------------------------*/
+div#mark1{
+	border:1px ridge black;
+	border-bottom:none;
+	margin-right:387px;
+	padding-bottom:-250px;
+}
+div#mark2{
+	border:1px ridge black;
+	border-bottom:none;
+	margin-right:387px;
+	padding-bottom:-250px;
+}
+
+div#mark3{
+	border:1px ridge black;
+	border-bottom:none;
+	margin-right:387px;
+	padding-bottom:-250px;
+}
+
