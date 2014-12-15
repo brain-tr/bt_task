@@ -177,6 +177,7 @@
 		echo '</tr></table>';
 		echo '<input type="hidden" name="create_user_id" value="'.$val['create_user_id'].'" />';
 		echo '<input type="hidden" name="follow_detail_id" value="'.$follow_detail_up_data['id'].'" />';
+		echo '<input type="hidden" name="follow_id" value="'.$follow_id.'" />';
 		echo '<input type="hidden" name="detail_date" value="'.$follow_detail_up_data['detail_date'].'" /></form>';
 		}
 	}?>
