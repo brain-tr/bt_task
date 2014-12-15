@@ -194,7 +194,7 @@ class db_follow extends \Model {
 	*/
 	public static function ins_follow_detail($data)
 	{
-		return \DB::insert('t_follow_detail')->set(array(
+		\DB::insert('t_follow_detail')->set(array(
 				//		'follow_id'		=> "",
 				'follow_id'			=> $data['follow_id'],
 				'detail_date'		=> $data['detail_date'],
@@ -204,6 +204,9 @@ class db_follow extends \Model {
 				'del_flag'			=> 0,
 				'create_user_id'	=> $data['user_id']
 		))->execute();
+		$query	=\DB::query("SELECT LAST_INSERT_ID();");
+		$result	= $query->execute()->current();
+		return $result;
 	}
 
 	/*
