@@ -77,9 +77,9 @@ class Controller_Follow extends Controller
 				$data["end_date"]		= empty($post["start_date"]) ? date('Y-m-d') : $post["start_date"];
 			}
 
+			//メール送信
 			$last_id = db_follow::ins_follow($data);
 			$to = db_follow::get_sflag($data);
-			//メール送信
 			$mailto = "";
 			foreach($to as $val){
 
@@ -166,6 +166,28 @@ class Controller_Follow extends Controller
 			if(!empty($checkFollow)) {
 				db_follow::upd_follow($data);
 				db_follow::ins_update($data);
+
+				//メール送信
+				$to = db_follow::get_sflag($data);
+				$mailto = "";
+				foreach($to as $val){
+
+					if (empty($mailto)) {
+						$mailto .= $val["mail"];
+					} else {
+						$mailto .= ",".$val["mail"];
+					}
+				}
+
+
+				$from	 = "test";
+				$subject = str_replace("{title}",			"変更",						FOLLOW_SUBJECT);
+				$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
+				$message = str_replace("{title}",			"変更",						$message);
+				$message = str_replace("{follow_url}",		"http://192.168.11.50/follow/update/?follow_id=".$data["follow_id"]."&follow_detail_id=0",		$message);
+				if(!Workbench::sendMail($mailto,"test",$subject,$message)){
+					return Response::forge(View::forge('welcome/404', $data), 404);
+				}
 				$data["msg"] = "フォロー情報を変更しました。";
 			} else {
 				$data["msg"] = "フォロー情報がみつかりません。データを確認してください。";
@@ -177,6 +199,28 @@ class Controller_Follow extends Controller
 			$checkFollow = db_follow::get_follow($data["follow_id"]);	// フォローの検索
 			if(!empty($checkFollow)) {
 				db_follow::follow_del_flag($data['follow_id']);
+				//メール送信
+				$to = db_follow::get_sflag($data);
+				$mailto = "";
+				foreach($to as $val){
+
+					if (empty($mailto)) {
+						$mailto .= $val["mail"];
+					} else {
+						$mailto .= ",".$val["mail"];
+					}
+				}
+
+
+				$from	 = "test";
+				$subject = str_replace("{title}",			"削除",						FOLLOW_SUBJECT);
+				$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
+				$message = str_replace("{title}",			"削除",						$message);
+				$message = str_replace("{follow_url}",		"http://192.168.11.50/list",		$message);
+				if(!Workbench::sendMail($mailto,"test",$subject,$message)){
+					return Response::forge(View::forge('welcome/404', $data), 404);
+				}
+
 				$data["msg"] = "フォロー情報を一覧から削除しました。";
 				header('Location: /list/index?msg='.$data["msg"]."&today=".$data["start_date"]);
 				exit;
@@ -194,9 +238,28 @@ class Controller_Follow extends Controller
 			if(!empty($situation_flag)){
 				db_follow::upd_follow_detail2($data);
 			}
-
-
 			db_follow::ins_follow_detail($data);
+			//メール送信
+			$to = db_follow::get_sflag($data);
+			$mailto = "";
+			foreach($to as $val){
+
+				if (empty($mailto)) {
+					$mailto .= $val["mail"];
+				} else {
+					$mailto .= ",".$val["mail"];
+				}
+			}
+
+
+			$from	 = "test";
+			$subject = str_replace("{title}",			"詳細登録",						FOLLOW_SUBJECT);
+			$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
+			$message = str_replace("{title}",			"詳細登録",						$message);
+			$message = str_replace("{follow_url}",		"http://192.168.11.50/follow/update/?follow_id=".$data["follow_id"]."&follow_detail_id=0",		$message);
+			if(!Workbench::sendMail($mailto,"test",$subject,$message)){
+				return Response::forge(View::forge('welcome/404', $data), 404);
+			}
 			$data["msg"] = "フォロー詳細情報を登録しました。";
 		}
 
@@ -213,6 +276,29 @@ class Controller_Follow extends Controller
 			if(!empty($detail_up_data)) {
 				db_follow::upd_follow_detail($data);
 				db_follow::ins_update($data);
+				//メール送信
+				$to = db_follow::get_sflag($data);
+				$mailto = "";
+				foreach($to as $val){
+
+					if (empty($mailto)) {
+						$mailto .= $val["mail"];
+					} else {
+						$mailto .= ",".$val["mail"];
+					}
+				}
+
+
+				$from	 = "test";
+				$subject = str_replace("{title}",			"詳細登録",						FOLLOW_SUBJECT);
+				$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
+				$message = str_replace("{title}",			"詳細登録",						$message);
+				$message = str_replace("{follow_url}",		"http://192.168.11.50/follow/update/?follow_id=".$data["follow_id"]."&follow_detail_id=".$data["follow_detail_id"]."",		$message);
+
+				if(!Workbench::sendMail($mailto,"test",$subject,$message)){
+					return Response::forge(View::forge('welcome/404', $data), 404);
+				}
+
 				$data["msg"] = "フォロー詳細情報を変更しました。";
 				header('Location: /list/index?msg='.$data["msg"]."&today=".$data["detail_date"]);
 				exit;
@@ -227,6 +313,30 @@ class Controller_Follow extends Controller
 			$detail_up_data = db_follow::get_follow_detail($data['follow_detail_id']);
 			if(!empty($detail_up_data)) {
 				db_follow::upd_follow_detail_del($data);
+				//メール送信
+				$to = db_follow::get_sflag($data);
+				$mailto = "";
+				foreach($to as $val){
+
+					if (empty($mailto)) {
+						$mailto .= $val["mail"];
+					} else {
+						$mailto .= ",".$val["mail"];
+					}
+				}
+
+
+				$from	 = "test";
+				$subject = str_replace("{title}",			"削除",						FOLLOW_SUBJECT);
+				$message = str_replace("{user_name}",		$data['userlog_name'],		FOLLOW_MESSAGE);
+				$message = str_replace("{title}",			"削除",						$message);
+				$message = str_replace("{follow_url}",		"http://192.168.11.50/list",		$message);
+				var_dump($message);
+				exit;
+				if(!Workbench::sendMail($mailto,"test",$subject,$message)){
+					return Response::forge(View::forge('welcome/404', $data), 404);
+				}
+
 				$data["msg"] = "フォロー詳細情報を一覧から削除しました。";
 				header('Location: /list/index?msg='.$data["msg"]."&today=".$data["detail_date"]);
 				exit;

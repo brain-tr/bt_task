@@ -320,12 +320,12 @@ class db_follow extends \Model {
 	}
 
 	/*
-	 *	フォロー情報を検索する
+	 *	メール練習用
 	*/
-// 	public static function ins_follow($data)
-// 	{
-// 		return  \DB::select('situation_flag')->from('m_situation')->where('situation_id', $data["situation_id"])->where('situation_flag', '0')->where('flag', '1')->execute()->current();
-// 	}
+	public static function trial_follow($data)
+	{
+		return  \DB::select('name')->from('t_user')->execute()->as_array();
+	}
 
 
 
