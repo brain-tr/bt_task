@@ -61,7 +61,7 @@
 <table class="tableStyle3 mB20">
 	<tr>
 		<th>報告者</th>
-		<td colspan="3"><?php echo $val['create_name']; ?></td>
+		<td colspan="3"><?php echo $val['create_name']; ?>　<a onclick="disp(<?php echo "'".$val['follow_id']."'"; ?>)" href="#">更新履歴</a></td>
 	</tr>
 	<tr>
 		<th>発生日/終了日</th>
@@ -75,7 +75,7 @@
 		</td>
 		<th>エンジニア名</th>
 
-		<td><?php echo $val['engineer_name']; ?>　<a onclick="disp(<?php echo "'".$val['follow_id']."'"; ?>)" href="#">更新履歴</a></td>
+		<td><?php echo $val['engineer_name']; ?></td>
 	</tr>
 	<tr>
 		<th>状況フラグ</th>
@@ -114,10 +114,11 @@
 	<input type="hidden" name="create_user_id" value="<?php echo $val["create_user_id"]; ?>">
 	</form>
 
+	<div id="mark1">
 	<?php
 	if(empty($disabled)){
 		if(!empty($follow_detail_up_data)){
-			//echo '<h3>フォロー詳細内容の変更</h3>';
+			echo '<h3>フォロー詳細内容の変更</h3>';
 			echo '<form action="/follow/update" method="post" id="form3">';
 			echo '<table class="tableStyle3 mB50">';
 			echo '<tr>';
@@ -181,8 +182,9 @@
 		echo '<input type="hidden" name="detail_date" value="'.$follow_detail_up_data['detail_date'].'" /></form>';
 		}
 	}?>
+	</div><!-- #mark1 -->
 
-
+	<div id="mark2">
 	<h3>フォロー詳細内容の一覧</h3>
 	<table class="tableStyle3 mB50">
 	<?php
@@ -199,8 +201,9 @@
 	}
 	?>
 	</table>
-
+	</div><!-- #mark2 -->
 	<!-- 対応内容 -->
+	<div id="mark3">
 	<h3>フォロー詳細内容の登録</h3>
 	<form action="/follow/update" method="post" id="form2">
 	<table class="tableStyle3 mB50">
@@ -248,6 +251,7 @@
 			<td colspan="3"><textarea <?php echo $disabled; ?> id ="remarks2" name="remarks2" rows="4" cols="20" ></textarea></td>
 		</tr>
 	</table>
+	</div><!-- #mark3 -->
 	<input type="hidden" name="follow_id" value="<?php echo $follow_id; ?>" />
 	<input type="hidden" name="start_date" value="<?php //echo $val['start_date']; ?>" />
 	<input type="hidden" name="result" value="3" />
