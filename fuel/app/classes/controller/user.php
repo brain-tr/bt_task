@@ -42,6 +42,7 @@ class Controller_User extends Controller
 		$data["msg"]			= empty($post["msg"]) ? "1" : $post["msg"];
 		$data["result"]			= empty($post["result"]) ? 1 : $post["result"];
 		$data["user_id"]		= empty($post["user_id"]) ? "" : $post["user_id"];
+		$data["rank_id"]		= empty($post["rank_id"]) ? "10" : $post["rank_id"];
 		$data["btn_send"]		= empty($post["btn_send"]) ? "" : $post["btn_send"];
 		$data["delete"]			= empty($post["delete"]) ? "" : $post["delete"];
 		$data["password"]		= empty($post["password"]) ? "" : $post["password"];

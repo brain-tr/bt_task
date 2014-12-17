@@ -24,7 +24,7 @@ class db_user extends \Model {
 	*/
 	public static function user_list()
 	{
-		return  \DB::select()->from('t_user')->order_by('user_id','desc')->execute()->as_array();
+		return  \DB::select()->from('t_user')->order_by('rank_id','asc')->order_by('user_id','desc')->execute()->as_array();
 	}
 
 	/*
@@ -38,7 +38,7 @@ class db_user extends \Model {
 				'mail'			=> $data['mail'],
 				'job_type'		=> $data['job_type'],
 				'send_flag'		=> $data['send_flag'],
-				'rank_id'		=> 10,
+				'rank_id'		=> $data['rank_id'],
 				'password'		=> $data['password'],
 		))->execute();
 	}
@@ -54,7 +54,7 @@ class db_user extends \Model {
 				'mail'			=> $data['mail'],
 				'job_type'		=> $data['job_type'],
 				'send_flag'		=> $data['send_flag'],
-				'rank_id'		=> 10,
+				'rank_id'		=> $data['rank_id'],
 				//'password'	=> $data['password'],
 		))->where('user_id', $data['user_id'])
 		->execute();

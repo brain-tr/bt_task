@@ -21,34 +21,35 @@
 			alert("お名前を入力してください。");
 			return false;
 		} else if(pass != "変更できません"){
-			if(pass_conf == "" || pass == "") {
-				alert("パスワードまたはパスワード(確認用)を入力してください。");
-				return false;
-			} else  if(pass.match (/[^0-9a-zA-Z_]+/)) {
-				alert("パスワードは半角英数で入力してください。");
-				return false;
-			} else if(pass != pass_conf) {
-				alert("パスワードとパスワード(確認用)の文字が一致しません。");
-				return false;
-			} else if(passCount < 4) {
-				alert("4文字以上のパスワードを入力してください。");
-				return false;
-			} else if(passCount > 12) {
-				alert("12文字以下のパスワードを入力してください。");
-				return false;
-			} else {
-				return true;
-			}
+//			if(pass_conf == "" || pass == "") {
+//				alert("パスワードまたはパスワード(確認用)を入力してください。");
+//				return false;
+//			} else  if(pass.match (/[^0-9a-zA-Z_]+/)) {
+//				alert("パスワードは半角英数で入力してください。");
+//				return false;
+//			} else if(pass != pass_conf) {
+//				alert("パスワードとパスワード(確認用)の文字が一致しません。");
+//				return false;
+//			} else if(passCount < 4) {
+//				alert("4文字以上のパスワードを入力してください。");
+//				return false;
+//			} else if(passCount > 12) {
+//				alert("12文字以下のパスワードを入力してください。");
+//				return false;
+//			} else {
+//				return true;
+//			}
 		} else {
 			return true;
 		}
 	}
 
 	// 変更処理
-	function userUpdate(name, mail,  job_type, send_flag, user_id){
+	function userUpdate(name, mail,  job_type, send_flag, user_id, rank_id){
 		document.form.name.value			= name;
 		document.form.mail.value			= mail;
 		document.form.user_id.value			= user_id;
+		document.form.rank_id.value			= rank_id;
 		document.form.password.value		= "変更できません";
 		document.form.password_conf.value	= "変更できません";
 
@@ -168,6 +169,7 @@
 			<option value="1">エンジニア</option>
 		</select><br />
 		<p class="rd sm">※パスワードは半角英数（4文字以上 12文字以下）</p>
+		表示順位 <input type="text" name="rank_id" id="rank_id" value="" />　
 
 		<input type="hidden" name="result" value="<?php echo $result; ?>" />
 		<input type="hidden" name="user_id" value="" />
@@ -181,6 +183,7 @@
 		<th>アドレス</th>
 		<th>業種判定</th>
 		<th>メール</th>
+		<th>表示順位</th>
 		<th></th>
 	</tr>
 	<?php
@@ -192,8 +195,9 @@
 		<td><?php echo $val['mail']; ?></td>
 		<td><?php echo empty($val['job_type']) ? "営業": "エンジニア" ?></td>
 		<td><?php echo empty($val['send_flag']) ? "送信しない": "送信する" ?></td>
+		<td><?php echo $val['rank_id']; ?></td>
 		<td class="cnt">
-			<a href="#" onClick="userUpdate(<?php echo "'".$val['name']."','".$val['mail']."',".$val['job_type'].",".$val['send_flag'].",".$val['user_id']; ?>)">変更</a>｜
+			<a href="#" onClick="userUpdate(<?php echo "'".$val['name']."','".$val['mail']."',".$val['job_type'].",".$val['send_flag'].",".$val['user_id'].",".$val['rank_id']; ?>)">変更</a>｜
 			<a href="#" onClick="userDelete(<?php echo "'".$val['user_id']."'"; ?>)">削除</a>｜
 			<a href="#" onClick="userPass(<?php echo "'".$val['user_id']."'"; ?>)">パスワードの変更</a>
 		</td>
