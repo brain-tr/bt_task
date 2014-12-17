@@ -164,12 +164,12 @@
 		<input type="checkbox" name="send_flag" value="1" /> メールを送信する<br />
 		パスワード <input type="password" name="password" id="password" value="" size="10" />　
 		パスワード(確認用) <input type="password" name="password_conf" id="password_conf" value ="" size="10" />　
+		<p class="rd sm">※パスワードは半角英数（4文字以上 12文字以下）</p>
+		表示順位 <input type="text" name="rank_id" id="rank_id" value="10"  size="4" />　
 		<select name="job_type">
 			<option value="0">営業</option>
 			<option value="1">エンジニア</option>
 		</select><br />
-		<p class="rd sm">※パスワードは半角英数（4文字以上 12文字以下）</p>
-		表示順位 <input type="text" name="rank_id" id="rank_id" value="" />　
 
 		<input type="hidden" name="result" value="<?php echo $result; ?>" />
 		<input type="hidden" name="user_id" value="" />

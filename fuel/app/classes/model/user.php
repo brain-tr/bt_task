@@ -16,7 +16,7 @@ class User extends \Model {
 				return $msg;
 			}
 		}
-		if(in_array(2,$flag)){
+/*		if(in_array(2,$flag)){
 			if(empty($password) || empty($password_conf)) {
 				$msg	= empty($msg) ? "パスワードまたはパスワード(確認用)を入力してください。" : $msg;
 				return $msg;
@@ -46,6 +46,7 @@ class User extends \Model {
 				return $msg;
 			}
 		}
+*/		
 	}
 
 
