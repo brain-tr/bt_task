@@ -2,7 +2,7 @@
 
 use \Model\Loginout;
 
-class Controller_Top extends Controller
+class Controller_Ktop extends Controller
 {
 	/*
 	 *	セッション情報の確認
@@ -25,7 +25,7 @@ class Controller_Top extends Controller
 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
 
 
- 		return View::forge('top' , $data);
+ 		return View::forge('ktop' , $data);
 	}
 
 }

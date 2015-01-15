@@ -247,6 +247,7 @@
 
 					//まわす回数を取得
 					$end = date("d",mktime(0,0,0,substr($lastday,5,2),substr($lastday,8,2),substr($lastday,0,4)));
+
 					for($i=$flag; $i<$end; $i++){
 
 						//比較日付の設定
@@ -284,7 +285,7 @@
 
 <div id="side">
 	<ul class="navi">
-		<li><a href="/top/">TOP</a></li>
+		<li><a href="/ttop/">TOP</a></li>
 		<li><a href="/follow/create">フォロー報告</a></li>
 		<li><a href="/list/">フォロー一覧</a></li>
 	<!--管理者以外のアクセスをブロック-->

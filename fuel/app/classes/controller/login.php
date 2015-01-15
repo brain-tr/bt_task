@@ -46,7 +46,7 @@ class Controller_Login extends Controller
 					$_SESSION['id']		= $user["user_id"];
 					$_SESSION['name']	= $user["name"];
 					$_SESSION['admin_flag']= $user["admin_flag"];
-					header('Location: /top');
+					header('Location: /menu');
 					exit();
 				}
 			}

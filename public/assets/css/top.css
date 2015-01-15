@@ -5,7 +5,6 @@
 #formbox2{
 	width:800px;
 	margin:30px 0;
-	border:2px solid #3089cb;
 	padding:50px 0;
 
 }
@@ -20,5 +19,27 @@
 }
 
 
+#formbox3{
+	width:550px;
+	margin:30px 0;
+	border:2px solid #3089cb;
+	padding:50px 0;
+
+}
+
+#formbox3 ul li {
+	float:left;
+	margin-bottom:20px;
+}
+
+#formbox3 input{
+	margin-left:50px;
+}
+
 /*	table
 ----------------------------------------------------*/
+
+
+
+
+

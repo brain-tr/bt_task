@@ -56,7 +56,7 @@
 
 <div id="side">
 	<ul class="navi">
-		<li><a href="/top/">TOP</a></li>
+		<li><a href="/ttop">TOP</a></li>
 		<li><a href="/follow/create">フォロー報告</a></li>
 		<li><a href="/list/">フォロー一覧</a></li>
 	<!-- 管理者以外のアクセスをブロック -->
