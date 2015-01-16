@@ -39,6 +39,55 @@ function change(company_id){
 	form.submit();
 }
 
+//昇順降順ボタン
+function msg(msg){
+	//会社名用
+	if(msg == 1){
+		var frm1 = document.createElement("form");
+		var ipt1 = document.createElement("input");
+		var ipt2 = document.createElement("input");
+
+		frm1.action = "clist";
+		frm1.method = "post";
+
+		ipt1.type = "hidden";
+		ipt1.name = "updown1";
+		ipt1.value= <?php echo $flag; ?>;
+
+		ipt2.type = "hidden";
+		ipt2.name = "check3";
+		ipt2.value = 1;
+
+		frm1.appendChild(ipt1);
+		frm1.appendChild(ipt2);
+		document.body.appendChild(frm1);
+		frm1.submit();
+	//客種用
+	}else if(msg == 2){
+		var frm2  = document.createElement("form");
+		var ipt2 = document.createElement("input");
+		var ipt3 = document.createElement("input");
+
+		frm2.action = "clist";
+		frm2.method = "post";
+
+		ipt2.type = "hidden"
+		ipt2.name = "updown2";
+		ipt2.value= <?php echo $flag2; ?>;
+
+		ipt3.type = "hidden";
+		ipt3.name = "check3";
+		ipt3.value = 2;
+
+		frm2.appendChild(ipt2);
+		frm2.appendChild(ipt3);
+		document.body.appendChild(frm2);
+		frm2.submit();
+
+	}
+
+}
+
 
 
 
@@ -101,8 +150,8 @@ table.tableStylex tr,th,td{
 	);
 
 	echo "<tr>";
-	echo "<td>会社名</td>";
-	echo "<td>客種</td>";
+	echo "<td>会社名<input type='button' name='updown1' value='$msg' onClick='msg(1);'></td>";
+	echo "<td>客種<input type='button' name='updown2' value='$msg2' onClick='msg(2);'></td>";
 	echo "<td>削除</td>";
 
 	foreach($view as $key=> $val){

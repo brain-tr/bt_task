@@ -29,37 +29,44 @@ class Controller_Customer extends Controller
 
 		// POST
 		$post = Input::post();
-		$data["flag"]				= empty($post["flag"]) ? "" : $post["flag"];
-		$data["c_name"]				= empty($post["c_name"]) ? "" : $post["c_name"];
-		$data["address"]			= empty($post["address"]) ? "" : $post["address"];
-		$data["tel"]				= empty($post["tel"]) ? "" : $post["tel"];
-		$data["mail"]				= empty($post["mail"]) ? "" : $post["mail"];
-		$data["t_name"]				= empty($post["t_name"]) ? "" : $post["t_name"];
+		$data["flag"]				= empty($post["flag"]) ? ""  : $post["flag"];
+		$data["c_name"]				= empty($post["c_name"])?""  : $post["c_name"];
+		$data["address"]			= empty($post["address"])?"" : $post["address"];
+		$data["tel"]				= empty($post["tel"]) ? ""   : $post["tel"];
+		$data["mail"]				= empty($post["mail"]) ? ""  : $post["mail"];
+		$data["t_name"]				= empty($post["t_name"]) ?"" : $post["t_name"];
 		$data["t_tel"]				= empty($post["t_tel"]) ? "" : $post["t_tel"];
-		$data["t_mail"]				= empty($post["t_mail"]) ? "" : $post["t_mail"];
-		$data["u_name"]				= empty($post["u_name"]) ? "" : $post["u_name"];
-		$data["special"]			= empty($post["special"]) ? "" : $post["special"];
+		$data["t_mail"]				= empty($post["t_mail"]) ?"" : $post["t_mail"];
+		$data["u_name"]				= empty($post["u_name"]) ?"" : $post["u_name"];
+		$data["special"]			= empty($post["special"]) ?"": $post["special"];
 		$data["check"]				= empty($post["check"]) ? "" : $post["check"];
- 		$data["id"]					= empty($post["id"])? "" : $post["id"];
-
+ 		$data["id"]					= empty($post["id"])? ""     : $post["id"];
+ 		$data["msg"]				= empty($post["msg"])?""     : $post["msg"];
 
 		if($data["check"]==1 && !empty($data["c_name"])){
-			$id = db_customer::ins_company($data);
-			//company_idの取り出しに使用
-			foreach($id as $key => $val){
-				$data["id"] = $val;
-			}
-			//担当者情報を入力
- 			if(!empty($data["id"]) && !empty($data["t_name"])){
- 				//入力された回数文顧客担当者情報をinsertするための処理
- 				for($i=0; $i<count($data["t_name"]);$i++){
- 					db_customer::ins_customer($data["id"],$data["t_name"][$i],$data["t_mail"][$i],$data["t_tel"][$i]);
- 				}
+			$checkName = db_customer::check_company($data);
+			if(empty($checkName)){
+				$id = db_customer::ins_company($data);
+				//company_idの取り出しに使用
+				foreach($id as $key => $val){
+					$data["id"] = $val;
+				}
+
+				//担当者情報を入力
+ 				if(!empty($data["id"]) && !empty($data["t_name"][0])){
+ 					//入力された回数文顧客担当者情報をinsertするための処理
+ 					for($i=0; $i<count($data["t_name"]);$i++){
+ 						db_customer::ins_customer($data["id"],$data["t_name"][$i],$data["t_mail"][$i],$data["t_tel"][$i]);
+ 					}
+
+				}
+			}else{
+				$data["msg"] = "既に登録されています。";
 			}
 
 		}
 
-		return View::forge('customer/create');
+		return View::forge('customer/create',$data);
 	}
 	//変更画面
 	public function action_update()

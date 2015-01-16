@@ -80,7 +80,7 @@ ul#list li{
 		</td>
 	<tr>
 	<tr>
-		<th>顧客会社名</th>
+		<th>顧客会社名></th>
 		<td><input type="text" name="c_name" size="20" value="<?php echo $val["company_name"];?>"></td>
 	<tr>
 	<tr>

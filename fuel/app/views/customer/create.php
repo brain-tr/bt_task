@@ -32,6 +32,10 @@ $(function(){
 ul#list li{
 	margin-left:5px;
 }
+p#big{
+	font-size:30px;
+	color:red;
+}
 </style>
 
 </head>
@@ -49,6 +53,7 @@ ul#list li{
 <div id="main">
 <div id="content">
 <div id="contentIn">
+<p id="big"><?php echo $msg; ?></p>
 <form action="#" name="form1" id="form1" method="post">
 <br>
 <table>

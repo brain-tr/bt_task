@@ -24,6 +24,14 @@ class db_customer extends \Model {
 		return $result;
 	}
 
+	/*
+	 *	顧客会社情報重複チェック
+	 */
+	public static function check_company($data)
+	{
+		return \DB::select('company_name')->from('k_company')->where("company_name",$data["c_name"])->execute()->as_array();
+	}
+
 
 
 	/*
@@ -124,5 +132,14 @@ class db_customer extends \Model {
 	{
 		return \DB::select('company_id','company_name','c_flag')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->execute()->as_array();
 	}
+
+	/*
+	 *	昇順降順ボタン
+	 */
+	public static function up_down($select,$cd)
+	{
+		return \DB::select('company_id','company_name','c_flag')->from('k_company')->order_by($select,$cd)->execute()->as_array();
+	}
+
 
 }
