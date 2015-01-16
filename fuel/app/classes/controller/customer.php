@@ -56,7 +56,7 @@ class Controller_Customer extends Controller
  				if(!empty($data["id"]) && !empty($data["t_name"][0])){
  					//入力された回数文顧客担当者情報をinsertするための処理
  					for($i=0; $i<count($data["t_name"]);$i++){
- 						db_customer::ins_customer($data["id"],$data["t_name"][$i],$data["t_mail"][$i],$data["t_tel"][$i]);
+ 						db_customer::ins_customer($data["id"],$data["t_name"][$i],$data["t_tel"][$i],$data["t_mail"][$i]);
  					}
 
 				}
