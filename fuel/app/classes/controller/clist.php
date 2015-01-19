@@ -7,15 +7,15 @@ class Controller_Clist extends Controller
 	/*
 	 *	セッション情報の確認
 	*/
-// 	public function before()
-// 	{
-// 		session_start();
-// 		parent::before();
-// 		if (!Loginout::logincheck()){
-// 			header('Location: /login/');
-// 			exit();
-// 		}
-// 	}
+	public function before()
+	{
+		session_start();
+		parent::before();
+		if (!Loginout::logincheck()){
+			header('Location: /login/');
+			exit();
+		}
+	}
 
 	/*
 	 *	フォロー一覧画面

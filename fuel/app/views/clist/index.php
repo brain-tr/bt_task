@@ -116,9 +116,6 @@ input[type="button"].updown {
 	width:24px;
 	height:24px;
 	font-size:14px;
-
-
-
 }
 
 </style>

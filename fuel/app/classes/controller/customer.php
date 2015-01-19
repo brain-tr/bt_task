@@ -7,15 +7,15 @@ class Controller_Customer extends Controller
 	/*
 	 *	セッション情報の確認
 	*/
-// 	public function before()
-// 	{
-// 		session_start();
-// 		parent::before();
-// 		if (!Loginout::logincheck()){
-// 			header('Location: /login/');
-// 			exit();
-// 		}
-// 	}
+	public function before()
+	{
+		session_start();
+		parent::before();
+		if (!Loginout::logincheck()){
+			header('Location: /login/');
+			exit();
+		}
+	}
 
 	/*
 	 *	顧客情報登録画面
@@ -24,9 +24,8 @@ class Controller_Customer extends Controller
 	{
 		// ログイン情報
 // 		$data['userlog_id']		= $_SESSION['id'];
-// 		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_name']	= $_SESSION['name'];
 // 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
-
 		// POST
 		$post = Input::post();
 		$data["flag"]				= empty($post["flag"]) ? ""  : $post["flag"];
