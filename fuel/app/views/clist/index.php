@@ -111,6 +111,16 @@ table.tableStylex tr,th,td{
 	margin-left:600px;
 }
 
+input[type="button"].updown {
+	margin:0;
+	width:24px;
+	height:24px;
+	font-size:14px;
+
+
+
+}
+
 </style>
 
 </head>
@@ -150,8 +160,8 @@ table.tableStylex tr,th,td{
 	);
 
 	echo "<tr>";
-	echo "<td>会社名<input type='button' name='updown1' value='$msg' onClick='msg(1);'></td>";
-	echo "<td>客種<input type='button' name='updown2' value='$msg2' onClick='msg(2);'></td>";
+	echo "<td>会社名<input type='button' name='updown1' class='updown' value='$msg' onClick='msg(1);'></td>";
+	echo "<td>客種<input type='button' name='updown2' class='updown' value='$msg2' onClick='msg(2);'></td>";
 	echo "<td>削除</td>";
 
 	foreach($view as $key=> $val){
