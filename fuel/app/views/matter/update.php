@@ -112,7 +112,7 @@ p#msg{
 		<li><a href="/ktop">TOP</a></li>
 		<li><a href="/clist">顧客一覧</a></li>
 		<li><a href="#">要求一覧</a></li>
-		<li><a href="#">対応一覧</a></li>
+		<li><a href="/mlist">対応一覧</a></li>
 	</ul>
 </div>
 <div class="clear"></div>

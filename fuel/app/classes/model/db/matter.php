@@ -98,7 +98,7 @@ class db_matter extends \Model {
 	/*
 	 *	会社別対応一覧取得用
 	 */
-	public static function get_matter()
+	public static function get_matter($matter)
 	{
 		//where文の部分は一覧ができたら必ず修正すること!
 		$query =\DB::query("
@@ -132,7 +132,7 @@ class db_matter extends \Model {
 				on
 					c.user_id = d.user_id
 				where
-					a.company_id = 3
+					matter_id = $matter
 
 				group by
 					company_name;
@@ -172,6 +172,7 @@ class db_matter extends \Model {
 		 $query =\DB::query("
 				select
 		 			a.company_id,
+		 			matter_id,
 					company_name,
 					case_id,
 					date
@@ -194,6 +195,7 @@ class db_matter extends \Model {
 		$query =\DB::query("
 				select
 		 			a.company_id,
+					matter_id,
 					company_name,
 					case_id,
 					date
@@ -204,7 +206,40 @@ class db_matter extends \Model {
 				on
 					a.company_id = b.company_id
 				where
-					a.company_name = $search
+					company_name = '$search'
+				");
+		$result	=	$query->execute()->as_array();
+		return $result;
+	}
+
+	/*
+	 *	対応者名一覧取得
+	 */
+	public static function get_respon()
+	{
+		return \DB::select('matter_id','respone_name')->from('k_matter')->execute()->as_array();
+	}
+
+	/*
+	 *	カレンダー対応者検索
+	 */
+	public static function search_respon($search)
+	{
+		$query =\DB::query("
+				select
+					a.company_id,
+					matter_id,
+					company_name,
+					case_id,
+					date
+				from
+					k_company a
+				left join
+					k_matter b
+				on
+					a.company_id = b.company_id
+				where
+					respone_name = '$search'
 				");
 		$result	=	$query->execute()->as_array();
 		return $result;

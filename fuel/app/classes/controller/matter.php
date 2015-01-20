@@ -84,17 +84,30 @@ class Controller_Matter extends Controller
 		$data["user"]	=	empty($post["user"])	?  "": $post["user"];
 		$data["check"]	=	empty($post["check"])	?  "": $post["check"];
 		$data["m_id"]	=	empty($post["matter_id"])? "": $post["matter_id"];
+		$data["list_id"]=	empty($post["list_id"])?   "": $post["list_id"];
+		$data["check2"] =	empty($post["flag"])?	   "": $post["flag"];
 
-		if($data["check"]==1){
+		//一覧から遷移してきた時の処理
+		if($data["check2"]==1 && !empty($data["list_id"])){
+			//表示用
+			$data["view"]	=	db_matter::get_matter($data["list_id"]);
+		}
+
+		//変更した時の処理
+		if($data["check"]==1 && !empty($data["user"])){
 			db_matter::upd_matter($data);
 			db_matter::ins_updated($data);
+			//表示用
+			$data["view"]	=	db_matter::get_matter($data["m_id"]);
 		}
 
 
 
 
-		//表示用
-		$data["view"]	=	db_matter::get_matter();
+
+
+
+
 		return view::forge('matter/update',$data);
 	}
 
