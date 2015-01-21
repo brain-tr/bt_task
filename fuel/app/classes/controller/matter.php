@@ -100,16 +100,10 @@ class Controller_Matter extends Controller
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["m_id"]);
 		}
-
-
-
-
-
-
-
-
 		return view::forge('matter/update',$data);
 	}
+
+
 
 
 }

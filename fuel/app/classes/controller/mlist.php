@@ -79,4 +79,17 @@ class Controller_Mlist extends Controller
 
 		return View::forge('mlist/index',$data);
 	}
+
+	//顧客会社名検索用サブウインドウ
+	public function action_csearch()
+	{
+		//POST
+		$post = Input::post();
+
+		$data["name"] = db_matter::all_name();
+
+
+
+		return View::forge('mlist/csearch',$data);
+	}
 }

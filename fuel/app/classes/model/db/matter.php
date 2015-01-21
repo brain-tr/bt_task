@@ -245,5 +245,13 @@ class db_matter extends \Model {
 		return $result;
 	}
 
+	/*
+	 *	カレンダーサブウインドウ用名前一覧
+	 */
+	public static function all_name()
+	{
+		return \DB::select('company_name')->from('k_company')->execute()->as_array();
+	}
+
 
 }
