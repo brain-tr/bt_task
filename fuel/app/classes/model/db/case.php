@@ -49,4 +49,14 @@ class db_case extends \Model {
  		->execute();
  	}
 
+ 	/*
+ 	 *	要求フラグをソートする
+ 	*/
+ 	public static function sort($data)
+ 	{
+
+ 		$query = \DB::query("SELECT * FROM k_case order by case_id ".$data["updown"]." ");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
 }
