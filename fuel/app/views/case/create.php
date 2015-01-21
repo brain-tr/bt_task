@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/assets/js/colorpicker.js"></script>
+	<script type="text/javascript" src="jscolor.js"></script>
 	<script type="text/javascript">
 	msgcheck	= "<?php echo $msg; ?>";
 	window.onload = function() {
@@ -53,17 +54,49 @@
 		alert(msgcheck);
 	}
 	</script>
+<style type="text/css">
+p{
+	margin-left:5px;
+	margin-top:50px;
+}
+table.tableStylex tr,th,td{
+	border: 1px solid #999;
+	padding:5px;
+	width:50px;
+	text-align:center;
+	margin-left:100px;
+	text-align:center;
+	padding: 5px 10px;
+	background-color:#fff;
+}
+table.tableStylex th {
+	text-align:center;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	color:#666;
+	font-size:93%;
+}
+
+table.tableStylex td {
+	font-size:86%;
+	text-align:left;
+}
+</style>
+
 </head>
 <body class="white">
 
 <form action="create" method="post" name="form">
-	<table>
+<p>
+	<table border="1" class="tableStylex">
 		<tr>
-			<td>要求名</td>
-			<td><input type="text" name="new_name"></td>
+			<th>要求名</th>
+			<td><input type="text" name="new_name" maxlength="6" size="6"></td>
 		</tr>
 		<tr>
-			<td>色</td>
+			<th>色</th>
 			<td><input type="text" name="new_color" id="jquery-colorpicker-field" maxlength="6" size="6" value="" /></td>
 		</tr>
 	</table>
