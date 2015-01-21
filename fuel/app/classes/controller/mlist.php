@@ -29,7 +29,7 @@ class Controller_Mlist extends Controller
 		$data["check1"] =	empty($post["check1"])?"": $post["check1"];
 		$data["check2"] =	empty($post["check2"])?"": $post["check2"];
 		$data["person"] =	empty($post["respon"])?"": $post["respon"];
-
+		$data["name"]   =	empty($post["name"])?  "": $post["name"];
 
 		//日付取得用の処理
 		$data["year"]	= date('Y');
@@ -85,8 +85,16 @@ class Controller_Mlist extends Controller
 	{
 		//POST
 		$post = Input::post();
+		$data["check"] = empty($post["check"])? "" : $post["check"];
+		$data["s_name"]= empty($post["s_name"])?"" : $post["s_name"];
 
-		$data["name"] = db_matter::all_name();
+		if($data["check"]==1 && !empty($data["s_name"])){
+			$data["name"] = db_matter::search_cname($data["s_name"]);
+		}else{
+			$data["name"] = db_matter::all_name();
+		}
+
+
 
 
 

@@ -253,5 +253,26 @@ class db_matter extends \Model {
 		return \DB::select('company_name')->from('k_company')->execute()->as_array();
 	}
 
+	/*
+	 *	カレンダーサブウインドウ名前検索
+	 */
+	public static function search_cname($data)
+	{
+		$query =\DB::query("
+				select
+					company_name
+				from
+					k_company
+				where
+					company_name LIKE '%$data%'
+				or
+					company_tel LIKE '%$data%'
+				group by
+					company_name;
+				");
+				$result	=	$query->execute()->as_array();
+				return $result;
+	}
+
 
 }

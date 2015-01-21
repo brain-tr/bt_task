@@ -12,13 +12,15 @@
             //window.openerで親ウィンドウのオブジェクトを操作
             window.opener.document.getElementById('search').value = val;
             window.close();
+            window.opener.form1.submit();
         }
+
     }
 	</script>
 </head>
 <body class="white">
 
-<form action="search" method="post">
+<form action="csearch" method="post" name="frm">
 <table>
 	<tr>
 		<td><input type="text" name="s_name" size="10"></td>
@@ -38,6 +40,8 @@
 </table>
 <input type="hidden" name="check" value="1">
 </form>
+
+
 
 </body>
 </html>
