@@ -148,7 +148,8 @@ class db_matter extends \Model {
 	{
 		return \DB::update('k_matter')->set(array(
 				'respone_name'		=> $data['user'],
-				'content_text'		=> $data['detail']
+				'content_text'		=> $data['detail'],
+				'date'				=> $data['date']
 		))->where('matter_id', $data['m_id'])
 		->execute();
 	}
@@ -217,7 +218,7 @@ class db_matter extends \Model {
 	 */
 	public static function get_respon()
 	{
-		return \DB::select('matter_id','respone_name')->from('k_matter')->execute()->as_array();
+		return \DB::select('matter_id','respone_name')->from('k_matter')->group_by('respone_name')->execute()->as_array();
 	}
 
 	/*
