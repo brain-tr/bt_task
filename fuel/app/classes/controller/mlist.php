@@ -2,6 +2,7 @@
 use \Model\Db_matter;
 use \Model\Loginout;
 use Model\db_customer;
+use Model\db_case;
 class Controller_Mlist extends Controller
 {
 	/*
@@ -30,6 +31,7 @@ class Controller_Mlist extends Controller
 		$data["check2"] =	empty($post["check2"])?"": $post["check2"];
 		$data["person"] =	empty($post["respon"])?"": $post["respon"];
 		$data["name"]   =	empty($post["name"])?  "": $post["name"];
+		$data["msg"]	=	empty($post["msg"])?   "": $post["msg"];
 
 		//日付取得用の処理
 		$data["year"]	= date('Y');
@@ -59,17 +61,13 @@ class Controller_Mlist extends Controller
 		//会社名検索用表示
 		if($data["check1"] == 1 && !empty($data["search"])){
 			$data["company"] = db_matter::search_list($data["search"]);
+			$data["msg"] = $data["company"][0]["company_name"];
 		}else if($data["check2"]==1 && !empty($data["person"]) && $data["person"] != '----'){
 			$data["company"] = db_matter::search_respon($data["person"]);
 		}else{
 			//初期表示
 			$data["company"] = db_matter::get_list();
 		}
-
-
-
-
-
 
 
 		//対応者セレクトボックス表示用

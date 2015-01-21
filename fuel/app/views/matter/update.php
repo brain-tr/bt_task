@@ -57,9 +57,13 @@ p#msg{
 		<td><input type="text" id="two" disabled size="1" value="<?php echo $flg; ?>"></td>
 		<th>要求フラグ</th>
 		<td>
-			<select>
-				<option value="1">提案</option>
-				<option value="2">紹介</option>
+			<select name="case">
+				<?php
+					foreach($select as $val2){
+						echo "<option value='".$val2['case_id']."'>".$val2["name"]."</option>";
+
+					}
+				?>
 			</select>
 		</td>
 	</tr>

@@ -2,6 +2,7 @@
 use \Model\Db_matter;
 use \Model\Loginout;
 use \Model\Workbench;
+use Model\db_case;
 class Controller_Matter extends Controller
 {
 	/*
@@ -34,6 +35,7 @@ class Controller_Matter extends Controller
 		$data["user"]	=	empty($post["user"])	?  "": $post["user"];
 		$data["check"]	=	empty($post["check"])	?  "": $post["check"];
 		$data["msg"]	=	empty($post["msg"])		?  "": $post["msg"];
+		$data["case"]	=	empty($post["case"])	?  "": $post["case"];
 
 		if($data["check"]==1 && empty($data["user"])){
 			$data["msg"]	=	"対応者名は必須項目です。";
@@ -45,6 +47,9 @@ class Controller_Matter extends Controller
 				db_matter::ins_matter($data);
 			}
 		}
+
+		//セレクトボックス取り出し用
+		$data["select"]	=	db_case::get_name();
 
 		return View::forge('matter/create',$data);
 	}
@@ -86,6 +91,7 @@ class Controller_Matter extends Controller
 		$data["m_id"]	=	empty($post["matter_id"])? "": $post["matter_id"];
 		$data["list_id"]=	empty($post["list_id"])?   "": $post["list_id"];
 		$data["check2"] =	empty($post["flag"])?	   "": $post["flag"];
+		$data["case"]	=	empty($post["case"])?	   "": $post["case"];
 
 		//一覧から遷移してきた時の処理
 		if($data["check2"]==1 && !empty($data["list_id"])){
@@ -100,6 +106,9 @@ class Controller_Matter extends Controller
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["m_id"]);
 		}
+
+		//セレクトボックス取り出し用
+		$data["select"]	=	db_case::get_name();
 		return view::forge('matter/update',$data);
 	}
 

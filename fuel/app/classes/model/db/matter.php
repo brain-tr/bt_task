@@ -79,7 +79,7 @@ class db_matter extends \Model {
 		//要求フラグが未完成のため、case_idには1を入れるようにしています。
 		\DB::insert('k_matter')->set(array(
 				'company_id'	=> $data['c_id'],
-				'case_id'		=> 1,
+				'case_id'		=> $data['case'],
 				'respone_name'	=> $data['user'],
 				'content_text'	=> $data['detail'],
 				'date'			=> $data['date'],
@@ -100,7 +100,6 @@ class db_matter extends \Model {
 	 */
 	public static function get_matter($matter)
 	{
-		//where文の部分は一覧ができたら必ず修正すること!
 		$query =\DB::query("
 				select
 					matter_id,
@@ -148,6 +147,7 @@ class db_matter extends \Model {
 	{
 		return \DB::update('k_matter')->set(array(
 				'respone_name'		=> $data['user'],
+				'case_id'		=> $data['case'],
 				'content_text'		=> $data['detail'],
 				'date'				=> $data['date']
 		))->where('matter_id', $data['m_id'])
@@ -175,14 +175,19 @@ class db_matter extends \Model {
 		 			a.company_id,
 		 			matter_id,
 					company_name,
-					case_id,
-					date
+					b.case_id,
+					date,
+					color_code
 				from
 					k_company a
 				left join
 					k_matter b
 				on
 					a.company_id = b.company_id
+				left join
+					k_case c
+				on
+					b.case_id = c.case_id;
 				");
 		$result	=	$query->execute()->as_array();
 		return $result;
@@ -195,17 +200,22 @@ class db_matter extends \Model {
 	{
 		$query =\DB::query("
 				select
-		 			a.company_id,
+					a.company_id,
 					matter_id,
 					company_name,
-					case_id,
-					date
+					b.case_id,
+					date,
+					color_code
 				from
 					k_company a
 				left join
 					k_matter b
 				on
 					a.company_id = b.company_id
+				left join
+					k_case c
+				on
+					b.case_id = c.case_id
 				where
 					company_name = '$search'
 				");
@@ -231,14 +241,19 @@ class db_matter extends \Model {
 					a.company_id,
 					matter_id,
 					company_name,
-					case_id,
-					date
+					b.case_id,
+					date,
+					color_code
 				from
 					k_company a
 				left join
 					k_matter b
 				on
 					a.company_id = b.company_id
+				left join
+					k_case c
+				on
+					b.case_id = c.case_id
 				where
 					respone_name = '$search'
 				");

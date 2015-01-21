@@ -80,7 +80,7 @@ class Controller_Week extends Controller
 		//本日の日付(表示用)
 		$data["today"]	=	date("Y年m月d日");
 
-		return View::forge('week',$data);
+		return View::forge('week/index',$data);
 	}
 
 

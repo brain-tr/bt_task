@@ -27,9 +27,7 @@ function test(id){
 	form.submit();
 }
 
-function sear(){
-	window.open("/mlist/csearch","window","width=400,height=400,scrollbars=yes");
-}
+
 </script>
 
 <style type="text/css">
@@ -51,11 +49,11 @@ table td {
 }
 
 span#one{
-	margin-left:210px;
+	margin-left:220px;
 }
 
 span#two{
-	margin-left:300px;
+	margin-left:326px;
 }
 
 span#big{
@@ -63,25 +61,12 @@ span#big{
 }
 
 span#change{
-	margin-left:290px;
+	margin-left:300px;
 }
 
-span#change a,
-span#change2 a{
-	font-size:20px;;
+span#change a{
+	font-size:25px;
 }
-
-span#change a,
-span#change2 a,
-span#com a{
-	text-decoration:none;
-}
-span#com a{
-	color:white;
-}
-
-
-
 
 
 </style>
@@ -103,16 +88,13 @@ span#com a{
 <div id="content">
 <div id="contentIn">
 <input type="button" onClick="location.href='/matter/create'"  name="create" id="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px"><br>
-<span id="one">顧客会社検索</span>
-<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
-<input type="button" name="flg1" onClick="sear();" value="検索">
-<form action="mlist" name="form1" method="post">
-	<input type="hidden" id="search" name="search" value="">
+<form action="week" name="form1" method="post">
+	<span id="one">顧客会社検索</span><input type="text" name="search" size="10"><input type="submit" name="flg1" value="検索">
 	<input type="hidden" name="check1" value="1">
 </form>
 
 
-<form action="mlist" name="form2" method="post">
+<form action="week" name="form2" method="post">
 	<span id="two">対応者検索</span>
 	<select name="respon">
 		<option>----</option>
@@ -126,7 +108,7 @@ span#com a{
 	<input type="submit" name="flg2" value="検索">
 </form>
 <?php echo "<span id='big'>".$today."</span>"; ?>
-<span id="change"><a href="week/index">週</a></span>/<span id="change2"><a href="mlist">月</a></span>
+<span id="change"><a href="week/index">週</a></span>/<span><a href="#">月</a></span>
 <table>
 	<tr>
 		<th>日</th>
@@ -141,7 +123,6 @@ span#com a{
 	<?php
 		$cnt = 0;
 		$wk_id = "";
-		$color = "";
 
 		foreach($calendar as $key => $val){
 
@@ -152,18 +133,14 @@ span#com a{
 			}else if(!empty($val['day'])){
 				$wk_id .= ",".$val['day'];
 			}
-			//日付を生成
+			//0000-00-0型の日付を生成
 			$comp = $year."-".$month."-".$val['day'];
 			$cnt++;
-			//検索が行われたら
-			if($check1 == 1 || $check2 == 1){
-				//会社名取り出し
-				foreach($company as $val2){
-					$color = $val2["color_code"];
-					//該当の日付と登録日が一致かつdateが空でなければ。
-					if(strtotime($comp) == strtotime($val2["date"]) && !empty($val2["date"])){
-						echo "<span id='com'><a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name' style='background-color:$color'>".$val2["company_name"]."</a></span><br>";
-					}
+			//会社名取り出し
+			foreach($company as $val2){
+				//該当の日付と登録日が一致かつdateが空でなければ。
+				if(strtotime($comp) == strtotime($val2["date"]) && !empty($val2["date"])){
+					echo "<a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name'>".$val2["company_name"]."</a><br>";
 				}
 			}
 
