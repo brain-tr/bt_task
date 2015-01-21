@@ -27,7 +27,9 @@ function test(id){
 	form.submit();
 }
 
-
+function sear(){
+	window.open("/mlist/csearch","window","width=400,height=400,scrollbars=yes");
+}
 </script>
 
 <style type="text/css">
@@ -61,12 +63,20 @@ span#big{
 }
 
 span#change{
-	margin-left:300px;
+	margin-left:290px;
 }
 
-span#change a{
-	font-size:25px;
+span#change a,
+span#change2 a{
+	font-size:20px;;
 }
+
+span#change a,
+span#change2 a,
+span#com a{
+	text-decoration:none;
+}
+
 
 
 </style>
@@ -89,7 +99,9 @@ span#change a{
 <div id="contentIn">
 <input type="button" onClick="location.href='/matter/create'"  name="create" id="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px"><br>
 <form action="mlist" name="form1" method="post">
-	<span id="one">顧客会社検索</span><input type="text" name="search" size="10"><input type="submit" name="flg1" value="検索">
+	<span id="one">顧客会社検索</span>
+	<input type="text" id="search" name="search"  size="10">
+	<input type="button" name="flg1" onClick="sear();" value="検索">
 	<input type="hidden" name="check1" value="1">
 </form>
 
@@ -108,7 +120,7 @@ span#change a{
 	<input type="submit" name="flg2" value="検索">
 </form>
 <?php echo "<span id='big'>".$today."</span>"; ?>
-<span id="change"><a href="#">週</a></span>/<span><a href="#">月</a></span>
+<span id="change"><a href="#">週</a></span>/<span id="change2"><a href="#">月</a></span>
 <table>
 	<tr>
 		<th>日</th>
@@ -140,7 +152,7 @@ span#change a{
 			foreach($company as $val2){
 				//該当の日付と登録日が一致かつdateが空でなければ。
 				if(strtotime($comp) == strtotime($val2["date"]) && !empty($val2["date"])){
-					echo "<a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name'>".$val2["company_name"]."</a><br>";
+					echo "<span id='com'><a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name'>".$val2["company_name"]."</a></span><br>";
 				}
 			}
 
