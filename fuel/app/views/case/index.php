@@ -9,6 +9,10 @@
 msgcheck	= "<?php echo $msg; ?>";
 // 新規フラグ登録用サブウィンドウを開く。
 function crea(){
+	document.form.check.value = 1;
+	document.form.flag_id.value = "";
+	document.form.new_name.value = "";
+	document.form.new_color.value = "";
 	window.open("/case/create","window","width=450,height=400,scrollbars=yes");
 }
 //フラグ変更用サブウィンドウを開く。
@@ -31,6 +35,28 @@ function del(case_id){
 	form.submit();
 	}
 }
+//昇順降順ボタン
+function sortbtn(){
+		var frm1 = document.createElement("form");
+		var ipt1 = document.createElement("input");
+		var ipt2 = document.createElement("input");
+
+		frm1.action = "case";
+		frm1.method = "post";
+
+		ipt1.type = "hidden";
+		ipt1.name = "updown";
+		ipt1.value= "<?php echo $updown; ?>";
+
+		ipt2.type = "hidden";
+		ipt2.name = "check2";
+		ipt2.value = 1;
+
+		frm1.appendChild(ipt1);
+		frm1.appendChild(ipt2);
+		document.body.appendChild(frm1);
+		frm1.submit();
+}
 //アラートメッセージ
 if(msgcheck != "1"){
 	alert(msgcheck);
@@ -39,8 +65,11 @@ if(msgcheck != "1"){
 <style type="text/css">
 table.tableStylex tr,th,td{
 	padding:5px;
-	width:150px;
+	width:50px;
 	text-align:center;
+}
+#btn{
+	margin-left:600px;
 }
 </style>
 
@@ -59,13 +88,12 @@ table.tableStylex tr,th,td{
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<input type="button" name="search" onClick="crea();" value="新規登録画面" style="WIDTH: 100px; HEIGHT: 40px; float:right">
-<input type="button" name="search" onClick="upda('3', 'あああ', 'ff0000');" value="変更画面" style="WIDTH: 100px; HEIGHT: 40px; float:right">
+<input type="button" id="btn" onClick="crea();" value="新規登録画面" style="WIDTH: 100px; HEIGHT: 40px">
 <br>
-<form action="index" method="post" name="form" style="clear:both;">
-<table border="1">
+<form action="case" method="post" name="form" style="clear:both;">
+<table border="1" class="tableStylex">
 <tr>
-<td>要求名</td>
+<td>要求名<input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></td>
 <td>編集</td>
 </tr>
 <?php
@@ -93,7 +121,7 @@ table.tableStylex tr,th,td{
 	<ul class="navi">
 		<li><a href="/ktop">TOP</a></li>
 		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case/index">要求一覧</a></li>
+		<li><a href="/case">要求一覧</a></li>
 		<li><a href="/mlist">対応一覧</a></li>
 	</ul>
 </div>

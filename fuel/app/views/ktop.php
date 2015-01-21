@@ -26,12 +26,12 @@
 			</form>
 		</li>
 		<li>
-			<form action="#" method="post" name="case">
+			<form action="/case" method="post" name="case">
 				<input type="submit" value="要求一覧" name="case_list"  style="WIDTH: 200px; HEIGHT: 70px">
 			</form>
 		</li>
 				<li>
-			<form action="#" method="post" name="matter">
+			<form action="/mlist" method="post" name="matter">
 				<input type="submit" value="対応一覧" name="matter_list"  style="WIDTH: 200px; HEIGHT: 70px">
 			</form>
 		</li>
@@ -44,8 +44,8 @@
 	<ul class="navi">
 		<li><a href="/ktop">TOP</a></li>
 		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="#">要求一覧</a></li>
-		<li><a href="#">対応一覧</a></li>
+		<li><a href="/case">要求一覧</a></li>
+		<li><a href="/mlist">対応一覧</a></li>
 	</ul>
 </div>
 
