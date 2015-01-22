@@ -147,7 +147,7 @@ class db_matter extends \Model {
 	{
 		return \DB::update('k_matter')->set(array(
 				'respone_name'		=> $data['user'],
-				'case_id'		=> $data['case'],
+				'case_id'			=> $data['case'],
 				'content_text'		=> $data['detail'],
 				'date'				=> $data['date']
 		))->where('matter_id', $data['m_id'])

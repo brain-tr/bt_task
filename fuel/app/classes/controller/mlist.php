@@ -36,7 +36,7 @@ class Controller_Mlist extends Controller
 		//日付取得用の処理
 		$data["year"]	= date('Y');
 		$data["month"]	= date('m');
-		$data["lastday"]	= date('t');
+		$data["lastday"]= date('t');
 		$data["calendar"]	= array();
 		$cnt	=0;
 		for($i=1; $i<$data["lastday"]+1; $i++){
