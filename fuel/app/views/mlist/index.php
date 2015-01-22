@@ -30,6 +30,11 @@ function test(id){
 function sear(){
 	window.open("/mlist/csearch","window","width=400,height=400,scrollbars=yes");
 }
+//先月翌月表示
+function weekchange(check){
+	document.form3.check4.value = check;
+	document.form3.submit();
+}
 </script>
 
 <style type="text/css">
@@ -63,15 +68,21 @@ span#big{
 }
 
 span#change{
-	margin-left:290px;
+	margin-left:134px;
+}
+
+span#change3{
+	margin-left:330px;
 }
 
 span#change a,
+span#change3 a,
 span#change2 a{
 	font-size:20px;;
 }
 
 span#change a,
+span#change3 a,
 span#change2 a,
 span#com a{
 	text-decoration:none;
@@ -109,6 +120,8 @@ span#com a{
 <form action="mlist" name="form1" method="post">
 	<input type="hidden" id="search" name="search" value="">
 	<input type="hidden" name="check1" value="1">
+	<input type="hidden" name="check4" value=3>
+	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
 
 
@@ -123,10 +136,23 @@ span#com a{
 		?>
 	</select>
 	<input type="hidden" name="check2" value="1">
+	<input type="hidden" name="check4" value=3>
 	<input type="submit" name="flg2" value="検索">
+	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
-<?php echo "<span id='big'>".$today."</span>"; ?>
-<span id="change"><a href="week/index">週</a></span>/<span id="change2"><a href="mlist">月</a></span>
+<form action="mlist" name="form3" method="post">
+<input type="hidden" name="check4" value="1">
+	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
+</form>
+<?php echo "<span id='big'>本日：".$today."</span>"; ?>
+<span id="change"><a href="#" onClick="weekchange(1);">先月</a></span>/
+<span id="change2"><a href="/mlist">今月</a></span>/
+<span id="change2"><a href="#" onClick="weekchange(2);">翌月</a></span>　
+<br />
+<?php echo "<span id='big'>".$year."年</span>"; ?>
+<?php echo "<span id='big'>".$month."月</span>"; ?>
+<span id="change3"><a href="/week">週</a></span>/
+<span id="change2"><a href="/mlist">月</a></span>
 <table>
 	<tr>
 		<th>日</th>

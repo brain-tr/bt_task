@@ -87,15 +87,20 @@ span#big{
 	font-size:20px;
 }
 span#change{
-	margin-left:20px;
+	margin-left:135px;
 }
 
+span#change3{
+	margin-left:120px;
+}
 span#change a,
+span#change3 a,
 span#change2 a{
 	font-size:20px;;
 }
 
 span#change a,
+span#change3 a,
 span#change2 a,
 span#com a{
 	text-decoration:none;
@@ -133,13 +138,13 @@ span#com a{
 <span id="one">顧客会社検索</span>
 <input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
 <input type="button" name="flg1" onClick="sear();" value="検索">
-<form action="index" name="form1" method="post">
+<form action="/week/index" name="form1" method="post">
 	<input type="hidden" id="search" name="search" value="">
 	<input type="hidden" name="check1" value="1">
 	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
 
-<form action="index" name="form2" method="post">
+<form action="/week/index" name="form2" method="post">
 	<span id="two">対応者検索</span>
 	<select name="respon">
 		<option>----</option>
@@ -154,14 +159,15 @@ span#com a{
 	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
 
-<form action="index" name="form3" method="post">
+<form action="/week/index" name="form3" method="post">
 <span id='big'>本日：</span>
-<?php echo "<span id='big'>".$today."</span>"; ?><br />
+<?php echo "<span id='big'>".$today."</span>"; ?>
+<span id="change"><a href="#" onClick="weekchange(1);">先週</a></span>/
+<span id="change2"><a href="/week">今週</a></span>/
+<span id="change2"><a href="#" onClick="weekchange(2);">翌週</a></span>　<br />
 <?php echo "<span id='big'>".$today1."</span>"; ?>～<?php echo "<span id='big'>".$today2."</span>"; ?>
-<span id="change"><a href="#" onClick="weekchange(1);">先週</a></span>　
-<span id="change2"><a href="#" onClick="weekchange(2);">翌週</a></span>　
-<span id="change2"><a href="#">週</a></span>/
-<span id="change2"><a href="../mlist">月</a></span>
+<span id="change3"><a href="/week">週</a></span>/
+<span id="change2"><a href="/mlist">月</a></span>
 <table>
 	<tr>
 		<th>日付</th>

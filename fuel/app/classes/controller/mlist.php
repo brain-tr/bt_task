@@ -29,15 +29,39 @@ class Controller_Mlist extends Controller
 		$data["search"] =	empty($post["search"])?"": $post["search"];
 		$data["check1"] =	empty($post["check1"])?"": $post["check1"];
 		$data["check2"] =	empty($post["check2"])?"": $post["check2"];
+		$data["check4"] =	empty($post["check4"])?"": $post["check4"];
 		$data["person"] =	empty($post["respon"])?"": $post["respon"];
 		$data["name"]   =	empty($post["name"])?  "": $post["name"];
 		$data["msg"]	=	empty($post["msg"])?   "": $post["msg"];
+		$data["today"]	=	empty($post["today"])?   "": $post["today"];
+		$data["cnt_week"]	=	empty($post["cnt_week"])?   "0": $post["cnt_week"];
+		$data["weekchange"]	=	empty($post["weekchange"])?   "": $post["weekchange"];
+
 
 		//日付取得用の処理
 		$data["year"]	= date('Y');
 		$data["month"]	= date('m');
 		$data["lastday"]= date('t');
+		// 基準日付
+		$tday	= date("Y-m-d");
 		$data["calendar"]	= array();
+		//先週表示
+		if($data["check4"]==1){
+			$data["cnt_week"]  += 1;
+			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+		//翌週表示
+		}else if($data["check4"]==2){
+			$data["cnt_week"]  -= 1;
+			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+		}else if($data["check4"]==3){
+			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+		}
 		$cnt	=0;
 		for($i=1; $i<$data["lastday"]+1; $i++){
 			$week = date('w', mktime(0, 0, 0, $data["month"], $i, $data["year"]));
