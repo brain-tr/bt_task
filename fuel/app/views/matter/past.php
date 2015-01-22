@@ -6,34 +6,79 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
-//変更用
-function test(id){
-	var form  = document.createElement("form");
-	var input = document.createElement("input");
-	var input2= document.createElement("input");
+//昇順降順ボタン
+function sortbtn(){
+		var frm1 = document.createElement("form");
+		var ipt1 = document.createElement("input");
+		var ipt2 = document.createElement("input");
+		var ipt3 = document.createElement("input");
 
-	form.action = "/matter/past";
-	form.method = "post";
+		frm1.action = "past";
+		frm1.method = "post";
 
-	input.type = "hidden";
-	input.name = "list_id";
-	input.value= id;
+		ipt1.type = "hidden";
+		ipt1.name = "updown";
+		ipt1.value= "<?php echo $updown; ?>";
 
-	input2.type  = "hidden";
-	input2.name  = "flag";
-	input2.value = "1";
+		ipt2.type = "hidden";
+		ipt2.name = "check3";
+		ipt2.value = 1;
 
-	form.appendChild(input);
-	form.appendChild(input2);
-	document.body.appendChild(form);
-	form.submit();
+		ipt3.type = "hidden";
+		ipt3.name = "list_id";
+		ipt3.value = <?php echo $list_id;?>;
+
+		frm1.appendChild(ipt1);
+		frm1.appendChild(ipt2);
+		frm1.appendChild(ipt3);
+		document.body.appendChild(frm1);
+		frm1.submit();
 }
-
 </script>
 <style type="text/css">
 p#msg{
 	color:red;
 	font-size:30px;
+}
+table.tableStyley{
+	margin-top:40px;
+}
+table.tableStylex{
+	border: 2px solid #999;
+	margin-top:20px;
+}
+table.tableStylex td,
+table.tableStylex th {
+	text-align:center;
+	width:193px;
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px solid #999;
+	background-color:#fff;
+}
+table.tableStylex th {
+	text-align:center;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	color:#666;
+	font-size:93%;
+}
+
+table.tableStylex td {
+	font-size:86%;
+	text-align:center;
+}
+table.tableStylex td a{
+	text-decoration: none;
+}
+span#com {
+	text-decoration:none;
+}
+span#com {
+	color:white;
 }
 </style>
 
@@ -65,11 +110,11 @@ p#msg{
 			$flg = "両方";
 		}
 ?>
-<form action="update" method="post">
-<table>
+<form action="past" method="post">
+<table class="tableStyley">
 	<tr>
 		<th>日付</th>
-		<td><input type="text" name="date"  value="<?php echo $val['date']; ?>" size="6"></td>
+		<td><input type="text" name="date" disabled value="<?php echo $val['date']; ?>" size="6"></td>
 		<th>記入者:</th>
 		<td><?php echo $val['user_name']; ?></td>
 	</tr>
@@ -78,26 +123,6 @@ p#msg{
 		<td><input type="text" id="one" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
 		<th>客種</th>
 		<td><input type="text" id="two" disabled size="1" value="<?php echo $flg; ?>"></td>
-		<th>要求フラグ</th>
-		<td>
-			<select name="case">
-				<?php
-					foreach($select as $val2){
-						echo "<option value='".$val2['case_id']."'>".$val2["name"]."</option>";
-
-					}
-				?>
-			</select>
-		</td>
-	</tr>
-
-	<tr>
-		<th>対応者</th>
-		<td><input type="text" name="user" value="<?php echo $val["respone_name"];?>" size="10"></td>
-	</tr>
-	<tr>
-		<td>対応内容</td>
-		<td><textarea name="detail"><?php echo $val["content_text"]; ?></textarea></td>
 	</tr>
 
 	<tr>
@@ -123,16 +148,37 @@ p#msg{
 	<tr>
 		<th>特記事項</th>
 		<td><textarea id="nine" disabled><?php echo $val["special_text"]; ?></textarea></td>
-		<td></td>
-		<td><a href="#" onclick=test(<?php echo $list_id;?>)>履歴詳細はこちら</a></td>
 	</tr>
 </table>
 <input type="hidden" id="ten" name="company_id" value="<?php echo $val["company_id"];?>">
 <input type="hidden" name="matter_id" value="<?php echo $val["matter_id"]; ?>">
 <input type="hidden" name="check" value="1">
 <input type="hidden" name="list_id" value=<?php echo $list_id;?>>
-<p class="btnSpace"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_update.png" alt="変更する" /></button></p>
+<table class="tableStylex">
+<tr>
+<th>日付</th>
+<th>要求フラグ</th>
+<th>対応者</th>
+<th>対応内容</th>
+<th>編集</th>
+</tr>
+<?php
+	foreach($past as $key2 => $val2){
+		$color = $val2["color_code"];
+		echo "<tr>";
+		echo "<td>".$val2["date"]."</td>";
+		echo "<td style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
+		echo "<td>".$val2["respone_name"]."</td>";
+		echo "<td>".$val2["content_text"]."</td>";
+		echo "<td>編集</td>";
+		echo "</tr>";
+	}
 
+
+
+
+?>
+</table>
 </form>
 </div><!-- /contentIn -->
 </div><!-- /content -->

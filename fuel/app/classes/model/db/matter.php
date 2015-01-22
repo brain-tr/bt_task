@@ -290,5 +290,55 @@ class db_matter extends \Model {
 				return $result;
 	}
 
+	/*
+	 *	履歴取り出し
+	 */
+	public static function get_past($data)
+	{
+		$query =\DB::query("
+				select
+					a.date,
+					b.name,
+					b.color_code,
+					a.respone_name,
+					a.content_text
+				from
+					k_matter a left join
+					k_case b
+				on
+					a.case_id = b.case_id
+				where
+					company_id = ".$data["c_id"]."
+				");
+				$result	=	$query->execute()->as_array();
+				return $result;
+	}
+	/*
+	 *	履歴時間ソート
+	 */
+	public static function past_sort($data, $updown)
+	{
+		$query =\DB::query("
+				select
+					a.date,
+					b.name,
+					b.color_code,
+					a.respone_name,
+					a.content_text
+				from
+					k_matter a left join
+					k_case b
+				on
+					a.case_id = b.case_id
+				where
+					company_id = ".$data["c_id"]."
+				order by
+					a.date ".$updown."
+				");
+				$result	=	$query->execute()->as_array();
+				return $result;
+	}
+
+
 
 }

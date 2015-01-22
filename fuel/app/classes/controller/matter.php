@@ -112,6 +112,59 @@ class Controller_Matter extends Controller
 		return view::forge('matter/update',$data);
 	}
 
+	/*
+	 *	顧客対応履歴画面
+	 */
+	public function action_past()
+	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		// POST
+		$post = Input::post();
+		$data["c_id"]	=	empty($post["c_id"])?"": $post["c_id"];
+		$data["date"]	=	empty($post["date"])	?  "": $post["date"];
+		$data["detail"]	=	empty($post["detail"])	?  "": $post["detail"];
+		$data["user"]	=	empty($post["user"])	?  "": $post["user"];
+		$data["check"]	=	empty($post["check"])	?  "": $post["check"];
+		$data["m_id"]	=	empty($post["matter_id"])? "": $post["matter_id"];
+		$data["list_id"]=	empty($post["list_id"])?   "": $post["list_id"];
+		$data["check2"] =	empty($post["flag"])?	   "": $post["flag"];
+		$data["check3"]	=	empty($post["check3"])? ""	 : $post["check3"];
+		$data["case"]	=	empty($post["case"])?	   "": $post["case"];
+		$data["flag_id"]=	empty($post["flag_id"])? ""  : $post["flag_id"];
+		$data["sortbtn"]=	empty($post["sortbtn"])	?"↑": $post["sortbtn"];
+		$data["updown"]	=	empty($post["updown"])?	"asc": $post["updown"];
+
+		//一覧から遷移してきた時の処理
+		if($data["check2"]==1 && !empty($data["list_id"])){
+			//表示用
+			$data["view"]	=	db_matter::get_matter($data["list_id"]);
+			$data["c_id"]	=	$data["list_id"];
+		}
+
+		//ソート
+		if($data["check3"] == 1){
+			if($data["updown"] == "asc"){
+				$data["updown"] = "desc";
+				$data["sortbtn"] = "↓";
+				$data['name'] = \Model\db_matter::past_sort($data, $data["updown"]);
+			}else{
+				$data["updown"] = "asc";
+				$data["sortbtn"] = "↑";
+				$data['name'] = \Model\db_matter::past_sort($data, $data["updown"]);
+			}
+		}
+
+		//履歴取り出し
+		$data["past"] = db_matter::get_past($data);
+
+		//セレクトボックス取り出し用
+		$data["select"]	=	db_case::get_name();
+		return view::forge('matter/past',$data);
+	}
+
+
 
 
 
