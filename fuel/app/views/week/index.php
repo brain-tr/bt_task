@@ -45,6 +45,15 @@ function del2(matter_id){
 		document.form3.submit();
 	}
 }
+//会社名検索用
+function sear(){
+	window.open("/mlist/csearch","window","width=400,height=400,scrollbars=yes");
+}
+//先週翌週表示
+function weekchange(check){
+	document.form3.check4.value = check;
+	document.form3.submit();
+}
 
 </script>
 
@@ -77,15 +86,30 @@ span#two{
 span#big{
 	font-size:20px;
 }
-
 span#change{
-	margin-left:300px;
+	margin-left:20px;
 }
 
-span#change a{
-	font-size:25px;
+span#change a,
+span#change2 a{
+	font-size:20px;;
 }
 
+span#change a,
+span#change2 a,
+span#com a{
+	text-decoration:none;
+}
+
+span#com a{
+	text-decoration:none;
+}
+span#com a{
+	color:white;
+}
+#delbtn{
+	margin-left:400px;
+}
 
 </style>
 
@@ -106,13 +130,16 @@ span#change a{
 <div id="content">
 <div id="contentIn">
 <input type="button" onClick="location.href='/matter/create'"  name="create" id="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px"><br>
-<form action="week" name="form1" method="post">
-	<span id="one">顧客会社検索</span><input type="text" name="search" size="10"><input type="submit" name="flg1" value="検索">
+<span id="one">顧客会社検索</span>
+<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
+<input type="button" name="flg1" onClick="sear();" value="検索">
+<form action="index" name="form1" method="post">
+	<input type="hidden" id="search" name="search" value="">
 	<input type="hidden" name="check1" value="1">
+	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
 
-
-<form action="week" name="form2" method="post">
+<form action="index" name="form2" method="post">
 	<span id="two">対応者検索</span>
 	<select name="respon">
 		<option>----</option>
@@ -124,9 +151,17 @@ span#change a{
 	</select>
 	<input type="hidden" name="check2" value="1">
 	<input type="submit" name="flg2" value="検索">
+	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
-<?php echo "<span id='big'>".$today."</span>"; ?>
-<span id="change"><a href="#">週</a></span>/<span><a href="#">月</a></span>
+
+<form action="index" name="form3" method="post">
+<span id='big'>本日：</span>
+<?php echo "<span id='big'>".$today."</span>"; ?><br />
+<?php echo "<span id='big'>".$today1."</span>"; ?>～<?php echo "<span id='big'>".$today2."</span>"; ?>
+<span id="change"><a href="#" onClick="weekchange(1);">先週</a></span>　
+<span id="change2"><a href="#" onClick="weekchange(2);">翌週</a></span>　
+<span id="change2"><a href="#">週</a></span>/
+<span id="change2"><a href="../mlist">月</a></span>
 <table>
 	<tr>
 		<th>日付</th>
@@ -146,6 +181,7 @@ span#change a{
 			//会社名取り出し
 			echo "<td>";
 			foreach($company as $val2){
+				$color = $val2["color_code"];
 				//該当の日付と登録日が一致かつdateが空でなければ。
 				if(strtotime($comp) == strtotime($val2["date"]) && !empty($val2["date"])){
 					if($cnt2 > 0){
@@ -154,7 +190,7 @@ span#change a{
 						echo "<td></td>";
 						echo "<td>";
 					}
-					echo "<a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name'>".$val2["company_name"]."</a><br>";
+					echo "<span id='com'><a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name' style='background-color:$color'>".$val2["company_name"]."</a></span><br>";
 					echo "<td><input type='checkbox' name='del[]' value=".$val2['matter_id'].">";
 					echo "　　　<input type='button' onClick='del2(".$val2["matter_id"].");' value='削除'></td>";
 					$cnt2 += 1;
@@ -169,13 +205,11 @@ span#change a{
 	?>
 </table>
 
-<div class="clear">
-<form action="week" name="form3" method="post">
 <input type="hidden" name="check3" value="1">
+<input type="hidden" name="check4" value="1">
+	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 <input type="button"  value="一括削除" id="delbtn" onClick="del();">
 </form>
-</div>
-
 
 </div><!-- /content -->
 </div><!-- /contentIn -->

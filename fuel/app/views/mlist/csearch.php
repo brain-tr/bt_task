@@ -17,24 +17,60 @@
 
     }
 	</script>
+<style type="text/css">
+table.tableStylex{
+	border: 2px solid #999;
+}
+table.tableStylex td,
+table.tableStylex th {
+	text-align:center;
+	width:193px;
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px solid #999;
+	background-color:#fff;
+}
+table.tableStylex th {
+	text-align:center;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	color:#666;
+	font-size:93%;
+}
+
+table.tableStylex td {
+	font-size:86%;
+	text-align:left;
+}
+table.tableStylex td a{
+	text-decoration: none;
+}
+</style>
 </head>
 <body class="white">
 
 <form action="csearch" method="post" name="frm">
-<table>
+<table class="tableStylex">
 	<tr>
 		<td><input type="text" name="s_name" size="10"></td>
 		<td><input type="submit"  value="検索"></td>
 	</tr>
 
 	<tr>
-		<th>会社名</th>
+		<th colspan="2">会社名</th>
 	</tr>
 	<?php
 		foreach($name as $key => $val){
-			echo "<tr>";
+			if($key % 2 == 0){
+				echo "<tr>";
+			}
 			echo "<td><a href=javascript:setFormInput('".$val["company_name"]."');>".$val['company_name']."</a></td>";
-			echo "</tr>";
+			if($key % 2 == 1 || $key == count($name)){
+				echo "</tr>";
+			}
 		}
 	?>
 </table>

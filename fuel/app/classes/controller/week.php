@@ -30,20 +30,46 @@ class Controller_Week extends Controller
 		$data["check1"] =	empty($post["check1"])?"": $post["check1"];
 		$data["check2"] =	empty($post["check2"])?"": $post["check2"];
 		$data["check3"] =	empty($post["check3"])?"": $post["check3"];
+		$data["check4"] =	empty($post["check4"])?"": $post["check4"];
 		$data["person"] =	empty($post["respon"])?"": $post["respon"];
 		$data["delete"]		=	empty($post["delete"])? "": $post["delete"];
 		$data["del"]		=	empty($post["del"])	?	"": $post["del"];
-
+		$data["msg"]	=	empty($post["msg"])?   "": $post["msg"];
+		$data["today"]	=	empty($post["today"])?   "": $post["today"];
+		$data["cnt_week"]	=	empty($post["cnt_week"])?   "": $post["cnt_week"];
+		$data["weekchange"]	=	empty($post["weekchange"])?   "": $post["weekchange"];
 
 		//日付取得用の処理
 		$data["year"]	= date('Y');
 		$data["month"]	= date('m');
-		$data["lastweek"]	= intval(date('d')) - 6;
+		$data["lastday"] = date('t');
 		$data["week"]	= date('d');
+		// 基準日付
+		$tday	= date("Y-m-d");
 		$data["calendar"]	= array();
-		$cnt	=0;
+		//先週表示
+		if($data["check4"]==1){
+			$data["cnt_week"]  += 1;
+			$data["year"]	= date('Y', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
+			$data["month"]	= date('m', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
+			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"]*7, 0, substr($tday,0,4)));
+			$data["week"]	= date('d', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
+		//翌週表示
+		}else if($data["check4"]==2){
+			$data["cnt_week"]  -= 1;
+			$data["year"]	= date('Y', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
+			$data["month"]	= date('m', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
+			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2), substr($tday,7,2)-$data["cnt_week"]*7, substr($tday,0,4)));
+			$data["week"]	= date('d', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
+		}
+		$cnt	= 1;
 		for($i=0; $i< 7; $i++){
-			$data["calendar"][$i]['day'] = $data["lastweek"] + $i;
+			if($data["week"] + $i <= $data["lastday"]){
+				$data["calendar"][$i]['day'] = $data["week"] + $i;
+			}else{
+				$data["calendar"][$i]['day'] = $cnt;
+				$cnt += 1;
+			}
 		}
 
 		//注意：一括削除はまだできていません
@@ -63,6 +89,7 @@ class Controller_Week extends Controller
 		//会社名検索用表示
 		if($data["check1"] == 1 && !empty($data["search"])){
 			$data["company"] = db_matter::search_list($data["search"]);
+			$data["msg"] = $data["company"][0]["company_name"];
 		}else if($data["check2"]==1 && !empty($data["person"]) && $data["person"] != '----'){
 			$data["company"] = db_matter::search_respon($data["person"]);
 		}else{
@@ -79,6 +106,8 @@ class Controller_Week extends Controller
 		$data["respon"]	=	db_matter::get_respon();
 		//本日の日付(表示用)
 		$data["today"]	=	date("Y年m月d日");
+		$data["today1"]	=	date("Y年m月d日", mktime(0, 0, 0, $data["month"], $data["week"], $data["year"]));
+		$data["today2"]	=	date("Y年m月d日", mktime(0, 0, 0, $data["month"], $data["week"]+6, $data["year"]));
 
 		return View::forge('week/index',$data);
 	}
