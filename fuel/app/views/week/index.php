@@ -10,7 +10,7 @@ function test(id){
 	var input = document.createElement("input");
 	var input2= document.createElement("input");
 
-	form.action = "matter/update";
+	form.action = "../matter/update";
 	form.method = "post";
 
 	input.type = "hidden";
@@ -26,7 +26,25 @@ function test(id){
 	document.body.appendChild(form);
 	form.submit();
 }
-
+//削除確認
+function del(){
+	if(window.confirm('一括削除を実行')){
+		alert('削除しました');
+		document.form3.submit();
+	}
+}
+//単体削除用
+function del2(matter_id){
+	if(window.confirm('削除しますか')){
+		alert('削除しました');
+		var submitType = document.createElement("input");
+		submitType.setAttribute("name", "delete");
+		submitType.setAttribute("type", "hidden");
+		submitType.setAttribute("value", matter_id);
+		form3.appendChild(submitType);
+		document.form3.submit();
+	}
+}
 
 </script>
 
@@ -108,51 +126,55 @@ span#change a{
 	<input type="submit" name="flg2" value="検索">
 </form>
 <?php echo "<span id='big'>".$today."</span>"; ?>
-<span id="change"><a href="week/index">週</a></span>/<span><a href="#">月</a></span>
+<span id="change"><a href="#">週</a></span>/<span><a href="#">月</a></span>
 <table>
 	<tr>
-		<th>日</th>
-		<th>月</th>
-		<th>火</th>
-		<th>水</th>
-		<th>木</th>
-		<th>金</th>
-		<th>土</th>
+		<th>日付</th>
+		<th>会社 / 用件</th>
+		<th>編集</th>
 	</tr>
 	<tr>
 	<?php
-		$cnt = 0;
-		$wk_id = "";
 
 		foreach($calendar as $key => $val){
-
-			echo "<td>".$val["day"]."<br>";
-			//日付一覧取得用 カンマ区切りで日付を全取得
-			if(empty($wk_id)){
-				$wk_id .= $val['day'];
-			}else if(!empty($val['day'])){
-				$wk_id .= ",".$val['day'];
-			}
+			$cnt = 0;
+			$cnt2 = 0;
+			echo "<td>".$val["day"]."</td>";
 			//0000-00-0型の日付を生成
 			$comp = $year."-".$month."-".$val['day'];
 			$cnt++;
 			//会社名取り出し
+			echo "<td>";
 			foreach($company as $val2){
 				//該当の日付と登録日が一致かつdateが空でなければ。
 				if(strtotime($comp) == strtotime($val2["date"]) && !empty($val2["date"])){
+					if($cnt2 > 0){
+						echo "</td>";
+						echo "<tr>";
+						echo "<td></td>";
+						echo "<td>";
+					}
 					echo "<a href='#' onClick='test(".$val2['matter_id'].");'  name='c_name'>".$val2["company_name"]."</a><br>";
+					echo "<td><input type='checkbox' name='del[]' value=".$val2['matter_id'].">";
+					echo "　　　<input type='button' onClick='del2(".$val2["matter_id"].");' value='削除'></td>";
+					$cnt2 += 1;
 				}
 			}
-
-			if($cnt == 7){
-				echo "</div></td></tr>";
-				$cnt = 0;
+			if($cnt2 == 0){
+				echo "<td></td>";
 			}
+			echo "</td></tr>";
+
 		}
 	?>
 </table>
 
-<div class="clear"></div>
+<div class="clear">
+<form action="week" name="form3" method="post">
+<input type="hidden" name="check3" value="1">
+<input type="button"  value="一括削除" id="delbtn" onClick="del();">
+</form>
+</div>
 
 
 </div><!-- /content -->
