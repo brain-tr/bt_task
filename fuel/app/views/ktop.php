@@ -30,9 +30,14 @@
 				<input type="submit" value="要求一覧" name="case_list"  style="WIDTH: 200px; HEIGHT: 70px">
 			</form>
 		</li>
-				<li>
+		<li>
 			<form action="/mlist" method="post" name="matter">
 				<input type="submit" value="対応一覧" name="matter_list"  style="WIDTH: 200px; HEIGHT: 70px">
+			</form>
+		</li>
+		<li>
+			<form action="/menu" method="post" name="menu">
+				<input type="submit" value="menu画面" name="menu"  style="WIDTH: 200px; HEIGHT: 70px">
 			</form>
 		</li>
 	</ul>

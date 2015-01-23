@@ -48,6 +48,11 @@
 			</form>
 		</li>
 	<?php }?>
+		<li>
+			<form action="/menu" method="post" name="menu">
+				<input type="submit" value="menu画面" name="menu"  style="WIDTH: 200px; HEIGHT: 70px">
+			</form>
+		</li>
 	<!--   -->
 	</ul>
 	</div>
