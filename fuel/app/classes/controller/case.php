@@ -29,11 +29,11 @@ class Controller_Case extends Controller
 		// POST
 		$post = Input::post();
 		$data['name']				= \Model\db_case::get_name();
- 		$data["msg"]				= empty($post["msg"])?"1": $post["msg"];
-		$data["check"]	=	empty($post["check"])? "" : $post["check"];
-		$data["check2"]	=	empty($post["check2"])? "" : $post["check2"];
+ 		$data["msg"]		=	empty($post["msg"])?"1": $post["msg"];
+		$data["check"]		=	empty($post["check"])? "" : $post["check"];
+		$data["check2"]		=	empty($post["check2"])? "" : $post["check2"];
 		$data["flag_id"]	=	empty($post["flag_id"])? "" : $post["flag_id"];
-		$data["sortbtn"]		=	empty($post["sortbtn"])	 ?"↑": $post["sortbtn"];
+		$data["sortbtn"]	=	empty($post["sortbtn"])	 ?"↑": $post["sortbtn"];
 		$data["updown"]		=	empty($post["updown"])?	"asc": $post["updown"];
 
 		// 削除（チェック = 3）
@@ -65,9 +65,9 @@ class Controller_Case extends Controller
 		$post = Input::post();
 		$data["new_name"]	=	empty($post["new_name"])? "" : $post["new_name"];
 		$data["new_color"]	=	empty($post["new_color"])? "" : $post["new_color"];
-		$data["check"]	=	empty($post["check"])? "" : $post["check"];
+		$data["check"]		=	empty($post["check"])? "" : $post["check"];
 		$data["flag_id"]	=	empty($post["flag_id"])? "" : $post["flag_id"];
- 		$data["msg"]				= empty($post["msg"])?"1": $post["msg"];
+ 		$data["msg"]		=	empty($post["msg"])?"1": $post["msg"];
 
  		// 登録（チェック = 1）
 		if($data["check"] == 1){

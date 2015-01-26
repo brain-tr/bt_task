@@ -71,6 +71,13 @@ table.tableStylex tr,th,td{
 #btn{
 	margin-left:600px;
 }
+input[type="button"].updown {
+	margin:0;
+	width:24px;
+	height:24px;
+	font-size:12px;
+	text-align:center;
+}
 </style>
 
 </head>
