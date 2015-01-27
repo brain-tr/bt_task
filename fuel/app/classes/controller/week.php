@@ -36,7 +36,7 @@ class Controller_Week extends Controller
 		$data["del"]		=	empty($post["del"])	?	"": $post["del"];
 		$data["msg"]	=	empty($post["msg"])?   "": $post["msg"];
 		$data["today"]	=	empty($post["today"])?   "": $post["today"];
-		$data["cnt_week"]	=	empty($post["cnt_week"])?   "": $post["cnt_week"];
+		$data["cnt_week"]	=	empty($post["cnt_week"])?   "0": $post["cnt_week"];
 		$data["weekchange"]	=	empty($post["weekchange"])?   "": $post["weekchange"];
 
 		//日付取得用の処理

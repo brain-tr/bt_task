@@ -6,15 +6,12 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
+msgcheck	= "<?php echo $msg; ?>";
 //昇順降順ボタン
-function sortbtn(){
-		var frm1 = document.createElement("form");
+function sortbtn(number){
+	if(number == 1){
 		var ipt1 = document.createElement("input");
 		var ipt2 = document.createElement("input");
-		var ipt3 = document.createElement("input");
-
-		frm1.action = "past";
-		frm1.method = "post";
 
 		ipt1.type = "hidden";
 		ipt1.name = "updown";
@@ -24,15 +21,61 @@ function sortbtn(){
 		ipt2.name = "check3";
 		ipt2.value = 1;
 
-		ipt3.type = "hidden";
-		ipt3.name = "list_id";
-		ipt3.value = <?php echo $list_id;?>;
+		document.form.appendChild(ipt1);
+		document.form.appendChild(ipt2);
+		document.form.submit();
+	}else if(number == 2){
+		var ipt3 = document.createElement("input");
+		var ipt4 = document.createElement("input");
 
-		frm1.appendChild(ipt1);
-		frm1.appendChild(ipt2);
-		frm1.appendChild(ipt3);
-		document.body.appendChild(frm1);
-		frm1.submit();
+		ipt3.type = "hidden";
+		ipt3.name = "updown2";
+		ipt3.value= "<?php echo $updown2; ?>";
+
+		ipt4.type = "hidden";
+		ipt4.name = "check3";
+		ipt4.value = 2;
+
+		document.form.appendChild(ipt3);
+		document.form.appendChild(ipt4);
+		document.form.submit();
+	}
+}
+//フラグ変更用サブウィンドウを開く。
+function upda(id){
+	var form  = document.createElement("form");
+	var input = document.createElement("input");
+	var input2= document.createElement("input");
+
+	form.action = "/matter/update";
+	form.method = "post";
+
+	input.type = "hidden";
+	input.name = "list_id";
+	input.value= id;
+
+	input2.type  = "hidden";
+	input2.name  = "flag";
+	input2.value = "1";
+
+	form.appendChild(input);
+	form.appendChild(input2);
+	document.body.appendChild(form);
+	form.submit();
+}
+//フラグ削除
+function del(matter_id){
+	Msg = "削除しますか？";
+	if(confirm(Msg)){
+	document.form.check.value = 3;
+	document.form.matter_id.value = matter_id;
+	form.method = "post";
+	form.submit();
+	}
+}
+//アラートメッセージ
+if(msgcheck != "1"){
+	alert(msgcheck);
 }
 </script>
 <style type="text/css">
@@ -110,7 +153,7 @@ span#com {
 			$flg = "両方";
 		}
 ?>
-<form action="past" method="post">
+<form action="past" method="post" name="form">
 <table class="tableStyley">
 	<tr>
 		<th>日付</th>
@@ -156,8 +199,8 @@ span#com {
 <input type="hidden" name="list_id" value=<?php echo $list_id;?>>
 <table class="tableStylex">
 <tr>
-<th>日付</th>
-<th>要求フラグ</th>
+<th>日付<input type='button' value=<?php echo $sortbtn;?> onClick='sortbtn(1);'></th>
+<th>要求フラグ<input type='button' value=<?php echo $sortbtn2;?> onClick='sortbtn(2);'></th>
 <th>対応者</th>
 <th>対応内容</th>
 <th>編集</th>
@@ -170,7 +213,11 @@ span#com {
 		echo "<td style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
 		echo "<td>".$val2["respone_name"]."</td>";
 		echo "<td>".$val2["content_text"]."</td>";
-		echo "<td>編集</td>";
+		echo "<td>";
+  		echo "<input type='button' value='変更' onClick=\"upda('".$val2["matter_id"]."')\">";
+ 		echo " / ";
+		echo "<input type='button' value='削除' onClick=del(".$val2["matter_id"].")>";
+		echo "</td>";
 		echo "</tr>";
 	}
 

@@ -301,14 +301,15 @@ class db_matter extends \Model {
 					b.name,
 					b.color_code,
 					a.respone_name,
-					a.content_text
+					a.content_text,
+					a.matter_id
 				from
 					k_matter a left join
 					k_case b
 				on
 					a.case_id = b.case_id
 				where
-					company_id = ".$data["c_id"]."
+					company_id = ".$data["company_id"]."
 				");
 				$result	=	$query->execute()->as_array();
 				return $result;
@@ -324,20 +325,62 @@ class db_matter extends \Model {
 					b.name,
 					b.color_code,
 					a.respone_name,
-					a.content_text
+					a.content_text,
+					a.matter_id
 				from
 					k_matter a left join
 					k_case b
 				on
 					a.case_id = b.case_id
 				where
-					company_id = ".$data["c_id"]."
+					company_id = ".$data["company_id"]."
 				order by
 					a.date ".$updown."
 				");
 				$result	=	$query->execute()->as_array();
 				return $result;
 	}
+
+	/*
+	 *	履歴要求ソート
+	*/
+	public static function past_sort2($data, $updown)
+	{
+		$query =\DB::query("
+				select
+					a.date,
+					b.name,
+					b.color_code,
+					a.respone_name,
+					a.content_text,
+					a.matter_id
+				from
+					k_matter a left join
+					k_case b
+				on
+					a.case_id = b.case_id
+				where
+					company_id = ".$data["company_id"]."
+				order by
+					b.case_id ".$updown."
+				");
+		$result	=	$query->execute()->as_array();
+		return $result;
+	}
+
+
+	/*
+	 *	履歴削除
+	*/
+	/*
+	 *	要求フラグを削除する
+	*/
+	public static function past_delete($data)
+ 	{
+ 		\DB::query("delete from k_matter where matter_id = ".$data["m_id"]."")
+		->execute();
+ 	}
+
 
 
 
