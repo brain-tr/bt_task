@@ -144,11 +144,10 @@ class Controller_Matter extends Controller
 		if($data["check2"]==1 && !empty($data["list_id"])){
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["list_id"]);
-			$data["company_id"]	=	$data["list_id"];
 		}
 
 		//履歴取り出し
-		$data["past"] = db_matter::get_past($data);
+		$data["past"]	=	db_matter::get_past($data);
 		$data["view"]	=	db_matter::get_matter($data["list_id"]);
 
 		//ソート
@@ -187,6 +186,66 @@ class Controller_Matter extends Controller
 		//セレクトボックス取り出し用
 		$data["select"]	=	db_case::get_name();
 		return view::forge('matter/past',$data);
+	}
+
+
+	/*
+	 *	顧客対応一覧画面（週表示）
+	*/
+	public function action_day()
+	{
+		//POST
+		$post = Input::post();
+		$data["check1"] =	empty($post["check1"])?"": $post["check1"];
+		$data["check2"] =	empty($post["check2"])?"": $post["check2"];
+		$data["check3"] =	empty($post["check3"])?"": $post["check3"];
+		$data["msg"]	=	empty($post["msg"])?   "": $post["msg"];
+		$data["search"]	=	empty($post["search"])?   "": $post["search"];
+		$data["person"]	=	empty($post["person"])?   "": $post["person"];
+		$data["delete"]	=	empty($post["delete"])?   "": $post["delete"];
+		$data["del"]		=	empty($post["del"])	?	"": $post["del"];
+		$data["day"]	=	empty($post["day"])?""	 : $post["day"];
+		$data["month"]	=	empty($post["month"])?""	 : $post["month"];
+		$data["year"]	=	empty($post["year"])?""	 : $post["year"];
+		$data["searchday"]	=	empty($post["searchday"])?   "": $post["searchday"];
+		$data["today"]	=	empty($post["today"])?   "": $post["today"];
+
+		//単体削除はできます。
+		if($data["check3"]==1){
+			//一括削除処理
+			if(!empty($data["del"])){
+				for($i=0; $i<count($data["del"]); $i++){
+					db_matter::daydel_matter($data["del"][$i]);
+				}
+				//削除ボタン 単体削除
+			}else if(!empty($data["delete"])){
+				db_matter::daydel_matter($data["delete"]);
+			}
+		}
+
+		//一覧から遷移してきた時の処理
+		if($data["check2"]==1 && !empty($data["day"])){
+			//表示用
+			$data["searchday"]  =	date("Y-m-d", mktime(0, 0, 0, $data["month"], $data["day"], $data["year"]));
+			$data["today"]		=	date("Y年m月d日", mktime(0, 0, 0, $data["month"], $data["day"], $data["year"]));
+		}
+
+		//会社名検索用表示
+		if($data["check1"] == 1 && !empty($data["search"])){
+			$data["company"] = db_matter::daysearch_list($data);
+			$data["msg"] = $data["search"];
+		}else if($data["check1"]==2 && !empty($data["person"]) && $data["person"] != '----'){
+			$data["company"] = db_matter::daysearch_person($data);
+		}else{
+			//初期表示
+			$data["company"] = db_matter::dayget_list($data);
+		}
+
+
+		//対応者セレクトボックス表示用
+		$data["respon"]	=	db_matter::get_respon();
+
+		return View::forge('matter/day',$data);
 	}
 
 

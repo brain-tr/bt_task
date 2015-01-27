@@ -7,10 +7,12 @@
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
 //変更用
-function test(id){
+id = <?php echo $list_id;?>;
+function test(company_id){
 	var form  = document.createElement("form");
 	var input = document.createElement("input");
 	var input2= document.createElement("input");
+	var input3= document.createElement("input");
 
 	form.action = "/matter/past";
 	form.method = "post";
@@ -23,8 +25,13 @@ function test(id){
 	input2.name  = "flag";
 	input2.value = "1";
 
+	input3.type = "hidden";
+	input3.name = "company_id";
+	input3.value= company_id;
+
 	form.appendChild(input);
 	form.appendChild(input2);
+	form.appendChild(input3);
 	document.body.appendChild(form);
 	form.submit();
 }
@@ -124,7 +131,7 @@ p#msg{
 		<th>特記事項</th>
 		<td><textarea id="nine" disabled><?php echo $val["special_text"]; ?></textarea></td>
 		<td></td>
-		<td><a href="#" onclick=test(<?php echo $list_id;?>)>履歴詳細はこちら</a></td>
+		<td><a href="#" onclick=test(<?php echo $val["company_id"];?>)>履歴詳細はこちら</a></td>
 	</tr>
 </table>
 <input type="hidden" id="ten" name="company_id" value="<?php echo $val["company_id"];?>">

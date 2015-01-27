@@ -382,6 +382,115 @@ class db_matter extends \Model {
  	}
 
 
+ 	//日表示画面
+ 	/*
+ 	 *  対応を削除する
+ 	*/
+ 	public static function dayget_matter($data)
+ 	{
+ 		return \DB::select('k_matter')->where('date',$data["searchday"])->execute()->as_array();
+ 	}
 
+ 	/*
+ 	 *	一覧表示用取得
+ 	*/
+ 	public static function dayget_list($data)
+ 	{
+ 		$query =\DB::query("
+				select
+		 			a.company_id,
+		 			matter_id,
+					company_name,
+					b.case_id,
+					date,
+					color_code
+				from
+					k_company a
+				left join
+					k_matter b
+				on
+					a.company_id = b.company_id
+				left join
+					k_case c
+				on
+					b.case_id = c.case_id
+				where
+					b.date = '".$data["searchday"]."'
+				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+
+ 	/*
+ 	 *	会社検索
+ 	*/
+ 	public static function daysearch_list($data)
+ 	{
+ 		$query =\DB::query("
+				select
+		 			a.company_id,
+		 			matter_id,
+					company_name,
+					b.case_id,
+					date,
+					color_code
+				from
+					k_company a
+				left join
+					k_matter b
+				on
+					a.company_id = b.company_id
+				left join
+					k_case c
+				on
+					b.case_id = c.case_id
+				where
+					b.date = '".$data["searchday"]."'
+				and
+					company_name = '".$data["search"]."'
+				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+ 	/*
+ 	 *	対応者検索
+ 	*/
+ 	public static function daysearch_person($data)
+ 	{
+ 		$query =\DB::query("
+				select
+		 			a.company_id,
+		 			matter_id,
+					company_name,
+					b.case_id,
+					date,
+					color_code
+				from
+					k_company a
+				left join
+					k_matter b
+				on
+					a.company_id = b.company_id
+				left join
+					k_case c
+				on
+					b.case_id = c.case_id
+				where
+					b.date = '".$data["searchday"]."'
+				and
+					b.respone_name = '".$data["person"]."'
+				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
+
+ 	/*
+ 	 *  対応を削除する
+ 	*/
+ 	public static function daydel_matter($matter_id)
+ 	{
+ 		\DB::delete('k_matter')->where('matter_id',$matter_id)->execute();
+
+ 	}
 
 }

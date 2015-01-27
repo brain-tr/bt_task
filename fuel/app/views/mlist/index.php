@@ -4,6 +4,8 @@
 <title>顧客管理システム | 顧客一覧</title>
 <link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
+month	= "<?php echo $month; ?>";
+year	= "<?php echo $year; ?>";
 //変更用
 function test(id){
 	var form  = document.createElement("form");
@@ -34,6 +36,40 @@ function sear(){
 function weekchange(check){
 	document.form3.check4.value = check;
 	document.form3.submit();
+}
+//日表示
+function daychange(day){
+	var form  = document.createElement("form");
+	var input = document.createElement("input");
+	var input2= document.createElement("input");
+	var input3= document.createElement("input");
+	var input4= document.createElement("input");
+
+	form.action = "matter/day";
+	form.method = "post";
+
+	input.type = "hidden";
+	input.name = "day";
+	input.value= day;
+
+	input2.type  = "hidden";
+	input2.name  = "check2";
+	input2.value = "1";
+
+	input3.type = "hidden";
+	input3.name = "month";
+	input3.value= month;
+
+	input4.type = "hidden";
+	input4.name = "year";
+	input4.value= year;
+
+	form.appendChild(input);
+	form.appendChild(input2);
+	form.appendChild(input3);
+	form.appendChild(input4);
+	document.body.appendChild(form);
+	form.submit();
 }
 </script>
 
@@ -171,7 +207,7 @@ span#com a{
 
 		foreach($calendar as $key => $val){
 
-			echo "<td>".$val["day"]."<br>";
+			echo "<td><a href='#' onClick='daychange(".$val["day"].");'>".$val["day"]."</a><br>";
 			//日付一覧取得用 カンマ区切りで日付を全取得
 			if(empty($wk_id)){
 				$wk_id .= $val['day'];
