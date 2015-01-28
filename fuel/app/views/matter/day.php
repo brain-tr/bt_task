@@ -53,64 +53,46 @@ function del2(matter_id){
 </script>
 
 <style type="text/css">
-table {
-    width: 500px;
-    border-collapse:collapse;
+table.tableStylex tr,th,td{
+	padding:15px;
+	text-align:center;
+    border: 1px solid #999;
+	text-decoration:none;
 }
-table th {
-    background: #EEEEEE;
-}
-table th,
-table td {
-    border: 1px solid grey;
+table.tableStylex th {
+    font-weight: bold;
+    border-bottom: 1px solid #999;
+    background-color: #FFE8EE;
+    color: #666;
+    vertical-align: middle;
     text-align: center;
-    padding: 15px;
 }
-#create{
-	margin-left:400px;
+table.tableStylex {
+	border-collapse: collapse;
+	border: 2px solid #999;
+	width: 700px;
 }
-
-span#one{
-	margin-left:220px;
-}
-
-span#two{
-	margin-left:326px;
-}
-
 span#big{
 	font-size:20px;
 }
-span#change{
-	margin-left:135px;
-}
-
-span#change3{
-	margin-left:290px;
-}
-span#change a,
-span#change3 a,
-span#change2 a{
-	font-size:20px;;
-}
-
-span#change a,
-span#change3 a,
-span#change2 a,
 span#com a{
 	text-decoration:none;
-}
-
-span#com a{
-	text-decoration:none;
-}
-span#com a{
 	color:white;
 }
 #delbtn{
-	margin-left:400px;
+	margin-left:632px;
 }
-
+div#resize {
+	width:700px;
+}
+div.floatbtn {
+	margin-left:300px;
+	float:right;
+}
+.change a{
+	font-size:20px;
+	text-decoration:none;
+}
 </style>
 
 </head>
@@ -129,21 +111,25 @@ span#com a{
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<input type="button" onClick="location.href='/matter/create'"  name="create" id="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px"><br>
-<form action="day" name="form1" method="post">
-<span id="one">顧客会社検索</span>
-<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
-<input type="button" name="flg1" onClick="sear();" value="検索">
-<input type="hidden" id="search" name="search" value="">
-<input type="hidden" name="check1" value="1">
-<input type="hidden" name="searchday" value=<?php echo $searchday;?>>
-<input type="hidden" name="today" value=<?php echo $today;?>>
-<input type="hidden" name="day" value=<?php echo $day;?>>
-</form>
-
-
+<div id="resize">
+<div class="floatbtn">
+	<input type="button" onClick="location.href='/matter/create'"  name="create" id="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px"><br>
+</div>
+<div class="floatbtn">
+	<form action="day" name="form1" method="post">
+		顧客会社検索
+		<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
+		<input type="button" name="flg1" onClick="sear();" value="検索">
+		<input type="hidden" id="search" name="search" value="">
+		<input type="hidden" name="check1" value="1">
+		<input type="hidden" name="searchday" value=<?php echo $searchday;?>>
+		<input type="hidden" name="today" value=<?php echo $today;?>>
+		<input type="hidden" name="day" value=<?php echo $day;?>>
+	</form>
+</div>
+<div class="floatbtn">
 <form action="day" name="form2" method="post">
-	<span id="two">対応者検索</span>
+	対応者検索
 	<select name="person">
 		<option>----</option>
 		<?php
@@ -158,50 +144,51 @@ span#com a{
 	<input type="hidden" name="day" value=<?php echo $day;?>>
 	<input type="submit" name="flg2" value="検索">
 </form>
-<form action="day" name="form3" method="post">
-<?php echo "<span id='big'>".$today."</span>"; ?>
-<span id="change3"><a href="/week">週</a></span>/
-<span id="change2"><a href="/mlist">月</a></span>
-<table>
-	<tr>
-		<th>日付</th>
-		<th>会社 / 用件</th>
-		<th>編集</th>
-	</tr>
-	<tr>
-	<?php
-
-		foreach($company as $key => $val){
-			$color = $val["color_code"];
-			echo "<tr>";
-			//最初の欄だけ日付入力
-			if($key == 0){
-				echo "<td>".$day."日</td>";
-			}else{
-				echo "<td></td>";
-			}
-			//会社名入力
-			echo "<td><span id='com'><a href='#' onClick='test(".$val['matter_id'].");'  name='c_name' style='background-color:$color'>".$val["company_name"]."</a></td>";
-			echo "<td><input type='checkbox' name='del[]' value=".$val['matter_id'].">";
-					echo "　　　<input type='button' onClick='del2(".$val["matter_id"].");' value='削除'></td>";
-			echo "</tr>";
-
-		}
-	?>
-</table>
-
-<div class="clear">
-<input type="hidden" name="check3" value="1">
-<input type="hidden" name="searchday" value=<?php echo $searchday;?>>
-<input type="hidden" name="today" value=<?php echo $today;?>>
-<input type="hidden" name="day" value=<?php echo $day;?>>
-<input type="button"  value="一括削除" id="delbtn" onClick="del();">
-</form>
 </div>
 
+<div  class="clear">
+	<?php echo "<span id='big'>".$today."</span>"; ?>
+	<div class="floatbtn change">
+		<a href="/week">週</a>/
+		<a href="/mlist">月</a>
+	</div>
+	<form action="day" name="form3" method="post">
+		<table class="tableStylex">
+			<tr>
+				<th>日付</th>
+				<th>会社 / 用件</th>
+				<th>編集</th>
+			</tr>
+			<tr>
+			<?php
+				foreach($company as $key => $val){
+					$color = $val["color_code"];
+					echo "<tr>";
+					//最初の欄だけ日付入力
+					if($key == 0){
+						echo "<td>".$day."日</td>";
+					}else{
+						echo "<td></td>";
+					}
+					//会社名入力
+					echo "<td><span id='com'><a href='#' onClick='test(".$val['matter_id'].");'  name='c_name' style='background-color:$color'>".$val["company_name"]."</a></td>";
+					echo "<td><input type='checkbox' name='del[]' value=".$val['matter_id'].">";
+					echo "　　　<input type='button' onClick='del2(".$val["matter_id"].");' value='削除'></td>";
+					echo "</tr>";
+				}
+			?>
+		</table>
+	<input type="hidden" name="check3" value="1">
+	<input type="hidden" name="searchday" value=<?php echo $searchday;?>>
+	<input type="hidden" name="today" value=<?php echo $today;?>>
+	<input type="hidden" name="day" value=<?php echo $day;?>>
+	<input type="button"  value="一括削除" id="delbtn" onClick="del();">
+</form>
+</div><!-- /clear -->
 
-</div><!-- /content -->
+</div><!-- /resize -->
 </div><!-- /contentIn -->
+</div><!-- /content -->
 
 <div id="side">
 	<ul class="navi">

@@ -74,63 +74,46 @@ function daychange(day){
 </script>
 
 <style type="text/css">
-table {
-    width: 500px;
-    border-collapse:collapse;
+table.tableStylex tr,th,td{
+	padding:15px;
+	text-align:center;
+    border: 1px solid #999;
+	text-decoration:none;
 }
-table th {
-    background: #EEEEEE;
-}
-table th,
-table td {
-    border: 1px solid grey;
+table.tableStylex th {
+    font-weight: bold;
+    border-bottom: 1px solid #999;
+    background-color: #FFE8EE;
+    color: #666;
+    vertical-align: middle;
     text-align: center;
-    padding: 15px;
 }
-#create{
-	margin-left:400px;
+table.tableStylex {
+	border-collapse: collapse;
+	border: 2px solid #999;
+	width: 700px;
 }
-
-span#one{
-	margin-left:210px;
-}
-
-span#two{
-	margin-left:300px;
-}
-
-span#big{
+span#big {
 	font-size:20px;
 }
-
-span#change{
-	margin-left:134px;
+div#resize {
+	width:700px;
 }
-
-span#change3{
-	margin-left:330px;
+div.floatbtn {
+	margin-left:300px;
+	float:right;
 }
-
-span#change a,
-span#change3 a,
-span#change2 a{
-	font-size:20px;;
-}
-
-span#change a,
-span#change3 a,
-span#change2 a,
-span#com a{
+.change a{
+	font-size:20px;
 	text-decoration:none;
 }
 span#com a{
-	color:white;
+	text-decoration:none;
+    color: #fff;
 }
-
-
-
-
-
+span#com2 a{
+	text-decoration:none;
+}
 </style>
 
 </head>
@@ -145,51 +128,60 @@ span#com a{
 </div><!-- /header -->
 </div><!-- /headerInner -->
 
-
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<input type="button" onClick="location.href='/matter/create'"  name="create" id="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px"><br>
-<span id="one">顧客会社検索</span>
-<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
-<input type="button" name="flg1" onClick="sear();" value="検索">
-<form action="mlist" name="form1" method="post">
-	<input type="hidden" id="search" name="search" value="">
-	<input type="hidden" name="check1" value="1">
-	<input type="hidden" name="check4" value=3>
-	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
-</form>
+<div id="resize">
+<div class="floatbtn">
+	<input type="button" onClick="location.href='/matter/create'"  name="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px">
+</div>
+<div class="floatbtn">
+	顧客会社検索
+	<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
+	<input type="button" name="flg1" onClick="sear();" value="検索">
+	<form action="mlist" name="form1" method="post">
+		<input type="hidden" id="search" name="search" value="">
+		<input type="hidden" name="check1" value="1">
+		<input type="hidden" name="check4" value=3>
+		<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
+	</form>
+</div>
+<div class="floatbtn">
+	<form action="mlist" name="form2" method="post">
+		対応者検索
+		<select name="respon">
+			<option>----</option>
+			<?php
+				foreach($respon as $key3=> $val3){
+					echo "<option value='".$val3['respone_name']."'>".$val3["respone_name"]."</option>";
+				}
+			?>
+		</select>
+		<input type="hidden" name="check2" value="1">
+		<input type="hidden" name="check4" value=3>
+		<input type="submit" name="flg2" value="検索">
+		<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
+	</form>
+</div>
 
-
-<form action="mlist" name="form2" method="post">
-	<span id="two">対応者検索</span>
-	<select name="respon">
-		<option>----</option>
-		<?php
-			foreach($respon as $key3=> $val3){
-				echo "<option value='".$val3['respone_name']."'>".$val3["respone_name"]."</option>";
-			}
-		?>
-	</select>
-	<input type="hidden" name="check2" value="1">
-	<input type="hidden" name="check4" value=3>
-	<input type="submit" name="flg2" value="検索">
-	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
-</form>
+<div  class="clear">
 <form action="mlist" name="form3" method="post">
-<input type="hidden" name="check4" value="1">
+	<?php echo "<span id='big'>本日：".$today."</span>"; ?>
+	<div class="floatbtn change">
+		<a href="#" onClick="weekchange(1);">先月</a>/
+		<a href="/mlist">今月</a>/
+		<a href="#" onClick="weekchange(2);">翌月</a>
+	</div>
+	<br />
+	<?php echo "<span id='big'>".$year."年".$month."月</span>"; ?>
+	<div class="floatbtn change">
+		<a href="/week">週</a>/
+		<a href="/mlist">月</a>
+	</div>
+	<input type="hidden" name="check4" value="1">
 	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
-<?php echo "<span id='big'>本日：".$today."</span>"; ?>
-<span id="change"><a href="#" onClick="weekchange(1);">先月</a></span>/
-<span id="change2"><a href="/mlist">今月</a></span>/
-<span id="change2"><a href="#" onClick="weekchange(2);">翌月</a></span>　
-<br />
-<?php echo "<span id='big'>".$year."年</span>"; ?>
-<?php echo "<span id='big'>".$month."月</span>"; ?>
-<span id="change3"><a href="/week">週</a></span>/
-<span id="change2"><a href="/mlist">月</a></span>
-<table>
+<table class="tableStylex">
 	<tr>
 		<th>日</th>
 		<th>月</th>
@@ -204,10 +196,8 @@ span#com a{
 		$cnt = 0;
 		$wk_id = "";
 		$color = "";
-
 		foreach($calendar as $key => $val){
-
-			echo "<td><a href='#' onClick='daychange(".$val["day"].");'>".$val["day"]."</a><br>";
+			echo "<td><span id='com2'><a href='#' onClick='daychange(".$val["day"].");'>".$val["day"]."</a></span><br>";
 			//日付一覧取得用 カンマ区切りで日付を全取得
 			if(empty($wk_id)){
 				$wk_id .= $val['day'];
@@ -228,7 +218,6 @@ span#com a{
 					}
 				}
 			}
-
 			if($cnt == 7){
 				echo "</div></td></tr>";
 				$cnt = 0;
@@ -236,12 +225,11 @@ span#com a{
 		}
 	?>
 </table>
+</div><!-- /clear -->
 
-<div class="clear"></div>
-
-
-</div><!-- /content -->
+</div><!-- /resize -->
 </div><!-- /contentIn -->
+</div><!-- /content -->
 
 <div id="side">
 	<ul class="navi">

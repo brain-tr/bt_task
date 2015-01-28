@@ -95,22 +95,40 @@ function msg(msg){
 
 <style type="text/css">
 table.tableStylex tr,th,td{
+    width: 750px;
 	padding:5px;
 	text-align:center;
+    border: 1px solid #999;
+	text-decoration:none;
 }
-
+#content table.tableStylex th {
+    font-weight: bold;
+    border-bottom: 1px solid #999;
+    background-color: #FFE8EE;
+    color: #666;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 93%;
+}
+table {
+   border-collapse: collapse;
+   border: 2px solid #999;
+}
 #delbtn{
-	margin-left:450px;
+	margin-left:632px;
 }
 
 #search{
-	margin-left:500px;
+	margin-left:498px;
 }
 
 #btn{
 	margin-left:600px;
 }
 
+span#com a{
+	text-decoration:none;
+}
 input[type="button"].updown {
 	margin:0;
 	width:24px;
@@ -140,7 +158,7 @@ input[type="button"].updown {
 <br>
 <form action="#" name="form1" id="search" method="post">
 	<input type="text" name="search" size="10">
-	<input type="submit" name="send" value="検索">
+	<input type="submit" id="searchbtn" name="send" value="検索">
 	<input type="hidden" name="check2" value="2">
 </form>
 
@@ -157,13 +175,13 @@ input[type="button"].updown {
 	);
 
 	echo "<tr>";
-	echo "<td>会社名<input type='button' name='updown1' class='updown' value='$msg' onClick='msg(1);'></td>";
-	echo "<td>客種<input type='button' name='updown2' class='updown' value='$msg2' onClick='msg(2);'></td>";
-	echo "<td>削除</td>";
+	echo "<th>会社名<input type='button' name='updown1' class='updown' value='$msg' onClick='msg(1);'></th>";
+	echo "<th>客種<input type='button' name='updown2' class='updown' value='$msg2' onClick='msg(2);'></th>";
+	echo "<th>削除</th>";
 
 	foreach($view as $key=> $val){
 		echo "<tr>";
-		echo "<td><a href='#' onClick='change(".$val['company_id'].");'  name='c_name'>".$val["company_name"]."</a></td>";
+		echo "<td><span id='com'><a href='#' onClick='change(".$val['company_id'].");'  name='c_name'>".$val["company_name"]."</a></span></td>";
 		echo "<td>".$select[$val["c_flag"]]."</td>";
 		echo "<td><input type='checkbox' name='del[]' value=".$val['company_id'].">　　　<input type='button' onClick='del2(".$val["company_id"].");' value='削除'></td>";
 		echo "<tr>";

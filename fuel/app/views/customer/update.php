@@ -6,50 +6,34 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
-var counter = 0;
 $(function(){
-		// "品目の追加"ボタンを押した場合の処理
-		$('#add').click(function(){
-			counter++;
-			// 品目入力欄を追加
-			if(counter ==1){
-				var new_list = '';
-				var new_list2 ='<li>顧客担当者名<br><input type="text" name="t_name[]" size="8"></li><li>TEL(顧客担当者)<br><input type="text" name="t_tel[]" size="8"></li>';
-				var new_list3 ='<li>Mail(顧客担当者)<br><input type="text" name="t_mail[]" size="8"></li>';
-				$('#list').append(new_list,new_list2,new_list3);
-			}else{
-				var new_list = '<br><br>';
-				var new_list2 ='<li><input type="text" name="t_name[]" size="8"></li><li><input type="text" name="t_tel[]" size="8"></li>';
-				var new_list3 ='<li><input type="text" name="t_mail[]" size="8"></li>';
-				$('#list').append(new_list,new_list2,new_list3);
-			}
+	// "品目の追加"ボタンを押した場合の処理
+	$('#add').click(function(){
+		// 品目入力欄を追加
+			var new_list = '<tr>';
+			var new_list2 ='<td><input type="text" name="t_name[]" size="8"></td><td><input type="text" name="t_tel[]" size="8"></td>';
+			var new_list3 ='<td><input type="text" name="t_mail[]" size="8"></td></tr>';
+			$('#list').append(new_list,new_list2,new_list3);
 
-		});
+	});
 });
 
 </script>
 <style type="text/css">
-ul#list li{
-	margin-left:5px;
-}
-
 p#big{
 	font-size:30px;
 	color:red;
 }
-
-
-
-table#style th{
-	background-color:#FFDDFF;
-	text-align:center;
-	height:40px;
-
+#content table.tableStyle {
+    border: 1px solid #999;
 }
-
-
-
-
+#thbtn {
+	float:left;
+}
+#add {
+	float:right;
+	margin-right:15px;
+}
 </style>
 
 </head>
@@ -83,83 +67,79 @@ table#style th{
 <form action="#" name="form1" id="form1" method="post">
 
 <br>
-<table id="style">
+<table class="tableStyle6">
 	<tr>
 		<th>客主</th>
-		<td>
+		<td colspan='2'>
 			<select name="flag">
 			<?php
-
 				echo "<option value='1' $selected1>案件</option>";
 				echo "<option value='2' $selected2>人材</option>";
 				echo "<option value='3' $selected3>両方</option>";
 			?>
 			</select>
 		</td>
-		<td>　</td>
-		<td>　</td>
 	<tr>
 	<tr>
 		<th>顧客会社名</th>
-		<td><input type="text" name="c_name" size="15" value="<?php echo $val["company_name"];?>"></td>
-		<td>　</td>
-		<td>　</td>
+		<td colspan='2'><input type="text" name="c_name" size="15" value="<?php echo $val["company_name"];?>"></td>
 	<tr>
 	<tr>
 		<th>顧客会社住所</th>
-		<td><input type="text" name="address"size="15" value="<?php echo $val["company_add"]; ?>"></td>
-		<td>　</td>
-		<td>　</td>
+		<td colspan='2'><input type="text" name="address"size="15" value="<?php echo $val["company_add"]; ?>"></td>
 	<tr>
 	<tr>
-		<th>TEL(請求担当)</th>
-		<td><input type="text" name="tel"size="10" value="<?php echo $val["company_tel"]; ?>"></td>
-		<th>Mail(請求担当)</th>
-		<td><input type="text" name="mail"size="10" value="<?php echo $val["company_mail"]; ?>"></td>
-
+		<th>
+			顧客会社<br/>
+			詳細情報
+		</th>
+		<td colspan='2'>
+			<table class="tableStyle">
+				<tr>
+					<th>TEL(請求担当)</th>
+					<th>Mail(請求担当)</th>
+				</tr>
+				<tr>
+					<td><input type="text" name="tel"size="10" value="<?php echo $val["company_tel"]; ?>"></td>
+					<td><input type="text" name="mail"size="10" value="<?php echo $val["company_mail"]; ?>"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 
-
-	<?php
+	<tr>
+		<th>
+			<span id="thbtn">
+				顧客担当者<br />
+				詳細情報<br />
+			</span>
+			<input type="button" name="any" value="追加" id="add"></th>
+		<td colspan='2'>
+		<table class="tableStyle" id="list">
+		<tr>
+			<th>顧客担当者名</th>
+			<th>TEL(顧客担当者)</th>
+			<th>Mail(顧客担当者)</th>
+		</tr>
+		<?php
 		foreach($customer as $key2 => $val2){
 			echo "<tr>";
-				echo "<th>顧客担当者名</th>";
-				echo "<td><input type='text' name='t_name[]'size='15' value=".$val2["name"]."></td>";
-				echo "<td>　</td>";
-				echo "<td>　</td>";
-			echo "</tr>";
-
-
-
-			echo "<tr>";
-				echo "<th>TEL(顧客担当者)</th>";
-				echo "<td><input type='text' name='t_tel[]'size='10' value=".$val2["tel"]."></td>";
-				echo "<th>Mail(顧客担当者)</th>";
-				echo "<td><input type='text' name='t_mail[]'size='10' value=".$val2["mail"]."></td>";
+				echo "<td><input type='text' name='t_name[]'size='8' value=".$val2["name"]."></td>";
+				echo "<td><input type='text' name='t_tel[]'size='8' value=".$val2["tel"]."></td>";
+				echo "<td><input type='text' name='t_mail[]'size='8' value=".$val2["mail"]."></td>";
 			echo "</tr>";
 		}
-	?>
-	<tr>
-		<th><input type="button" name="any" value="追加" id="add"></th>
-		<td class="wid">
-			<ul id="list">
-			</ul>
+		?>
+		</table>
 		</td>
-		<td>　</td>
-		<td>　</td>
-
 	</tr>
 	<tr>
 		<th>弊社担当者</th>
-		<td><input type="text" name="u_name"size="15" value="<?php echo $val["user_name"]; ?>"></td>
-		<td>　</td>
-		<td>　</td>
+		<td colspan='2'><input type="text" name="u_name"size="15" value="<?php echo $val["user_name"]; ?>"></td>
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td><textarea name="special" cols="14"><?php echo $val["special_text"]; ?></textarea>
-		<td>　</td>
-		<td>　</td>
+		<td colspan='2'><textarea name="special" cols="20"><?php echo $val["special_text"]; ?></textarea>
 	<tr>
 </table>
 <input type="hidden" name="check" value="2">

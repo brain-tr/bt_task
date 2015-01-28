@@ -72,15 +72,14 @@ class Controller_Week extends Controller
 			}
 		}
 
-		//注意：一括削除はまだできていません
-		//単体削除はできます。
+
 		if($data["check3"]==1){
 			//一括削除処理
 			if(!empty($data["del"])){
 				for($i=0; $i<count($data["del"]); $i++){
 					db_week::del_matter($data["del"][$i]);
 				}
-				//削除ボタン 単体削除
+			//削除ボタン 単体削除
 			}else if(!empty($data["delete"])){
 				db_week::del_matter($data["delete"]);
 			}

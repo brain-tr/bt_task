@@ -42,6 +42,15 @@ p#msg{
 	color:red;
 	font-size:30px;
 }
+#searchbtn {
+	margin:0px 5px;
+}
+.disabled {
+	background-color: #e0e0e0;
+}
+#content table.tableStyle {
+    border: 1px solid #999;
+}
 </style>
 
 </head>
@@ -73,64 +82,81 @@ p#msg{
 		}
 ?>
 <form action="update" method="post">
-<table>
+<br />
+<table class="tableStyle6">
 	<tr>
 		<th>日付</th>
-		<td><input type="text" name="date"  value="<?php echo $val['date']; ?>" size="6"></td>
-		<th>記入者:</th>
-		<td><?php echo $val['user_name']; ?></td>
+		<td colspan="3"><input type="text" name="date"  value="<?php echo $val['date']; ?>" size="6"></td>
+	</tr>
+	<tr>
+		<th>記入者</th>
+		<td colspan="3"><?php echo $val['user_name']; ?></td>
 	</tr>
 	<tr>
 		<th>顧客会社名</th>
-		<td><input type="text" id="one" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
-		<th>客種</th>
-		<td><input type="text" id="two" disabled size="1" value="<?php echo $flg; ?>"></td>
+		<td colspan="2"><input type="text" id="one" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
+		<td>客種:<input type="text" id="two" disabled size="1" value="<?php echo $flg; ?>"></td>
+	</tr>
+	<tr>
 		<th>要求フラグ</th>
-		<td>
+		<td colspan="3">
 			<select name="case">
 				<?php
 					foreach($select as $val2){
 						echo "<option value='".$val2['case_id']."'>".$val2["name"]."</option>";
-
 					}
 				?>
 			</select>
 		</td>
 	</tr>
-
 	<tr>
 		<th>対応者</th>
-		<td><input type="text" name="user" value="<?php echo $val["respone_name"];?>" size="10"></td>
+		<td colspan="3"><input type="text" name="user" value="<?php echo $val["respone_name"];?>" size="10"></td>
 	</tr>
 	<tr>
-		<td>対応内容</td>
-		<td><textarea name="detail"><?php echo $val["content_text"]; ?></textarea></td>
+		<th>対応内容</th>
+		<td colspan="3"><textarea name="detail"><?php echo $val["content_text"]; ?></textarea></td>
 	</tr>
 
 	<tr>
 		<th>住所</th>
-		<td><input type="text" id="three" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
+		<td colspan="3"><input type="text" id="three" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
 	</tr>
 	<tr>
-		<th>TEL</th>
-		<td><input type="text" id="four" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
-		<th>Mail</th>
-		<td><input type="text" id="five" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
+		<th>顧客会社<br />詳細情報</th>
+		<td colspan="3">
+			<table class="tableStyle">
+				<tr>
+					<th>TEL(請求担当)</th>
+					<th>Mail(請求担当)</th>
+				</tr>
+				<tr>
+					<td><input type="text" id="four" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
+					<td><input type="text" id="five" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 	<tr>
-		<th>顧客担当者名</th>
-		<td><input type="text" id="six" disabled size="10" value="<?php echo $val["name"];?>"></td>
-	</tr>
-	<tr>
-		<th>担当者Tel</th>
-		<td><input type="text" id="seven" disabled size="10" value="<?php echo $val["tel"];?>"></td>
-		<th>担当者Mail</th>
-		<td><input type="text" id="eight" disabled size="10" value="<?php echo $val["mail"];?>"></td>
+		<th>顧客担当者<br />詳細情報</th>
+		<td colspan="3">
+			<table class="tableStyle">
+				<tr>
+					<th>顧客担当者名</th>
+					<th>TEL(顧客担当者)</th>
+					<th>Mail(顧客担当者)</th>
+				</tr>
+				<tr>
+					<td><input type="text" id="six" disabled size="10" value="<?php echo $val["name"];?>"></td>
+					<td><input type="text" id="seven" disabled size="10" value="<?php echo $val["tel"];?>"></td>
+					<td><input type="text" id="eight" disabled size="10" value="<?php echo $val["mail"];?>"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td><textarea id="nine" disabled><?php echo $val["special_text"]; ?></textarea></td>
-		<td></td>
+		<td colspan="2"><textarea id="nine" disabled cols="20"><?php echo $val["special_text"]; ?></textarea></td>
 		<td><a href="#" onclick=test(<?php echo $val["company_id"];?>)>履歴詳細はこちら</a></td>
 	</tr>
 </table>

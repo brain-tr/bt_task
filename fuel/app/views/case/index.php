@@ -63,13 +63,19 @@ if(msgcheck != "1"){
 }
 </script>
 <style type="text/css">
+table.tableStylex {
+    width: 400px;
+    margin:5px 150px;
+}
 table.tableStylex tr,th,td{
 	padding:5px;
 	width:50px;
+    border: 2px dotted #999;
+    border-left: 2px solid #999;
 	text-align:center;
 }
 #btn{
-	margin-left:600px;
+	margin-left:450px;
 }
 input[type="button"].updown {
 	margin:0;
@@ -77,6 +83,18 @@ input[type="button"].updown {
 	height:24px;
 	font-size:12px;
 	text-align:center;
+}
+#content table.tableStylex th {
+    font-weight: bold;
+    color: #666;
+    border-bottom: 2px solid #999;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 93%;
+}
+table {
+   border-collapse: collapse;
+   border: 2px solid #999;
 }
 </style>
 
@@ -100,8 +118,8 @@ input[type="button"].updown {
 <form action="case" method="post" name="form" style="clear:both;">
 <table border="1" class="tableStylex">
 <tr>
-<td>要求名<input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></td>
-<td>編集</td>
+<th>要求名<input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></th>
+<th>編集</th>
 </tr>
 <?php
 	foreach($name as $key => $val){
