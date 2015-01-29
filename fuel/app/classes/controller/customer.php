@@ -42,7 +42,9 @@ class Controller_Customer extends Controller
  		$data["id"]					= empty($post["id"])? ""     : $post["id"];
  		$data["msg"]				= empty($post["msg"])?""     : $post["msg"];
 
-		if($data["check"]==1 && !empty($data["c_name"])){
+ 		if($data["check"]==1 && empty($data["c_name"])){
+ 			$data["msg"] = "顧客会社名を入力してください。";
+ 		}else if($data["check"]==1 && !empty($data["c_name"])){
 			$checkName = db_customer::check_company($data);
 			if(empty($checkName)){
 				$id = db_customer::ins_company($data);
@@ -52,12 +54,13 @@ class Controller_Customer extends Controller
 				}
 
 				//担当者情報を入力
- 				if(!empty($data["id"]) && !empty($data["t_name"][0])){
+ 				if(!empty($data["id"])){
  					//入力された回数文顧客担当者情報をinsertするための処理
  					for($i=0; $i<count($data["t_name"]);$i++){
- 						db_customer::ins_customer($data["id"],$data["t_name"][$i],$data["t_tel"][$i],$data["t_mail"][$i]);
+ 						if(!empty($data["t_name"][$i])){
+ 							db_customer::ins_customer($data["id"],$data["t_name"][$i],$data["t_tel"][$i],$data["t_mail"][$i]);
+ 						}
  					}
-
 				}
 			}else{
 				$data["msg"] = "既に登録されています。";
@@ -83,24 +86,22 @@ class Controller_Customer extends Controller
 		$data["special"]			= empty($post["special"]) ? "" : $post["special"];
 		$data["check"]				= empty($post["check"]) ? "" : $post["check"];
 		$data["company_id"]			= empty($post["company_id"])?"": $post["company_id"];
+ 		$data["msg"]				= empty($post["msg"])?""     : $post["msg"];
 		//一覧から受け取り用
 		$data["c_id"]				= empty($post["c_id"])? "" : $post["c_id"];
 
 
-
-		if($data["check"] == 2 && !empty($data["c_name"])){
+		if($data["check"] == 2 && empty($data["c_name"])){
+			$data["msg"] = "顧客会社名を入力してください。";
+		}else if($data["check"] == 2 && !empty($data["c_name"])){
 			db_customer::upd_company($data);
 			db_customer::del_customer($data["company_id"]);
 			for($i=0; $i<count($data["t_name"]);$i++){
-				db_customer::upd_customer($data["company_id"],$data["t_name"][$i],$data["t_tel"][$i],$data["t_mail"][$i]);
+ 				if(!empty($data["t_name"][$i])){
+					db_customer::upd_customer($data["company_id"],$data["t_name"][$i],$data["t_tel"][$i],$data["t_mail"][$i]);
+ 				}
 			}
-
 		}
-
-
-
-
-
 		$data["company"]	=	db_customer::get_company($data["c_id"],$data["company_id"]);
 		$data["customer"]	=	db_customer::get_customer($data["c_id"],$data["company_id"]);
 		return view::forge('customer/update',$data);

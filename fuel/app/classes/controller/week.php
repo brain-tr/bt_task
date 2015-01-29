@@ -46,32 +46,33 @@ class Controller_Week extends Controller
 		$data["week"]	= date('d');
 		// 基準日付
 		$tday	= date("Y-m-d");
+		$tday_y	= date("Y");
+		$tday_m	= date("m");
+		$tday_d	= date("d");
 		$data["calendar"]	= array();
 		//先週表示
 		if($data["check4"]==1){
 			$data["cnt_week"]  += 1;
-			$data["year"]	= date('Y', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
-			$data["month"]	= date('m', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
-			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"]*7, 0, substr($tday,0,4)));
-			$data["week"]	= date('d', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
 		//翌週表示
 		}else if($data["check4"]==2){
 			$data["cnt_week"]  -= 1;
-			$data["year"]	= date('Y', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
-			$data["month"]	= date('m', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
-			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2), substr($tday,7,2)-$data["cnt_week"]*7, substr($tday,0,4)));
-			$data["week"]	= date('d', mktime(0, 0, 0, $data["month"], $data["week"]-$data["cnt_week"]*7, $data["year"]));
 		}
+		$data["year"]	= date('Y', mktime(0, 0, 0, $tday_m, $tday_d-$data["cnt_week"]*7, $tday_y));
+		$data["month"]	= date('m', mktime(0, 0, 0, $tday_m, $tday_d-$data["cnt_week"]*7, $tday_y));
+		$data["lastday"] = date('t', mktime(0, 0, 0, $tday_m, $tday_d-$data["cnt_week"]*7, $tday_y));
+		$data["week"]	= date('d', mktime(0, 0, 0, $tday_m, $tday_d-$data["cnt_week"]*7, $tday_y));
+		//日付を入れる作業
 		$cnt	= 1;
 		for($i=0; $i< 7; $i++){
+			//最終日までは日にちをそのまま入力
 			if($data["week"] + $i <= $data["lastday"]){
 				$data["calendar"][$i]['day'] = $data["week"] + $i;
+			//最終日を過ぎるとカウンターで日にちを入力
 			}else{
 				$data["calendar"][$i]['day'] = $cnt;
 				$cnt += 1;
 			}
 		}
-
 
 		if($data["check3"]==1){
 			//一括削除処理
@@ -95,11 +96,6 @@ class Controller_Week extends Controller
 			//初期表示
 			$data["company"] = db_matter::get_list();
 		}
-
-
-
-
-
 
 		//対応者セレクトボックス表示用
 		$data["respon"]	=	db_matter::get_respon();

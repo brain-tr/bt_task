@@ -30,6 +30,7 @@
 			form.method = "post";
 			form.submit();
 			window.opener.location.reload();
+            window.close();
         }
     }
 	// カラーピッカー

@@ -92,7 +92,7 @@ div.floatbtn {
 }
 span#com a{
 	text-decoration:none;
-    color: #fff;
+    color: #000;
 }
 #delbtn {
 	margin-left:632px;

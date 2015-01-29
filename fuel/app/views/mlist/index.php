@@ -109,7 +109,7 @@ div.floatbtn {
 }
 span#com a{
 	text-decoration:none;
-    color: #fff;
+    color: #000;
 }
 span#com2 a{
 	text-decoration:none;
@@ -194,16 +194,8 @@ span#com2 a{
 	<tr>
 	<?php
 		$cnt = 0;
-		$wk_id = "";
-		$color = "";
 		foreach($calendar as $key => $val){
 			echo "<td><span id='com2'><a href='#' onClick='daychange(".$val["day"].");'>".$val["day"]."</a></span><br>";
-			//日付一覧取得用 カンマ区切りで日付を全取得
-			if(empty($wk_id)){
-				$wk_id .= $val['day'];
-			}else if(!empty($val['day'])){
-				$wk_id .= ",".$val['day'];
-			}
 			//日付を生成
 			$comp = $year."-".$month."-".$val['day'];
 			$cnt++;

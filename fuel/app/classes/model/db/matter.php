@@ -117,6 +117,7 @@ class db_matter extends \Model {
 					content_text,
 					date,
 					c.user_id,
+					c.case_id,
 					d.name as user_name
 				from
 					k_company a left join k_customer b
@@ -132,7 +133,6 @@ class db_matter extends \Model {
 					c.user_id = d.user_id
 				where
 					matter_id = $matter
-
 				group by
 					company_name;
 				");

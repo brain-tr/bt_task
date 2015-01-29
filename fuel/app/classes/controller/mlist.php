@@ -44,24 +44,29 @@ class Controller_Mlist extends Controller
 		$data["lastday"]= date('t');
 		// 基準日付
 		$tday	= date("Y-m-d");
+		$tday_y	= date("Y");
+		$tday_m	= date("m");
+		$tday_d	= date("d");
 		$data["calendar"]	= array();
-		//先週表示
+		//先月表示
 		if($data["check4"]==1){
 			$data["cnt_week"]  += 1;
-			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-		//翌週表示
+			$data["year"]	= date('Y', mktime(0, 0, 0, $tday_m-$data["cnt_week"], 1, substr($tday,0,4)));
+			$data["month"]	= date('m', mktime(0, 0, 0, $tday_m-$data["cnt_week"], 1, substr($tday,0,4)));
+			$data["lastday"] = date('t', mktime(0, 0, 0, $tday_m-$data["cnt_week"], 1, substr($tday,0,4)));
+		//翌月表示
 		}else if($data["check4"]==2){
 			$data["cnt_week"]  -= 1;
-			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["year"]	= date('Y', mktime(0, 0, 0, $tday_m-$data["cnt_week"], 1, $tday_y));
+			$data["month"]	= date('m', mktime(0, 0, 0, $tday_m-$data["cnt_week"], 1, $tday_y));
+			$data["lastday"] = date('t', mktime(0, 0, 0, $tday_m-$data["cnt_week"], 1, $tday_y));
+		//対応者検索で月を固定させておく場合
 		}else if($data["check4"]==3){
-			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
-			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], substr($tday,8,2), substr($tday,0,4)));
+			$data["year"]	= date('Y', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], 1, substr($tday,0,4)));
+			$data["month"]	= date('m', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], 1, substr($tday,0,4)));
+			$data["lastday"] = date('t', mktime(0, 0, 0, substr($tday,5,2)-$data["cnt_week"], 1, substr($tday,0,4)));
 		}
+		//カレンダーに空白をいれる作業
 		$cnt	=0;
 		for($i=1; $i<$data["lastday"]+1; $i++){
 			$week = date('w', mktime(0, 0, 0, $data["month"], $i, $data["year"]));

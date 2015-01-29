@@ -1,5 +1,6 @@
 <?php
 use \Model\Db_matter;
+use \Model\db_customer;
 use \Model\Loginout;
 use \Model\Workbench;
 use Model\db_case;
@@ -37,11 +38,15 @@ class Controller_Matter extends Controller
 		$data["msg"]	=	empty($post["msg"])		?  "": $post["msg"];
 		$data["case"]	=	empty($post["case"])	?  "": $post["case"];
 
+		$hyphen1 = substr($data["date"], 4, 1);
+		$hyphen2 = substr($data["date"], 7, 1);
 		if($data["check"]==1 && empty($data["user"])){
 			$data["msg"]	=	"対応者名は必須項目です。";
 		}else if($data["check"]==1 && empty($data["c_id"])){
 			$data["msg"] = "顧客会社を選択してください。";
-		}else if($data["check"]==1 && !empty($data["user"]) && !empty($data["c_id"])){
+		}else if($data["check"]==1 && ($hyphen1 != "-" || $hyphen2 != "-")){
+			$data["msg"] = "日付は「年-月-日」のハイフン付きで入力してください。";
+		}else if($data["check"]==1 && !empty($data["user"]) && !empty($data["c_id"]) && $hyphen1 == "-" && $hyphen2 == "-"){
 			$check	=	db_matter::check_matter($data);
 			if(empty($check)){
 				db_matter::ins_matter($data);
@@ -92,21 +97,32 @@ class Controller_Matter extends Controller
 		$data["list_id"]=	empty($post["list_id"])?   "": $post["list_id"];
 		$data["check2"] =	empty($post["flag"])?	   "": $post["flag"];
 		$data["case"]	=	empty($post["case"])?	   "": $post["case"];
+		$data["msg"]	=	empty($post["msg"])		?  "": $post["msg"];
 
 		//一覧から遷移してきた時の処理
 		if($data["check2"]==1 && !empty($data["list_id"])){
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["list_id"]);
+			$data["c_id"]	=	$data["view"][0]["company_id"];
 		}
 
+		$hyphen1 = substr($data["date"], 4, 1);
+		$hyphen2 = substr($data["date"], 7, 1);
 		//変更した時の処理
-		if($data["check"]==1 && !empty($data["user"])){
+		if($data["check"]==1 && empty($data["user"])){
+			$data["msg"]	=	"対応者名は必須項目です。";
+			$data["view"]	=	db_matter::get_matter($data["m_id"]);
+		}else if($data["check"]==1 && ($hyphen1 != "-" || $hyphen2 != "-")){
+			$data["msg"] = "日付は「年-月-日」のハイフン付きで入力してください。";
+			$data["view"]	=	db_matter::get_matter($data["m_id"]);
+		}else if($data["check"]==1 && !empty($data["user"]) && $hyphen1 == "-" && $hyphen2 == "-"){
 			db_matter::upd_matter($data);
 			db_matter::ins_updated($data);
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["m_id"]);
 		}
-
+		//顧客会社担当者一覧取得
+		$data["customer"]	=	db_customer::get_customer($data["c_id"],$data["c_id"]);
 		//セレクトボックス取り出し用
 		$data["select"]	=	db_case::get_name();
 		return view::forge('matter/update',$data);
@@ -144,6 +160,7 @@ class Controller_Matter extends Controller
 		if($data["check2"]==1 && !empty($data["list_id"])){
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["list_id"]);
+			$data["c_id"]	=	$data["view"][0]["company_id"];
 		}
 
 		//履歴取り出し
@@ -182,6 +199,8 @@ class Controller_Matter extends Controller
 			$data["msg"] = "削除しました。";
 			$data['past'] = db_matter::get_past($data);
 		}
+		//顧客会社担当者一覧取得
+		$data["customer"]	=	db_customer::get_customer($data["c_id"], $data["c_id"]);
 
 		//セレクトボックス取り出し用
 		$data["select"]	=	db_case::get_name();

@@ -35,7 +35,9 @@ function test(company_id){
 	document.body.appendChild(form);
 	form.submit();
 }
-
+function change(){
+	form1.submit();
+}
 </script>
 <style type="text/css">
 p#msg{
@@ -50,6 +52,9 @@ p#msg{
 }
 #content table.tableStyle {
     border: 1px solid #999;
+}
+#content table.tableStyle6 {
+	width:700px;
 }
 </style>
 
@@ -81,8 +86,8 @@ p#msg{
 			$flg = "両方";
 		}
 ?>
-<form action="update" method="post">
-<br />
+<form action="update" method="post" name="form1">
+<p id="msg"><?php echo $msg; ?></p><br />
 <table class="tableStyle6">
 	<tr>
 		<th>日付</th>
@@ -94,16 +99,20 @@ p#msg{
 	</tr>
 	<tr>
 		<th>顧客会社名</th>
-		<td colspan="2"><input type="text" id="one" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
-		<td>客種:<input type="text" id="two" disabled size="1" value="<?php echo $flg; ?>"></td>
+		<td colspan="2"><input type="text" id="one" class="disabled" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
+		<td>客種:<input type="text" id="two" class="disabled" disabled size="1" value="<?php echo $flg; ?>"></td>
 	</tr>
 	<tr>
 		<th>要求フラグ</th>
 		<td colspan="3">
 			<select name="case">
 				<?php
-					foreach($select as $val2){
-						echo "<option value='".$val2['case_id']."'>".$val2["name"]."</option>";
+					foreach($select as $key2=>$val2){
+						if($val["case_id"] == $val2["case_id"]){
+							echo "<option value='".$val2['case_id']."' selected>".$val2["name"]."</option>";
+						}else{
+							echo "<option value='".$val2['case_id']."'>".$val2["name"]."</option>";
+						}
 					}
 				?>
 			</select>
@@ -120,7 +129,7 @@ p#msg{
 
 	<tr>
 		<th>住所</th>
-		<td colspan="3"><input type="text" id="three" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
+		<td colspan="3"><input type="text" id="three" class="disabled" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
 	</tr>
 	<tr>
 		<th>顧客会社<br />詳細情報</th>
@@ -131,8 +140,8 @@ p#msg{
 					<th>Mail(請求担当)</th>
 				</tr>
 				<tr>
-					<td><input type="text" id="four" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
-					<td><input type="text" id="five" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
+					<td><input type="text" id="four" class="disabled" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
+					<td><input type="text" id="five" class="disabled" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
 				</tr>
 			</table>
 		</td>
@@ -146,25 +155,29 @@ p#msg{
 					<th>TEL(顧客担当者)</th>
 					<th>Mail(顧客担当者)</th>
 				</tr>
-				<tr>
-					<td><input type="text" id="six" disabled size="10" value="<?php echo $val["name"];?>"></td>
-					<td><input type="text" id="seven" disabled size="10" value="<?php echo $val["tel"];?>"></td>
-					<td><input type="text" id="eight" disabled size="10" value="<?php echo $val["mail"];?>"></td>
-				</tr>
+				<?php
+					foreach($customer as $key3 => $val3){
+						echo "<tr>";
+							echo "<td><input type='text' id='six' class='disabled' disabled size='8' value='".$val3["name"]."'></td>";
+							echo "<td><input type='text' id='seven' class='disabled' disabled size='8' value=".$val3["tel"]."></td>";
+							echo "<td><input type='text' id='eight' class='disabled' disabled size='8' value='".$val3["mail"]."'></td>";
+						echo "</tr>";
+					}
+				?>
 			</table>
 		</td>
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan="2"><textarea id="nine" disabled cols="20"><?php echo $val["special_text"]; ?></textarea></td>
-		<td><a href="#" onclick=test(<?php echo $val["company_id"];?>)>履歴詳細はこちら</a></td>
+		<td colspan="3"><textarea id="nine" class="disabled" disabled cols="20"><?php echo $val["special_text"]; ?></textarea></td>
 	</tr>
 </table>
 <input type="hidden" id="ten" name="company_id" value="<?php echo $val["company_id"];?>">
 <input type="hidden" name="matter_id" value="<?php echo $val["matter_id"]; ?>">
 <input type="hidden" name="check" value="1">
 <input type="hidden" name="list_id" value=<?php echo $list_id;?>>
-<p class="btnSpace"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_update.png" alt="変更する" /></button></p>
+<p class="btnSpace"><a href="#" onclick=change()><img src="/assets/img/common/btn_update.png" alt="変更する" /></a>
+<a href="#" onclick=test(<?php echo $val["company_id"];?>)><img src="/assets/img/common/btn_past.png" alt="履歴一覧" /></a></p>
 
 </form>
 </div><!-- /contentIn -->

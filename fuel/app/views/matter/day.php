@@ -77,7 +77,7 @@ span#big{
 }
 span#com a{
 	text-decoration:none;
-	color:white;
+	color: #000;
 }
 #delbtn{
 	margin-left:632px;

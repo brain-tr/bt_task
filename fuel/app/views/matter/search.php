@@ -79,7 +79,7 @@ table.tableStylex td a{
 			if($key % 2 == 0){
 				echo "<tr>";
 			}
-			echo "<td><a href=javascript:setFormInput('".$val["company_name"].",".$val["c_flag"].",".$val["company_add"].",".$val["company_tel"].",".$val["company_mail"].",".$val["name"].",".$val["tel"].",".$val["mail"].",".$val["special_text"].",".$val["company_id"]."');>".$val['company_name']."</a></td>";
+			echo "<td><a href=\"javascript:setFormInput('".$val["company_name"].",".$val["c_flag"].",".$val["company_add"].",".$val["company_tel"].",".$val["company_mail"].",".$val["name"].",".$val["tel"].",".$val["mail"].",".$val["special_text"].",".$val["company_id"]."');\">".$val['company_name']."</a></td>";
 			if($key % 2 == 1 || $key == count($name)){
 				echo "</tr>";
 			}

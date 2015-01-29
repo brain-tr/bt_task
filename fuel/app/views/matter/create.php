@@ -24,6 +24,10 @@ p#msg{
 #content table.tableStyle {
     border: 1px solid #999;
 }
+
+#content table.tableStyle6 {
+	width:700px;
+}
 </style>
 </head>
 
@@ -45,7 +49,7 @@ p#msg{
 <table class="tableStyle6">
 	<tr>
 		<th>日付</th>
-		<td colspan="3"><input type="text" name="date"  value="<?php echo date("Y-m-d"); ?>" size="6"></td>
+		<td colspan="3"><input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" size="6"></td>
 	</tr>
 	<tr>
 		<th>記入者</th>

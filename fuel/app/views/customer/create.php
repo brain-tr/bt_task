@@ -33,6 +33,9 @@ p#big{
 	float:right;
 	margin-right:15px;
 }
+#content table.tableStyle6 {
+	width:700px;
+}
 </style>
 
 </head>

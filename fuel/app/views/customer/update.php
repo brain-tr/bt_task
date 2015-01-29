@@ -34,6 +34,9 @@ p#big{
 	float:right;
 	margin-right:15px;
 }
+#content table.tableStyle6 {
+	width:700px;
+}
 </style>
 
 </head>
@@ -65,8 +68,7 @@ p#big{
 		}
 ?>
 <form action="#" name="form1" id="form1" method="post">
-
-<br>
+<p id="big"><?php echo $msg; ?></p><br />
 <table class="tableStyle6">
 	<tr>
 		<th>客主</th>

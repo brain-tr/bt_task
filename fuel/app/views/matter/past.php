@@ -77,6 +77,39 @@ function del(matter_id){
 if(msgcheck != "1"){
 	alert(msgcheck);
 }
+
+jQuery(function($) {
+    $('.textOverflowTest3').each(function() {
+        var $target = $(this);
+
+        // オリジナルの文章を取得する
+        var html = $target.html();
+
+        // 対象の要素を、高さにautoを指定し非表示で複製する
+        var $clone = $target.clone();
+        $clone
+            .css({
+                display: 'none',
+                position : 'absolute',
+                overflow : 'visible'
+            })
+            .width($target.width())
+            .height('auto');
+
+        // DOMを一旦追加
+        $target.after($clone);
+
+        // 指定した高さになるまで、1文字ずつ消去していく
+        while((html.length > 0) && ($clone.height() > $target.height())) {
+            html = html.substr(0, html.length - 1);
+            $clone.html(html + "...");
+        }
+
+        // 文章を入れ替えて、複製した要素を削除する
+        $target.html($clone.html());
+        $clone.remove();
+    });
+});
 </script>
 <style type="text/css">
 p#msg{
@@ -87,13 +120,13 @@ table.tableStyley{
 	margin-top:40px;
 }
 table.tableStylex{
+	width:700px;
 	border: 2px solid #999;
 	margin-top:20px;
 }
 table.tableStylex td,
 table.tableStylex th {
 	text-align:center;
-	width:193px;
 	padding: 5px 10px;
 	border-left: 1px dotted #999;
 	border-bottom: 1px solid #999;
@@ -117,11 +150,28 @@ table.tableStylex td {
 table.tableStylex td a{
 	text-decoration: none;
 }
+#content table.tableStyle {
+    border: 1px solid #999;
+}
+#content table.tableStyle6 {
+	width:700px;
+}
 span#com {
 	text-decoration:none;
 }
 span#com {
-	color:white;
+	color: #000;
+}
+/* overflow:hidden、heightは必ず指定する */
+.textOverflowTest3 {
+    overflow: hidden;
+    padding: 10px;
+    width: 200px;
+    height: 24px;
+}
+
+.disabled {
+	background-color: #e0e0e0;
 }
 </style>
 
@@ -154,43 +204,56 @@ span#com {
 		}
 ?>
 <form action="past" method="post" name="form">
-<table class="tableStyley">
-	<tr>
-		<th>日付</th>
-		<td><input type="text" name="date" disabled value="<?php echo $val['date']; ?>" size="6"></td>
-		<th>記入者:</th>
-		<td><?php echo $val['user_name']; ?></td>
-	</tr>
+<br />
+<table class="tableStyle6">
 	<tr>
 		<th>顧客会社名</th>
-		<td><input type="text" id="one" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
-		<th>客種</th>
-		<td><input type="text" id="two" disabled size="1" value="<?php echo $flg; ?>"></td>
+		<td colspan="2"><input type="text" id="one" class="disabled" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
+		<td>客種:<input type="text" id="two" class="disabled" disabled size="1" value="<?php echo $flg; ?>"></td>
 	</tr>
-
 	<tr>
 		<th>住所</th>
-		<td><input type="text" id="three" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
+		<td colspan="3"><input type="text" id="three" class="disabled" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
 	</tr>
 	<tr>
-		<th>TEL</th>
-		<td><input type="text" id="four" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
-		<th>Mail</th>
-		<td><input type="text" id="five" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
+		<th>顧客会社<br />詳細情報</th>
+		<td colspan="3">
+			<table class="tableStyle">
+				<tr>
+					<th>TEL(請求担当)</th>
+					<th>Mail(請求担当)</th>
+				</tr>
+				<tr>
+					<td><input type="text" id="four" class="disabled" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
+					<td><input type="text" id="five" class="disabled" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 	<tr>
-		<th>顧客担当者名</th>
-		<td><input type="text" id="six" disabled size="10" value="<?php echo $val["name"];?>"></td>
-	</tr>
-	<tr>
-		<th>担当者Tel</th>
-		<td><input type="text" id="seven" disabled size="10" value="<?php echo $val["tel"];?>"></td>
-		<th>担当者Mail</th>
-		<td><input type="text" id="eight" disabled size="10" value="<?php echo $val["mail"];?>"></td>
+		<th>顧客担当者<br />詳細情報</th>
+		<td colspan="3">
+			<table class="tableStyle">
+				<tr>
+					<th>顧客担当者名</th>
+					<th>TEL(顧客担当者)</th>
+					<th>Mail(顧客担当者)</th>
+				</tr>
+				<?php
+					foreach($customer as $key3 => $val3){
+						echo "<tr>";
+							echo "<td><input type='text' id='six' class='disabled' disabled size='8' value='".$val3["name"]."'></td>";
+							echo "<td><input type='text' id='seven' class='disabled' disabled size='8' value=".$val3["tel"]."></td>";
+							echo "<td><input type='text' id='eight' class='disabled' disabled size='8' value='".$val3["mail"]."'></td>";
+						echo "</tr>";
+					}
+				?>
+			</table>
+		</td>
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td><textarea id="nine" disabled><?php echo $val["special_text"]; ?></textarea></td>
+		<td colspan="3"><textarea id="nine" class="disabled" disabled><?php echo $val["special_text"]; ?></textarea></td>
 	</tr>
 </table>
 <input type="hidden" id="ten" name="company_id" value="<?php echo $val["company_id"];?>">
@@ -209,21 +272,17 @@ span#com {
 	foreach($past as $key2 => $val2){
 		$color = $val2["color_code"];
 		echo "<tr>";
-		echo "<td>".$val2["date"]."</td>";
-		echo "<td style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
-		echo "<td>".$val2["respone_name"]."</td>";
-		echo "<td>".$val2["content_text"]."</td>";
-		echo "<td>";
+		echo "<td class='style1'>".$val2["date"]."</td>";
+		echo "<td class='style1' style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
+		echo "<td class='style1'>".$val2["respone_name"]."</td>";
+		echo "<td><p class='textOverflowTest3'>".$val2["content_text"]."</p></td>";
+		echo "<td class='style1'>";
   		echo "<input type='button' value='変更' onClick=\"upda('".$val2["matter_id"]."')\">";
  		echo " / ";
 		echo "<input type='button' value='削除' onClick=del(".$val2["matter_id"].")>";
 		echo "</td>";
 		echo "</tr>";
 	}
-
-
-
-
 ?>
 </table>
 </form>
