@@ -11,6 +11,7 @@ class Controller_Matter extends Controller
 	*/
 	public function before()
 	{
+		session_cache_limiter('private_no_expire');
 		session_start();
 		parent::before();
 		if (!Loginout::logincheck()){
@@ -160,7 +161,7 @@ class Controller_Matter extends Controller
 		if($data["check2"]==1 && !empty($data["list_id"])){
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["list_id"]);
-			$data["c_id"]	=	$data["view"][0]["company_id"];
+			$data["company_id"]	=	$data["view"][0]["company_id"];
 		}
 
 		//履歴取り出し
@@ -200,7 +201,7 @@ class Controller_Matter extends Controller
 			$data['past'] = db_matter::get_past($data);
 		}
 		//顧客会社担当者一覧取得
-		$data["customer"]	=	db_customer::get_customer($data["c_id"], $data["c_id"]);
+		$data["customer"]	=	db_customer::get_customer($data["company_id"], $data["company_id"]);
 
 		//セレクトボックス取り出し用
 		$data["select"]	=	db_case::get_name();

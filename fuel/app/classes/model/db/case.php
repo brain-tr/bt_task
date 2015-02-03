@@ -59,4 +59,15 @@ class db_case extends \Model {
  		$result	=	$query->execute()->as_array();
  		return $result;
  	}
+
+ 	/*
+ 	 *	要求フラグが対応で使われているか検索
+ 	*/
+ 	public static function search_flag($data)
+ 	{
+
+ 		$query = \DB::query("SELECT case_id FROM k_matter where case_id=".$data["flag_id"]." group by case_id");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
+ 	}
 }

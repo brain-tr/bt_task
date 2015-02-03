@@ -9,6 +9,7 @@ class Controller_Case extends Controller
 	*/
 	public function before()
 	{
+		session_cache_limiter('private_no_expire');
 		session_start();
 		parent::before();
 		if (!Loginout::logincheck()){
@@ -38,9 +39,14 @@ class Controller_Case extends Controller
 
 		// 削除（チェック = 3）
  		if($data["check"] == 3){
- 			\Model\db_case::del_flag($data);
- 			$data["msg"] = "削除しました。";
-			$data['name'] = \Model\db_case::get_name();
+ 			$checkName = \Model\db_case::search_flag($data);
+			if(empty($checkName)){
+	 			\Model\db_case::del_flag($data);
+	 			$data["msg"] = "削除しました。";
+				$data['name'] = \Model\db_case::get_name();
+			}else{
+				$data["msg"] = "このフラグは対応詳細で使われているため削除できません。";
+			}
  		}
  		if($data["check2"] == 1){
  			if($data["updown"] == "asc"){

@@ -9,6 +9,7 @@ class Controller_Clist extends Controller
 	*/
 	public function before()
 	{
+		session_cache_limiter('private_no_expire');
 		session_start();
 		parent::before();
 		if (!Loginout::logincheck()){
