@@ -42,12 +42,8 @@ function change(company_id){
 function msg(msg){
 	//会社名用
 	if(msg == 1){
-		var frm1 = document.createElement("form");
 		var ipt1 = document.createElement("input");
 		var ipt2 = document.createElement("input");
-
-		frm1.action = "clist";
-		frm1.method = "post";
 
 		ipt1.type = "hidden";
 		ipt1.name = "updown1";
@@ -57,18 +53,13 @@ function msg(msg){
 		ipt2.name = "check3";
 		ipt2.value = 1;
 
-		frm1.appendChild(ipt1);
-		frm1.appendChild(ipt2);
-		document.body.appendChild(frm1);
-		frm1.submit();
+		form1.appendChild(ipt1);
+		form1.appendChild(ipt2);
+		form1.submit();
 	//客種用
 	}else if(msg == 2){
-		var frm2  = document.createElement("form");
 		var ipt2 = document.createElement("input");
 		var ipt3 = document.createElement("input");
-
-		frm2.action = "clist";
-		frm2.method = "post";
 
 		ipt2.type = "hidden"
 		ipt2.name = "updown2";
@@ -78,22 +69,15 @@ function msg(msg){
 		ipt3.name = "check3";
 		ipt3.value = 2;
 
-		frm2.appendChild(ipt2);
-		frm2.appendChild(ipt3);
-		document.body.appendChild(frm2);
-		frm2.submit();
-
+		form1.appendChild(ipt2);
+		form1.appendChild(ipt3);
+		form1.submit();
 	}
-
 }
-
 //アラートメッセージ
 if(msgcheck != "1"){
 	alert(msgcheck);
 }
-
-
-
 </script>
 
 <style type="text/css">
@@ -160,7 +144,7 @@ input[type="button"].updown {
 <input type="button" onClick="location.href='customer/create'" id="btn" value="新規登録画面" style="WIDTH: 100px; HEIGHT: 40px">
 <br>
 <form action="#" name="form1" id="search" method="post">
-	<input type="text" name="search" size="10">
+	<input type="text" name="search" size="10" value=<?php echo $search;?>>
 	<input type="submit" id="searchbtn" name="send" value="検索">
 	<input type="hidden" name="check2" value="2">
 </form>

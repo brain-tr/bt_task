@@ -141,8 +141,18 @@ class db_customer extends \Model {
 		return \DB::select('company_id','company_name','c_flag')->from('k_company')->order_by($select,$cd)->execute()->as_array();
 	}
 
+
 	/*
-	 *  顧客会社情報あいまい検索
+	 *	昇順降順ボタン(会社名検索付き)
+	*/
+	public static function up_down2($select,$cd,$data)
+	{
+		return \DB::select('company_id','company_name','c_flag')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->order_by($select,$cd)->execute()->as_array();
+	}
+
+
+	/*
+	 *  顧客会社検索
 	*/
 	public static function matter_company($data)
 	{

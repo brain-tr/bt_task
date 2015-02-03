@@ -38,7 +38,7 @@ class Controller_Clist extends Controller
 		$data["check3"]		=	empty($post["check3"])? "": $post["check3"];
 		$data["flag"]		=	empty($post["flag"])?	"1": $post["flag"];
 		$data["flag2"]		=	empty($post["flag2"])?	"1": $post["flag2"];
- 		$data["msgcheck"]			= empty($post["msgcheck"])?"1": $post["msgcheck"];
+ 		$data["msgcheck"]	= empty($post["msgcheck"])?"1": $post["msgcheck"];
 
 
 
@@ -91,7 +91,11 @@ class Controller_Clist extends Controller
 				$select = "company_name";
 				$cd = "asc";
 			}
-			$data["view"]	=	db_customer::up_down($select,$cd);
+			if(!empty($data["search"])){
+				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
+			}else{
+				$data["view"]	=	db_customer::up_down($select,$cd);
+			}
 		//客種フラグ
 		}else if($data["check3"] == 2){
 			if($data["updown2"] == 1){
@@ -106,7 +110,11 @@ class Controller_Clist extends Controller
 				$select = "c_flag";
 				$cd = "asc";
 			}
-			$data["view"]	=	db_customer::up_down($select,$cd);
+			if(!empty($data["search"])){
+				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
+			}else{
+				$data["view"]	=	db_customer::up_down($select,$cd);
+			}
 		}
 
 		return View::forge('clist/index',$data);
