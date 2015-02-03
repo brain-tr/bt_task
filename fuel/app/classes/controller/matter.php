@@ -38,6 +38,7 @@ class Controller_Matter extends Controller
 		$data["check"]	=	empty($post["check"])	?  "": $post["check"];
 		$data["msg"]	=	empty($post["msg"])		?  "": $post["msg"];
 		$data["case"]	=	empty($post["case"])	?  "": $post["case"];
+		$data["msgcheck"]	=	empty($post["msgcheck"])? "1": $post["msgcheck"];
 
 		$hyphen1 = substr($data["date"], 4, 1);
 		$hyphen2 = substr($data["date"], 7, 1);
@@ -51,6 +52,7 @@ class Controller_Matter extends Controller
 			$check	=	db_matter::check_matter($data);
 			if(empty($check)){
 				db_matter::ins_matter($data);
+				$data["msgcheck"] = "登録しました。";
 			}
 		}
 
@@ -58,25 +60,6 @@ class Controller_Matter extends Controller
 		$data["select"]	=	db_case::get_name();
 
 		return View::forge('matter/create',$data);
-	}
-
-	/*
-	 *	顧客会社名検索用サブウインドウ
-	 */
-
-	public function action_search()
-	{
-		// POST
-		$post = Input::post();
-		$data["s_name"]	=	empty($post["s_name"])?"" : $post["s_name"];
-		$data["check"]	=	empty($post["check"])? "" : $post["check"];
-
-		if($data["check"]==1){
-			$data["name"] = db_matter::search_name($data["s_name"]);
-		}else{
-			$data["name"]	=	db_matter::all_name();
-		}
-		return View::forge('matter/search',$data);
 	}
 
 	/*
@@ -89,16 +72,17 @@ class Controller_Matter extends Controller
 		$data['userlog_name']	= $_SESSION['name'];
 		// POST
 		$post = Input::post();
-		$data["c_id"]	=	empty($post["company_id"])?"": $post["company_id"];
-		$data["date"]	=	empty($post["date"])	?  "": $post["date"];
-		$data["detail"]	=	empty($post["detail"])	?  "": $post["detail"];
-		$data["user"]	=	empty($post["user"])	?  "": $post["user"];
-		$data["check"]	=	empty($post["check"])	?  "": $post["check"];
-		$data["m_id"]	=	empty($post["matter_id"])? "": $post["matter_id"];
-		$data["list_id"]=	empty($post["list_id"])?   "": $post["list_id"];
-		$data["check2"] =	empty($post["flag"])?	   "": $post["flag"];
-		$data["case"]	=	empty($post["case"])?	   "": $post["case"];
-		$data["msg"]	=	empty($post["msg"])		?  "": $post["msg"];
+		$data["c_id"]		=	empty($post["company_id"])?"": $post["company_id"];
+		$data["date"]		=	empty($post["date"])	?  "": $post["date"];
+		$data["detail"]		=	empty($post["detail"])	?  "": $post["detail"];
+		$data["user"]		=	empty($post["user"])	?  "": $post["user"];
+		$data["check"]		=	empty($post["check"])	?  "": $post["check"];
+		$data["m_id"]		=	empty($post["matter_id"])? "": $post["matter_id"];
+		$data["list_id"]	=	empty($post["list_id"])?   "": $post["list_id"];
+		$data["check2"] 	=	empty($post["flag"])?	   "": $post["flag"];
+		$data["case"]		=	empty($post["case"])?	   "": $post["case"];
+		$data["msg"]		=	empty($post["msg"])		?  "": $post["msg"];
+		$data["msgcheck"]	=	empty($post["msgcheck"])? "1": $post["msgcheck"];
 
 		//一覧から遷移してきた時の処理
 		if($data["check2"]==1 && !empty($data["list_id"])){
@@ -121,6 +105,7 @@ class Controller_Matter extends Controller
 			db_matter::ins_updated($data);
 			//表示用
 			$data["view"]	=	db_matter::get_matter($data["m_id"]);
+			$data["msgcheck"] = "変更しました。";
 		}
 		//顧客会社担当者一覧取得
 		$data["customer"]	=	db_customer::get_customer($data["c_id"],$data["c_id"]);

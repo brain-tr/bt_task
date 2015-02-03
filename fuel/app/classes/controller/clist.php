@@ -9,7 +9,6 @@ class Controller_Clist extends Controller
 	*/
 	public function before()
 	{
-		session_cache_limiter('private_no_expire');
 		session_start();
 		parent::before();
 		if (!Loginout::logincheck()){
@@ -39,6 +38,7 @@ class Controller_Clist extends Controller
 		$data["check3"]		=	empty($post["check3"])? "": $post["check3"];
 		$data["flag"]		=	empty($post["flag"])?	"1": $post["flag"];
 		$data["flag2"]		=	empty($post["flag2"])?	"1": $post["flag2"];
+ 		$data["msgcheck"]			= empty($post["msgcheck"])?"1": $post["msgcheck"];
 
 
 
@@ -46,13 +46,25 @@ class Controller_Clist extends Controller
 			//一括削除処理
 			if(!empty($data["del"])){
 				for($i=0; $i<count($data["del"]); $i++){
-					db_customer::del_company($data["del"][$i]);
-					db_customer::del_customer($data["del"][$i]);
+					$checkName = db_customer::matter_company($data["del"][$i]);
+					if(empty($checkName)){
+						db_customer::del_company($data["del"][$i]);
+						db_customer::del_customer($data["del"][$i]);
+						$data["msgcheck"] = "削除しました。";
+					}else{
+						$data["msgcheck"] = "この顧客会社は対応詳細で登録されているため削除できません。";
+					}
 				}
 			//削除ボタン 単体削除
 			}else if(!empty($data["delete"])){
-					db_customer::del_company($data["delete"]);
-					db_customer::del_customer($data["delete"]);
+					$checkName = db_customer::matter_company($data["delete"]);
+					if(empty($checkName)){
+						db_customer::del_company($data["delete"]);
+						db_customer::del_customer($data["delete"]);
+						$data["msgcheck"] = "削除しました。";
+					}else{
+						$data["msgcheck"] = "この顧客会社は対応詳細で登録されているため削除できません。";
+					}
 			}
 		}
 
@@ -96,8 +108,6 @@ class Controller_Clist extends Controller
 			}
 			$data["view"]	=	db_customer::up_down($select,$cd);
 		}
-
-
 		return View::forge('clist/index',$data);
 	}
 }

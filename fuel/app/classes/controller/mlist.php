@@ -10,7 +10,6 @@ class Controller_Mlist extends Controller
 	*/
 	public function before()
 	{
-		session_cache_limiter('private_no_expire');
 		session_start();
 		parent::before();
 		if (!Loginout::logincheck()){
@@ -121,11 +120,27 @@ class Controller_Mlist extends Controller
 		}else{
 			$data["name"] = db_matter::all_name();
 		}
-
-
-
-
-
 		return View::forge('mlist/csearch',$data);
 	}
+
+	/*
+	 *	顧客会社名検索用サブウインドウ
+	*/
+
+	public function action_search()
+	{
+		// POST
+		$post = Input::post();
+		$data["s_name"]	=	empty($post["s_name"])?"" : $post["s_name"];
+		$data["check"]	=	empty($post["check"])? "" : $post["check"];
+
+		if($data["check"]==1){
+			$data["name"] = db_matter::search_name($data["s_name"]);
+		}else{
+			$data["name"]	=	db_matter::all_name();
+		}
+
+		return View::forge('mlist/search',$data);
+	}
+
 }

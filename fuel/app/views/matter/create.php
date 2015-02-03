@@ -6,8 +6,13 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
+msgcheck	= "<?php echo $msgcheck; ?>";
 function sear(){
-	window.open("/matter/search","window","width=400,height=400,scrollbars=yes");
+	window.open("/mlist/search","window","width=400,height=400,scrollbars=yes");
+}
+// アラートメッセージ
+if(msgcheck != "1"){
+	alert(msgcheck);
 }
 </script>
 <style type="text/css">

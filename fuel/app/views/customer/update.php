@@ -6,6 +6,7 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
+msgcheck	= "<?php echo $msgcheck; ?>";
 $(function(){
 	// "品目の追加"ボタンを押した場合の処理
 	$('#add').click(function(){
@@ -17,6 +18,10 @@ $(function(){
 
 	});
 });
+// アラートメッセージ
+if(msgcheck != "1"){
+	alert(msgcheck);
+}
 
 </script>
 <style type="text/css">

@@ -4,17 +4,16 @@
 <title>顧客管理システム | 顧客一覧</title>
 <link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
+msgcheck	= "<?php echo $msgcheck; ?>";
 //削除確認
 function del(){
 	if(window.confirm('一括削除を実行')){
-		alert('削除しました');
 		document.form2.submit();
 	}
 }
 //単体削除用
 function del2(company_id){
 	if(window.confirm('削除しますか')){
-		alert('削除しました');
 		var submitType = document.createElement("input");
 		submitType.setAttribute("name", "delete");
 		submitType.setAttribute("type", "hidden");
@@ -88,6 +87,10 @@ function msg(msg){
 
 }
 
+//アラートメッセージ
+if(msgcheck != "1"){
+	alert(msgcheck);
+}
 
 
 

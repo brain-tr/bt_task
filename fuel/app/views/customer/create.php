@@ -6,6 +6,7 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
+msgcheck	= "<?php echo $msgcheck; ?>";
 $(function(){
 		// "品目の追加"ボタンを押した場合の処理
 		$('#add').click(function(){
@@ -14,9 +15,12 @@ $(function(){
 				var new_list2 ='<td><input type="text" name="t_name[]" size="8"></td><td><input type="text" name="t_tel[]" size="8"></td>';
 				var new_list3 ='<td><input type="text" name="t_mail[]" size="8"></td></tr>';
 				$('#list').append(new_list,new_list2,new_list3);
-
 		});
 });
+// アラートメッセージ
+if(msgcheck != "1"){
+	alert(msgcheck);
+}
 </script>
 <style type="text/css">
 p#big{
@@ -61,20 +65,20 @@ p#big{
 		<th>客主</th>
 		<td colspan='2'>
 			<select name="flag">
-				<option value="1">案件</option>
-				<option value="2">人材</option>
-				<option value="3">両方</option>
+				<option value="1" <?php if($flag == 1){echo "selected";};?>>案件</option>
+				<option value="2" <?php if($flag == 2){echo "selected";};?>>人材</option>
+				<option value="3" <?php if($flag == 3){echo "selected";};?>>両方</option>
 			</select>
 		</td>
 
 	</tr>
 	<tr>
 		<th>顧客会社名</th>
-		<td colspan='2'><input type="text" name="c_name" size="15"></td>
+		<td colspan='2'><input type="text" name="c_name" size="15" value="<?php echo $c_name;?>" ></td>
 	</tr>
 	<tr>
 		<th>顧客会社住所</th>
-		<td colspan='2'><input type="text" name="address"size="15"></td>
+		<td colspan='2'><input type="text" name="address"size="15" value="<?php echo $address;?>" ></td>
 	</tr>
 	<tr>
 		<th>
@@ -88,8 +92,8 @@ p#big{
 					<th>Mail(請求担当)</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="tel"size="10"></td>
-					<td><input type="text" name="mail"size="10"></td>
+					<td><input type="text" name="tel"size="10" value="<?php echo $tel;?>" ></td>
+					<td><input type="text" name="mail"size="10" value="<?php echo $mail;?>" ></td>
 				</tr>
 			</table>
 		</td>
@@ -101,7 +105,7 @@ p#big{
 				顧客担当者<br />
 				詳細情報<br />
 			</span>
-			<input type="button" name="any" value="追加" id="add"></th>
+			<input type="button" name="any" value="追加" id="add" ></th>
 		<td colspan='2'>
 		<table class="tableStyle" id="list">
 		<tr>
@@ -110,21 +114,34 @@ p#big{
 			<th>Mail(顧客担当者)</th>
 		</tr>
 		<tr>
-			<td><input type="text" name="t_name[]"size="8"></td>
-			<td><input type="text" name="t_tel[]"size="8"></td>
-			<td><input type="text" name="t_mail[]"size="8"></td>
+			<td><input type="text" name="t_name[]"size="8" value="<?php if(!empty($t_name2)){echo $t_name2[0];};?>" ></td>
+			<td><input type="text" name="t_tel[]"size="8" value="<?php if(!empty($t_tel2)){echo $t_tel2[0];};?>" ></td>
+			<td><input type="text" name="t_mail[]"size="8" value="<?php if(!empty($t_mail2)){echo $t_mail2[0];};?>" ></td>
 		</tr>
+		<?php
+		if(count($t_name2) > 1){
+			foreach($t_name2 as $key2 => $val2){
+				if($key2 != 0){
+					echo "<tr>";
+						echo "<td><input type='text' name='t_name[]'size='8' value=".$t_name2[$key2]."></td>";
+						echo "<td><input type='text' name='t_tel[]'size='8' value=".$t_tel2[$key2]."></td>";
+						echo "<td><input type='text' name='t_mail[]'size='8' value=".$t_mail2[$key2]."></td>";
+					echo "</tr>";
+				}
+			}
+		}
+		?>
 		</table>
 		</td>
 	</tr>
 
 	<tr>
 		<th>弊社担当者</th>
-		<td colspan='2'><input type="text" name="u_name"size="15"></td>
+		<td colspan='2'><input type="text" name="u_name"size="15" value="<?php echo $u_name;?>" ></td>
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan='2'><textarea name="special" cols="20"></textarea>
+		<td colspan='2'><textarea name="special" cols="20"><?php echo $special;?></textarea>
 	<tr>
 </table>
 <input type="hidden" name="check" value="1">

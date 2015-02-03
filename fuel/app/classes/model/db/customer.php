@@ -141,5 +141,13 @@ class db_customer extends \Model {
 		return \DB::select('company_id','company_name','c_flag')->from('k_company')->order_by($select,$cd)->execute()->as_array();
 	}
 
+	/*
+	 *  顧客会社情報あいまい検索
+	*/
+	public static function matter_company($data)
+	{
+		return \DB::select('company_id')->from('k_matter')->where("company_id",$data)->execute()->as_array();
+	}
+
 
 }

@@ -6,6 +6,7 @@
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
+msgcheck	= "<?php echo $msgcheck; ?>";
 //変更用
 id = <?php echo $list_id;?>;
 function test(company_id){
@@ -37,6 +38,10 @@ function test(company_id){
 }
 function change(){
 	form1.submit();
+}
+// アラートメッセージ
+if(msgcheck != "1"){
+	alert(msgcheck);
 }
 </script>
 <style type="text/css">
