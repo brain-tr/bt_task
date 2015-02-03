@@ -9,8 +9,9 @@ class Controller_Customer extends Controller
 	*/
 	public function before()
 	{
-		session_start();
 		parent::before();
+		session_cache_limiter('none');
+		session_start();
 		if (!Loginout::logincheck()){
 			header('Location: /login/');
 			exit();

@@ -11,9 +11,9 @@ class Controller_Matter extends Controller
 	*/
 	public function before()
 	{
+		parent::before();
 		session_cache_limiter('private_no_expire');
 		session_start();
-		parent::before();
 		if (!Loginout::logincheck()){
 			header('Location: /login/');
 			exit();
