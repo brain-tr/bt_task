@@ -108,6 +108,7 @@ class Controller_Clist extends Controller
 			}
 			$data["view"]	=	db_customer::up_down($select,$cd);
 		}
+
 		return View::forge('clist/index',$data);
 	}
 }
