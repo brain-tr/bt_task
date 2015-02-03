@@ -12,7 +12,7 @@ class Controller_Mlist extends Controller
 	{
 		parent::before();
 		session_cache_limiter('none');
-		session_start();var_dump(Loginout::logincheck());exit;
+		session_start();
 		if (!Loginout::logincheck()){
 			header('Location: /login/');
 			exit();
