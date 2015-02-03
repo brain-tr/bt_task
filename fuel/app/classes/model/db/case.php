@@ -55,7 +55,7 @@ class db_case extends \Model {
  	public static function sort($data)
  	{
 
- 		$query = \DB::query("SELECT * FROM k_case order by case_id ".$data["updown"]." ");
+ 		$query = \DB::query("SELECT * FROM k_case order by name ".$data["updown"]." ");
  		$result	=	$query->execute()->as_array();
  		return $result;
  	}
