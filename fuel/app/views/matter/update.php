@@ -221,6 +221,12 @@ div.floatright {
 #content table.tableStyle6 {
 	width:700px;
 }
+/* overflow:hidden、heightは必ず指定する */
+.textOverflowTest3 {
+    overflow: hidden;
+    width: 200px;
+    height: 23px;
+}
 </style>
 
 </head>
