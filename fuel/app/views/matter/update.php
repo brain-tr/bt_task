@@ -391,7 +391,7 @@ div.floatright {
 			}
 		}
 		if($nowpage != $lastpage){
-			echo '<a href="#" onclick="past(2)">次ページ</a>';
+			echo '<a href="#" onclick="past(2)">次ページ</a> ';
 			echo '<a href="#" onclick="directpast('.$lastpage.')">末尾</a> ';
 		}
 	}else if($lastpage >= 7){
