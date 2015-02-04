@@ -310,6 +310,8 @@ class db_matter extends \Model {
 					a.case_id = b.case_id
 				where
 					company_id = ".$data["company_id"]."
+				order by
+					matter_id;
 				");
 				$result	=	$query->execute()->as_array();
 				return $result;
@@ -491,6 +493,38 @@ class db_matter extends \Model {
  	{
  		\DB::delete('k_matter')->where('matter_id',$matter_id)->execute();
 
+ 	}
+
+ 	/*
+ 	 *  会社の対応を適当に１つ選択
+ 	*/
+ 	public static function pull_matter($company_id)
+ 	{
+ 		return \DB::select('matter_id')->from('k_matter')->where('company_id',$company_id)->execute()->current();
+
+ 	}
+
+ 	/*
+ 	 *  会社の対応を適当に１つ選択
+ 	*/
+ 	public static function get_updated($matter_id)
+ 	{
+ 		$query =\DB::query("
+				select
+					b.matter_id,
+					a.name,
+					b.updated_at
+				from
+					t_user a
+				left join
+					k_updated b
+				on
+					a.user_id = b.user_id
+				where
+					b.matter_id = ".$matter_id."
+				");
+ 		$result	=	$query->execute()->as_array();
+ 		return $result;
  	}
 
 }

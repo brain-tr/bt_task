@@ -144,4 +144,23 @@ class Controller_Mlist extends Controller
 		return View::forge('mlist/search',$data);
 	}
 
+	/*
+	 *	更新履歴画面
+	*/
+	public function action_updated()
+	{
+		//ユーザー情報の確認
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+		//フォローid取得用
+		$get = Input::get();
+		$data["matter_id"]	= empty($get["id"]) ? "" : $get["id"];
+
+		$data["show"] = db_matter::get_updated($data["matter_id"]);
+
+		return View::forge('mlist/updated',$data);
+	}
+
+
 }

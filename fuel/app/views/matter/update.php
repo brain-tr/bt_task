@@ -7,8 +7,63 @@
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
 msgcheck	= "<?php echo $msgcheck; ?>";
-//変更用
+msg_comp	= "<?php echo $msg_comp; ?>";
 id = <?php echo $list_id;?>;
+//昇順降順ボタン
+function sort_btn(number){
+	var ipt = document.createElement("input");
+
+	ipt.type = "hidden";
+	ipt.name = "check4";
+	ipt.value = 1;
+
+	document.form2.appendChild(ipt);
+	document.form2.check3.value = number;
+	document.form2.submit();
+}
+//変更画面遷移。
+function upda(id){
+	var form  = document.createElement("form");
+	var input = document.createElement("input");
+	var input2= document.createElement("input");
+
+	form.action = "/matter/update";
+	form.method = "post";
+
+	input.type = "hidden";
+	input.name = "list_id";
+	input.value= id;
+
+	input2.type  = "hidden";
+	input2.name  = "flag";
+	input2.value = "1";
+
+	form.appendChild(input);
+	form.appendChild(input2);
+	document.body.appendChild(form);
+	form.submit();
+}
+//削除
+function del(matter_id){
+	Msg = "削除しますか？";
+	if(confirm(Msg)){
+		var input = document.createElement("input");
+		var input2= document.createElement("input");
+
+		input.type = "hidden";
+		input.name = "flag";
+		input.value= 2;
+
+		input2.type  = "hidden";
+		input2.name  = "matter_id";
+		input2.value = matter_id;
+
+		document.form2.appendChild(input);
+		document.form2.appendChild(input2);
+		document.form2.submit();
+	}
+}
+//変更用
 function test(company_id){
 	var form  = document.createElement("form");
 	var input = document.createElement("input");
@@ -36,6 +91,25 @@ function test(company_id){
 	document.body.appendChild(form);
 	form.submit();
 }
+//対応履歴遷移
+function past(num){
+	if(num == 1){
+		document.form2.cnt.value = <?php echo $cnt-1;?>
+	}else if(num == 2){
+		document.form2.cnt.value = <?php echo $cnt+1;?>
+	}
+	document.form2.submit();
+}
+//対応履歴直接遷移
+function directpast(num){
+	document.form2.cnt.value = num-1;
+	document.form2.submit();
+}
+// 更新履歴表示
+function updated(){
+	var matter_id = id;
+	window.open("/mlist/updated?id="+matter_id,"id","width=400,height=400,scrollbars=yes");
+}
 function change(){
 	form1.submit();
 }
@@ -43,11 +117,97 @@ function change(){
 if(msgcheck != "1"){
 	alert(msgcheck);
 }
+// 画面遷移
+if(msg_comp != "0"){
+	var form  = document.createElement("form");
+	var input = document.createElement("input");
+
+	form.action = "/customer/update";
+	form.method = "post";
+
+	input.type = "hidden";
+	input.name = "c_id";
+	input.value= msg_comp;
+
+	form.appendChild(input);
+	document.body.appendChild(form);
+	form.submit();
+}
+jQuery(function($) {
+    $('.textOverflowTest3').each(function() {
+        var $target = $(this);
+
+        // オリジナルの文章を取得する
+        var html = $target.html();
+
+        // 対象の要素を、高さにautoを指定し非表示で複製する
+        var $clone = $target.clone();
+        $clone
+            .css({
+                display: 'none',
+                position : 'absolute',
+                overflow : 'visible'
+            })
+            .width($target.width())
+            .height('auto');
+
+        // DOMを一旦追加
+        $target.after($clone);
+
+        // 指定した高さになるまで、1文字ずつ消去していく
+        while((html.length > 0) && ($clone.height() > $target.height())) {
+            html = html.substr(0, html.length - 1);
+            $clone.html(html + "...");
+        }
+
+        // 文章を入れ替えて、複製した要素を削除する
+        $target.html($clone.html());
+        $clone.remove();
+    });
+});
 </script>
 <style type="text/css">
+table.tableStylex{
+	width:700px;
+	border: 2px solid #999;
+	margin-top:20px;
+}
+table.tableStylex td,
+table.tableStylex th {
+	text-align:center;
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px solid #999;
+	background-color:#fff;
+}
+table.tableStylex th {
+	text-align:center;
+	font-weight:bold;
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	color:#666;
+	font-size:93%;
+}
+
+table.tableStylex td {
+	font-size:86%;
+	text-align:center;
+}
+table.tableStylex td a{
+	text-decoration: none;
+}
 p#msg{
 	color:red;
 	font-size:30px;
+}
+div#resize {
+	width:700px;
+}
+div.floatright {
+	margin-top:10px;
+	float:right;
 }
 #searchbtn {
 	margin:0px 5px;
@@ -78,6 +238,7 @@ p#msg{
 <div id="main">
 <div id="content">
 <div id="contentIn">
+<div id="resize">
 <?php
 	$selected1 = "";
 	$flg	=	"";
@@ -100,7 +261,7 @@ p#msg{
 	</tr>
 	<tr>
 		<th>記入者</th>
-		<td colspan="3"><?php echo $val['user_name']; ?></td>
+		<td colspan="3"><?php echo $val['user_name']; ?>　　<a href="#" onclick="updated()">更新履歴</a></td>
 	</tr>
 	<tr>
 		<th>顧客会社名</th>
@@ -182,9 +343,113 @@ p#msg{
 <input type="hidden" name="check" value="1">
 <input type="hidden" name="list_id" value=<?php echo $list_id;?>>
 <p class="btnSpace"><a href="#" onclick=change()><img src="/assets/img/common/btn_update.png" alt="変更する" /></a>
-<a href="#" onclick=test(<?php echo $val["company_id"];?>)><img src="/assets/img/common/btn_past.png" alt="履歴一覧" /></a></p>
-
 </form>
+
+
+<form action="update" method="post" name="form2">
+<table class="tableStylex">
+<tr>
+<th>日付<input type='button' value=<?php echo $sortbtn;?> onClick='sort_btn(1);'></th>
+<th>要求フラグ<input type='button' value=<?php echo $sortbtn2;?> onClick='sort_btn(2);'></th>
+<th>対応者</th>
+<th>対応内容</th>
+<th>編集</th>
+</tr>
+<?php
+	foreach($past as $key2 => $val2){
+		if(($cnt*10 <= $key2) && ($cnt*10+10 > $key2)){
+			$color = $val2["color_code"];
+			echo "<tr>";
+			echo "<td class='style1'>".$val2["date"]."</td>";
+			echo "<td class='style1' style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
+			echo "<td class='style1'>".$val2["respone_name"]."</td>";
+			echo "<td><p class='textOverflowTest3'>".$val2["content_text"]."</p></td>";
+			echo "<td class='style1'>";
+	  		echo "<input type='button' value='変更' onClick=\"upda('".$val2["matter_id"]."')\">";
+	 		echo " / ";
+			echo "<input type='button' value='削除' onClick=del(".$val2["matter_id"].")>";
+			echo "</td>";
+			echo "</tr>";
+		}
+	}
+?>
+</table>
+<div class="floatright">
+<?php
+	$lastpage = ceil(count($past)/10);
+	$nowpage = $cnt+1;
+	if($lastpage >= 1 && $lastpage < 7){
+		if($nowpage != 1){
+			echo '<a href="#" onclick="directpast(1)">先頭</a> ';
+			echo '<a href="#" onclick="past(1)">前ページ</a> ';
+		}
+		for($i=1; $i<=$lastpage; $i++){
+			if($i == $nowpage){
+				echo $i.' ';
+			}else{
+				echo '<a href="#" onclick="directpast('.$i.')">'.$i.'</a> ';
+			}
+		}
+		if($nowpage != $lastpage){
+			echo '<a href="#" onclick="past(2)">次ページ</a>';
+			echo '<a href="#" onclick="directpast('.$lastpage.')">末尾</a> ';
+		}
+	}else if($lastpage >= 7){
+		if($nowpage != 1){
+			echo '<a href="#" onclick="directpast(1)">先頭</a> ';
+			echo '<a href="#" onclick="past(1)">前ページ</a> ';
+		}
+		for($i=1; $i<=$lastpage; $i++){
+			//1～2ページ目まで
+			if(1 <= $nowpage && $nowpage <= 3){
+				if($i == $nowpage){
+					echo $i.' ';
+				}else if($i <= 5){
+					echo '<a href="#" onclick="directpast('.$i.')">'.$i.'</a> ';
+				}else if($i == $lastpage){
+					echo '… ';
+				}
+			//3～後3ページ目まで
+			}else if(3 < $nowpage && $nowpage < $lastpage-2){
+				if($i == 1){
+					echo '… ';
+				}
+				if($i == $nowpage){
+					echo $i.' ';
+				}else if($nowpage-2 <= $i && $i <= $nowpage+2){
+					echo '<a href="#" onclick="directpast('.$i.')">'.$i.'</a> ';
+				}
+				if($i == $lastpage){
+					echo '… ';
+				}
+			//後2～最後ページ目まで
+			}else if($lastpage-2 <= $nowpage && $nowpage <= $lastpage){
+				if($i == 1){
+					echo '… ';
+				}else if($i == $nowpage){
+					echo $i.' ';
+				}else if($i >= $lastpage-4){
+					echo '<a href="#" onclick="directpast('.$i.')">'.$i.'</a> ';
+				}
+			}
+		}
+		if($nowpage != $lastpage){
+			echo '<a href="#" onclick="past(2)">次ページ</a> ';
+			echo '<a href="#" onclick="directpast('.$lastpage.')">末尾</a> ';
+		}
+	}
+?>
+</div>
+<input type="hidden" name="cnt" value="<?php echo $cnt; ?>">
+<input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
+<input type="hidden" name="list_id" value="<?php echo $list_id; ?>">
+<input type="hidden" name="updown" value="<?php echo $updown; ?>">
+<input type="hidden" name="updown2" value="<?php echo $updown2; ?>">
+<input type="hidden" name="check3" value="<?php echo $check3; ?>">
+<input type="hidden" name="sortbtn" value="<?php echo $sortbtn; ?>">
+<input type="hidden" name="sortbtn2" value="<?php echo $sortbtn2; ?>">
+</form>
+</div><!-- /resize -->
 </div><!-- /contentIn -->
 </div><!-- /content -->
 <?php }?>
