@@ -51,8 +51,15 @@ class Controller_Matter extends Controller
 		}else if($data["check"]==1 && !empty($data["user"]) && !empty($data["c_id"]) && $hyphen1 == "-" && $hyphen2 == "-"){
 			$check	=	db_matter::check_matter($data);
 			if(empty($check)){
-				db_matter::ins_matter($data);
+				$id = db_matter::ins_matter($data);
+				//company_idの取り出しに使用
+				foreach($id as $key => $val){
+					$data["m_id"] = $val;
+				}
+				db_matter::ins_updated($data);
 				$data["msgcheck"] = "登録しました。";
+			}else{
+				$data["msg"] = "既に対応内容は登録されています。";
 			}
 		}
 

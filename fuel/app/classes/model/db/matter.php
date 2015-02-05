@@ -85,6 +85,10 @@ class db_matter extends \Model {
 				'date'			=> $data['date'],
 				'user_id'		=> $data['userlog_id']
 		))->execute();
+
+		$query	=\DB::query("SELECT LAST_INSERT_ID();");
+		$result	= $query->execute()->current();
+		return $result;
 	}
 
 	/*
@@ -92,7 +96,7 @@ class db_matter extends \Model {
 	*/
 	public static function check_matter($data)
 	{
-		return \DB::select('matter_id')->from('k_matter')->or_where_open()->where("content_text",$data["detail"])->and_where('date',$data["date"])->or_where_close()->execute()->as_array();
+		return \DB::select('matter_id')->from('k_matter')->where("content_text",$data["detail"])->and_where('date',$data["date"])->execute()->as_array();
 	}
 
 	/*
