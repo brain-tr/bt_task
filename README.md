@@ -1,3 +1,9 @@
+新人＆インターン研修作品
+基本的なCRUDやソート、カレンダー操作などを学ぶ為の
+人員管理と顧客管理システムです。
+FuelPHP,mysql,JavaScriptを使用し作成しています。
+
+
 #FuelPHP
 
 * Version: 1.7.2
