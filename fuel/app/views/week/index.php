@@ -177,15 +177,13 @@ span#com a{
 			$cnt = 0;
 			$cnt2 = 0;
 			echo "<td>".$val["day"]."</td>";
-			//0000-00-0型の日付を生成
-			$comp = $year."-".$month."-".$val['day'];
 			$cnt++;
 			//会社名取り出し
 			echo "<td>";
 			foreach($company as $val2){
 				$color = $val2["color_code"];
 				//該当の日付と登録日が一致かつdateが空でなければ。
-				if(strtotime($comp) == strtotime($val2["date"]) && !empty($val2["date"])){
+				if(strtotime($calendar2["$key"]) == strtotime($val2["date"]) && !empty($val2["date"])){
 					if($cnt2 > 0){
 						echo "</td>";
 						echo "<tr>";

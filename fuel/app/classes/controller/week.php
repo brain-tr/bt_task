@@ -51,6 +51,7 @@ class Controller_Week extends Controller
 		$tday_m	= date("m");
 		$tday_d	= date("d");
 		$data["calendar"]	= array();
+		$data["calendar2"]	= array();
 		//先週表示
 		if($data["check4"]==1){
 			$data["cnt_week"]  += 1;
@@ -73,6 +74,10 @@ class Controller_Week extends Controller
 				$data["calendar"][$i]['day'] = $cnt;
 				$cnt += 1;
 			}
+		}
+		//年月日を入れる作業
+		for($i=0; $i< 7; $i++){
+			$data["calendar2"][$i] = date('Y-m-d', mktime(0, 0, 0, $tday_m, $tday_d-$data["cnt_week"]*7+$i, $tday_y));
 		}
 
 		if($data["check3"]==1){
