@@ -2,15 +2,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>顧客管理システム | 顧客会社検索</title>
+<script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript">
 	function setFormInput(val){
 		var data = val.split(",");
 		if(data[1]==1){
-			data[1] = "案件";
+			data[1] = "エンドユーザ";
 		}else if(data[1]==2){
-			data[1] = "人材";
+			data[1] = "元請け";
 		}else if(data[1]==3){
-			data[1] = "両方";
+			data[1] = "二次請け";
+		}else if(data[1]==4){
+			data[1] = "BP(両方)";
+		}else if(data[1]==5){
+			data[1] = "BP(人材元)";
 		}
         if(!window.opener || window.opener.closed){
             //親ウィンドウが存在しない場合の処理
@@ -22,12 +27,31 @@
             window.opener.document.getElementById('three').value = data[2];
             window.opener.document.getElementById('four').value = data[3];
             window.opener.document.getElementById('five').value = data[4];
-            window.opener.document.getElementById('six').value = data[5];
-            window.opener.document.getElementById('seven').value = data[6];
-            window.opener.document.getElementById('eight').value = data[7];
+//            window.opener.document.getElementById('six').value = data[5];
+//            window.opener.document.getElementById('seven').value = data[6];
+ //           window.opener.document.getElementById('eight').value = data[7];
             window.opener.document.getElementById('nine').value = data[8];
             window.opener.document.getElementById('ten').value = data[9];
-            window.close();
+
+  $.ajax({
+    url: "searchid/"+data[9],
+    dataType: "json",
+    cache: false,
+    success: function(data, textStatus){
+      // 成功したとき
+      // data にサーバーから返された html が入る 
+				
+				window.opener.document.getElementById("tbl_claim").innerHTML = data["claim"];
+				window.opener.document.getElementById("tbl_customer").innerHTML = data["customer"];
+				
+		window.close();
+	  
+	  
+	  
+    }
+  });
+
+			
         }
     }
 	</script>

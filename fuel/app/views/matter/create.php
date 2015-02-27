@@ -54,7 +54,7 @@ p#msg{
 <table class="tableStyle6">
 	<tr>
 		<th>日付</th>
-		<td colspan="3"><input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" size="6"></td>
+		<td colspan="3"><input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" size="12"></td>
 	</tr>
 	<tr>
 		<th>記入者</th>
@@ -66,7 +66,7 @@ p#msg{
 			<input type="text" id="one" class="disabled" disabled size="12">
 			<input type="button" id="searchbtn" name="search" onClick="sear();" value="検索">
 		</td>
-		<td>客種:<input type="text" id="two" class="disabled" disabled size="1"></td>
+		<td>客種:<input type="text" id="two" class="disabled" disabled size="12"></td>
 	</tr>
 	<tr>
 		<th>要求フラグ</th>
@@ -99,8 +99,8 @@ p#msg{
 		<td colspan="3">
 			<table class="tableStyle">
 				<tr>
-					<th>TEL(請求担当)</th>
-					<th>Mail(請求担当)</th>
+					<th>TEL</th>
+					<th>Mail</th>
 				</tr>
 				<tr>
 					<td><input type="text" id="four" class="disabled" disabled size="10"></td>
@@ -110,20 +110,17 @@ p#msg{
 		</td>
 	</tr>
 	<tr>
-		<th>顧客担当者<br />詳細情報</th>
+		<th>請求担当者</th>
 		<td colspan="3">
-			<table class="tableStyle">
-				<tr>
-					<th>顧客担当者名</th>
-					<th>TEL(顧客担当者)</th>
-					<th>Mail(顧客担当者)</th>
-				</tr>
-				<tr>
-					<td><input type="text" id="six" class="disabled" disabled size="8"></td>
-					<td><input type="text" id="seven" class="disabled" disabled size="8"></td>
-					<td><input type="text" id="eight" class="disabled" disabled size="8"></td>
-				</tr>
-			</table>
+			<div id="tbl_claim">
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<th>担当者</th>
+		<td colspan="3">
+			<div id="tbl_customer">
+			</div>
 		</td>
 	</tr>
 	<tr>

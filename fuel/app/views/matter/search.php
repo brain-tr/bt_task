@@ -6,11 +6,15 @@
 	function setFormInput(val){
 		var data = val.split(",");
 		if(data[1]==1){
-			data[1] = "案件";
+			data[1] = "エンドユーザ";
 		}else if(data[1]==2){
-			data[1] = "人材";
+			data[1] = "元請け";
 		}else if(data[1]==3){
-			data[1] = "両方";
+			data[1] = "二次請け";
+		}else if(data[1]==4){
+			data[1] = "BP(両方)";
+		}else if(data[1]==5){
+			data[1] = "BP(人材元)";
 		}
         if(!window.opener || window.opener.closed){
             //親ウィンドウが存在しない場合の処理

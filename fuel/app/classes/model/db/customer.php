@@ -8,15 +8,21 @@ class db_customer extends \Model {
 	*/
 	public static function ins_company($data)
 	{
+
 		\DB::insert('k_company')->set(array(
-				'company_name'	=> $data['c_name'],
-				'company_add'	=> $data['address'],
-				'company_tel'	=> $data['tel'],
-				'company_mail'	=> $data['mail'],
-				'user_name'		=> $data['u_name'],
-				'special_text'	=> $data['special'],
-				'c_flag'		=> $data['flag'],
-				'rank_id'		=> 0
+				'company_name'		=> $data['c_name'],
+				'capital'			=> $data['capital'],
+				'employees'			=> $data['employees'],
+				'sales'				=> $data['sales'],
+				'company_add_code'	=> $data['company_add_code'],
+				'company_add'		=> $data['address'],
+				'company_tel'		=> $data['tel'],
+				'company_mail'		=> $data['mail'],
+				'user_name'			=> $data['u_name'],
+				'special_text'		=> $data['special'],
+				'c_flag'			=> $data['flag'],
+				'listing_flag'		=> $data['listing_flag'],
+				'rank_id'			=> 0
 		))->execute();
 
 		$query	=\DB::query("SELECT LAST_INSERT_ID();");
@@ -37,13 +43,29 @@ class db_customer extends \Model {
 	/*
 	 *	顧客担当者情報を登録する
 	 */
-	public static function ins_customer($id,$name,$tel,$mail)
+	public static function ins_customer($id,$name,$tel,$mail,$remarks)
 	{
 		\DB::insert('k_customer')->set(array(
 				'company_id'	=> $id,
 				'name'			=> $name,
 				'tel'			=> $tel,
 				'mail'			=> $mail,
+				'remarks'		=> $remarks,
+				'rank_id'		=> 0
+		))->execute();
+	}
+	
+	/*
+	 *	顧客請求担当者情報を登録する
+	 */
+	public static function ins_claim($id,$name,$tel,$mail,$remarks)
+	{
+		\DB::insert('k_claim')->set(array(
+				'company_id'	=> $id,
+				'name'			=> $name,
+				'tel'			=> $tel,
+				'mail'			=> $mail,
+				'remarks'		=> $remarks,
 				'rank_id'		=> 0
 		))->execute();
 	}
@@ -67,6 +89,12 @@ class db_customer extends \Model {
 		return \DB::select()->from('k_customer')->or_where_open()->where("company_id",$data)->or_where('company_id',$data2)->or_where_close()->execute()->as_array();
 
 	}
+	public static function get_claim($data,$data2)
+	{
+		//変更処理の時と一覧から飛んできた時に判定を分けています。
+		return \DB::select()->from('k_claim')->or_where_open()->where("company_id",$data)->or_where('company_id',$data2)->or_where_close()->execute()->as_array();
+
+	}
 
 	/*
 	 *	顧客会社情報を変更する
@@ -74,14 +102,19 @@ class db_customer extends \Model {
 	public static function upd_company($data)
 	{
 		return \DB::update('k_company')->set(array(
-				'company_name'	=> $data['c_name'],
-				'company_add'	=> $data['address'],
-				'company_tel'	=> $data['tel'],
-				'company_mail'	=> $data['mail'],
-				'user_name'		=> $data['u_name'],
-				'special_text'	=> $data['special'],
-				'c_flag'		=> $data['flag'],
-				'rank_id'		=> 0
+				'company_name'		=> $data['c_name'],
+				'capital'			=> $data['capital'],
+				'employees'			=> $data['employees'],
+				'sales'				=> $data['sales'],
+				'company_add_code'	=> $data['company_add_code'],
+				'listing_flag'		=> $data['listing_flag'],
+				'company_add'		=> $data['address'],
+				'company_tel'		=> $data['tel'],
+				'company_mail'		=> $data['mail'],
+				'user_name'			=> $data['u_name'],
+				'special_text'		=> $data['special'],
+				'c_flag'			=> $data['flag'],
+				'rank_id'			=> 0
 		))->where('company_id', $data['company_id'])
 		->execute();
 	}
@@ -94,17 +127,34 @@ class db_customer extends \Model {
 		\DB::delete('k_customer')->where('company_id',$company_id)->execute();
 
 	}
+	public static function del_claim($company_id)
+	{
+		\DB::delete('k_claim')->where('company_id',$company_id)->execute();
+
+	}
 
 	/*
 	 *	顧客担当者情報を変更する
 	*/
-	public static function upd_customer($company_id,$name,$tel,$mail)
+	public static function upd_customer($company_id,$name,$tel,$mail,$remarks)
 	{
 		return \DB::insert('k_customer')->set(array(
 				'company_id'	=> $company_id,
 				'name'			=> $name,
 				'tel'			=> $tel,
 				'mail'			=> $mail,
+				'remarks'		=> $remarks,
+				'rank_id'		=> 0
+		))->execute();
+	}
+	public static function upd_claim($company_id,$name,$tel,$mail,$remarks)
+	{
+		return \DB::insert('k_claim')->set(array(
+				'company_id'	=> $company_id,
+				'name'			=> $name,
+				'tel'			=> $tel,
+				'mail'			=> $mail,
+				'remarks'		=> $remarks,
 				'rank_id'		=> 0
 		))->execute();
 	}

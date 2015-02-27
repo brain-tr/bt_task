@@ -60,16 +60,27 @@ p#big{
 <div id="content">
 <div id="contentIn">
 <?php
+	$listing_select = "";
 	$selected1 = "";
 	$selected2 = "";
 	$selected3 = "";
+	$selected4 = "";
+	$selected5 = "";
 	foreach($company as $key => $val){
+		if($val["listing_flag"]==1){
+			$listing_select = "checked='checked'";
+		}
+	
 		if($val["c_flag"]==1){
 			$selected1 = "selected";
 		}else if($val["c_flag"]==2){
 			$selected2 = "selected";
 		}else if($val["c_flag"] == 3){
 			$selected3 = "selected";
+		}else if($val["c_flag"] == 4){
+			$selected4 = "selected";
+		}else if($val["c_flag"] == 5){
+			$selected5 = "selected";
 		}
 ?>
 <form action="#" name="form1" id="form1" method="post">
@@ -80,21 +91,45 @@ p#big{
 		<td colspan='2'>
 			<select name="flag">
 			<?php
-				echo "<option value='1' $selected1>案件</option>";
-				echo "<option value='2' $selected2>人材</option>";
-				echo "<option value='3' $selected3>両方</option>";
+				echo "<option value='1' $selected1>エンドユーザ</option>";
+				echo "<option value='2' $selected2>元請け</option>";
+				echo "<option value='3' $selected3>二次請け</option>";
+				echo "<option value='4' $selected4>BP（両方）</option>";
+				echo "<option value='5' $selected5>BP（人材元）</option>";
 			?>
 			</select>
+			<?php
+				echo "上場済み<input type='checkbox' name='listing_flag' value='1' $listing_select>";
+			?>
 		</td>
 	<tr>
 	<tr>
 		<th>顧客会社名</th>
-		<td colspan='2'><input type="text" name="c_name" size="15" value="<?php echo $val["company_name"];?>"></td>
+		<td colspan='2'><input type="text" name="c_name" size="30" value="<?php echo $val["company_name"];?>"></td>
 	<tr>
 	<tr>
 		<th>顧客会社住所</th>
-		<td colspan='2'><input type="text" name="address"size="15" value="<?php echo $val["company_add"]; ?>"></td>
+		<td colspan='2'>
+			<div class="container" ng-controller="CalendarCtrl">
+				郵便番号：<input type="text" name="zip01" size="10" value="<?php echo $val["company_add_code"];?>" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+				<p>住所:<input type="text" name="addr11" size="40" value="<?php echo $val["company_add"]; ?>" >
+			</div>
+		</td>
 	<tr>
+
+	<tr>
+		<th>資本金</th>
+		<td colspan='2'><input type="text" name="capital" size="15" style="text-align:right" value="<?php echo $val["capital"];?>" ></td>
+	</tr>
+	<tr>
+		<th>従業員数</th>
+		<td colspan='2'><input type="text" name="employees" size="15" style="text-align:right" value="<?php echo $val["employees"];?>" ></td>
+	</tr>
+	<tr>
+		<th>売上高</th>
+		<td colspan='2'><input type="text" name="sales" size="15" style="text-align:right" value="<?php echo $val["sales"];?>" ></td>
+	</tr>
+
 	<tr>
 		<th>
 			顧客会社<br/>
@@ -103,12 +138,12 @@ p#big{
 		<td colspan='2'>
 			<table class="tableStyle">
 				<tr>
-					<th>TEL(請求担当)</th>
-					<th>Mail(請求担当)</th>
+					<th>TEL</th>
+					<th>Mail</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="tel"size="10" value="<?php echo $val["company_tel"]; ?>"></td>
-					<td><input type="text" name="mail"size="10" value="<?php echo $val["company_mail"]; ?>"></td>
+					<td><input type="text" name="tel"size="12" value="<?php echo $val["company_tel"]; ?>"></td>
+					<td><input type="text" name="mail"size="25" value="<?php echo $val["company_mail"]; ?>"></td>
 				</tr>
 			</table>
 		</td>
@@ -117,23 +152,54 @@ p#big{
 	<tr>
 		<th>
 			<span id="thbtn">
-				顧客担当者<br />
-				詳細情報<br />
+				請求担当者<br />
+				<br />
 			</span>
 			<input type="button" name="any" value="追加" id="add"></th>
 		<td colspan='2'>
 		<table class="tableStyle" id="list">
 		<tr>
-			<th>顧客担当者名</th>
-			<th>TEL(顧客担当者)</th>
-			<th>Mail(顧客担当者)</th>
+			<th>名前</th>
+			<th>TEL</th>
+			<th>Mail</th>
+			<th>備考</th>
+		</tr>
+		<?php
+		foreach($claim as $key2 => $val2){
+			echo "<tr>";
+				echo "<td><input type='text' name='t_name4[]'size='8' value=".$val2["name"]."></td>";
+				echo "<td><input type='text' name='t_tel4[]'size='12' value=".$val2["tel"]."></td>";
+				echo "<td><input type='text' name='t_mail4[]'size='25' value=".$val2["mail"]."></td>";
+				echo "<td><textarea name='t_remarks4[]' cols='50'>".$val2["remarks"]."</textarea></td>";
+			echo "</tr>";
+		}
+		?>
+		</table>
+		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<span id="thbtn">
+				担当者<br />
+				<br />
+			</span>
+			<input type="button" name="any" value="追加" id="add"></th>
+		<td colspan='2'>
+		<table class="tableStyle" id="list">
+		<tr>
+			<th>名前</th>
+			<th>TEL</th>
+			<th>Mail</th>
+			<th>備考</th>
 		</tr>
 		<?php
 		foreach($customer as $key2 => $val2){
 			echo "<tr>";
 				echo "<td><input type='text' name='t_name[]'size='8' value=".$val2["name"]."></td>";
-				echo "<td><input type='text' name='t_tel[]'size='8' value=".$val2["tel"]."></td>";
-				echo "<td><input type='text' name='t_mail[]'size='8' value=".$val2["mail"]."></td>";
+				echo "<td><input type='text' name='t_tel[]'size='12' value=".$val2["tel"]."></td>";
+				echo "<td><input type='text' name='t_mail[]'size='25' value=".$val2["mail"]."></td>";
+				echo "<td><textarea name='t_remarks[]' cols='50'>".$val2["remarks"]."</textarea></td>";
 			echo "</tr>";
 		}
 		?>

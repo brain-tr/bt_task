@@ -143,6 +143,42 @@ class Controller_Mlist extends Controller
 
 		return View::forge('mlist/search',$data);
 	}
+	
+	public function action_searchid($company_id)
+	{
+		$rtn_html = array();
+		$data	=	db_customer::get_customer($company_id,0);
+		$html = "";
+		
+		if (!empty($data)){
+			$html = '<table class="tableStyle"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
+			foreach($data as $key => $val){
+				$html .= '<tr><td><input type="text" class="disabled" disabled size="10" value="'.$val["name"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled size="12" value="'.$val["tel"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled size="25" value="'.$val["mail"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled size="50" value="'.$val["remarks"].'"></td></tr>';
+			}
+			$html .= "</table>";
+		}
+		$rtn_html["customer"] = $html;
+		
+		$data	=	db_customer::get_claim($company_id,0);
+		$html = "";
+		
+		if (!empty($data)){
+			$html = '<table class="tableStyle"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
+			foreach($data as $key => $val){
+				$html .= '<tr><td><input type="text" class="disabled" disabled size="10" value="'.$val["name"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled size="12" value="'.$val["tel"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled size="25" value="'.$val["mail"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled size="50" value="'.$val["remarks"].'"></td></tr>';
+			}
+			$html .= "</table>";
+		}
+		$rtn_html["claim"] = $html;
+		
+		return json_encode($rtn_html);
+	}
 
 	/*
 	 *	更新履歴画面

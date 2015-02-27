@@ -248,14 +248,22 @@ div.floatright {
 <?php
 	$selected1 = "";
 	$flg	=	"";
+	$flg2	=	"";
 
 	foreach($view as $key=>$val){
 		if($val["c_flag"]==1){
-			$flg = "案件";
+			$flg = "エンドユーザ";
 		}else if($val["c_flag"]==2){
-			$flg = "人材";
+			$flg = "元請け";
 		}else if($val["c_flag"] == 3){
-			$flg = "両方";
+			$flg = "二次請け";
+		}else if($val["c_flag"] == 4){
+			$flg = "BP(両方)";
+		}else if($val["c_flag"] == 5){
+			$flg = "BP(人材元)";
+		}
+		if ($val["listing_flag"] == 1){
+			$flg2	=	"checked='checked'";
 		}
 ?>
 <form action="update" method="post" name="form1">
@@ -263,7 +271,7 @@ div.floatright {
 <table class="tableStyle6">
 	<tr>
 		<th>日付</th>
-		<td colspan="3"><input type="text" name="date"  value="<?php echo $val['date']; ?>" size="6"></td>
+		<td colspan="3"><input type="text" name="date" class="disabled" disabled value="<?php echo $val['date']; ?>" size="12"></td>
 	</tr>
 	<tr>
 		<th>記入者</th>
@@ -271,8 +279,8 @@ div.floatright {
 	</tr>
 	<tr>
 		<th>顧客会社名</th>
-		<td colspan="2"><input type="text" id="one" class="disabled" disabled size="10" value="<?php echo $val["company_name"];?>"></td>
-		<td>客種:<input type="text" id="two" class="disabled" disabled size="1" value="<?php echo $flg; ?>"></td>
+		<td colspan="2"><input type="text" id="one" class="disabled" disabled size="30" value="<?php echo $val["company_name"];?>"></td>
+		<td>客種:<input type="text" id="two" class="disabled" disabled size="12" value="<?php echo $flg; ?>">　上場<input type="checkbox" name="listing_flag" value="1" disabled="disabled" <?php echo $flg2;?>></td>
 	</tr>
 	<tr>
 		<th>要求フラグ</th>
@@ -295,44 +303,85 @@ div.floatright {
 		<td colspan="3"><input type="text" name="user" value="<?php echo $val["respone_name"];?>" size="10"></td>
 	</tr>
 	<tr>
-		<th>対応内容</th>
-		<td colspan="3"><textarea name="detail"><?php echo $val["content_text"]; ?></textarea></td>
+		<th>総論</th>
+		<td colspan="3"><textarea name="detail" cols='100'><?php echo $val["content_text"]; ?></textarea></td>
+	</tr>
+	<tr>
+		<th>ニーズ</th>
+		<td colspan="3"><textarea name="content_text2" cols='100'><?php echo $val["content_text2"]; ?></textarea></td>
+	</tr>
+	<tr>
+		<th>今後の展開</th>
+		<td colspan="3"><textarea name="content_text3" cols='100'><?php echo $val["content_text3"]; ?></textarea></td>
+	</tr>
+	<tr>
+		<th>質問内容</th>
+		<td colspan="3"><textarea name="content_text4" cols='100'><?php echo $val["content_text4"]; ?></textarea></td>
+	</tr>
+	<tr>
+		<th>断られた内容</th>
+		<td colspan="3"><textarea name="content_text5" cols='100'><?php echo $val["content_text5"]; ?></textarea></td>
 	</tr>
 
 	<tr>
 		<th>住所</th>
-		<td colspan="3"><input type="text" id="three" class="disabled" disabled size="15" value="<?php echo $val["company_add"];?>"></td>
+		<td colspan="3"><input type="text" class="disabled" disabled size="10" value="<?php echo $val["company_add_code"];?>"> <input type="text" id="three" class="disabled" disabled size="40" value="<?php echo $val["company_add"];?>"></td>
 	</tr>
 	<tr>
 		<th>顧客会社<br />詳細情報</th>
 		<td colspan="3">
 			<table class="tableStyle">
 				<tr>
-					<th>TEL(請求担当)</th>
-					<th>Mail(請求担当)</th>
+					<th>TEL</th>
+					<th>Mail</th>
 				</tr>
 				<tr>
-					<td><input type="text" id="four" class="disabled" disabled size="10" value="<?php echo $val["company_tel"];?>"></td>
-					<td><input type="text" id="five" class="disabled" disabled size="10" value="<?php echo $val["company_mail"];?>"></td>
+					<td><input type="text" id="four" class="disabled" disabled size="12" value="<?php echo $val["company_tel"];?>"></td>
+					<td><input type="text" id="five" class="disabled" disabled size="25" value="<?php echo $val["company_mail"];?>"></td>
 				</tr>
 			</table>
 		</td>
 	</tr>
 	<tr>
-		<th>顧客担当者<br />詳細情報</th>
+		<th>請求担当者</th>
 		<td colspan="3">
 			<table class="tableStyle">
 				<tr>
-					<th>顧客担当者名</th>
-					<th>TEL(顧客担当者)</th>
-					<th>Mail(顧客担当者)</th>
+					<th>名前</th>
+					<th>TEL</th>
+					<th>Mail</th>
+					<th>備考</th>
+				</tr>
+				<?php
+					foreach($claim as $key3 => $val3){
+						echo "<tr>";
+							echo "<td><input type='text' id='six' class='disabled' disabled size='8' value='".$val3["name"]."'></td>";
+							echo "<td><input type='text' id='seven' class='disabled' disabled size='12' value=".$val3["tel"]."></td>";
+							echo "<td><input type='text' id='eight' class='disabled' disabled size='25' value='".$val3["mail"]."'></td>";
+							echo "<td><textarea name='t_remarks[]' class='disabled' disabled cols='50'>".$val3["remarks"]."</textarea></td>";
+						echo "</tr>";
+					}
+				?>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>担当者</th>
+		<td colspan="3">
+			<table class="tableStyle">
+				<tr>
+					<th>名前</th>
+					<th>TEL</th>
+					<th>Mail</th>
+					<th>備考</th>
 				</tr>
 				<?php
 					foreach($customer as $key3 => $val3){
 						echo "<tr>";
 							echo "<td><input type='text' id='six' class='disabled' disabled size='8' value='".$val3["name"]."'></td>";
-							echo "<td><input type='text' id='seven' class='disabled' disabled size='8' value=".$val3["tel"]."></td>";
-							echo "<td><input type='text' id='eight' class='disabled' disabled size='8' value='".$val3["mail"]."'></td>";
+							echo "<td><input type='text' id='seven' class='disabled' disabled size='12' value=".$val3["tel"]."></td>";
+							echo "<td><input type='text' id='eight' class='disabled' disabled size='25' value='".$val3["mail"]."'></td>";
+							echo "<td><textarea name='t_remarks[]' class='disabled' disabled cols='50'>".$val3["remarks"]."</textarea></td>";
 						echo "</tr>";
 					}
 				?>
@@ -341,7 +390,7 @@ div.floatright {
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan="3"><textarea id="nine" class="disabled" disabled cols="20"><?php echo $val["special_text"]; ?></textarea></td>
+		<td colspan="3"><textarea id="nine" class="disabled" disabled cols="100"><?php echo $val["special_text"]; ?></textarea></td>
 	</tr>
 </table>
 <input type="hidden" id="ten" name="company_id" value="<?php echo $val["company_id"];?>">
@@ -358,7 +407,7 @@ div.floatright {
 <th>日付<input type='button' value=<?php echo $sortbtn;?> onClick='sort_btn(1);'></th>
 <th>要求フラグ<input type='button' value=<?php echo $sortbtn2;?> onClick='sort_btn(2);'></th>
 <th>対応者</th>
-<th>対応内容</th>
+<th>総括</th>
 <th>編集</th>
 </tr>
 <?php

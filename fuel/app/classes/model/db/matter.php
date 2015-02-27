@@ -108,6 +108,11 @@ class db_matter extends \Model {
 				select
 					matter_id,
 					a.company_id,
+					a.capital,
+					a.employees,
+					a.sales,
+					a.company_add_code,
+					a.listing_flag,
 					company_name,
 					company_add,
 					company_tel,
@@ -119,6 +124,10 @@ class db_matter extends \Model {
 					b.mail,
 					respone_name,
 					content_text,
+					content_text2,
+					content_text3,
+					content_text4,
+					content_text5,
 					date,
 					c.user_id,
 					c.case_id,
@@ -153,6 +162,10 @@ class db_matter extends \Model {
 				'respone_name'		=> $data['user'],
 				'case_id'			=> $data['case'],
 				'content_text'		=> $data['detail'],
+				'content_text2'		=> $data['content_text2'],
+				'content_text3'		=> $data['content_text3'],
+				'content_text4'		=> $data['content_text4'],
+				'content_text5'		=> $data['content_text5'],
 				'date'				=> $data['date']
 		))->where('matter_id', $data['m_id'])
 		->execute();

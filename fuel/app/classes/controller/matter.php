@@ -79,25 +79,29 @@ class Controller_Matter extends Controller
 		$data['userlog_name']	= $_SESSION['name'];
 		// POST
 		$post = Input::post();
-		$data["company_id"]	=	empty($post["company_id"])?"": $post["company_id"];
-		$data["date"]		=	empty($post["date"])	?  "": $post["date"];
-		$data["detail"]		=	empty($post["detail"])	?  "": $post["detail"];
-		$data["user"]		=	empty($post["user"])	?  "": $post["user"];
-		$data["check"]		=	empty($post["check"])	?  "": $post["check"];
-		$data["m_id"]		=	empty($post["matter_id"])? "": $post["matter_id"];
-		$data["list_id"]	=	empty($post["list_id"])?   "": $post["list_id"];
-		$data["check2"] 	=	empty($post["flag"])?	   "": $post["flag"];
-		$data["check3"]		=	empty($post["check3"])? ""	 : $post["check3"];
-		$data["check4"] 	=	empty($post["check4"])?""	 : $post["check4"];
-		$data["sortbtn"]	=	empty($post["sortbtn"])	?"↑": $post["sortbtn"];
-		$data["sortbtn2"]	=	empty($post["sortbtn2"])?"↑": $post["sortbtn2"];
-		$data["updown"]		=	empty($post["updown"])?	"asc": $post["updown"];
-		$data["updown2"]	=	empty($post["updown2"])?"asc": $post["updown2"];
-		$data["case"]		=	empty($post["case"])?	   "": $post["case"];
-		$data["msg"]		=	empty($post["msg"])		?  "": $post["msg"];
-		$data["msg_comp"]	=	empty($post["msg_comp"])? "0": $post["msg_comp"];
-		$data["msgcheck"]	=	empty($post["msgcheck"])? "1": $post["msgcheck"];
-		$data["cnt"]		=	empty($post["cnt"])?"0"		 : $post["cnt"];
+		$data["company_id"]		=	empty($post["company_id"])?"": $post["company_id"];
+		$data["date"]			=	empty($post["date"])	?  "": $post["date"];
+		$data["detail"]			=	empty($post["detail"])	?  "": $post["detail"];
+		$data["content_text2"]	=	empty($post["content_text2"])	?  "": $post["content_text2"];
+		$data["content_text3"]	=	empty($post["content_text3"])	?  "": $post["content_text3"];
+		$data["content_text4"]	=	empty($post["content_text4"])	?  "": $post["content_text4"];
+		$data["content_text5"]	=	empty($post["content_text5"])	?  "": $post["content_text5"];
+		$data["user"]			=	empty($post["user"])	?  "": $post["user"];
+		$data["check"]			=	empty($post["check"])	?  "": $post["check"];
+		$data["m_id"]			=	empty($post["matter_id"])? "": $post["matter_id"];
+		$data["list_id"]		=	empty($post["list_id"])?   "": $post["list_id"];
+		$data["check2"] 		=	empty($post["flag"])?	   "": $post["flag"];
+		$data["check3"]			=	empty($post["check3"])? ""	 : $post["check3"];
+		$data["check4"] 		=	empty($post["check4"])?""	 : $post["check4"];
+		$data["sortbtn"]		=	empty($post["sortbtn"])	?"↑": $post["sortbtn"];
+		$data["sortbtn2"]		=	empty($post["sortbtn2"])?"↑": $post["sortbtn2"];
+		$data["updown"]			=	empty($post["updown"])?	"asc": $post["updown"];
+		$data["updown2"]		=	empty($post["updown2"])?"asc": $post["updown2"];
+		$data["case"]			=	empty($post["case"])?	   "": $post["case"];
+		$data["msg"]			=	empty($post["msg"])		?  "": $post["msg"];
+		$data["msg_comp"]		=	empty($post["msg_comp"])? "0": $post["msg_comp"];
+		$data["msgcheck"]		=	empty($post["msgcheck"])? "1": $post["msgcheck"];
+		$data["cnt"]			=	empty($post["cnt"])?"0"		 : $post["cnt"];
 
 
 		// 日付を「年-月-日」の形で登録される。
@@ -179,6 +183,7 @@ class Controller_Matter extends Controller
 
 		//顧客会社担当者一覧取得
 		$data["customer"]	=	db_customer::get_customer($data["company_id"],$data["company_id"]);
+		$data["claim"]	=	db_customer::get_claim($data["company_id"],$data["company_id"]);
 		//セレクトボックス取り出し用
 		$data["select"]	=	db_case::get_name();
 		return view::forge('matter/update',$data);
