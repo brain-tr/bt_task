@@ -37,11 +37,10 @@
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ttop">タスク管理システムTOP</a></li>
-		<li><a href="/ktop">顧客管理システムTOP</a></li>
-</div>
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->

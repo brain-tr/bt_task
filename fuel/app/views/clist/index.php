@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>顧客管理システム | 顧客一覧</title>
-<link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
 msgcheck	= "<?php echo $msgcheck; ?>";
 //削除確認
@@ -40,6 +40,7 @@ function change(company_id){
 
 //昇順降順ボタン
 function msg(msg){
+
 	//会社名用
 	if(msg == 1){
 		var ipt1 = document.createElement("input");
@@ -56,6 +57,7 @@ function msg(msg){
 		form1.appendChild(ipt1);
 		form1.appendChild(ipt2);
 		form1.submit();
+
 	//客種用
 	}else if(msg == 2){
 		var ipt2 = document.createElement("input");
@@ -81,38 +83,6 @@ if(msgcheck != "1"){
 </script>
 
 <style type="text/css">
-table.tableStylex tr,th,td{
-    width: 750px;
-	padding:5px;
-	text-align:center;
-    border: 1px solid #999;
-	text-decoration:none;
-}
-#content table.tableStylex th {
-    font-weight: bold;
-    border-bottom: 1px solid #999;
-    background-color: #FFE8EE;
-    color: #666;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 93%;
-}
-table {
-   border-collapse: collapse;
-   border: 2px solid #999;
-}
-#delbtn{
-	margin-left:632px;
-}
-
-#search{
-	margin-left:498px;
-}
-
-#btn{
-	margin-left:600px;
-}
-
 span#com a{
 	text-decoration:none;
 }
@@ -137,22 +107,27 @@ input[type="button"].updown {
 </div><!-- /header -->
 </div><!-- /headerInner -->
 
-
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<input type="button" onClick="location.href='customer/create'" id="btn" value="新規登録画面" style="WIDTH: 100px; HEIGHT: 40px">
+<h2>顧客一覧</h2>
+
+<div class="fl">
+	<input type="button" onClick="location.href='customer/create'" id="btn" value="新規登録画面" style="WIDTH: 200px; HEIGHT: 50px">
+</div>
+
+<div class="fr">
 <br>
 <form action="#" name="form1" id="search" method="post">
-	<input type="text" name="search" size="10" value=<?php echo $search;?>>
+	<input type="text" name="search" class="searchBoxSize" size="10" value=<?php echo $search;?>>
 	<input type="submit" id="searchbtn" name="send" value="検索">
 	<input type="hidden" name="check2" value="2">
 </form>
-
+</div>
+<div class="clear mB20"></div>
 
 <form action="#" name="form2" method="post">
-<table border="1" class="tableStylex">
-
+<table class="tableStyle1">
 <?php
 	$i = 0;
 	$select = array(
@@ -162,27 +137,24 @@ input[type="button"].updown {
 		4 => "BP（両方）",
 		5 => "BP（人材元）"
 	);
-
 	echo "<tr>";
-	echo "<th>会社名<input type='button' name='updown1' class='updown' value='$msg' onClick='msg(1);'></th>";
-	echo "<th>客種<input type='button' name='updown2' class='updown' value='$msg2' onClick='msg(2);'></th>";
+	echo "<th class='w50'>会社名　<input type='button' name='updown1' class='updown' value='$msg' onClick='msg(1);'></th>";
+	echo "<th>客種　<input type='button' name='updown2' class='updown' value='$msg2' onClick='msg(2);'></th>";
 	echo "<th>削除</th>";
 
 	foreach($view as $key=> $val){
 		echo "<tr>";
 		echo "<td><span id='com'><a href='#' onClick='change(".$val['company_id'].");'  name='c_name'>".$val["company_name"]."</a></span></td>";
 		echo "<td>".$select[$val["c_flag"]]."</td>";
-		echo "<td><input type='checkbox' name='del[]' value=".$val['company_id'].">　　　<input type='button' onClick='del2(".$val["company_id"].");' value='削除'></td>";
-		echo "<tr>";
-
+		echo "<td><input type='checkbox' name='del[]' value=".$val['company_id'].">　　　";
+		echo "<input type='button' onClick='del2(".$val["company_id"].");' value='削除' style='WIDTH: 60px; HEIGHT: 35px'></td>";
+		echo "</tr>";
 	}
-
 ?>
-
 </table>
 <br>
 <input type="hidden" name="check" value="1">
-<input type="button"  value="一括削除" id="delbtn" onClick="del();">
+<p class="r"><input type="button"  value="一括削除" id="delbtn" onClick="del();" style="WIDTH: 150px; HEIGHT: 40px"></p>
 </form>
 
 <div class="clear"></div>
@@ -191,14 +163,10 @@ input[type="button"].updown {
 </div><!-- /content -->
 </div><!-- /contentIn -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ktop">TOP</a></li>
-		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case">要求一覧</a></li>
-		<li><a href="/mlist">対応一覧</a></li>
-	</ul>
-</div>
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->

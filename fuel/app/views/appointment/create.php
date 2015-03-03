@@ -17,7 +17,6 @@
 		document.getElementById('formBox').style.backgroundColor	= '#FFD5D5' ;
 		//キャンセルボタン表示
 		document.form.cancel.disabled = false;
-
 	}
 
 	function reload(cancel){
@@ -50,7 +49,7 @@
 				return true;
 			}else{
 				return false;
-		}
+			}
 		}
 
 		if(document.form.btn.value == "変更"){
@@ -106,7 +105,7 @@
   		echo "<td>".$val["appointment_id"]."</td>";
   		echo "<td>".$val["name"]."</td>";
   		echo "<td><input type='button' value='変更' onClick=change('".$val["name"]."',".$val["appointment_id"].");>
-	    　　　　　<input type='button' value='削除' onClick=deleate('".$val["name"]."',".$val["appointment_id"].");></td>";
+	    <input type='button' value='削除' onClick=deleate('".$val["name"]."',".$val["appointment_id"].");></td>";
 		echo "</tr>";
 	}
 ?>
@@ -115,20 +114,13 @@
 </div><!--/contantIn-->
 </div><!--/contant-->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ttop/">TOP</a></li>
-		<li><a href="/follow/create">フォロー報告</a></li>
-		<li><a href="/list/">フォロー一覧</a></li>
-		<li><a href="/user/create">ユーザー登録・更新</a></li>
-		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
-		<li><a href="/appointment/create">対応方針登録・更新</a></li>
-	</ul>
-</div>
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->
-
 
 </body>
 </html>

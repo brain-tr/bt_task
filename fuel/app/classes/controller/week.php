@@ -24,6 +24,11 @@ class Controller_Week extends Controller
 	*/
 	public function action_index()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		//POST
 		$post = Input::post();
 		$data["flg1"]	=	empty($post["flg1"])? "" : $post["flg1"];

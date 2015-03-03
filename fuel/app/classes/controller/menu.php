@@ -24,7 +24,6 @@ class Controller_Menu extends Controller
 		$data['userlog_name']	= $_SESSION['name'];
 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
 
-
  		return View::forge('menu' , $data);
 	}
 

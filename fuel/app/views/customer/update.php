@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>顧客管理システム | 顧客情報登録</title>
-<link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
@@ -12,20 +12,20 @@ $(function(){
 	$('#add').click(function(){
 		// 品目入力欄を追加
 			var new_list = '<tr>';
-			var new_list2 ='<td><input type="text" name="t_name[]" size="8"></td><td><input type="text" name="t_tel[]" size="12"></td>';
-			var new_list3 ='<td><input type="text" name="t_mail[]" size="25"></td><td><textarea name="t_remarks[]" cols="50"></textarea></td></tr>';
+			var new_list2 ='<td><input type="text" name="t_name[]" class="w150"></td><td><input type="text" name="t_tel[]" class="w150"></td>';
+			var new_list3 ='<td><input type="text" name="t_mail[]" class="w150"></td><td><textarea name="t_remarks[]" class="w200" rows="3"></textarea></td></tr>';
 			$('#list').append(new_list,new_list2,new_list3);
 	});
 	$('#add3').click(function(){
 		// 品目入力欄を追加
 			var new_list = '<tr>';
-			var new_list2 ='<td><input type="text" name="t_name3[]" size="8"></td><td><input type="text" name="t_tel3[]" size="12"></td>';
-			var new_list3 ='<td><input type="text" name="t_mail3[]" size="25"></td><td><textarea name="t_remarks3[]" cols="50"></textarea></td></tr>';
+			var new_list2 ='<td><input type="text" name="t_name3[]" class="w150"></td><td><input type="text" name="t_tel3[]" class="w150"></td>';
+			var new_list3 ='<td><input type="text" name="t_mail3[]" class="w150"></td><td><textarea name="t_remarks3[]" class="w200" rows="3"></textarea></td></tr>';
 			$('#list3').append(new_list,new_list2,new_list3);
 	});
-	
-	
-	
+
+
+
 });
 // アラートメッセージ
 if(msgcheck != "1"){
@@ -35,21 +35,7 @@ if(msgcheck != "1"){
 </script>
 <style type="text/css">
 p#big{
-	font-size:30px;
 	color:red;
-}
-#content table.tableStyle {
-    border: 1px solid #999;
-}
-#thbtn {
-	float:left;
-}
-#add {
-	float:right;
-	margin-right:15px;
-}
-#content table.tableStyle6 {
-	width:700px;
 }
 </style>
 
@@ -68,6 +54,7 @@ p#big{
 <div id="main">
 <div id="content">
 <div id="contentIn">
+<h2>顧客情報詳細</h2>
 <?php
 	$listing_select = "";
 	$selected1 = "";
@@ -79,7 +66,7 @@ p#big{
 		if($val["listing_flag"]==1){
 			$listing_select = "checked='checked'";
 		}
-	
+
 		if($val["c_flag"]==1){
 			$selected1 = "selected";
 		}else if($val["c_flag"]==2){
@@ -92,9 +79,9 @@ p#big{
 			$selected5 = "selected";
 		}
 ?>
-<form action="#" name="form1" id="form1" method="post">
-<p id="big"><?php echo $msg; ?></p><br />
-<table class="tableStyle6">
+<form action="#" name="form1" id="form1" method="post" class="formstyle1">
+<?php if($msg != ""){ echo '<p id="big">'.$msg.'</p><br>'; } ?>
+<table class="tableStyle7 mB30">
 	<tr>
 		<th>客主</th>
 		<td colspan='2'>
@@ -106,9 +93,9 @@ p#big{
 				echo "<option value='4' $selected4>BP（両方）</option>";
 				echo "<option value='5' $selected5>BP（人材元）</option>";
 			?>
-			</select>
+			</select>　
 			<?php
-				echo "上場済み<input type='checkbox' name='listing_flag' value='1' $listing_select>";
+				echo "上場済み <input type='checkbox' name='listing_flag' value='1' $listing_select>";
 			?>
 		</td>
 	<tr>
@@ -120,8 +107,8 @@ p#big{
 		<th>顧客会社住所</th>
 		<td colspan='2'>
 			<div class="container" ng-controller="CalendarCtrl">
-				郵便番号：<input type="text" name="zip01" size="10" value="<?php echo $val["company_add_code"];?>" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
-				<p>住所:<input type="text" name="addr11" size="40" value="<?php echo $val["company_add"]; ?>" >
+				郵便番号 <input type="text" name="zip01" size="10" value="<?php echo $val["company_add_code"];?>" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+				<p>住所 <input type="text" name="addr11" size="40" value="<?php echo $val["company_add"]; ?>" >
 			</div>
 		</td>
 	<tr>
@@ -141,32 +128,27 @@ p#big{
 
 	<tr>
 		<th>
-			顧客会社<br/>
-			詳細情報
+			顧客会社<br/>詳細情報
 		</th>
 		<td colspan='2'>
-			<table class="tableStyle">
+			<table class="tableStyle8">
 				<tr>
 					<th>TEL</th>
 					<th>Mail</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="tel"size="12" value="<?php echo $val["company_tel"]; ?>"></td>
-					<td><input type="text" name="mail"size="25" value="<?php echo $val["company_mail"]; ?>"></td>
+					<td><input type="text" name="tel" class='w150' value="<?php echo $val["company_tel"]; ?>"></td>
+					<td><input type="text" name="mail" size="20" value="<?php echo $val["company_mail"]; ?>"></td>
 				</tr>
 			</table>
 		</td>
 	</tr>
-
 	<tr>
 		<th>
-			<span id="thbtn">
-				請求担当者<br />
-				<br />
-			</span>
-			<input type="button" name="any" value="追加" id="add3"></th>
+			<span id="thbtn">請求担当者<br /></span>
+			<input type="button" name="any" value="追加" id="add3" style="WIDTH: 45px; HEIGHT: 30px"></th>
 		<td colspan='2'>
-		<table class="tableStyle" id="list3">
+		<table class="tableStyle8" id="list3">
 		<tr>
 			<th>名前</th>
 			<th>TEL</th>
@@ -176,10 +158,10 @@ p#big{
 		<?php
 		foreach($claim as $key2 => $val2){
 			echo "<tr>";
-				echo "<td><input type='text' name='t_name4[]'size='8' value=".$val2["name"]."></td>";
-				echo "<td><input type='text' name='t_tel4[]'size='12' value=".$val2["tel"]."></td>";
-				echo "<td><input type='text' name='t_mail4[]'size='25' value=".$val2["mail"]."></td>";
-				echo "<td><textarea name='t_remarks4[]' cols='50'>".$val2["remarks"]."</textarea></td>";
+				echo "<td><input type='text' name='t_name4[]' class='w150' value=".$val2["name"]."></td>";
+				echo "<td><input type='text' name='t_tel4[]' class='w150' value=".$val2["tel"]."></td>";
+				echo "<td><input type='text' name='t_mail4[]' class='w150' value=".$val2["mail"]."></td>";
+				echo "<td><textarea name='t_remarks4[]' class='w200' rows='3'>".$val2["remarks"]."</textarea></td>";
 			echo "</tr>";
 		}
 		?>
@@ -189,13 +171,10 @@ p#big{
 
 	<tr>
 		<th>
-			<span id="thbtn">
-				担当者<br />
-				<br />
-			</span>
-			<input type="button" name="any" value="追加" id="add"></th>
+			<span id="thbtn">担当者<br /></span>
+			<input type="button" name="any" value="追加" id="add" style="WIDTH: 45px; HEIGHT: 30px"></th>
 		<td colspan='2'>
-		<table class="tableStyle" id="list">
+		<table class="tableStyle8" id="list">
 		<tr>
 			<th>名前</th>
 			<th>TEL</th>
@@ -205,10 +184,10 @@ p#big{
 		<?php
 		foreach($customer as $key2 => $val2){
 			echo "<tr>";
-				echo "<td><input type='text' name='t_name[]'size='8' value=".$val2["name"]."></td>";
-				echo "<td><input type='text' name='t_tel[]'size='12' value=".$val2["tel"]."></td>";
-				echo "<td><input type='text' name='t_mail[]'size='25' value=".$val2["mail"]."></td>";
-				echo "<td><textarea name='t_remarks[]' cols='50'>".$val2["remarks"]."</textarea></td>";
+				echo "<td><input type='text' name='t_name[]' class='w150' value=".$val2["name"]."></td>";
+				echo "<td><input type='text' name='t_tel[]' class='w150' value=".$val2["tel"]."></td>";
+				echo "<td><input type='text' name='t_mail[]' class='w150' value=".$val2["mail"]."></td>";
+				echo "<td><textarea name='t_remarks[]' class='w200' rows='3'>".$val2["remarks"]."</textarea></td>";
 			echo "</tr>";
 		}
 		?>
@@ -221,12 +200,12 @@ p#big{
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan='2'><textarea name="special" cols="100"><?php echo $val["special_text"]; ?></textarea>
-	<tr>
+		<td colspan='2'><textarea name="special" cols="40" rows="4"><?php echo $val["special_text"]; ?></textarea></td>
+	</tr>
 </table>
 <input type="hidden" name="check" value="2">
 <input type="hidden" name="company_id" value="<?php echo $val["company_id"]; ?>">
-<p class="btnSpace"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_update.png" alt="変更する" /></button></p>
+<p class="c" style="width:100%; min-width: 1000px;"><input type="submit" value="変更する" style="WIDTH: 200px; HEIGHT: 55px"></p>
 
 </form>
 
@@ -234,22 +213,14 @@ p#big{
 
 <?php }?>
 
-
-
-
-
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ktop">TOP</a></li>
-		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case">要求一覧</a></li>
-		<li><a href="/mlist">対応一覧</a></li>
-	</ul>
-</div>
 <div class="clear"></div>
 </div><!-- /main -->
 

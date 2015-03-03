@@ -31,7 +31,6 @@ body.white {
 	font-size: 87.50%;
 }
 
-
 h1,h2,h3,h4,h5,h6 {font-size:100%;}
 
 ul,
@@ -118,6 +117,7 @@ a:hover img {
 .mT10 {margin-top:10px !important;}
 .mT15 {margin-top:15px !important;}
 .mT20 {margin-top:20px !important;}
+.mT40 {margin-top:20px !important;}
 .mL10 {margin-left:10px !important;}
 .mL20 {margin-left:20px !important;}
 .mL50 {margin-left:50px !important;}
@@ -141,6 +141,7 @@ a:hover img {
 .noscript {display:none !important;}
 .narrow {letter-spacing:-1.0px !important;}
 .lg {font-size:16px !important;}
+.lg18 {font-size:18px !important;}
 .sm {font-size:12px !important;}
 
 
@@ -186,46 +187,69 @@ input {
 	margin:5px 0;
 }
 h2 {
-	font-size:172%;
-	margin:20px 0 20px 0;
-	color:171717;
+	font-size:192%;
+	margin:30px 0 20px 0;
 }
 h3 {
 	font-size:143%;
 	margin-bottom:15px;
-	color:171717;
+	color:#171717;
 }
 
 /*	navi
 ----------------------------------------------------*/
 #side {
-	background:#e9f6ff;
 	width:225px;
 	float: left;
 }
-#side ul.navi li a {
+#side ul.navi li.nuv a {
 	display: block;
 	width:195px;
-	height:45px;
+	height:40px;
 	font-weight:bold;
 	color:#006699;
 	text-decoration:none;
-	padding:25px 0 0 30px;
+	padding:25px 0 0 29px;
 	margin:0;
+	border-bottom:1px solid #b2dcf7;
 }
-#side ul.navi li a {
+#side ul.navi li.nuv a {
 	background: url(../img/common/bg_navi.png) no-repeat left top;
 }
-#side ul.navi li a:hover {
+#side ul.navi li.nuv a:hover {
 	background: url(../img/common/bg_navi.png) no-repeat left -70px;
 }
-#side ul.navi li a.now {
+#side ul.navi li.nuv a.now {
 	background: url(../img/common/bg_navi.png) no-repeat left -70px;
+}
+
+/*	submenu
+----------------------------------------------------*/
+#side ul.subMenu li.sub a {
+	display: block;
+	width:195px;
+	height:25px;
+	font-weight:nomal;
+	font-size:93%;
+	color:#006699;
+	text-decoration:none;
+	margin:0;
+	padding:8px 0 3px 29px;
+	border-bottom:1px dotted #97d1f4;
+	background-color:#e9f6ff;
+}
+#side ul.navi li.sub a:hover {
+	background: #f3eaff;
+}
+#side ul.navi li.sub a.now {
+	background: #f3eaff;
 }
 
 
 /*	table
 ----------------------------------------------------*/
+
+/* 幅100% */
 #content table.tableStyle1{
 	width:100%;
 	border: 2px solid #999;
@@ -241,16 +265,13 @@ h3 {
 }
 #content table.tableStyle1 th {
 	text-align:center;
-	font-weight:bold;
 	border-bottom-width: 1px;
 	border-bottom-style:solid;
 	border-bottom-color: #999;
 	background-color:#ffe8ee;
-	color:#666;
 	vertical-align:middle;
 	font-size:93%;
 }
-
 #content table.tableStyle1 td {
 	font-size:86%;
 	text-align:left;
@@ -259,7 +280,14 @@ h3 {
 	text-align:center;
 	font-size:86%;
 }
+#content table.tableStyle1 th.w50 {
+	width:50%;
+}
+#content table.tableStyle1 th.w200 {
+	width:200px;
+}
 
+/* 幅750px */
 #content table.tableStyle2{
 	width:750px;
 }
@@ -268,6 +296,7 @@ h3 {
 	font-size: 86%;
 }
 
+/* 幅850px */
 #content table.tableStyle3{
 	width:850px;
 	border: 2px solid #999;
@@ -281,25 +310,23 @@ h3 {
 }
 #content table.tableStyle3 th {
 	width:25%;
-	font-weight:bold;
+	/*font-weight:bold;*/
 	border-bottom-width: 1px;
 	border-bottom-style:solid;
 	border-bottom-color: #999;
-	background-color:#d5eff7;
-	color:#666;
+	background-color:#ffe8ee;
 	vertical-align:middle;
 	font-size:93%;
 }
-
-#content table.tableStyle3 .bgG{
+#content table.tableStyle3 .bgG {
 	background-color:#e8e8e8;
 }
-#content table.tableStyle3 .bgP{
+#content table.tableStyle3 .bgP {
 	background-color:#ffe8ee;
 }
 
-
-#content table.tableStyle4{
+/* 幅100% */
+#content table.tableStyle4 {
 	width:100%;
 	border: 2px solid #999;
 }
@@ -311,27 +338,28 @@ h3 {
 	background-color:#fff;
 }
 #content table.tableStyle4 th {
-	font-weight:bold;
 	border-bottom-width: 1px;
 	border-bottom-style:solid;
 	border-bottom-color: #999;
 	background-color:#ffe8ee;
-	color:#666;
 	vertical-align:middle;
 	text-align:center;
 	font-size:93%;
 }
-#content table.tableStyle4 td{
+#content table.tableStyle4 td {
 	min-width:100px;
 	min-height:100px;
 }
-#content table.tableStyle4 th.name{
+#content table.tableStyle4 th.name {
 	width:150px;
 	min-width:130px;
 }
+#content table.tableStyle4 .bgG {
+	background-color:#e8e8e8;
+}
 
-
-#content table.tableStyle5{
+/* 750px */
+#content table.tableStyle5 {
 	width:750px;
 	border: 2px solid #999;
 }
@@ -346,16 +374,13 @@ h3 {
 }
 #content table.tableStyle5 th {
 	text-align:center;
-	font-weight:bold;
 	border-bottom-width: 1px;
 	border-bottom-style:solid;
 	border-bottom-color: #999;
 	background-color:#ffe8ee;
-	color:#666;
 	vertical-align:middle;
 	font-size:93%;
 }
-
 #content table.tableStyle5 td {
 	font-size:86%;
 	text-align:left;
@@ -364,9 +389,12 @@ h3 {
 	text-align:center;
 	font-size:86%;
 }
+#content table.tableStyle5 th.wLg {
+	width:150px;
+}
 
 /* 追加 */
-#content table.tableStyle6{
+#content table.tableStyle6 {
 	width:750px;
 	border: 2px solid #999;
 }
@@ -379,29 +407,75 @@ h3 {
 }
 #content table.tableStyle6 th {
 	width:25%;
-	font-weight:bold;
 	border-bottom-width: 1px;
 	border-bottom-style:solid;
 	border-bottom-color: #999;
-	background-color:#d5eff7;
-	color:#666;
+	background-color:#ffe8ee;
 	vertical-align:middle;
 	font-size:93%;
 }
 
-#content table.tableStyle6 .bgG{
+#content table.tableStyle6 .bgG {
 	background-color:#e8e8e8;
 }
-#content table.tableStyle6 .bgP{
+#content table.tableStyle6 .bgP {
 	background-color:#ffe8ee;
 }
 
+/* 100% */
+#content table.tableStyle7 {
+	width:100%;
+	border: 2px solid #999;
+	min-width: 1000px;
+}
+#content table.tableStyle7 td,
+#content table.tableStyle7 th {
+	text-align:center;
+	padding: 5px 10px;
+	border-left: 1px dotted #999;
+	border-bottom: 1px solid #999;
+	background-color:#fff;
+	vertical-align:top;
+}
+#content table.tableStyle7 th {
+	border-bottom-width: 1px;
+	border-bottom-style:solid;
+	border-bottom-color: #999;
+	background-color:#ffe8ee;
+	vertical-align:middle;
+	font-size:93%;
+	width:150px;
+}
+#content table.tableStyle7 td {
+	font-size:86%;
+	text-align:left;
+}
 
+/* グレー幅100% */
+#content table.tableStyle8 {
+	border: 1px solid #999;
+}
+#content table.tableStyle8 th,td {
+	border-left: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+#content table.tableStyle8 th {
+	background-color:#e8e8e8;
+}
 
 /*	form
 ----------------------------------------------------*/
 #content .formstyle1 input#name {
 	width:150px;
+}
+#content .formstyle1 input.w150 {
+	width:150px;
+}
+#content .formstyle1 input.w200 {
+	width:200px;
+}
+#content .formstyle1 input.h120 {
+	width:120px;
 }
 #content .formstyle1 input#mail {
 	width:210px;
@@ -439,6 +513,9 @@ h3 {
 #content .formstyle3 textarea.txtArea1 {
 	width:650px;
 }
+#content .searchBoxSize {
+	width:200px;
+}
 
 
 /*	ボタンスタイル初期
@@ -475,10 +552,3 @@ div#mark3{
 	margin-right:387px;
 	padding-bottom:-250px;
 }
-
-/* 以下顧客管理
-----------------------------------------------------*/
-
-
-/*	navi
-----------------------------------------------------*/

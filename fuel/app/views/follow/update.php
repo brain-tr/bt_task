@@ -19,16 +19,15 @@
 		alert(msgcheck);
 	}
 
-	//更新者履歴の確認
+	// 更新者履歴の確認
 	function disp(follow_id){
 		var follow_id = follow_id;
-		window.open('/follow/check?id=' + follow_id , "id", "width=400,height=400,scrollbars=yes");
+		window.open('/follow/check?id=' + follow_id , "id", "width=450,height=450,scrollbars=yes");
 	}
 </script>
 </head>
 
 <body>
-
 <div id="header">
 <div id="headerInner">
 	<h1><img src="/assets/img/common/logo.png" alt="ブレイントラスト" /></h1>
@@ -50,10 +49,9 @@
 	$end_msg  = "";
 	if($val["end_date"]!='0000-00-00'){
 		$disabled = "disabled";
-		$end_msg = "このフォロー情報は終了しました";
+		$end_msg = '<br />このフォロー情報は終了しました';
 	}
-
- 	echo "<p class='alert' style='color:red; font-size:30px;'>".$end_msg."</p>";
+ 	echo "<p class='alert' style='color:#d64040; font-size:22px; font-weight:bold;'>".$end_msg."</p>";
  ?>
 <h2>フォロー報告の変更</h2>
 
@@ -103,24 +101,20 @@
 	</tr>
 	</table>
 	<?php if(empty($follow_detail_id)) {?>
-		<p class="btnSpace mB50">
-		<button type="submit" id="btnCrea" name="result" value="変更する"><img src="/assets/img/common/btn_update.png" alt="登録する" width="180px" height="70px" /></button>　
-		<button type="submit" id="btnCrea" name="result" value="削除する" onClick="followDelete()"><img src="/assets/img/common/btn_delete.png" alt="登録する" width="180px" height="70px" /></button>
-<!-- 		<input type="submit" name="result" value="変更する" />　 -->
-<!--		<input type="submit" name="result" value="削除する" onClick="followDelete()" /> -->
-	</p>
+		<p class="c"><input type="submit" class="btnSpace mB50" name="result" value="変更する" style="WIDTH: 200px; HEIGHT: 50px">
+		<input type="submit" class="btnSpace mB50" name="result" value="削除する" onClick="followDelete()" style="WIDTH: 200px; HEIGHT: 50px"></p>
+
 	<?php } ?>
 	<input type="hidden" name="follow_id" id="follow_id" value="<?php echo $follow_id; ?>" />
 	<input type="hidden" name="create_user_id" value="<?php echo $val["create_user_id"]; ?>">
 	</form>
 
-	<div id="mark1">
 	<?php
 	if(empty($disabled)){
 		if(!empty($follow_detail_up_data)){
-			echo '<h3>フォロー詳細内容の変更</h3>';
 			echo '<form action="/follow/update" method="post" id="form3">';
 			echo '<table class="tableStyle3 mB50">';
+			echo '<tr><td colspan="4">フォロー詳細内容の変更</td></tr>';
 			echo '<tr>';
 
 			echo '<th class="bgP">日付</th>';
@@ -182,11 +176,9 @@
 		echo '<input type="hidden" name="detail_date" value="'.$follow_detail_up_data['detail_date'].'" /></form>';
 		}
 	}?>
-	</div><!-- #mark1 -->
 
-	<div id="mark2">
-	<h3>フォロー詳細内容の一覧</h3>
 	<table class="tableStyle3 mB50">
+	<tr><td colspan="4"><p class="lg18 mT10 mB10">フォロー詳細内容の一覧</p></td></tr>
 	<?php
 		if(!empty($follow_detail_data)){
 			foreach($follow_detail_data as $val2){
@@ -197,20 +189,21 @@
 				}
 			}
 		} else {
-			echo '<tr><td>フォロー詳細内容は登録されていません</td></tr>';
+			echo '<tr><td colspan="4">フォロー詳細内容は登録されていません</td></tr>';
 	}
 	?>
 	</table>
-	</div><!-- #mark2 -->
+
 	<!-- 対応内容 -->
-	<div id="mark3">
-	<h3>フォロー詳細内容の登録</h3>
 	<form action="/follow/update" method="post" id="form2">
 	<table class="tableStyle3 mB50">
 		<tr>
-			<th class="bgP">日付</th>
-			<td colspan="2" style="border-right:none;"><input type="text" id="detail_date" name="detail_date" value="<?php echo date("Y-m-d") ; ?>" size="15" <?php echo $disabled; ?>/></td>
+			<td colspan="3"><p class="lg18">フォロー詳細内容の登録</p></td>
 			<td style="border-left:none;"><button type="submit" id="btnCrea" <?php echo $disabled; ?>><img src="/assets/img/common/btn_insert2.png" alt="登録する"  width="100px"/></button></td>
+		</tr>
+		<tr>
+			<th class="bgP">日付</th>
+			<td colspan="3" style="border-right:none;"><input type="text" id="detail_date" name="detail_date" value="<?php echo date("Y-m-d") ; ?>" size="15" <?php echo $disabled; ?>/></td>
 		</tr>
 
 		<tr>
@@ -244,14 +237,13 @@
 			</td>
 		</tr>
 		<tr>
-
 		</tr>
 		<tr>
 			<th class="bgP">フォロー詳細内容</th>
 			<td colspan="3"><textarea <?php echo $disabled; ?> id ="remarks2" name="remarks2" rows="4" cols="20" ></textarea></td>
 		</tr>
 	</table>
-	</div><!-- #mark3 -->
+
 	<input type="hidden" name="follow_id" value="<?php echo $follow_id; ?>" />
 	<input type="hidden" name="start_date" value="<?php //echo $val['start_date']; ?>" />
 	<input type="hidden" name="result" value="3" />
@@ -265,18 +257,10 @@
 </div><!-- /content -->
 
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ttop/">TOP</a></li>
-		<li><a href="/follow/create">フォロー報告</a></li>
-		<li><a href="/list/">フォロー一覧</a></li>
-	<?php if($userlog_adflag!=0){?>
-		<li><a href="/user/create">ユーザー登録・更新</a></li>
-		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
-		<li><a href="/appointment/create">対応方針登録・更新</a></li>
-	<?php }?>
-	</ul>
-</div><!-- /side -->
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->

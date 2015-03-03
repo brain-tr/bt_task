@@ -24,6 +24,11 @@ class Controller_Mlist extends Controller
 	*/
 	public function action_index()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		//POST
 		$post = Input::post();
 		$data["flg1"]	=	empty($post["flg1"])? "" : $post["flg1"];
@@ -143,13 +148,13 @@ class Controller_Mlist extends Controller
 
 		return View::forge('mlist/search',$data);
 	}
-	
+
 	public function action_searchid($company_id)
 	{
 		$rtn_html = array();
 		$data	=	db_customer::get_customer($company_id,0);
 		$html = "";
-		
+
 		if (!empty($data)){
 			$html = '<table class="tableStyle"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
 			foreach($data as $key => $val){
@@ -161,10 +166,10 @@ class Controller_Mlist extends Controller
 			$html .= "</table>";
 		}
 		$rtn_html["customer"] = $html;
-		
+
 		$data	=	db_customer::get_claim($company_id,0);
 		$html = "";
-		
+
 		if (!empty($data)){
 			$html = '<table class="tableStyle"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
 			foreach($data as $key => $val){
@@ -176,7 +181,7 @@ class Controller_Mlist extends Controller
 			$html .= "</table>";
 		}
 		$rtn_html["claim"] = $html;
-		
+
 		return json_encode($rtn_html);
 	}
 

@@ -28,6 +28,7 @@ class Controller_Appointment extends Controller
 		// ログイン情報
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
 
 		 $post				=	Input::post();
 		 $data["name"]		=	empty($post["name"]) ? "": $post["name"];

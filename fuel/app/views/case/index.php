@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>顧客管理システム | 要求フラグ一覧</title>
-<link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
@@ -64,18 +64,20 @@ if(msgcheck != "1"){
 </script>
 <style type="text/css">
 table.tableStylex {
-    width: 400px;
-    margin:5px 150px;
+    width: 800px;
 }
 table.tableStylex tr,th,td{
 	padding:5px;
-	width:50px;
-    border: 2px dotted #999;
-    border-left: 2px solid #999;
+    border: 1px dotted #999;
+    border-left: 1px solid #999;
 	text-align:center;
 }
+table.tableStylex td.w150{
+	width:150px;
+}
+
 #btn{
-	margin-left:450px;
+	margin:40px 0 10px 540px;
 }
 input[type="button"].updown {
 	margin:0;
@@ -85,9 +87,7 @@ input[type="button"].updown {
 	text-align:center;
 }
 #content table.tableStylex th {
-    font-weight: bold;
-    color: #666;
-    border-bottom: 2px solid #999;
+    border-bottom: 1px solid #999;
     vertical-align: middle;
     text-align: center;
     font-size: 93%;
@@ -113,27 +113,34 @@ table {
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<input type="button" id="btn" onClick="crea();" value="新規登録画面" style="WIDTH: 100px; HEIGHT: 40px">
-<br>
+<div class="fl">
+	<h2>要求一覧</h2>
+</div>
+<div class="fl">
+<input type="button" id="btn" onClick="crea();" value="新規登録画面" style="WIDTH: 150px; HEIGHT: 50px">
+</div>
+<div class="clear"></div>
+
 <form action="case" method="post" name="form" style="clear:both;">
 <table border="1" class="tableStylex">
-<tr>
-<th>要求名<input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></th>
-<th>編集</th>
-</tr>
-<?php
-	foreach($name as $key => $val){
-		echo "<tr>";
-		echo "<td style='background-color:".$val["color_code"].";'>".$val["name"]."</td>";
-		echo "<td>";
-  		echo "<input type='button' value='変更' onClick=\"upda('".$val["case_id"]."', '".$val["name"]."', '".$val["color_code"]."')\">";
- 		echo " / ";
-		echo "<input type='button' value='削除' onClick=del(".$val["case_id"].")>";
-		echo "</td>";
-		echo "</tr>";
-	}
-?>
+	<tr>
+		<th><span class="lg18">要求名</span></span> <input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></th>
+		<th><span class="lg18">編集</span></th>
+	</tr>
+	<?php
+		foreach($name as $key => $val){
+			echo "<tr>";
+			echo "<td style='background-color:".$val["color_code"].";'>".$val["name"]."</td>";
+			echo "<td>";
+	  		echo "<input type='button' value='変更' onClick=\"upda('".$val["case_id"]."', '".$val["name"]."', '".$val["color_code"]."')\" style='WIDTH: 60px; HEIGHT: 35px'>";
+	 		echo " / ";
+			echo "<input type='button' value='削除' onClick=del(".$val["case_id"].") style='WIDTH: 60px; HEIGHT: 35px'>";
+			echo "</td>";
+			echo "</tr>";
+		}
+	?>
 </table>
+
 <input type="hidden" value="1" name="check">
 <input type="hidden" value="" name="flag_id">
 <input type="hidden" value="" name="new_name">
@@ -142,14 +149,11 @@ table {
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ktop">TOP</a></li>
-		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case">要求一覧</a></li>
-		<li><a href="/mlist">対応一覧</a></li>
-	</ul>
-</div>
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
+
 <div class="clear"></div>
 </div><!-- /main -->
 

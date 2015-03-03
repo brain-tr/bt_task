@@ -28,7 +28,8 @@ class Controller_Matter extends Controller
 		// ログイン情報
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
-// 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+ 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		// POST
 		$post = Input::post();
 		$data["c_id"]	=	empty($post["company_id"])?"": $post["company_id"];
@@ -77,6 +78,8 @@ class Controller_Matter extends Controller
 		// ログイン情報
 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		// POST
 		$post = Input::post();
 		$data["company_id"]		=	empty($post["company_id"])?"": $post["company_id"];
@@ -195,6 +198,11 @@ class Controller_Matter extends Controller
 	*/
 	public function action_day()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		//POST
 		$post = Input::post();
 		$data["check1"] =	empty($post["check1"])?"": $post["check1"];

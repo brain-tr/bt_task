@@ -23,6 +23,11 @@ class Controller_Clist extends Controller
 	*/
 	public function action_index()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		$post = Input::post();
 		$select 			=	empty($post["select"])?"" : $post["select"];
 		$cd					=	empty($post["cd"])	?""	  : $post["cd"];

@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>顧客管理システム | 顧客一覧</title>
-<link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
 month	= "<?php echo $month; ?>";
 year	= "<?php echo $year; ?>";
@@ -114,6 +114,7 @@ span#com a{
 span#com2 a{
 	text-decoration:none;
 }
+
 </style>
 
 </head>
@@ -131,6 +132,7 @@ span#com2 a{
 <div id="main">
 <div id="content">
 <div id="contentIn">
+<h2>対応一覧</h2>
 <div id="resize">
 <div class="floatbtn">
 	<input type="button" onClick="location.href='/matter/create'"  name="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px">
@@ -223,14 +225,10 @@ span#com2 a{
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ktop">TOP</a></li>
-		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case">要求一覧</a></li>
-		<li><a href="/mlist">対応一覧</a></li>
-	</ul>
-</div>
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->

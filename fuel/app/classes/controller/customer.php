@@ -26,7 +26,8 @@ class Controller_Customer extends Controller
 		// ログイン情報
 // 		$data['userlog_id']		= $_SESSION['id'];
 		$data['userlog_name']	= $_SESSION['name'];
-// 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+ 		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		// POST
 		$post = Input::post();
 		$data["flag"]				= empty($post["flag"]) ? ""  : $post["flag"];
@@ -49,7 +50,7 @@ class Controller_Customer extends Controller
 		$data["t_tel2"]				= empty($post["t_tel2"]) ? "" : $post["t_tel2"];
 		$data["t_mail2"]			= empty($post["t_mail2"]) ?"" : $post["t_mail2"];
 		$data["t_remarks2"]			= empty($post["t_remarks2"]) ?"" : $post["t_remarks2"];
-		
+
 		$data["t_name3"]			= empty($post["t_name3"]) ?"" : $post["t_name3"];
 		$data["t_tel3"]				= empty($post["t_tel3"]) ? "" : $post["t_tel3"];
 		$data["t_mail3"]			= empty($post["t_mail3"]) ?"" : $post["t_mail3"];
@@ -58,7 +59,7 @@ class Controller_Customer extends Controller
 		$data["t_tel4"]				= empty($post["t_tel4"]) ? "" : $post["t_tel4"];
 		$data["t_mail4"]			= empty($post["t_mail4"]) ?"" : $post["t_mail4"];
 		$data["t_remarks4"]			= empty($post["t_remarks4"]) ?"" : $post["t_remarks4"];
-		
+
 		$data["u_name"]				= empty($post["u_name"]) ?"" : $post["u_name"];
 		$data["special"]			= empty($post["special"]) ?"": $post["special"];
 		$data["check"]				= empty($post["check"]) ? "" : $post["check"];
@@ -123,6 +124,11 @@ class Controller_Customer extends Controller
 	//変更画面
 	public function action_update()
 	{
+		// ログイン情報
+		$data['userlog_id']		= $_SESSION['id'];
+		$data['userlog_name']	= $_SESSION['name'];
+		$data['userlog_adflag'] = $_SESSION['admin_flag'];
+
 		$post = Input::post();
 		$data["flag"]				= empty($post["flag"]) ? "" : $post["flag"];
 		$data["c_name"]				= empty($post["c_name"]) ? "" : $post["c_name"];
@@ -153,7 +159,7 @@ class Controller_Customer extends Controller
 		$data["t_tel4"]				= empty($post["t_tel4"]) ? "" : $post["t_tel4"];
 		$data["t_mail4"]			= empty($post["t_mail4"]) ?"" : $post["t_mail4"];
 		$data["t_remarks4"]			= empty($post["t_remarks4"]) ?"" : $post["t_remarks4"];
-		
+
 		$data["u_name"]				= empty($post["u_name"]) ? "" : $post["u_name"];
 		$data["special"]			= empty($post["special"]) ? "" : $post["special"];
 		$data["check"]				= empty($post["check"]) ? "" : $post["check"];
@@ -195,11 +201,11 @@ class Controller_Customer extends Controller
 			db_customer::del_claim($data["company_id"]);
 			for($i=0; $i<count($data["t_name2"]);$i++){
 				db_customer::upd_customer($data["company_id"],$data["t_name2"][$i],$data["t_tel2"][$i],$data["t_mail2"][$i],$data["t_remarks2"][$i]);
-			} 
+			}
 			for($i=0; $i<count($data["t_name4"]);$i++){
 				db_customer::upd_claim($data["company_id"],$data["t_name4"][$i],$data["t_tel4"][$i],$data["t_mail4"][$i],$data["t_remarks4"][$i]);
 			}
-			
+
 			$data["msgcheck"] = "変更しました。";
 		}
 		$data["company"]	=	db_customer::get_company($data["c_id"],$data["company_id"]);

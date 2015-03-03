@@ -99,25 +99,15 @@
 	</tr>
 	</table>
 	<input type="hidden" name="result" value="1" />
-	<p class="btnSpace"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_insert.png" alt="登録する" /></button></p>
+	<p class="btnSpace"><input type="submit" value="登録する" style="WIDTH: 200px; HEIGHT: 50px"></p>
 </form>
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ttop/">TOP</a></li>
-		<li><a href="/follow/create">フォロー報告</a></li>
-		<li><a href="/list/">フォロー一覧</a></li>
-	<!--管理者以外のアクセスをブロック-->
-	<?php if($userlog_adflag!=0){?>
-		<li><a href="/user/create">ユーザー登録・更新</a></li>
-		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
-		<li><a href="/appointment/create">対応方針登録・更新</a></li>
-	<?php }?>
-	<!--  -->
-	</ul>
-</div><!-- /side -->
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->

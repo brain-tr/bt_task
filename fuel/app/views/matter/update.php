@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>顧客管理システム | 顧客対応変更</title>
-<link href="/assets/css/kcommon.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
@@ -508,14 +508,12 @@ div.floatright {
 </div><!-- /contentIn -->
 </div><!-- /content -->
 <?php }?>
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ktop">TOP</a></li>
-		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case">要求一覧</a></li>
-		<li><a href="/mlist">対応一覧</a></li>
-	</ul>
-</div>
+
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
+
 <div class="clear"></div>
 </div><!-- /main -->
 

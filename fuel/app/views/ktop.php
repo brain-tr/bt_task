@@ -3,7 +3,7 @@
 	<meta charset="utf-8">
 	<title>顧客管理システム | TOP</title>
 	<link href="/assets/css/common.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="/assets/css/ktop.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/assets/css/top.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body class="top">
 <div id="header">
@@ -45,14 +45,10 @@
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ktop">TOP</a></li>
-		<li><a href="/clist">顧客一覧</a></li>
-		<li><a href="/case">要求一覧</a></li>
-		<li><a href="/mlist">対応一覧</a></li>
-	</ul>
-</div>
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->

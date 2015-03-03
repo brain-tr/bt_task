@@ -137,17 +137,10 @@
 </div><!-- /contentIn -->
 </div><!-- /content -->
 
-<div id="side">
-	<ul class="navi">
-		<li><a href="/ttop/">TOP</a></li>
-		<li><a href="/follow/create">フォロー報告</a></li>
-		<li><a href="/list/">フォロー一覧</a></li>
-		<li><a href="/user/create">ユーザー登録・更新</a></li>
-		<li><a href="/situation/create">状況フラグ登録・更新</a></li>
-		<li><a href="/appointment/create">対応方針登録・更新</a></li>
-	</ul>
-</div><!-- /side -->
-
+<?php
+	// サイドメニューの読み込み
+	require_once(dirname(__FILE__)."/../side.php");
+?>
 
 <div class="clear"></div>
 </div><!-- /main -->
