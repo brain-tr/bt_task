@@ -215,7 +215,7 @@ p#big{
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan='2'><textarea name="special" cols="80"><?php echo $special;?></textarea>
+		<td colspan='2'><textarea name="special" cols="100"><?php echo $special;?></textarea>
 	<tr>
 </table>
 <input type="hidden" name="check" value="1">

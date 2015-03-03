@@ -12,11 +12,20 @@ $(function(){
 	$('#add').click(function(){
 		// 品目入力欄を追加
 			var new_list = '<tr>';
-			var new_list2 ='<td><input type="text" name="t_name[]" size="8"></td><td><input type="text" name="t_tel[]" size="8"></td>';
-			var new_list3 ='<td><input type="text" name="t_mail[]" size="8"></td></tr>';
+			var new_list2 ='<td><input type="text" name="t_name[]" size="8"></td><td><input type="text" name="t_tel[]" size="12"></td>';
+			var new_list3 ='<td><input type="text" name="t_mail[]" size="25"></td><td><textarea name="t_remarks[]" cols="50"></textarea></td></tr>';
 			$('#list').append(new_list,new_list2,new_list3);
-
 	});
+	$('#add3').click(function(){
+		// 品目入力欄を追加
+			var new_list = '<tr>';
+			var new_list2 ='<td><input type="text" name="t_name3[]" size="8"></td><td><input type="text" name="t_tel3[]" size="12"></td>';
+			var new_list3 ='<td><input type="text" name="t_mail3[]" size="25"></td><td><textarea name="t_remarks3[]" cols="50"></textarea></td></tr>';
+			$('#list3').append(new_list,new_list2,new_list3);
+	});
+	
+	
+	
 });
 // アラートメッセージ
 if(msgcheck != "1"){
@@ -155,9 +164,9 @@ p#big{
 				請求担当者<br />
 				<br />
 			</span>
-			<input type="button" name="any" value="追加" id="add"></th>
+			<input type="button" name="any" value="追加" id="add3"></th>
 		<td colspan='2'>
-		<table class="tableStyle" id="list">
+		<table class="tableStyle" id="list3">
 		<tr>
 			<th>名前</th>
 			<th>TEL</th>
@@ -212,7 +221,7 @@ p#big{
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan='2'><textarea name="special" cols="20"><?php echo $val["special_text"]; ?></textarea>
+		<td colspan='2'><textarea name="special" cols="100"><?php echo $val["special_text"]; ?></textarea>
 	<tr>
 </table>
 <input type="hidden" name="check" value="2">
