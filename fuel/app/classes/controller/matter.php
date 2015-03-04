@@ -115,6 +115,7 @@ class Controller_Matter extends Controller
 			$data["msg"]	=	"対応者名は必須項目です。";
 		}else if($data["check"]==1 && ($hyphen1 != "-" || $hyphen2 != "-")){
 			$data["msg"] = "日付は「年-月-日」のハイフン付きで入力してください。";
+
 		}else if($data["check"]==1 && !empty($data["user"]) && $hyphen1 == "-" && $hyphen2 == "-"){
 			db_matter::upd_matter($data);
 			db_matter::ins_updated($data);

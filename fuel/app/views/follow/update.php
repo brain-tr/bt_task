@@ -10,7 +10,14 @@
 	function followDelete(){
 		deleteMsg = "この内容を削除しますか？";
 		if(confirm(deleteMsg)){
-			return true;
+			var submitType = document.createElement("input");
+			submitType.setAttribute("name", "result");
+			submitType.setAttribute("type", "hidden");
+			submitType.setAttribute("value", "2");
+			form.appendChild(submitType);
+
+			form.method = "post";
+			form.submit();
 		}
 	}
 
@@ -55,7 +62,7 @@
  ?>
 <h2>フォロー報告の変更</h2>
 
-<form action="/follow/update" method="post" id="form1">
+<form action="/follow/update" method="post" id="form1" name="form">
 <table class="tableStyle3 mB20">
 	<tr>
 		<th>報告者</th>
@@ -84,25 +91,25 @@
 	<tr>
 		<th>案件内容</th>
 		<td  colspan="3">
-			<textarea name="project_text" rows="4" cols="25" <?php echo empty($follow_detail_id) ? "": "disabled" ?>><?php echo $val['project_text']; ?></textarea>
+			<textarea name="project_text" rows="4" cols="35" <?php echo empty($follow_detail_id) ? "": "disabled" ?>><?php echo $val['project_text']; ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<th>面談内容・トラブル・<br />懸案事項</th>
 		<td  colspan="3">
-			<textarea name="content_text" rows="4" cols="25" <?php echo empty($follow_detail_id) ? "": "disabled" ?>><?php echo $val['content_text']; ?></textarea>
+			<textarea name="content_text" rows="4" cols="35" <?php echo empty($follow_detail_id) ? "": "disabled" ?>><?php echo $val['content_text']; ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<th>その他連絡事項<br />（増員情報等）</th>
 		<td  colspan="3">
-			<textarea name="remarks" rows="4" cols="25" <?php echo empty($follow_detail_id) ? "": "disabled" ?>><?php echo $val['remarks']; ?></textarea>
+			<textarea name="remarks" rows="4" cols="35" <?php echo empty($follow_detail_id) ? "": "disabled" ?>><?php echo $val['remarks']; ?></textarea>
 		</td>
 	</tr>
 	</table>
 	<?php if(empty($follow_detail_id)) {?>
-		<p class="c"><input type="submit" class="btnSpace mB50" name="result" value="変更する" style="WIDTH: 200px; HEIGHT: 50px">
-		<input type="submit" class="btnSpace mB50" name="result" value="削除する" onClick="followDelete()" style="WIDTH: 200px; HEIGHT: 50px"></p>
+		<p class="c" style="width:850px;"><input type="submit" class="btnSpace mB50" name="result" value="変更する" style="WIDTH: 200px; HEIGHT: 50px">　
+		<input type="button" class="btnSpace mB50" name="result" value="削除する" onClick="followDelete()" style="WIDTH: 200px; HEIGHT: 50px"></p>
 
 	<?php } ?>
 	<input type="hidden" name="follow_id" id="follow_id" value="<?php echo $follow_id; ?>" />
@@ -119,7 +126,7 @@
 
 			echo '<th class="bgP">日付</th>';
 			echo '<td colspan="2" style="border-right:none;">'.$follow_detail_up_data['detail_date'].'</td>';
-			echo '<td style="border-left:none;"><input type="submit" name="detail_up"value="変更" '.$disabled.' />　<input type="submit" name="detail_del" value="削除" '.$disabled.' onClick="followDelete()" /></td>';
+			echo '<td style="border-left:none;"><input type="submit" name="detail_up"value="変更" '.$disabled.' />　<input type="button" name="detail_del" value="削除" '.$disabled.' onClick="followDelete()" /></td>';
 			echo '</tr><tr>';
 
 			// 状況フラグ
@@ -167,7 +174,7 @@
 			}
 			echo '</td></tr><tr>';
 			echo '<th class="bgP">フォロー詳細内容</th>';
-			echo '<td colspan="3"><textarea '.$disabled.' id ="remarks3" name="remarks3" rows="4" cols="20">'.$follow_detail_up_data['remarks'].'</textarea></td>';
+			echo '<td colspan="3"><textarea '.$disabled.' id ="remarks3" name="remarks3" rows="4" cols="35">'.$follow_detail_up_data['remarks'].'</textarea></td>';
 
 		echo '</tr></table>';
 		echo '<input type="hidden" name="create_user_id" value="'.$val['create_user_id'].'" />';
@@ -240,7 +247,7 @@
 		</tr>
 		<tr>
 			<th class="bgP">フォロー詳細内容</th>
-			<td colspan="3"><textarea <?php echo $disabled; ?> id ="remarks2" name="remarks2" rows="4" cols="20" ></textarea></td>
+			<td colspan="3"><textarea <?php echo $disabled; ?> id ="remarks2" name="remarks2" rows="4" cols="35" ></textarea></td>
 		</tr>
 	</table>
 

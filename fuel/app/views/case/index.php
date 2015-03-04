@@ -75,7 +75,6 @@ table.tableStylex tr,th,td{
 table.tableStylex td.w150{
 	width:150px;
 }
-
 #btn{
 	margin:40px 0 10px 540px;
 }
@@ -116,7 +115,9 @@ table {
 <div class="fl">
 	<h2>要求一覧</h2>
 </div>
+
 <div class="fl">
+<br>
 <input type="button" id="btn" onClick="crea();" value="新規登録画面" style="WIDTH: 150px; HEIGHT: 50px">
 </div>
 <div class="clear"></div>
@@ -124,7 +125,7 @@ table {
 <form action="case" method="post" name="form" style="clear:both;">
 <table border="1" class="tableStylex">
 	<tr>
-		<th><span class="lg18">要求名</span></span> <input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></th>
+		<th><span class="lg18">要求名</span> <input type='button' class='updown' value=<?php echo $sortbtn;?> onClick='sortbtn();'></th>
 		<th><span class="lg18">編集</span></th>
 	</tr>
 	<?php

@@ -13,14 +13,14 @@ $(function(){
 		// 品目入力欄を追加
 			var new_list = '<tr>';
 			var new_list2 ='<td><input type="text" name="t_name[]" class="w150"></td><td><input type="text" name="t_tel[]" class="w150"></td>';
-			var new_list3 ='<td><input type="text" name="t_mail[]" class="w150"></td><td><textarea name="t_remarks[]" class="w200" rows="3"></textarea></td></tr>';
+			var new_list3 ='<td><input type="text" name="t_mail[]" class="w270"></td><td><textarea name="t_remarks[]" class="w250" rows="3"></textarea></td></tr>';
 			$('#list').append(new_list,new_list2,new_list3);
 	});
 	$('#add3').click(function(){
 		// 品目入力欄を追加
 			var new_list = '<tr>';
 			var new_list2 ='<td><input type="text" name="t_name3[]" class="w150"></td><td><input type="text" name="t_tel3[]" class="w150"></td>';
-			var new_list3 ='<td><input type="text" name="t_mail3[]" class="w150"></td><td><textarea name="t_remarks3[]" class="w200" rows="3"></textarea></td></tr>';
+			var new_list3 ='<td><input type="text" name="t_mail3[]" class="w270"></td><td><textarea name="t_remarks3[]" class="w250" rows="3"></textarea></td></tr>';
 			$('#list3').append(new_list,new_list2,new_list3);
 	});
 
@@ -138,7 +138,7 @@ p#big{
 				</tr>
 				<tr>
 					<td><input type="text" name="tel" class='w150' value="<?php echo $val["company_tel"]; ?>"></td>
-					<td><input type="text" name="mail" size="20" value="<?php echo $val["company_mail"]; ?>"></td>
+					<td><input type="text" name="mail" class='w270' value="<?php echo $val["company_mail"]; ?>"></td>
 				</tr>
 			</table>
 		</td>
@@ -160,8 +160,8 @@ p#big{
 			echo "<tr>";
 				echo "<td><input type='text' name='t_name4[]' class='w150' value=".$val2["name"]."></td>";
 				echo "<td><input type='text' name='t_tel4[]' class='w150' value=".$val2["tel"]."></td>";
-				echo "<td><input type='text' name='t_mail4[]' class='w150' value=".$val2["mail"]."></td>";
-				echo "<td><textarea name='t_remarks4[]' class='w200' rows='3'>".$val2["remarks"]."</textarea></td>";
+				echo "<td><input type='text' name='t_mail4[]' class='w270' value=".$val2["mail"]."></td>";
+				echo "<td><textarea name='t_remarks4[]' class='w250' rows='3'>".$val2["remarks"]."</textarea></td>";
 			echo "</tr>";
 		}
 		?>
@@ -186,8 +186,8 @@ p#big{
 			echo "<tr>";
 				echo "<td><input type='text' name='t_name[]' class='w150' value=".$val2["name"]."></td>";
 				echo "<td><input type='text' name='t_tel[]' class='w150' value=".$val2["tel"]."></td>";
-				echo "<td><input type='text' name='t_mail[]' class='w150' value=".$val2["mail"]."></td>";
-				echo "<td><textarea name='t_remarks[]' class='w200' rows='3'>".$val2["remarks"]."</textarea></td>";
+				echo "<td><input type='text' name='t_mail[]' class='w270' value=".$val2["mail"]."></td>";
+				echo "<td><textarea name='t_remarks[]' class='w250' rows='3'>".$val2["remarks"]."</textarea></td>";
 			echo "</tr>";
 		}
 		?>

@@ -30,15 +30,15 @@
 		//テキストボックスの背景色
 		Msg = "削除しますか？";
 		if(confirm(Msg)){
-		document.form.id.value = appointment_id;
-		document.form.name.value = name;
-		var submitType = document.createElement("input");
-		submitType.setAttribute("name", "deleate");
-		submitType.setAttribute("type", "hidden");
-		submitType.setAttribute("value", "1");
-		form.appendChild(submitType);
-		form.method = "post";
-		form.submit();
+			document.form.id.value = appointment_id;
+			document.form.name.value = name;
+			var submitType = document.createElement("input");
+			submitType.setAttribute("name", "deleate");
+			submitType.setAttribute("type", "hidden");
+			submitType.setAttribute("value", "1");
+			form.appendChild(submitType);
+			form.method = "post";
+			form.submit();
 		}
 	}
 

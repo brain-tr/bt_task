@@ -87,15 +87,15 @@
 	</tr>
 	<tr>
 		<th>案件内容</th>
-		<td><textarea name="project_text" rows="4" cols="25"></textarea></td>
+		<td><textarea name="project_text" rows="4" cols="35"></textarea></td>
 	</tr>
 	<tr>
 		<th>面談内容・トラブル・<br />懸案事項</th>
-		<td><textarea name="content_text" rows="4" cols="25"></textarea></td>
+		<td><textarea name="content_text" rows="4" cols="35"></textarea></td>
 	</tr>
 	<tr>
 		<th>その他連絡事項<br />（増員情報等）</th>
-		<td><textarea name="remarks" rows="4" cols="25"></textarea></td>
+		<td><textarea name="remarks" rows="4" cols="35"></textarea></td>
 	</tr>
 	</table>
 	<input type="hidden" name="result" value="1" />

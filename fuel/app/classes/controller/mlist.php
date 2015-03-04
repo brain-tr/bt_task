@@ -156,12 +156,12 @@ class Controller_Mlist extends Controller
 		$html = "";
 
 		if (!empty($data)){
-			$html = '<table class="tableStyle"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
+			$html = '<table class="tableStyle8"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
 			foreach($data as $key => $val){
-				$html .= '<tr><td><input type="text" class="disabled" disabled size="10" value="'.$val["name"].'"></td>';
-				$html .= '<td><input type="text" class="disabled" disabled size="12" value="'.$val["tel"].'"></td>';
-				$html .= '<td><input type="text" class="disabled" disabled size="25" value="'.$val["mail"].'"></td>';
-				$html .= '<td><input type="text" class="disabled" disabled size="50" value="'.$val["remarks"].'"></td></tr>';
+				$html .= '<tr><td><input type="text" class="disabled" disabled style="width:110px" value="'.$val["name"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled style="width:110px" value="'.$val["tel"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled style="width:270px" value="'.$val["mail"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled style="width:250px" value="'.$val["remarks"].'"></td></tr>';
 			}
 			$html .= "</table>";
 		}
@@ -171,12 +171,12 @@ class Controller_Mlist extends Controller
 		$html = "";
 
 		if (!empty($data)){
-			$html = '<table class="tableStyle"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
+			$html = '<table class="tableStyle8"><tr><th>名前</th><th>TEL</th><th>Mail</th><th>備考</th></tr>';
 			foreach($data as $key => $val){
-				$html .= '<tr><td><input type="text" class="disabled" disabled size="10" value="'.$val["name"].'"></td>';
-				$html .= '<td><input type="text" class="disabled" disabled size="12" value="'.$val["tel"].'"></td>';
-				$html .= '<td><input type="text" class="disabled" disabled size="25" value="'.$val["mail"].'"></td>';
-				$html .= '<td><input type="text" class="disabled" disabled size="50" value="'.$val["remarks"].'"></td></tr>';
+				$html .= '<tr><td><input type="text" class="disabled" disabled style="width:110px" value="'.$val["name"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled style="width:110px" value="'.$val["tel"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled style="width:270px" value="'.$val["mail"].'"></td>';
+				$html .= '<td><input type="text" class="disabled" disabled style="width:250px" value="'.$val["remarks"].'"></td></tr>';
 			}
 			$html .= "</table>";
 		}

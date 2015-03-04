@@ -22,35 +22,35 @@
 	<ul class="clearfix">
 		<li>
 			<form action="/follow/create" method="post" name="f_follow">
-				<input type="submit" value="フォロー報告" name="follow"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="フォロー報告" name="follow"  style="WIDTH: 250px; HEIGHT: 70px">
 			</form>
 		</li>
 		<li>
 			<form action="/list/" method="post" name="f_list">
-				<input type="submit" value="フォロー一覧" name="list"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="フォロー一覧" name="list"  style="WIDTH: 250px; HEIGHT: 70px">
 			</form>
 		</li>
 	<!-- 管理者以外のアクセスをブロック -->
 	<?php if($userlog_adflag!=0){?>
 		<li>
 			<form action="/user/create" method="post" name="f_user">
-				<input type="submit" value="ユーザ登録・更新" name="user"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="ユーザ登録・更新" name="user"  style="WIDTH: 250px; HEIGHT: 70px">
 			</form>
 		</li>
 		<li>
 			<form action="/situation/create" method="post" name="f_flag">
-				<input type="submit" value="状況フラグ登録・更新" name="flag"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="状況フラグ登録・更新" name="flag"  style="WIDTH: 250px; HEIGHT: 70px">
 			</form>
 		</li>
 		<li>
 			<form action="/appointment/create" method="post" name="f_flag">
-				<input type="submit" value="対応方式登録・更新" name="form"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="対応方式登録・更新" name="form"  style="WIDTH: 250px; HEIGHT: 70px">
 			</form>
 		</li>
 	<?php }?>
 		<li>
 			<form action="/menu" method="post" name="menu">
-				<input type="submit" value="menu画面" name="menu"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="menu画面" name="menu"  style="WIDTH: 250px; HEIGHT: 70px">
 			</form>
 		</li>
 	<!--   -->

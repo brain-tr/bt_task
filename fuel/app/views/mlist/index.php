@@ -81,31 +81,32 @@ table.tableStylex tr,th,td{
 	text-decoration:none;
 }
 table.tableStylex th {
-    font-weight: bold;
     border-bottom: 1px solid #999;
     background-color: #FFE8EE;
-    color: #666;
     vertical-align: middle;
     text-align: center;
 }
 table.tableStylex {
 	border-collapse: collapse;
 	border: 2px solid #999;
-	width: 700px;
+	width: 800px;
 }
 span#big {
-	font-size:20px;
+	font-size:18px;
 }
 div#resize {
-	width:700px;
+	width:800px;
 }
-div.floatbtn {
-	margin-left:300px;
+div.floatbtnL {
+	float:left;
+}
+div.floatbtnR {
 	float:right;
 }
 .change a{
-	font-size:20px;
+	font-size:18px;
 	text-decoration:none;
+	text-align:right;
 }
 span#com a{
 	text-decoration:none;
@@ -133,56 +134,65 @@ span#com2 a{
 <div id="content">
 <div id="contentIn">
 <h2>対応一覧</h2>
+
 <div id="resize">
-<div class="floatbtn">
-	<input type="button" onClick="location.href='/matter/create'"  name="create" value="新規対応登録" style="WIDTH: 100px; HEIGHT: 40px">
-</div>
-<div class="floatbtn">
-	顧客会社検索
-	<input type="text" value="<?php echo $msg; ?>"  size="10" disabled>
-	<input type="button" name="flg1" onClick="sear();" value="検索">
-	<form action="mlist" name="form1" method="post">
-		<input type="hidden" id="search" name="search" value="">
-		<input type="hidden" name="check1" value="1">
-		<input type="hidden" name="check4" value=3>
-		<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
-	</form>
-</div>
-<div class="floatbtn">
-	<form action="mlist" name="form2" method="post">
-		対応者検索
-		<select name="respon">
-			<option>----</option>
-			<?php
-				foreach($respon as $key3=> $val3){
-					echo "<option value='".$val3['respone_name']."'>".$val3["respone_name"]."</option>";
-				}
-			?>
-		</select>
-		<input type="hidden" name="check2" value="1">
-		<input type="hidden" name="check4" value=3>
-		<input type="submit" name="flg2" value="検索">
-		<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
-	</form>
-</div>
+
+<div class="floatbtnR">
+	<input type="button" onClick="location.href='/matter/create'"  name="create" value="新規対応登録" style="WIDTH: 180px; HEIGHT: 50px">
+</div><!-- /floatbtnR -->
+
+<div class="floatbtnL mB30">
+	<div class="floatbtnL mR20">
+		顧客会社検索
+		<input type="text" value="<?php echo $msg; ?>" style="width:180px;" disabled>
+		<input type="button" name="flg1" onClick="sear();" value="検索">
+		<form action="mlist" name="form1" method="post" class="formstyle1">
+			<input type="hidden" id="search" name="search" value="">
+			<input type="hidden" name="check1" value="1">
+			<input type="hidden" name="check4" value=3>
+			<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
+		</form>
+	</div><!-- /floatbtnL -->
+
+	<div class="floatbtnL">
+		<form action="mlist" name="form2" method="post">
+			対応者検索
+			<select name="respon">
+				<option>----</option>
+				<?php
+					foreach($respon as $key3=> $val3){
+						echo "<option value='".$val3['respone_name']."'>".$val3["respone_name"]."</option>";
+					}
+				?>
+			</select>
+			<input type="hidden" name="check2" value="1">
+			<input type="hidden" name="check4" value=3>
+			<input type="submit" name="flg2" value="検索">
+			<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
+		</form>
+	</div><!-- /floatbtnL -->
+	<div class="clear"></div>
+</div><!-- /floatbtnL -->
 
 <div  class="clear">
 <form action="mlist" name="form3" method="post">
 	<?php echo "<span id='big'>本日：".$today."</span>"; ?>
-	<div class="floatbtn change">
+	<div class="floatbtnR change">
 		<a href="#" onClick="weekchange(1);">先月</a>/
 		<a href="/mlist">今月</a>/
 		<a href="#" onClick="weekchange(2);">翌月</a>
 	</div>
 	<br />
 	<?php echo "<span id='big'>".$year."年".$month."月</span>"; ?>
-	<div class="floatbtn change">
-		<a href="/week">週</a>/
-		<a href="/mlist">月</a>
+
+	<div class="floatbtnR change">
+		<a href="/week">週</a>/<a href="/mlist">月</a>
 	</div>
+
 	<input type="hidden" name="check4" value="1">
 	<input type="hidden" name="cnt_week" value=<?php echo $cnt_week;?>>
 </form>
+
 <table class="tableStylex">
 	<tr>
 		<th>日</th>

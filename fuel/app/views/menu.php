@@ -22,12 +22,12 @@
 	<ul class="clearfix">
 		<li>
 			<form action="/ttop" method="post" name="f_follow">
-				<input type="submit" value="タスク管理システムTOP" name="task"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="タスク管理システムTOP" name="task"  style="WIDTH: 250px; HEIGHT: 80px">
 			</form>
 		</li>
 		<li>
 			<form action="/ktop" method="post" name="f_list">
-				<input type="submit" value="顧客管理システムTOP" name="customer"  style="WIDTH: 200px; HEIGHT: 70px">
+				<input type="submit" value="顧客管理システムTOP" name="customer"  style="WIDTH: 250px; HEIGHT: 80px">
 			</form>
 		</li>
 

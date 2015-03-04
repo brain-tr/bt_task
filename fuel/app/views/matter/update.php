@@ -167,40 +167,11 @@ jQuery(function($) {
 });
 </script>
 <style type="text/css">
-table.tableStylex{
-	width:700px;
-	border: 2px solid #999;
-	margin-top:20px;
-}
-table.tableStylex td,
-table.tableStylex th {
-	text-align:center;
-	padding: 5px 10px;
-	border-left: 1px dotted #999;
-	border-bottom: 1px solid #999;
-	background-color:#fff;
-}
-table.tableStylex th {
-	text-align:center;
-	font-weight:bold;
-	border-bottom-width: 1px;
-	border-bottom-style:solid;
-	border-bottom-color: #999;
-	background-color:#ffe8ee;
-	color:#666;
-	font-size:93%;
-}
-
-table.tableStylex td {
-	font-size:86%;
-	text-align:center;
-}
 table.tableStylex td a{
 	text-decoration: none;
 }
 p#msg{
 	color:red;
-	font-size:30px;
 }
 div#resize {
 	width:700px;
@@ -215,17 +186,12 @@ div.floatright {
 .disabled {
 	background-color: #e0e0e0;
 }
-#content table.tableStyle {
-    border: 1px solid #999;
-}
-#content table.tableStyle6 {
-	width:700px;
-}
 /* overflow:hidden、heightは必ず指定する */
 .textOverflowTest3 {
     overflow: hidden;
     width: 200px;
     height: 23px;
+    margin-left:40px;
 }
 </style>
 
@@ -244,7 +210,8 @@ div.floatright {
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<div id="resize">
+<h2>対応一覧</h2>
+
 <?php
 	$selected1 = "";
 	$flg	=	"";
@@ -266,12 +233,12 @@ div.floatright {
 			$flg2	=	"checked='checked'";
 		}
 ?>
-<form action="update" method="post" name="form1">
-<p id="msg"><?php echo $msg; ?></p><br />
-<table class="tableStyle6">
+<form action="update" method="post" name="form1" class="formstyle1">
+<?php if($msg != ''){ echo '<p id="msg">'.$msg.'</p><br />'; } ?>
+<table class="tableStyle7 mB30">
 	<tr>
 		<th>日付</th>
-		<td colspan="3"><input type="text" name="date" class="disabled" disabled value="<?php echo $val['date']; ?>" size="12"></td>
+		<td colspan="3"><input type="text" name="date" value="<?php echo $val['date']; ?>" size="12"></td>
 	</tr>
 	<tr>
 		<th>記入者</th>
@@ -280,7 +247,7 @@ div.floatright {
 	<tr>
 		<th>顧客会社名</th>
 		<td colspan="2"><input type="text" id="one" class="disabled" disabled size="30" value="<?php echo $val["company_name"];?>"></td>
-		<td>客種:<input type="text" id="two" class="disabled" disabled size="12" value="<?php echo $flg; ?>">　上場<input type="checkbox" name="listing_flag" value="1" disabled="disabled" <?php echo $flg2;?>></td>
+		<td>客種 <input type="text" id="two" class="disabled" disabled size="12" value="<?php echo $flg; ?>">　上場 <input type="checkbox" name="listing_flag" value="1" disabled="disabled" <?php echo $flg2;?>></td>
 	</tr>
 	<tr>
 		<th>要求フラグ</th>
@@ -304,23 +271,23 @@ div.floatright {
 	</tr>
 	<tr>
 		<th>総論</th>
-		<td colspan="3"><textarea name="detail" cols='100'><?php echo $val["content_text"]; ?></textarea></td>
+		<td colspan="3"><textarea name="detail" cols='50'><?php echo $val["content_text"]; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>ニーズ</th>
-		<td colspan="3"><textarea name="content_text2" cols='100'><?php echo $val["content_text2"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text2" cols='50'><?php echo $val["content_text2"]; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>今後の展開</th>
-		<td colspan="3"><textarea name="content_text3" cols='100'><?php echo $val["content_text3"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text3" cols='50'><?php echo $val["content_text3"]; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>質問内容</th>
-		<td colspan="3"><textarea name="content_text4" cols='100'><?php echo $val["content_text4"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text4" cols='50'><?php echo $val["content_text4"]; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>断られた内容</th>
-		<td colspan="3"><textarea name="content_text5" cols='100'><?php echo $val["content_text5"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text5" cols='50'><?php echo $val["content_text5"]; ?></textarea></td>
 	</tr>
 
 	<tr>
@@ -330,14 +297,14 @@ div.floatright {
 	<tr>
 		<th>顧客会社<br />詳細情報</th>
 		<td colspan="3">
-			<table class="tableStyle">
+			<table class="tableStyle8">
 				<tr>
 					<th>TEL</th>
 					<th>Mail</th>
 				</tr>
 				<tr>
 					<td><input type="text" id="four" class="disabled" disabled size="12" value="<?php echo $val["company_tel"];?>"></td>
-					<td><input type="text" id="five" class="disabled" disabled size="25" value="<?php echo $val["company_mail"];?>"></td>
+					<td><input type="text" id="five" class="disabled w270" disabled value="<?php echo $val["company_mail"];?>"></td>
 				</tr>
 			</table>
 		</td>
@@ -345,7 +312,7 @@ div.floatright {
 	<tr>
 		<th>請求担当者</th>
 		<td colspan="3">
-			<table class="tableStyle">
+			<table class="tableStyle8">
 				<tr>
 					<th>名前</th>
 					<th>TEL</th>
@@ -355,10 +322,10 @@ div.floatright {
 				<?php
 					foreach($claim as $key3 => $val3){
 						echo "<tr>";
-							echo "<td><input type='text' id='six' class='disabled' disabled size='8' value='".$val3["name"]."'></td>";
-							echo "<td><input type='text' id='seven' class='disabled' disabled size='12' value=".$val3["tel"]."></td>";
-							echo "<td><input type='text' id='eight' class='disabled' disabled size='25' value='".$val3["mail"]."'></td>";
-							echo "<td><textarea name='t_remarks[]' class='disabled' disabled cols='50'>".$val3["remarks"]."</textarea></td>";
+							echo "<td><input type='text' id='six' class='disabled w150' disabled value='".$val3["name"]."'></td>";
+							echo "<td><input type='text' id='seven' class='disabled w150' disabled value=".$val3["tel"]."></td>";
+							echo "<td><input type='text' id='eight' class='disabled w270' disabled value='".$val3["mail"]."'></td>";
+							echo "<td><textarea name='t_remarks[]' class='disabled w250' disabled >".$val3["remarks"]."</textarea></td>";
 						echo "</tr>";
 					}
 				?>
@@ -368,7 +335,7 @@ div.floatright {
 	<tr>
 		<th>担当者</th>
 		<td colspan="3">
-			<table class="tableStyle">
+			<table class="tableStyle8">
 				<tr>
 					<th>名前</th>
 					<th>TEL</th>
@@ -378,10 +345,10 @@ div.floatright {
 				<?php
 					foreach($customer as $key3 => $val3){
 						echo "<tr>";
-							echo "<td><input type='text' id='six' class='disabled' disabled size='8' value='".$val3["name"]."'></td>";
-							echo "<td><input type='text' id='seven' class='disabled' disabled size='12' value=".$val3["tel"]."></td>";
-							echo "<td><input type='text' id='eight' class='disabled' disabled size='25' value='".$val3["mail"]."'></td>";
-							echo "<td><textarea name='t_remarks[]' class='disabled' disabled cols='50'>".$val3["remarks"]."</textarea></td>";
+							echo "<td><input type='text' id='six' class='disabled w150' disabled value='".$val3["name"]."'></td>";
+							echo "<td><input type='text' id='seven' class='disabled w150' disabled value=".$val3["tel"]."></td>";
+							echo "<td><input type='text' id='eight' class='disabled w270' disabled value='".$val3["mail"]."'></td>";
+							echo "<td><textarea name='t_remarks[]' class='disabled w250' disabled >".$val3["remarks"]."</textarea></td>";
 						echo "</tr>";
 					}
 				?>
@@ -390,19 +357,19 @@ div.floatright {
 	</tr>
 	<tr>
 		<th>特記事項</th>
-		<td colspan="3"><textarea id="nine" class="disabled" disabled cols="100"><?php echo $val["special_text"]; ?></textarea></td>
+		<td colspan="3"><textarea id="nine" class="disabled" disabled cols="50"><?php echo $val["special_text"]; ?></textarea></td>
 	</tr>
 </table>
 <input type="hidden" id="ten" name="company_id" value="<?php echo $val["company_id"];?>">
 <input type="hidden" name="matter_id" value="<?php echo $val["matter_id"]; ?>">
 <input type="hidden" name="check" value="1">
 <input type="hidden" name="list_id" value=<?php echo $list_id;?>>
-<p class="btnSpace"><a href="#" onclick=change()><img src="/assets/img/common/btn_update.png" alt="変更する" /></a>
+<p class="c"><input type="submit" value="変更する" onclick="change()" style='WIDTH: 200px; HEIGHT: 50px'></p>
 </form>
-
+<br><br>
 
 <form action="update" method="post" name="form2">
-<table class="tableStylex">
+<table class="tableStyle9">
 <tr>
 <th>日付<input type='button' value=<?php echo $sortbtn;?> onClick='sort_btn(1);'></th>
 <th>要求フラグ<input type='button' value=<?php echo $sortbtn2;?> onClick='sort_btn(2);'></th>
@@ -415,11 +382,11 @@ div.floatright {
 		if(($cnt*10 <= $key2) && ($cnt*10+10 > $key2)){
 			$color = $val2["color_code"];
 			echo "<tr>";
-			echo "<td class='style1'>".$val2["date"]."</td>";
-			echo "<td class='style1' style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
-			echo "<td class='style1'>".$val2["respone_name"]."</td>";
+			echo "<td>".$val2["date"]."</td>";
+			echo "<td style='background-color:$color'><span id='com'>".$val2["name"]."</span><br></td>";
+			echo "<td>".$val2["respone_name"]."</td>";
 			echo "<td><p class='textOverflowTest3'>".$val2["content_text"]."</p></td>";
-			echo "<td class='style1'>";
+			echo "<td class='c'>";
 	  		echo "<input type='button' value='変更' onClick=\"upda('".$val2["matter_id"]."')\">";
 	 		echo " / ";
 			echo "<input type='button' value='削除' onClick=del(".$val2["matter_id"].")>";
@@ -504,7 +471,6 @@ div.floatright {
 <input type="hidden" name="sortbtn" value="<?php echo $sortbtn; ?>">
 <input type="hidden" name="sortbtn2" value="<?php echo $sortbtn2; ?>">
 </form>
-</div><!-- /resize -->
 </div><!-- /contentIn -->
 </div><!-- /content -->
 <?php }?>

@@ -18,20 +18,12 @@ if(msgcheck != "1"){
 <style type="text/css">
 p#msg{
 	color:red;
-	font-size:30px;
 }
 #searchbtn {
 	margin:0px 5px;
 }
 .disabled {
 	background-color: #e0e0e0;
-}
-#content table.tableStyle {
-    border: 1px solid #999;
-}
-
-#content table.tableStyle6 {
-	width:700px;
 }
 </style>
 </head>
@@ -49,9 +41,11 @@ p#msg{
 <div id="main">
 <div id="content">
 <div id="contentIn">
-<p id="msg"><?php echo $msg; ?></p><br />
-<form action="create" method="post">
-<table class="tableStyle6">
+<h2>新規対応登録</h2>
+
+<?php if($msg != ''){ echo '<p id="msg">'.$msg.'</p><br />'; } ?>
+<form action="create" method="post" class="formstyle1">
+<table class="tableStyle7 mB30">
 	<tr>
 		<th>日付</th>
 		<td colspan="3"><input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" size="12"></td>
@@ -63,10 +57,10 @@ p#msg{
 	<tr>
 		<th>顧客会社名</th>
 		<td colspan="2">
-			<input type="text" id="one" class="disabled" disabled size="12">
+			<input type="text" id="one" class="disabled" disabled size="30">
 			<input type="button" id="searchbtn" name="search" onClick="sear();" value="検索">
 		</td>
-		<td>客種:<input type="text" id="two" class="disabled" disabled size="12"></td>
+		<td>客種 <input type="text" id="two" class="disabled" disabled size="20"></td>
 	</tr>
 	<tr>
 		<th>要求フラグ</th>
@@ -92,19 +86,19 @@ p#msg{
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td colspan="3"><input type="text" id="three" class="disabled" disabled size="15"></td>
+		<td colspan="3"><input type="text" id="three" class="disabled" disabled size="45"></td>
 	</tr>
 	<tr>
 		<th>顧客会社<br />詳細情報</th>
 		<td colspan="3">
-			<table class="tableStyle">
+			<table class="tableStyle8">
 				<tr>
 					<th>TEL</th>
 					<th>Mail</th>
 				</tr>
 				<tr>
 					<td><input type="text" id="four" class="disabled" disabled size="10"></td>
-					<td><input type="text" id="five" class="disabled" disabled size="10"></td>
+					<td><input type="text" id="five" class="disabled" disabled class="w270"></td>
 				</tr>
 			</table>
 		</td>
@@ -130,7 +124,7 @@ p#msg{
 </table>
 <input type="hidden" id="ten" name="company_id" value="">
 <input type="hidden" name="check" value="1">
-<p class="btnSpace"><button type="submit" id="btnCrea"><img src="/assets/img/common/btn_insert.png" alt="登録する" /></button></p>
+<p class="c" style="width:100%; min-width: 1000px;"><input type="submit" value="登録する" style="WIDTH: 200px; HEIGHT: 55px"></p>
 </form>
 </div><!-- /contentIn -->
 </div><!-- /content -->

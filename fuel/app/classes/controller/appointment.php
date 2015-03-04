@@ -54,7 +54,7 @@ class Controller_Appointment extends Controller
 				$user_name = db_appointment::get_name($data['name']);
 				if(empty($user_name)) {
 					db_appointment::ins_name($data);
-					$data['msg'] = "ユーザー情報を登録しました。";
+					$data['msg'] = "対応方式情報を登録しました。";
 				} else {
 					$data['msg'] = "すでに登録されている名前です。";
 				}
