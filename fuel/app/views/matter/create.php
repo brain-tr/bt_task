@@ -82,7 +82,7 @@ p#msg{
 	</tr>
 	<tr>
 		<th>総論</th>
-		<td colspan="3"><textarea name="detail" cols='50'><?php echo $val["content_text"]; ?></textarea></td>
+		<td colspan="3"><textarea name="detail" cols='50'><?php echo $val["detail"]; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>ニーズ</th>
