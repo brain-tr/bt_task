@@ -82,6 +82,10 @@ class db_matter extends \Model {
 				'case_id'		=> $data['case'],
 				'respone_name'	=> $data['user'],
 				'content_text'	=> $data['detail'],
+				'content_text2'		=> $data['content_text2'],
+				'content_text3'		=> $data['content_text3'],
+				'content_text4'		=> $data['content_text4'],
+				'content_text5'		=> $data['content_text5'],
 				'date'			=> $data['date'],
 				'user_id'		=> $data['userlog_id']
 		))->execute();

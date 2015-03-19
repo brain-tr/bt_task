@@ -35,6 +35,10 @@ class Controller_Matter extends Controller
 		$data["c_id"]	=	empty($post["company_id"])?"": $post["company_id"];
 		$data["date"]	=	empty($post["date"])	?  "": $post["date"];
 		$data["detail"]	=	empty($post["detail"])	?  "": $post["detail"];
+		$data["content_text2"]	=	empty($post["content_text2"])	?  "": $post["content_text2"];
+		$data["content_text3"]	=	empty($post["content_text3"])	?  "": $post["content_text3"];
+		$data["content_text4"]	=	empty($post["content_text4"])	?  "": $post["content_text4"];
+		$data["content_text5"]	=	empty($post["content_text5"])	?  "": $post["content_text5"];
 		$data["user"]	=	empty($post["user"])	?  "": $post["user"];
 		$data["check"]	=	empty($post["check"])	?  "": $post["check"];
 		$data["msg"]	=	empty($post["msg"])		?  "": $post["msg"];
