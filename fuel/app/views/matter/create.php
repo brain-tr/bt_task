@@ -82,23 +82,23 @@ p#msg{
 	</tr>
 	<tr>
 		<th>総論</th>
-		<td colspan="3"><textarea name="detail" cols='50'><?php echo $val["detail"]; ?></textarea></td>
+		<td colspan="3"><textarea name="detail" cols='50'><?php echo $detail; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>ニーズ</th>
-		<td colspan="3"><textarea name="content_text2" cols='50'><?php echo $val["content_text2"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text2" cols='50'><?php echo $content_text2; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>今後の展開</th>
-		<td colspan="3"><textarea name="content_text3" cols='50'><?php echo $val["content_text3"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text3" cols='50'><?php echo $content_text3; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>質問内容</th>
-		<td colspan="3"><textarea name="content_text4" cols='50'><?php echo $val["content_text4"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text4" cols='50'><?php echo $content_text4; ?></textarea></td>
 	</tr>
 	<tr>
 		<th>断られた内容</th>
-		<td colspan="3"><textarea name="content_text5" cols='50'><?php echo $val["content_text5"]; ?></textarea></td>
+		<td colspan="3"><textarea name="content_text5" cols='50'><?php echo $content_text5; ?></textarea></td>
 	</tr>
 	
 	<tr>
