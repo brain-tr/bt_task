@@ -115,15 +115,15 @@ p#big{
 
 	<tr>
 		<th>資本金</th>
-		<td colspan='2'><input type="text" name="capital" size="15" style="text-align:right" value="<?php echo $val["capital"];?>" ></td>
+		<td colspan='2'><input type="text" name="capital" size="15" style="text-align:right" value="<?php echo $val["capital"];?>" >万円</td>
 	</tr>
 	<tr>
 		<th>従業員数</th>
-		<td colspan='2'><input type="text" name="employees" size="15" style="text-align:right" value="<?php echo $val["employees"];?>" ></td>
+		<td colspan='2'><input type="text" name="employees" size="15" style="text-align:right" value="<?php echo $val["employees"];?>" >名</td>
 	</tr>
 	<tr>
 		<th>売上高</th>
-		<td colspan='2'><input type="text" name="sales" size="15" style="text-align:right" value="<?php echo $val["sales"];?>" ></td>
+		<td colspan='2'><input type="text" name="sales" size="15" style="text-align:right" value="<?php echo $val["sales"];?>" >万円</td>
 	</tr>
 
 	<tr>

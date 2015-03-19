@@ -34,9 +34,12 @@ class Controller_Customer extends Controller
 		$data["listing_flag"]		= empty($post["listing_flag"]) ? 0  : $post["listing_flag"];
 		$data["c_name"]				= empty($post["c_name"])?""  : $post["c_name"];
 
-		$data["capital"]			= empty($post["capital"])?0 : ctype_digit(mb_convert_kana($post["capital"], "n", "utf-8"))? mb_convert_kana($post["capital"], "n", "utf-8") : 0;
-		$data["employees"]			= empty($post["employees"])?0 : ctype_digit(mb_convert_kana($post["employees"], "n", "utf-8"))? mb_convert_kana($post["employees"], "n", "utf-8") : 0;
-		$data["sales"]				= empty($post["sales"])?0 : ctype_digit(mb_convert_kana($post["sales"], "n", "utf-8"))? mb_convert_kana($post["sales"], "n", "utf-8") : 0;
+//		$data["capital"]			= empty($post["capital"])?0 : ctype_digit(mb_convert_kana($post["capital"], "n", "utf-8"))? mb_convert_kana($post["capital"], "n", "utf-8") : 0;
+//		$data["employees"]			= empty($post["employees"])?0 : ctype_digit(mb_convert_kana($post["employees"], "n", "utf-8"))? mb_convert_kana($post["employees"], "n", "utf-8") : 0;
+//		$data["sales"]				= empty($post["sales"])?0 : ctype_digit(mb_convert_kana($post["sales"], "n", "utf-8"))? mb_convert_kana($post["sales"], "n", "utf-8") : 0;
+		$data["capital"]			= empty($post["capital"])?0 : $post["capital"];
+		$data["employees"]			= empty($post["employees"])?0 : $post["employees"];
+		$data["sales"]				= empty($post["sales"])?0 : $post["sales"];
 		$data["company_add_code"]	= empty($post["zip01"])?""  : $post["zip01"];
 
 		$data["address"]			= empty($post["addr11"])?"" : $post["addr11"];
@@ -134,9 +137,12 @@ class Controller_Customer extends Controller
 		$data["c_name"]				= empty($post["c_name"]) ? "" : $post["c_name"];
 		$data["listing_flag"]		= empty($post["listing_flag"]) ? 0  : $post["listing_flag"];
 
-		$data["capital"]			= empty($post["capital"])?0 : ctype_digit(mb_convert_kana($post["capital"], "n", "utf-8"))? mb_convert_kana($post["capital"], "n", "utf-8") : 0;
-		$data["employees"]			= empty($post["employees"])?0 : ctype_digit(mb_convert_kana($post["employees"], "n", "utf-8"))? mb_convert_kana($post["employees"], "n", "utf-8") : 0;
-		$data["sales"]				= empty($post["sales"])?0 : ctype_digit(mb_convert_kana($post["sales"], "n", "utf-8"))? mb_convert_kana($post["sales"], "n", "utf-8") : 0;
+//		$data["capital"]			= empty($post["capital"])?0 : ctype_digit(mb_convert_kana($post["capital"], "n", "utf-8"))? mb_convert_kana($post["capital"], "n", "utf-8") : 0;
+//		$data["employees"]			= empty($post["employees"])?0 : ctype_digit(mb_convert_kana($post["employees"], "n", "utf-8"))? mb_convert_kana($post["employees"], "n", "utf-8") : 0;
+//		$data["sales"]				= empty($post["sales"])?0 : ctype_digit(mb_convert_kana($post["sales"], "n", "utf-8"))? mb_convert_kana($post["sales"], "n", "utf-8") : 0;
+		$data["capital"]			= empty($post["capital"])?0 : $post["capital"];
+		$data["employees"]			= empty($post["employees"])?0 : $post["employees"];
+		$data["sales"]				= empty($post["sales"])?0 : $post["sales"];
 		$data["company_add_code"]	= empty($post["zip01"])?""  : $post["zip01"];
 
 		$data["address"]			= empty($post["addr11"]) ? "" : $post["addr11"];
