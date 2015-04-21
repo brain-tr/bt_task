@@ -205,12 +205,12 @@ class Controller_Customer extends Controller
 			db_customer::upd_company($data);
 			db_customer::del_customer($data["company_id"]);
 			db_customer::del_claim($data["company_id"]);
-			if (if_array($data["t_name2"])) {
+			if (is_array($data["t_name2"])) {
 				for($i=0; $i<count($data["t_name2"]);$i++){
 					db_customer::upd_customer($data["company_id"],$data["t_name2"][$i],$data["t_tel2"][$i],$data["t_mail2"][$i],$data["t_remarks2"][$i]);
 				}
 			}
-			if (if_array($data["t_name4"])) {
+			if (is_array($data["t_name4"])) {
 				for($i=0; $i<count($data["t_name4"]);$i++){
 					db_customer::upd_claim($data["company_id"],$data["t_name4"][$i],$data["t_tel4"][$i],$data["t_mail4"][$i],$data["t_remarks4"][$i]);
 				}
