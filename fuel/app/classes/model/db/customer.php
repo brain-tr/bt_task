@@ -22,7 +22,8 @@ class db_customer extends \Model {
 				'special_text'		=> $data['special'],
 				'c_flag'			=> $data['flag'],
 				'listing_flag'		=> $data['listing_flag'],
-				'rank_id'			=> 0
+				'rank_id'			=> 0,
+				'creation_time'		=> date("Y-m-d H:i:s")
 		))->execute();
 
 		$query	=\DB::query("SELECT LAST_INSERT_ID();");
@@ -114,7 +115,7 @@ class db_customer extends \Model {
 				'user_name'			=> $data['u_name'],
 				'special_text'		=> $data['special'],
 				'c_flag'			=> $data['flag'],
-				'rank_id'			=> 0
+				'rank_id'			=> 0,
 		))->where('company_id', $data['company_id'])
 		->execute();
 	}
