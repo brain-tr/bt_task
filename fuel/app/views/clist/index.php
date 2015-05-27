@@ -74,6 +74,40 @@ function msg(msg){
 		form1.appendChild(ipt2);
 		form1.appendChild(ipt3);
 		form1.submit();
+    
+    //作成日用
+	}else if(msg == 3){
+		var ipt2 = document.createElement("input");
+		var ipt3 = document.createElement("input");
+
+		ipt2.type = "hidden"
+		ipt2.name = "updown3";
+		ipt2.value= <?php echo $flag3; ?>;
+
+		ipt3.type = "hidden";
+		ipt3.name = "check3";
+		ipt3.value = 3;
+
+		form1.appendChild(ipt2);
+		form1.appendChild(ipt3);
+		form1.submit();
+        
+    //更新日用
+	}else if(msg == 4){
+		var ipt2 = document.createElement("input");
+		var ipt3 = document.createElement("input");
+
+		ipt2.type = "hidden"
+		ipt2.name = "updown4";
+		ipt2.value= <?php echo $flag4; ?>;
+
+		ipt3.type = "hidden";
+		ipt3.name = "check3";
+		ipt3.value = 4;
+
+		form1.appendChild(ipt2);
+		form1.appendChild(ipt3);
+		form1.submit();
 	}
 }
 //アラートメッセージ
@@ -140,12 +174,16 @@ input[type="button"].updown {
 	echo "<tr>";
 	echo "<th class='w50'>会社名　<input type='button' name='updown1' class='updown' value='$msg' onClick='msg(1);'></th>";
 	echo "<th>客種　<input type='button' name='updown2' class='updown' value='$msg2' onClick='msg(2);'></th>";
+	echo "<th>作成日　<input type='button' name='updown3' class='updown' value='$msg3' onClick='msg(3);'></th>";
+	echo "<th>更新日　<input type='button' name='updown4' class='updown' value='$msg4' onClick='msg(4);'></th>";
 	echo "<th>削除</th>";
 
 	foreach($view as $key=> $val){
 		echo "<tr>";
 		echo "<td><span id='com'><a href='#' onClick='change(".$val['company_id'].");'  name='c_name'>".$val["company_name"]."</a></span></td>";
 		echo "<td>".$select[$val["c_flag"]]."</td>";
+		echo "<td>".$val["creation_time"]."</td>";
+		echo "<td>".$val["modification_time"]."</td>";
 		echo "<td><input type='checkbox' name='del[]' value=".$val['company_id'].">　　　";
 		echo "<input type='button' onClick='del2(".$val["company_id"].");' value='削除' style='WIDTH: 60px; HEIGHT: 35px'></td>";
 		echo "</tr>";

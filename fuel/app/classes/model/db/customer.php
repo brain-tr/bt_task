@@ -164,7 +164,7 @@ class db_customer extends \Model {
 	 */
 	public static function get_name()
 	{
-		return \DB::select('company_id','company_name','c_flag')->from('k_company')->order_by('company_name','asc')->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','modification_time')->from('k_company')->order_by('company_name','asc')->execute()->as_array();
 	}
 
 	/*
@@ -180,7 +180,7 @@ class db_customer extends \Model {
 	 */
 	public static function search_company($data)
 	{
-		return \DB::select('company_id','company_name','c_flag')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','creation_time','modification_time')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('user_name','like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->execute()->as_array();
 	}
 
 	/*
@@ -188,7 +188,7 @@ class db_customer extends \Model {
 	 */
 	public static function up_down($select,$cd)
 	{
-		return \DB::select('company_id','company_name','c_flag')->from('k_company')->order_by($select,$cd)->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','creation_time','modification_time')->from('k_company')->order_by($select,$cd)->execute()->as_array();
 	}
 
 
@@ -197,7 +197,7 @@ class db_customer extends \Model {
 	*/
 	public static function up_down2($select,$cd,$data)
 	{
-		return \DB::select('company_id','company_name','c_flag')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->order_by($select,$cd)->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','modification_time')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->order_by($select,$cd)->execute()->as_array();
 	}
 
 

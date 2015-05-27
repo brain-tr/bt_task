@@ -39,11 +39,17 @@ class Controller_Clist extends Controller
 		$data["check2"]		=	empty($post["check2"])? "": $post["check2"];
 		$data["updown1"]	=	empty($post["updown1"])?"": $post["updown1"];
 		$data["updown2"]	=	empty($post["updown2"])?"": $post["updown2"];
+		$data["updown3"]	=	empty($post["updown3"])?"": $post["updown3"];
+		$data["updown4"]	=	empty($post["updown4"])?"": $post["updown4"];
 		$data["msg"]		=	empty($post["msg"])	 ?"↑": $post["msg"];
 		$data["msg2"]		=	empty($post["msg2"]) ?"↑": $post["msg2"];
+		$data["msg3"]		=	empty($post["msg3"]) ?"↑": $post["msg3"];
+		$data["msg4"]		=	empty($post["msg4"]) ?"↑": $post["msg4"];
 		$data["check3"]		=	empty($post["check3"])? "": $post["check3"];
 		$data["flag"]		=	empty($post["flag"])?	"1": $post["flag"];
 		$data["flag2"]		=	empty($post["flag2"])?	"1": $post["flag2"];
+		$data["flag3"]		=	empty($post["flag3"])?	"1": $post["flag3"];
+		$data["flag4"]		=	empty($post["flag4"])?	"1": $post["flag4"];
  		$data["msgcheck"]	= empty($post["msgcheck"])?"1": $post["msgcheck"];
 
 
@@ -114,6 +120,42 @@ class Controller_Clist extends Controller
 				$data["msg"] = "↑";
 				$data["flag2"] = 1;
 				$select = "c_flag";
+				$cd = "asc";
+			}
+			if(!empty($data["search"])){
+				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
+			}else{
+				$data["view"]	=	db_customer::up_down($select,$cd);
+			}
+		}else if($data["check3"] == 3){
+			if($data["updown3"] == 1){
+				$data["msg3"] = "↓";
+				$data["flag3"] = 2;
+				$select = "creation_time";
+				$cd = "desc";
+
+			}else if($data["updown3"] == 2){
+				$data["msg"] = "↑";
+				$data["flag3"] = 1;
+				$select = "creation_time";
+				$cd = "asc";
+			}
+			if(!empty($data["search"])){
+				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
+			}else{
+				$data["view"]	=	db_customer::up_down($select,$cd);
+			}
+		}else if($data["check3"] == 4){
+			if($data["updown4"] == 1){
+				$data["msg4"] = "↓";
+				$data["flag4"] = 2;
+				$select = "modification_time";
+				$cd = "desc";
+
+			}else if($data["updown4"] == 2){
+				$data["msg"] = "↑";
+				$data["flag4"] = 1;
+				$select = "modification_time";
 				$cd = "asc";
 			}
 			if(!empty($data["search"])){
