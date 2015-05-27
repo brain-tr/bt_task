@@ -116,6 +116,7 @@ class db_customer extends \Model {
 				'special_text'		=> $data['special'],
 				'c_flag'			=> $data['flag'],
 				'rank_id'			=> 0,
+                'modification_time'	=> date("Y-m-d H:i:s"),
 		))->where('company_id', $data['company_id'])
 		->execute();
 	}
