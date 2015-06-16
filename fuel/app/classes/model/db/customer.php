@@ -164,9 +164,19 @@ class db_customer extends \Model {
 	/*
 	 *  一覧用の顧客会社名を全件取得する
 	 */
-	public static function get_name()
+	public static function get_name($limitCnt)
 	{
-		return \DB::select('company_id','company_name','c_flag','creation_time','modification_time')->from('k_company')->order_by('company_name','asc')->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','modification_time')->from('k_company')->order_by('company_name','asc')->limit(10)->offset($limitCnt * 10 -10)->execute()->as_array();
+	}
+    
+    /*
+	 *  一覧用の顧客会社名の数を取得する
+	 */
+	public static function get_name_count()
+	{
+        
+		$result = \DB::select('*')->from('k_company')->execute()->as_array();
+        return count($result);
 	}
 
 	/*
@@ -188,18 +198,18 @@ class db_customer extends \Model {
 	/*
 	 *	昇順降順ボタン
 	 */
-	public static function up_down($select,$cd)
+	public static function up_down($select,$cd,$limitCnt)
 	{
-		return \DB::select('company_id','company_name','c_flag','creation_time','creation_time','modification_time')->from('k_company')->order_by($select,$cd)->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','creation_time','modification_time')->from('k_company')->order_by($select,$cd)->limit(10)->offset($limitCnt * 10 - 10)->execute()->as_array();
 	}
 
 
 	/*
 	 *	昇順降順ボタン(会社名検索付き)
 	*/
-	public static function up_down2($select,$cd,$data)
+	public static function up_down2($select,$cd,$data,$limitCnt)
 	{
-		return \DB::select('company_id','company_name','c_flag','creation_time','modification_time')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->order_by($select,$cd)->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','modification_time')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->order_by($select,$cd)->limit(10)->offset($limitCnt * 10 - 10)->execute()->as_array();
 	}
 
 

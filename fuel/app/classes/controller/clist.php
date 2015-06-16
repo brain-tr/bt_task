@@ -41,16 +41,17 @@ class Controller_Clist extends Controller
 		$data["updown2"]	=	empty($post["updown2"])?"": $post["updown2"];
 		$data["updown3"]	=	empty($post["updown3"])?"": $post["updown3"];
 		$data["updown4"]	=	empty($post["updown4"])?"": $post["updown4"];
-		$data["msg"]		=	empty($post["msg"])	 ?"↑": $post["msg"];
+		$data["msg1"]		=	empty($post["msg1"])	 ?"↑": $post["msg1"];
 		$data["msg2"]		=	empty($post["msg2"]) ?"↑": $post["msg2"];
 		$data["msg3"]		=	empty($post["msg3"]) ?"↑": $post["msg3"];
 		$data["msg4"]		=	empty($post["msg4"]) ?"↑": $post["msg4"];
 		$data["check3"]		=	empty($post["check3"])? "": $post["check3"];
-		$data["flag"]		=	empty($post["flag"])?	"1": $post["flag"];
+		$data["flag1"]		=	empty($post["flag1"])?	"1": $post["flag1"];
 		$data["flag2"]		=	empty($post["flag2"])?	"1": $post["flag2"];
 		$data["flag3"]		=	empty($post["flag3"])?	"1": $post["flag3"];
 		$data["flag4"]		=	empty($post["flag4"])?	"1": $post["flag4"];
- 		$data["msgcheck"]	= empty($post["msgcheck"])?"1": $post["msgcheck"];
+ 		$data["msgcheck"]	=   empty($post["msgcheck"])?"1": $post["msgcheck"];
+        $data["limitCnt"]   =   empty($post["limitCnt"])?"1": $post["limitCnt"];
 
 
 
@@ -85,85 +86,31 @@ class Controller_Clist extends Controller
 				$data["view"]	=	db_customer::search_company(strval($data["search"]));
 		}else{
 			//初期表示用
-			$data["view"]	=	db_customer::get_name();
+			$data["view"]	=	db_customer::get_name($data["limitCnt"]);
+			$data["count"]	=	db_customer::get_name_count();
+			$data["now"]	=	1;
 		}
-
-		//昇順降順ボタン
-		//顧客会社
-		if($data["check3"] == 1){
-			if($data["updown1"] == 1){
-				$data["msg"] = "↓";
-				$data["flag"] = 2;
-				$select = "company_name";
-				$cd = "desc";
-
-			}else if($data["updown1"] == 2){
-				$data["msg"] = "↑";
-				$data["flag"] = 1;
-				$select = "company_name";
-				$cd = "asc";
-			}
-			if(!empty($data["search"])){
-				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
+        
+        //どの項目をソートするのかを配列で保持する
+        $orderBy = array("company_name","c_flag","creation_time","modification_time");
+        if($data["check3"] != null){
+            if($data["updown".$data["check3"]] == 1){
+                    $data["msg".$data["check3"]] = "↓";
+                    $data["flag".$data["check3"]] = 2;
+                    $select = $orderBy[$data["check3"]-1];
+                    $cd = "desc";
+            }else if($data["updown".$data["check3"]] == 2){
+                    $data["msg"] = "↑";
+                    $data["flag".$data["check3"]] = 1;
+                    $select = $orderBy[$data["check3"]-1];
+                    $cd = "asc";
+            }
+            if(!empty($data["search"])){
+				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"],$data["limitCnt"]);
 			}else{
-				$data["view"]	=	db_customer::up_down($select,$cd);
+				$data["view"]	=	db_customer::up_down($select,$cd,$data["limitCnt"]);
 			}
-		//客種フラグ
-		}else if($data["check3"] == 2){
-			if($data["updown2"] == 1){
-				$data["msg2"] = "↓";
-				$data["flag2"] = 2;
-				$select = "c_flag";
-				$cd = "desc";
-
-			}else if($data["updown2"] == 2){
-				$data["msg"] = "↑";
-				$data["flag2"] = 1;
-				$select = "c_flag";
-				$cd = "asc";
-			}
-			if(!empty($data["search"])){
-				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
-			}else{
-				$data["view"]	=	db_customer::up_down($select,$cd);
-			}
-		}else if($data["check3"] == 3){
-			if($data["updown3"] == 1){
-				$data["msg3"] = "↓";
-				$data["flag3"] = 2;
-				$select = "creation_time";
-				$cd = "desc";
-
-			}else if($data["updown3"] == 2){
-				$data["msg"] = "↑";
-				$data["flag3"] = 1;
-				$select = "creation_time";
-				$cd = "asc";
-			}
-			if(!empty($data["search"])){
-				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
-			}else{
-				$data["view"]	=	db_customer::up_down($select,$cd);
-			}
-		}else if($data["check3"] == 4){
-			if($data["updown4"] == 1){
-				$data["msg4"] = "↓";
-				$data["flag4"] = 2;
-				$select = "modification_time";
-				$cd = "desc";
-
-			}else if($data["updown4"] == 2){
-				$data["msg"] = "↑";
-				$data["flag4"] = 1;
-				$select = "modification_time";
-				$cd = "asc";
-			}
-			if(!empty($data["search"])){
-				$data["view"]	=	db_customer::up_down2($select, $cd, $data["search"]);
-			}else{
-				$data["view"]	=	db_customer::up_down($select,$cd);
-			}
-		}
+        }
 
 		return View::forge('clist/index',$data);
 	}
