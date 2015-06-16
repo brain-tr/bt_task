@@ -354,3 +354,98 @@ WARNING - 2015-06-16 04:25:00 --> Fuel\Core\Fuel::init - The configured locale e
 WARNING - 2015-06-16 04:25:00 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2015-06-16 04:25:01 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2015-06-16 04:25:06 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:28:26 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:28:37 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:28:39 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:28:40 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:28:49 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:28:50 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:29:21 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:27 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:30 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:33 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:38 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:40 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:43 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:29:47 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:30:05 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:30:10 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:30:10 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:30:12 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:30:13 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:30:24 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:30:24 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:31:06 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:09 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:37 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:45 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:31:45 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:31:49 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:52 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:53 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:55 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:31:58 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:32:05 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:32:05 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:32:10 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:32:12 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:32:31 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:32:32 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:32:37 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:32:37 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:39:44 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:40:29 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:40:31 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:40:36 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:41:02 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:47:40 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:47:44 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:47:47 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:47:57 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:47:59 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:48:01 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:48:06 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:48:06 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:48:48 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:48:53 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:48:55 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:48:56 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:48:57 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:49:08 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:49:10 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:49:14 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:49:15 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:49:19 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:49:19 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:51:43 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:51:57 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:52:03 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:52:11 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:52:16 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:52:18 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:52:22 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:54:14 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:54:15 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:54:21 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:54:21 --> Notice - Uninitialized string offset: 0 in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 115
+WARNING - 2015-06-16 04:55:46 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:55:49 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:55:53 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2015-06-16 04:55:53 --> Notice - Undefined index: company_id in C:\xampp\htdocs\bt_task\fuel\app\classes\controller\customer.php on line 113
+WARNING - 2015-06-16 04:56:27 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:56:29 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:56:30 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:56:33 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:29 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:29 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:30 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:31 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:38 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:40 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:41 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:45 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:57:46 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:58:51 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:58:59 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:59:02 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2015-06-16 04:59:04 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.

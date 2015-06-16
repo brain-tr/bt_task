@@ -108,12 +108,16 @@ class Controller_Customer extends Controller
 				//担当者情報を入力
  				if(!empty($data["id"])){
  					//入力された回数文顧客担当者情報をinsertするための処理
- 					for($i=0; $i<count($data["t_name2"]);$i++){
- 						db_customer::ins_customer($data["id"],$data["t_name2"][$i],$data["t_tel2"][$i],$data["t_mail2"][$i],$data["t_remarks2"][$i]);
- 					}
- 					for($i=0; $i<count($data["t_name4"]);$i++){
- 						db_customer::ins_claim($data["id"],$data["t_name4"][$i],$data["t_tel4"][$i],$data["t_mail4"][$i],$data["t_remarks4"][$i]);
- 					}
+                    if (is_array($data["t_name2"])) {
+                        for($i=0; $i<count($data["t_name2"]);$i++){
+                            db_customer::upd_customer($data["id"],$data["t_name2"][$i],$data["t_tel2"][$i],$data["t_mail2"][$i],$data["t_remarks2"][$i]);
+                        }
+                    }
+                    if (is_array($data["t_name4"])) {
+                        for($i=0; $i<count($data["t_name4"]);$i++){
+                            db_customer::upd_claim($data["id"],$data["t_name4"][$i],$data["t_tel4"][$i],$data["t_mail4"][$i],$data["t_remarks4"][$i]);
+                        }
+                    }
 				}
 				$data["msgcheck"] = "登録しました。";
 			}else{
