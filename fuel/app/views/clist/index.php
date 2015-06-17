@@ -195,6 +195,8 @@ input[type="button"].updown {
     <input type="hidden" name="check3" value="<?php echo $check3; ?>">
     <input type="hidden" name="updown<?php echo $check3 ?>" value="<?php echo "${'updown'.$check3}"; ?>">
     <input type="hidden" name="limitCnt" value="<?php echo $limitCnt; ?>">
+    <input type="hidden" name="check2" value="<?php echo $check2; ?>">
+    <input type="hidden" name="search" value="<?php echo $search; ?>">
 </form>
 
 <form action="#" name="form1" id="search" method="post">

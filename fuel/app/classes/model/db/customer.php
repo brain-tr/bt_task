@@ -178,6 +178,12 @@ class db_customer extends \Model {
 		$result = \DB::select('*')->from('k_company')->execute()->as_array();
         return count($result);
 	}
+    
+    public static function get_name_count_where($data)
+	{
+		$result = \DB::select('*')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('user_name','like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->execute()->as_array();
+        return count($result);
+	}
 
 	/*
 	 *  顧客会社情報を削除する
@@ -190,9 +196,9 @@ class db_customer extends \Model {
 	/*
 	 *  顧客会社情報あいまい検索
 	 */
-	public static function search_company($data)
+	public static function search_company($data,$limitCnt)
 	{
-		return \DB::select('company_id','company_name','c_flag','creation_time','creation_time','modification_time')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('user_name','like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->execute()->as_array();
+		return \DB::select('company_id','company_name','c_flag','creation_time','creation_time','modification_time')->from('k_company')->or_where_open()->where("company_name",'like','%'.$data.'%')->or_where('user_name','like','%'.$data.'%')->or_where('company_tel','like','%'.$data.'%')->or_where_close()->limit(10)->offset($limitCnt * 10 - 10)->execute()->as_array();
 	}
 
 	/*

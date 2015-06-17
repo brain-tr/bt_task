@@ -83,7 +83,9 @@ class Controller_Clist extends Controller
 
 		//検索
 		if($data["check2"]==2 && !empty($data["search"])){
-				$data["view"]	=	db_customer::search_company(strval($data["search"]));
+				$data["view"]	=	db_customer::search_company(strval($data["search"]),$data["limitCnt"]);
+                $data["count"]	=	db_customer::get_name_count_where(strval($data["search"]));
+                $data["now"]	=	1;
 		}else{
 			//初期表示用
 			$data["view"]	=	db_customer::get_name($data["limitCnt"]);
