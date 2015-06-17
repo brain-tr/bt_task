@@ -120,6 +120,7 @@ class Controller_Customer extends Controller
                     }
 				}
 				$data["msgcheck"] = "登録しました。";
+                Response::redirect(Uri::create('customer/update')."?c_id=".$data["id"], 'refresh');
 			}else{
 				$data["msg"] = "既に登録されています。";
 			}
@@ -177,8 +178,12 @@ class Controller_Customer extends Controller
  		$data["msg"]				= empty($post["msg"])?""     : $post["msg"];
  		$data["msgcheck"]			= empty($post["msgcheck"])?"1": $post["msgcheck"];
 		//一覧から受け取り用
+        
 		$data["c_id"]				= empty($post["c_id"])? "" : $post["c_id"];
-
+        if(Input::get('c_id')){
+            $data['c_id'] = Input::get('c_id');
+        }
+        
 		// 顧客担当者の空リストを排除
 		for($i=0; $i<count($data["t_name"]);$i++){
 			if(!empty($data["t_name"][$i]) || !empty($data["t_tel"][$i]) || !empty($data["t_mail"][$i])){
